@@ -10,6 +10,7 @@ const { seite, currentPage } = Astro.props;
 
 const href = seite.toLowerCase().replaceAll(" ", "_");
 const name = seite.toString();
+
 ---
 
 <a href={href} class={currentPage ? "aktuelle-seite" : ""}>{name}</a>
@@ -19,4 +20,6 @@ const name = seite.toString();
         text-decoration: underline
     a 
         text-decoration: none
+        color: black
+    //TODO: add text variable for color
 </style>
