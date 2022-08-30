@@ -1,0 +1,28 @@
+---
+import MenuItem from "./MenuItem.astro";
+export interface Props {
+    currentPage: Seite;
+}
+
+export enum Seite {
+    Aktuelles = "Aktuelles",
+    Startseite = "Startseite",
+}
+
+const { currentPage: page } = Astro.props;
+Object.entries(Seite).forEach((seite) => {
+    console.log(seite, page);
+    console.log(seite[1] === page);
+});
+---
+
+<header>
+    <img src="new_logo.svg" alt="Logo des Harzklub" />
+    <div class="menu">
+        {
+            Object.entries(Seite).map((seite) => (
+                <MenuItem seite={seite[1]} currentPage={seite[1] === page} />
+            ))
+        }
+    </div>
+</header>
