@@ -1,0 +1,15 @@
+---
+import type { Veranstaltung } from "src/utils/directus";
+
+export type Props = {
+    veranstaltung: Veranstaltung;
+};
+
+const { veranstaltung: v } = Astro.props;
+---
+
+<div>
+    <h3>{v.titel}</h3>
+    <p>Am: {v.datum}</p>
+    <p>Wo: {v.ort}</p>
+</div>
