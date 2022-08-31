@@ -6,9 +6,30 @@ export interface Props {
 }
 
 export enum Seite {
-    Startseite = "Startseite",
-    Aktuelles = "Aktuelles",
+    Startseite,
+    Aktuelles,
+    Heimatgruppe,
+    Jugendgruppe,
+    Wanderungen,
+    DerHarz,
+    UeberUns,
 }
+
+type SeitenInfo = {
+    href: string;
+    page: Seite;
+    name: string;
+};
+
+const pages: Array<SeitenInfo> = [
+    { page: Seite.Aktuelles, href: "aktuelles", name: "Aktuelles" },
+    { page: Seite.Startseite, href: "startseite", name: "Startseite" },
+    { page: Seite.Heimatgruppe, href: "heimatgruppe", name: "Heimatgruppe" },
+    { page: Seite.Jugendgruppe, href: "jugendgruppe", name: "Jugendgruppe" },
+    { page: Seite.Wanderungen, href: "wanderungen", name: "Wanderungen" },
+    { page: Seite.DerHarz, href: "der-harz", name: "Der Harz" },
+    { page: Seite.UeberUns, href: "ueber-uns", name: "Über uns" },
+];
 
 const { currentPage: page } = Astro.props;
 ---
@@ -19,8 +40,12 @@ const { currentPage: page } = Astro.props;
     </a>
     <div class="menu">
         {
-            Object.entries(Seite).map((seite) => (
-                <MenuItem seite={seite[1]} currentPage={seite[1] === page} />
+            pages.map((seite) => (
+                <MenuItem
+                    href={seite.href}
+                    currentPage={seite.page === page}
+                    name={seite.name}
+                />
             ))
         }
         <Button title="Mach mit" href="about-us" />

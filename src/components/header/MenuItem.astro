@@ -2,14 +2,12 @@
 import type { Seite } from "./Header.astro";
 
 export interface Props {
-    seite: Seite;
+    href: string, 
+    name: string,
     currentPage: boolean;
 }
 
-const { seite, currentPage } = Astro.props;
-
-const href = seite.toLowerCase().replaceAll(" ", "_");
-const name = seite.toString();
+const { href, name, currentPage } = Astro.props;
 
 ---
 
