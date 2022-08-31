@@ -1,0 +1,23 @@
+---
+import type { Seite } from "./Header.astro";
+
+export interface Props {
+    href: string, 
+    name: string,
+    currentPage: boolean;
+}
+
+const { href, name, currentPage } = Astro.props;
+
+---
+
+<a href={href} class={currentPage ? "aktuelle-seite" : ""}>{name}</a>
+
+<style lang="stylus">
+    .aktuelle-seite 
+        text-decoration: underline
+    a 
+        text-decoration: none
+        color: black
+    //TODO: add text variable for color
+</style>

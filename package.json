@@ -10,7 +10,8 @@
     "astro": "astro"
   },
   "devDependencies": {
-    "astro": "^1.1.1"
+    "astro": "^1.1.1",
+    "stylus": "^0.59.0"
   },
   "dependencies": {
     "@directus/sdk": "^10.1.4"
