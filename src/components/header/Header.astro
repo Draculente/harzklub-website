@@ -22,21 +22,21 @@ type SeitenInfo = {
 };
 
 const pages: Array<SeitenInfo> = [
-    { page: Seite.Aktuelles, href: "aktuelles", name: "Aktuelles" },
-    { page: Seite.Startseite, href: "startseite", name: "Startseite" },
-    { page: Seite.Heimatgruppe, href: "heimatgruppe", name: "Heimatgruppe" },
-    { page: Seite.Jugendgruppe, href: "jugendgruppe", name: "Jugendgruppe" },
-    { page: Seite.Wanderungen, href: "wanderungen", name: "Wanderungen" },
-    { page: Seite.DerHarz, href: "der-harz", name: "Der Harz" },
-    { page: Seite.UeberUns, href: "ueber-uns", name: "Über uns" },
+    { page: Seite.Startseite, href: "/", name: "Startseite" },
+    { page: Seite.Aktuelles, href: "/aktuelles", name: "Aktuelles" },
+    { page: Seite.Heimatgruppe, href: "/heimatgruppe", name: "Heimatgruppe" },
+    { page: Seite.Jugendgruppe, href: "/jugendgruppe", name: "Jugendgruppe" },
+    { page: Seite.Wanderungen, href: "/wanderungen", name: "Wanderungen" },
+    { page: Seite.DerHarz, href: "/der-harz", name: "Der Harz" },
+    { page: Seite.UeberUns, href: "/ueber-uns", name: "Über uns" },
 ];
 
 const { currentPage: page } = Astro.props;
 ---
 
 <header>
-    <a href="startseite">
-        <img src="new_logo.svg" alt="Logo des Harzklub" />
+    <a href="/">
+        <img src="/new_logo.svg" alt="Logo des Harzklub" />
     </a>
     <div class="menu">
         {

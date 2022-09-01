@@ -1,0 +1,18 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header, { Seite } from "../components/header/Header.astro";
+import { veranstaltungen } from "src/utils/directus";
+import VeranstaltungsCard from "@components/VeranstaltungsCard.astro";
+---
+
+<Layout title="Aktuelles">
+    <Header currentPage={Seite.Aktuelles} />
+    <main>
+        <h1>Aktuelles</h1>
+        {
+            veranstaltungen.map(
+                (v) => v && <VeranstaltungsCard veranstaltung={v} />
+            )
+        }
+    </main>
+</Layout>

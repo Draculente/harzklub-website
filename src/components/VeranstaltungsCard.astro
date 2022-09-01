@@ -1,0 +1,16 @@
+---
+import type { Veranstaltung } from "src/utils/directus";
+import { formatDate } from "src/utils/format-date";
+
+export type Props = {
+    veranstaltung: Veranstaltung;
+};
+
+const { veranstaltung: v } = Astro.props;
+---
+
+<a href={`veranstaltung/${v.slug}`}>
+    <h3>{v.titel}</h3>
+    <p>Am: {v.formattedDate}</p>
+    <p>Wo: {v.ort}</p>
+</a>

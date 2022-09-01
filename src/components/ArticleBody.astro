@@ -1,0 +1,25 @@
+---
+import type { Html } from "src/utils/directus";
+
+export type Props = {
+    html: Html;
+};
+
+const { html } = Astro.props;
+---
+
+<article set:html={html} class="article-body"></article>
+
+<style is:global lang="stylus">
+    article.article-body 
+        img 
+            max-width: 100%
+            border-radius: 10px
+        blockquote
+            // font: 14px/22px normal helvetica, sans-serif;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: 50px;
+            padding-left: 15px;
+            border-left: 3px solid #ccc;
+</style>

@@ -14,6 +14,7 @@
     "stylus": "^0.59.0"
   },
   "dependencies": {
-    "@directus/sdk": "^10.1.4"
+    "@directus/sdk": "^10.1.4",
+    "slugify": "^1.6.5"
   }
 }

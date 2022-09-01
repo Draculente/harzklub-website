@@ -1,0 +1,35 @@
+---
+import ArticleBody from "@components/ArticleBody.astro";
+import Header, { Seite } from "@components/header/Header.astro";
+import Layout from "src/layouts/Layout.astro";
+import { Veranstaltung, veranstaltungen } from "src/utils/directus";
+
+export function getStaticPaths() {
+    return veranstaltungen
+        .filter((e) => e)
+        .map((e) => {
+            return {
+                params: { veranstaltung: e.slug },
+                props: e,
+            };
+        });
+}
+
+const post = Astro.props as Veranstaltung;
+---
+
+<Layout title={post.titel ?? "Aktuelles"}>
+    <Header currentPage={Seite.Aktuelles}></Header>
+    <main>
+        <h1>{post.titel}</h1>
+        <p class="date">{post.formattedDate}</p>
+        <ArticleBody html={post.beschreibung ?? "<p>Keine Beschreibung vorhanden.</p>"}></ArticleBody>
+    </main>
+</Layout>
+
+<style lang="stylus">
+    main
+        width 90%
+        max-width: 800px
+        margin: auto
+</style>
