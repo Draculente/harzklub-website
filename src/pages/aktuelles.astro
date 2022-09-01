@@ -1,17 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Header, { Seite } from "../components/header/Header.astro";
-import { directus, Veranstaltung } from "src/utils/directus";
+import { veranstaltungen } from "src/utils/directus";
 import VeranstaltungsCard from "@components/VeranstaltungsCard.astro";
-
-const { data } = await directus.items("veranstaltung").readByQuery();
-
-const veranstaltungen =
-    data?.map((v) => {
-        return {
-            ...v,
-        } as Veranstaltung;
-    }) ?? [];
 ---
 
 <Layout title="Aktuelles">
