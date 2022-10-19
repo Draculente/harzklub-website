@@ -1,71 +1,57 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Header, { Seite } from "../components/header/Header.astro";
+import VeranstaltungsCard from "@components/VeranstaltungsCard.astro";
+import { veranstaltungen } from "src/utils/directus";
+
+const featuredEvent = veranstaltungen[0];
 ---
 
 <Layout title="Welcome to Astro.">
-	<Header currentPage={Seite.Startseite} />
-	<main>
-		<h1>Willkommen auf der Website des Harzklub Zweigverein Hohegeiß</h1>
-	</main>
+  <Header currentPage={Seite.Startseite} />
+  <main>
+    <a class="org-logo" href="#heading">
+      <img src="/images/org-logo.png" alt="Logo" />
+    </a>
+    <section id="heading" class="title-section">
+      <div class="layout-box">
+        <div class="action-column">
+          <VeranstaltungsCard veranstaltung={featuredEvent} />
+        </div>
+        <div class="title-column">
+          <h2 class="subtitle">Harz, harzer, am harzesten.</h2>
+          <h1 class="big-title">
+            Hier bitte einen netten Slogan einfügen: Die Website des Harzklub
+            Hohegeiß
+          </h1>
+          <hr />
+          <!-- TODO: Calendar icon -->
+          <a href="/aktuelles" class="title-link"
+            >Unsere Verantstaltungen &gt;</a
+          >
+        </div>
+      </div>
+    </section>
+  </main>
 </Layout>
 
 <style>
-	:root {
-		--astro-gradient: linear-gradient(0deg, #4f39fa, #da62c4);
-	}
+  .title-section {
+    height: 100vh;
+  }
 
-	h1 {
-		margin: 2rem 0;
-	}
-
-	main {
-		margin: auto;
-		padding: 1em;
-		max-width: 60ch;
-	}
-
-	.text-gradient {
-		font-weight: 900;
-		background-image: var(--astro-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 100% 200%;
-		background-position-y: 100%;
-		border-radius: 0.4rem;
-		animation: pulse 4s ease-in-out infinite;
-	}
-
-	@keyframes pulse {
-		0%,
-		100% {
-			background-position-y: 0%;
-		}
-		50% {
-			background-position-y: 80%;
-		}
-	}
-
-	.instructions {
-		line-height: 1.6;
-		margin: 1rem 0;
-		background: #4f39fa;
-		padding: 1rem;
-		border-radius: 0.4rem;
-		color: var(--color-bg);
-	}
-
-	.instructions code {
-		font-size: 0.875em;
-		border: 0.1em solid var(--color-border);
-		border-radius: 4px;
-		padding: 0.15em 0.25em;
-	}
-
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 1rem;
-		padding: 0;
-	}
+  .org-logo {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    align-items: center;
+    bottom: 30px;
+    right: 30px;
+    border-radius: 20px;
+    box-shadow: 7px 9px 10px -5px rgba(102, 102, 102, 0.75);
+    -webkit-box-shadow: 7px 9px 10px -5px rgba(102, 102, 102, 0.75);
+    -moz-box-shadow: 7px 9px 10px -5px rgba(102, 102, 102, 0.75);
+    cursor: pointer;
+  }
 </style>

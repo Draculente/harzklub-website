@@ -1,16 +1,102 @@
 ---
 import type { Veranstaltung } from "src/utils/directus";
 import { formatDate } from "src/utils/format-date";
+import sanitizeHtml from "sanitize-html";
+import type sanitize from "sanitize-html";
+import InvertedButton from "./InvertedButton.astro";
+import Tag from "./Tag.astro";
 
 export type Props = {
-    veranstaltung: Veranstaltung;
+  veranstaltung: Veranstaltung;
 };
 
 const { veranstaltung: v } = Astro.props;
 ---
 
-<a href={`veranstaltung/${v.slug}`}>
-    <h3>{v.titel}</h3>
-    <p>Am: {v.formattedDate}</p>
-    <p>Wo: {v.ort}</p>
-</a>
+<div
+  class="container"
+  style={`background-image: url(${
+    import.meta.env.DIRECTUS_HOST + "/assets/" + v.featured_image
+  });`}
+>
+  <div class="infos">
+    <!-- TODO: calender icon -->
+    <div class="header-bar">
+      <p>{v.formattedDate}</p>
+      <Tag title="Veranstaltung" />
+    </div>
+    <p class="title">{v.titel}</p>
+    <p class="desc">
+      {
+        sanitizeHtml(v.beschreibung || "Wir freuen uns auf euch!", {
+          allowedTags: [],
+        })
+      }
+    </p>
+    <div class="to-bottom">
+      <InvertedButton title="Mehr erfahren" href={"/veranstaltung/" + v.slug} />
+    </div>
+  </div>
+</div>
+
+<style>
+  .container {
+    max-width: 450px;
+    width: 30vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left;
+    border-radius: 21px;
+    box-shadow: 7px 9px 10px -5px rgba(102, 102, 102, 0.75);
+    -webkit-box-shadow: 7px 9px 10px -5px rgba(102, 102, 102, 0.75);
+    -moz-box-shadow: 7px 9px 10px -5px rgba(102, 102, 102, 0.75);
+  }
+
+  .title {
+    font-weight: 400;
+    font-size: 1.1rem;
+    line-height: 1;
+    padding: 0;
+    margin: 0;
+  }
+
+  .desc {
+    font-weight: 300;
+    font-size: var(--font-size-small);
+  }
+
+  .header-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-bar {
+    font-size: var(--font-size-small);
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .infos {
+    width: 65%;
+    border-radius: 20px;
+    z-index: 1;
+    background-color: var(--color-bg);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .to-bottom {
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex-grow: 100;
+  }
+</style>

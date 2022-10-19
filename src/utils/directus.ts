@@ -20,6 +20,7 @@ export interface Veranstaltung extends Record<string, any> {
   bildergalerie?: Array<ID>;
   slug?: string;
   formattedDate?: string;
+  featured_image?: ID;
 }
 
 type Collections = {

@@ -1,0 +1,23 @@
+---
+export interface Props {
+  href: string;
+  title: string;
+}
+
+const { href, title } = Astro.props;
+---
+
+<a href={href}>&gt; {title}</a>
+
+<style>
+  a {
+    background-color: var(--color-bg);
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    font-size: var(--font-size-xs);
+    border-radius: 5px;
+    text-decoration: none;
+    padding-inline: 10px;
+    padding-block: 5px;
+  }
+</style>
