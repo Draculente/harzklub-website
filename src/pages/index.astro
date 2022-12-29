@@ -4,6 +4,12 @@ import Header, { Seite } from "../components/header/Header.astro";
 import VeranstaltungsCard from "@components/VeranstaltungsCard.astro";
 import { veranstaltungen } from "src/data/veranstaltungen";
 import OrgLogo from "@components/OrgLogo.astro";
+import SectionHeader from "@components/SectionHeader.astro";
+import {
+  DEFAULT_AUFGABEN_SECTION_LINK,
+  MITMACHEN,
+  UNDER_CONSTRUCTION,
+} from "src/data/links";
 
 const featuredEvent = veranstaltungen[0];
 
@@ -36,24 +42,59 @@ const aufgaben = [
     <OrgLogo />
 
     <section id="heading" class="h-screen pt-[15vh] relative">
-      <div class="absolute bottom-24 justify-center w-full icon-text">
+      <a
+        class="absolute bottom-24 justify-center w-full icon-text flex"
+        href="#moin"
+      >
         <i class="ri-mouse-line mr-2"></i>
         Scroll weiter
-      </div>
+      </a>
       <div class="layout-box grid grid-cols-5 gap-12 px-[20%] w-full">
         <div class="col-span-2 h-full grid grid-rows-4 gap-4">
           <div class="row-span-3">
             <VeranstaltungsCard veranstaltung={featuredEvent} />
           </div>
-          <a
+          <button
             class="bg-white drop-shadow-md p-4 rounded-4xl w-full row-span-1 flex items-center"
-            href="#"
+            dialog-trigger="true"
           >
             <i
               class="ri-flag-line bg-green text-white rounded-full px-2 py-1 mr-3 text-lg"
             ></i>
-            Probleme auf Wanderweg melden
-          </a>
+            Probleme auf einem Wanderweg melden
+          </button>
+          <div class="dialog">
+            <div class="dialog-overlay" dialog-close="true"></div>
+            <div class="modal-dialog">
+              <div class="dialog-content">
+                <div class="dialog-header">
+                  <h6 class="mb-0">Coming soon...</h6>
+                  <button
+                    type="button"
+                    class="me-0 button-close"
+                    dialog-close="true"
+                    aria-label="Close"
+                  >
+                    <i class="ri-close-line"></i>
+                  </button>
+                </div>
+                <div class="dialog-body">
+                  <p class="opacity-60">
+                    Ab Frühjahr kannst du hier einfach und schnell Schäden an
+                    Wanderwegen melden.
+                  </p>
+                </div>
+                <div class="dialog-footer">
+                  <button
+                    class="button button-green mr-3 mb-0"
+                    dialog-close="true"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="col-start-3 col-span-3">
           <h2 class="font-medium text-lg tracking-wide">
@@ -75,7 +116,7 @@ const aufgaben = [
       </div>
     </section>
 
-    <section id="moin" class="px-[10%]">
+    <section id="moin" class="px-[10%] pb-20">
       <div class="">
         <div class="flex flex-row p-10">
           <div class="basis-1/2">
@@ -130,23 +171,26 @@ const aufgaben = [
       </div>
     </section>
 
-    <section id="aufgaben" class="bg-light-brown py-12">
+    <section id="aufgaben" class="bg-light-brown py-20">
       <h1 class="text-center text-4xl font-semibold">
         Das sind <span class="text-green-500">unsere Aufgaben</span>
       </h1>
-      <p class="font-medium text-center w-2/5 mx-auto leading-5 my-10">
+      <p class="font-medium text-center w-2/5 mx-auto leading-5 my-12">
         Der Harzklub wurde am 8. August 1886 in Seesen gegründet. Der
         Eisenbahndirektor Albert Schneider wurde der erste Vorsitzende.
         Mitbegründer waren u. a. Oberforstrat Carl Reuß als zweiter Vorsitzender
         und Verlagsbuchhändler Heinrich Conrad Huch als Schriftführer.
       </p>
 
-      <div class="flex flex-row gap-8 px-[12vw] justify-center">
+      <div class="flex flex-row gap-8 px-[10vw] justify-center flex-wrap mt-20">
         {
           aufgaben.map((aufgabe) => (
-            <div class="card flex flex-col w-full bg-white">
+            <div class="card flex flex-col w-full bg-white basis-1/5 min-w-[260px] shrink-0 hover:scale-105 transition-all">
               <div class="card-header basis-2/5">
-                <a href={aufgabe.link ?? "/aktuelles"} blur-shadow-image="true">
+                <a
+                  href={aufgabe.link ?? DEFAULT_AUFGABEN_SECTION_LINK}
+                  blur-shadow-image="true"
+                >
                   <img
                     class="w-auto rounded-t-lg"
                     src={
@@ -157,14 +201,14 @@ const aufgaben = [
                   />
                 </a>
               </div>
-              <div class="card-body flex flex-col basis-3/5 ">
-                <a href={aufgabe.link ?? "/aktuelles"}>
+              <div class="card-body flex flex-col basis-3/5 break-words">
+                <a href={aufgabe.link ?? DEFAULT_AUFGABEN_SECTION_LINK}>
                   <h4 class="font-medium text-green-500">{aufgabe.title}</h4>
                 </a>
-                <p class="text-gray-800 mb-3">{aufgabe.desc}</p>
+                <p class="text-gray-800 mb-3 break-words">{aufgabe.desc}</p>
                 <div class="h-full flex flex-col justify-end">
                   <a
-                    href={aufgabe.link ?? "/aktuelles"}
+                    href="{aufgabe.link ?? DEFAULT_AUFGABEN_LINK}"
                     class="button button-green w-full rounded-md text-center"
                   >
                     Weiterlesen
@@ -177,19 +221,240 @@ const aufgaben = [
       </div>
     </section>
 
-    <script src="node_modules/@material-tailwind/html/scripts/dialog.js"
-    ></script>
+    <section id="wandern" class="pt-20">
+      <SectionHeader title="Wandern" subtitle="Egal zu welche Jahreszeit">
+        Und wir sorgen dafür, dass Du Dich dabei zurechtfindest.<br />Der
+        Harzklub erschließt neue Wanderwege, hält bestehende in Schuss<br /> und
+        beschildert Deine Routen.
+      </SectionHeader>
+      <div class="p-[10%] flex flex-row items-center">
+        <div
+          class="border-dashed border-grey-300 rounded-md border-2 w-1/2 p-16 -mr-[5vw]"
+        >
+          <div class="w-3/4">
+            <i class="ri-treasure-map-line text-green-500 text-5xl"></i>
+            <h2 class="font-semibold">Wir helfen dir, Dich zurechtzufinden</h2>
+            <p>
+              Du weißt gar nicht, wie du deine Wanderungen beginnen sollst? Wir
+              bieten Gruppenwanderungen und viele weitere Aktivitäten rund ums
+              Wandern an! Außerdem planen wir einen Wanderwege-Finder bei dem Du
+              einfach angibst, wie Du am liebsten wanderst und wir den passenden
+              Weg für Dich finden.
+            </p>
+          </div>
+        </div>
+        <div class="relative w-3/5 -mt-52">
+          <img
+            src="/images/geiss.png"
+            alt="Das Wappentier Hohegeiß"
+            class="absolute -top-28 rotate-6 right-32 -z-10"
+          />
+          <img
+            src="/images/forest-with-fancy-sky.png"
+            alt="Ein Wanderweg durch einen lichten Wald. Die Sonne zeigt über einer Bergkuppe durch golden leuchtende Wolken."
+          />
+          <a
+            href="#"
+            class="text-green-500 font-medium block text-center hover:underline"
+            >Erfahre mehr über Wanderungen &gt;</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-20">
+      <SectionHeader
+        title="Der Harz"
+        subtitle="Ein Mittelgebirge mit Tradition"
+      >
+        Der Harzklub kümmert sich um Pflege und Erhaltung von Harzer <br
+        />Brauchtum, Harzer Liedgut, Harzer Festtags- und Arbeitstrachten sowie<br
+        />die Mundart
+      </SectionHeader>
+      <div class="flex flex-row justify-center items-center">
+        <div class="-mr-32">
+          <img
+            src="/images/tradition.png"
+            alt="6 Bilder, auf denen Menschen in Harzer-Trachten zu sehen sind."
+          />
+          <a
+            href="#"
+            class="text-green-500 font-medium block text-center hover:underline mt-7"
+            >Erfahre mehr über die Heimatgruppe &gt;</a
+          >
+        </div>
+        <div class="w-1/5 rounded-md bg-white drop-shadow-lg p-8 mt-20">
+          <h3 class="text-xl font-semibold">
+            Pflege des Harzer <span class="text-green-500">Brauchtums</span>
+          </h3>
+          <p class="text-gray-800 leading-5 my-3 text-sm">
+            Der Zweigverein Hohegeiß hat ca. 220 Mitglieder einschl. Kinder und
+            Jugendlichen. Die Brauchtumsgruppe setzt sich zusammen aus ca.25
+            Mitgliedern.
+          </p>
+          <p class="text-gray-800 leading-5 my-3 text-sm">
+            Ein wichtiger Bestandteil des heimatlichen Kulturgutes wird in den
+            über 40 Heimatgruppen der Harzklub-zweigvereine gepflegt und
+            weiterentwickelt: Harzer Liedgut, Glockenspiel, Peitschenknall,
+            Teufel / Hexenspuk, Jodeln, Mundart, Trachten und Brauchtum.
+          </p>
+          <p class="text-gray-800 leading-5 my-3 text-sm">
+            An unzähligen Heimatabenden finden sie in der Saison ihr Publikum.
+            Höhepunkt ist der jährlich stattfindende große Harzer Heimattag, der
+            einen Querschnitt der Heimgruppenarbeit zeigt.
+          </p>
+          <p class="text-gray-800 leading-5 my-3 text-sm">
+            In Fernseh- und Rundfunksendungen werben die Gruppen weit über die
+            Grenzen des Harzes hinaus für ihre Heimat.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10">
+      <SectionHeader title="Die Jugend" subtitle="Der Harz wird wieder jung">
+        Die Kinder und Jugendlichen machen Hohegeiß erst richtig lebendig. Und <br
+        />
+        wir bringen dem Nachwuchs den Harz und seine Traditionen nahe.
+      </SectionHeader>
+      <div class="p-[10%] flex flex-row items-center mt-20">
+        <div
+          class="border-dashed border-grey-300 rounded-md border-2 w-1/2 p-16 -mr-[8vw]"
+        >
+          <div class="w-3/4">
+            <h2 class="font-bold mb-0">
+              <span class="text-green-500">Spaß</span> und Spiele
+            </h2>
+            <h3 class="text-lg mt-0 font-semibold mb-6">
+              (und Brot gibt's auch)
+            </h3>
+            <p class="leading-5 text-gray-800">
+              Die Jugendarbeit beziehungsweise Kinder- und Jugendarbeit
+              existiert seit dem Ende des 19. Jahrhunderts in Zentraleuropa und
+              ist ein klassisches Tätigkeitsfeld der Sozialen Arbeit. Sie ist
+              heute ein unentbehrlicher Bestandteil der sozialen
+              Infrastruktur.Die Jugendarbeit ist gesetzliche Pflichtaufgabe der
+              Kinder und Jugendhilfe. Sie ist neben der Erziehung und Bildung im
+              Elternhaus und in der Schule, Kindergarten oder beruflichen
+              Ausbildung eine dritte Säule der Jugendbildung. Die Jugendarbeit
+              ist abzugrenzen von der Jugendsozialarbeit für benachteiligte
+              Jugendliche.
+            </p>
+          </div>
+        </div>
+        <div class="relative w-3/5 -mt-52">
+          <!-- <img
+            src="/images/geiss.png"
+            alt="Das Wappentier Hohegeiß"
+            class="absolute -top-28 rotate-6 right-32 -z-10"
+          /> -->
+          <img
+            src="/images/youth.png"
+            alt="Das Bild ist eine Collage aus 3 verschiedenen Bildern. Auf zweien ist eine Gruppe von Kindern zwischen 5 und 11 auf einer Bühne zu sehen. Auf einem tanzen sie, auf dem anderen singen sie. Das dritte Bild zeigt eine Gruppe junger Kinder in Trachten auf einer Treppe sitzend, im Hintergrund sitzt eine erwachsene Person."
+          />
+          <a
+            href="#"
+            class="text-green-500 font-medium block text-center hover:underline -ml-32"
+            >Erfahre mehr über die Jugendarbeit &gt;</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <section id="call-to-action" class="bg-green-500 relative pb-20">
+      <div class="w-full h-3 bg-green-300"></div>
+      <div class="w-full h-3 bg-green-400"></div>
+      <div class="flex flex-row px-[20%] gap-32 mt-20 items-center">
+        <img
+          class="shrink-0 aspect-square"
+          src="/images/team-icon.png"
+          alt="Ein Icon mit 3 nur mit Umrissen gezeichneten Personen. Die vorderste Person hält ein 'Plus'-Zeichen in den Händen."
+        />
+        <div>
+          <div class="chip chip-green">Mitgliedschaft</div>
+          <h1 class="text-5xl font-bold text-white mt-5">Mach Mit</h1>
+          <h2 class="text-gray-300 mb-3">Unterstütze den Harzklub</h2>
+          <p class="break-words text-white my-7">
+            Mitglied ist ein konstitutiver Angehöriger (natürliche oder
+            juristische Person) eines <br />Kollegialorgans. Konstitutiv
+            bedeutet hier, dass es diese Personenvereinigung ohne Mitglieder gar<br
+            />nicht geben könnte, weil die Existenz einer Personenvereinigung
+            nur durch ihre Mitglieder<br />gewährleistet ist. Nach der Art der
+            Freiwilligkeit gibt es freiwillige Mitglieder oder die<br />
+            Pflichtmitgliedschaft durch Zwang kraft Gesetzes oder öffentlicher Satzung.
+          </p>
+          <a
+            href={MITMACHEN}
+            class="button button-lime text-white rounded-md filter-none"
+            style="color: white; box-shadow: none;">Mehr erfahren &gt;</a
+          >
+        </div>
+      </div>
+      <img
+        src="/images/filled-geiss-on-mountains.png"
+        alt="Der Hohegeisser Geiss steht stilisiert auf einem Berg."
+        class="absolute right-0 bottom-0"
+      />
+    </section>
+
+    <footer class="bg-lime-500">
+      <div>
+        <img
+          src="/images/logo-white.png"
+          alt="Das Logo der Website. Drei Tannen und rechts daneben der Schriftzug: 'Harzklub Hohegeiß' in zwei Zeilen."
+        />
+        <p>
+          Pflege und Erhaltung von Harzer Brauchtum, Harzer Liedgut, Harzer
+          Festtags- und Arbeitstrachten sowie der Mundart seit 1011.
+        </p>
+        <div>
+          <a href="#"><i class="ri-instagram-line"></i></a>
+          <a href="mailto:info@harzklub-hohegeiss.de"
+            ><i class="ri-mail-line"></i>
+          </a>
+        </div>
+      </div>
+      <div>
+        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Startseite</a>
+        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Aktuelles</a>
+        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Heimatgruppe</a>
+        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Jugendgruppe</a>
+        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Wanderungen</a>
+        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Wanderwegefinder</a
+        >
+        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Alle Wanderwege</a>
+        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Der Harz</a>
+        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Über uns</a>
+        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Mitglied werden</a>
+        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Datenschutz</a>
+        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Impressum</a>
+      </div>
+      <div>
+        <div class="relative">
+          <img
+            src="/images/three-people.png"
+            class="bottom-10 absolute"
+            alt="Drei Icons von Menschen, die neugierig über den Button schauen."
+          />
+          <a
+            href={UNDER_CONSTRUCTION}
+            class="button button-green rounded-md"
+            style="color: white; box-shadow: none;">Mitglied werden &gt;</a
+          >
+        </div>
+        <div>
+          <img src="/images/documents.png" alt="Drei Icons von Dokumenten" />
+          <a
+            href={UNDER_CONSTRUCTION}
+            class="button button-green rounded-md"
+            style="color: white; box-shadow: none;">Downloadbereich &gt;</a
+          >
+        </div>
+      </div>
+    </footer>
   </main>
+
+  <script src="node_modules/@material-tailwind/html/scripts/dialog.js"></script>
 </Layout>
 
-<style>
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
-
-  @layer components {
-    .icon-text {
-      @apply flex flex-row items-center;
-    }
-  }
-</style>
+<style></style>

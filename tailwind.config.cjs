@@ -9,6 +9,7 @@ module.exports = withMT({
 				'4xl': '20px'
 			}
 		},
+		//https://javisperez.github.io/tailwindcolorshades/
 		colors: {
 			'green': {
 				'50': '#f6f8f3',
@@ -23,7 +24,18 @@ module.exports = withMT({
 				'900': '#213b06'
 			},
 			'light-blue': '#F8FAFF',
-			'dark-green': '#374A24',
+			'lime': {
+				'50': '#f5f6f4',
+				'100': '#ebede9',
+				'200': '#cdd2c8',
+				'300': '#afb7a7',
+				'400': '#738066',
+				'500': '#374a24',
+				'600': '#324320',
+				'700': '#29381b',
+				'800': '#212c16',
+				'900': '#1b2412'
+			},
 			'light-brown': '#E6E6E6',
 		},
 		fontFamily: {

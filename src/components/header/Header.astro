@@ -1,4 +1,5 @@
 ---
+import { MITMACHEN } from "src/data/links";
 import MenuItem from "./MenuItem.astro";
 export interface Props {
   currentPage: Seite;
@@ -37,12 +38,15 @@ const { currentPage: page } = Astro.props;
   class="fixed w-full top-0 my-0 mx-0 bg-light-blue z-10 py-4 px-10 flex flex-row justify-between items-center"
 >
   <a href="/">
-    <img src="/new_logo.svg" alt="Logo des Harzklub" />
+    <img
+      src="/new_logo.svg"
+      alt="Das Logo der Website. Drei Tannen und rechts daneben der Schriftzug: 'Harzklub Hohegeiß' in zwei Zeilen."
+    />
   </a>
   <div class="flex flex-row items-center">
     {
       pages.map((seite) => (
-        <div class="mx-2">
+        <div class="mx-2 hover:underline">
           <MenuItem
             href={seite.href}
             currentPage={seite.page === page}
@@ -51,7 +55,7 @@ const { currentPage: page } = Astro.props;
         </div>
       ))
     }
-    <a class="button button-green" href="about-us">Mach mit</a>
+    <a class="button button-green" href={MITMACHEN}>Mach mit</a>
   </div>
 </header>
 

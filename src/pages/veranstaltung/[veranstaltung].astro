@@ -2,7 +2,7 @@
 import ArticleBody from "@components/ArticleBody.astro";
 import Header, { Seite } from "@components/header/Header.astro";
 import Layout from "src/layouts/Layout.astro";
-import { Veranstaltung, veranstaltungen } from "src/utils/directus";
+import { Veranstaltung, veranstaltungen } from "src/data/veranstaltungen";
 
 export function getStaticPaths() {
     return veranstaltungen
