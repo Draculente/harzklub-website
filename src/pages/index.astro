@@ -398,59 +398,76 @@ const aufgaben = [
     </section>
 
     <footer class="bg-lime-500">
-      <div>
-        <img
-          src="/images/logo-white.png"
-          alt="Das Logo der Website. Drei Tannen und rechts daneben der Schriftzug: 'Harzklub Hohegeiß' in zwei Zeilen."
-        />
-        <p>
-          Pflege und Erhaltung von Harzer Brauchtum, Harzer Liedgut, Harzer
-          Festtags- und Arbeitstrachten sowie der Mundart seit 1011.
-        </p>
+      <div class="grid grid-cols-4 gap-24 py-20 px-[15%]">
         <div>
-          <a href="#"><i class="ri-instagram-line"></i></a>
-          <a href="mailto:info@harzklub-hohegeiss.de"
-            ><i class="ri-mail-line"></i>
-          </a>
-        </div>
-      </div>
-      <div>
-        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Startseite</a>
-        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Aktuelles</a>
-        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Heimatgruppe</a>
-        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Jugendgruppe</a>
-        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Wanderungen</a>
-        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Wanderwegefinder</a
-        >
-        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Alle Wanderwege</a>
-        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Der Harz</a>
-        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Über uns</a>
-        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Mitglied werden</a>
-        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Datenschutz</a>
-        <a href={UNDER_CONSTRUCTION} class="text-white my-3">Impressum</a>
-      </div>
-      <div>
-        <div class="relative">
           <img
-            src="/images/three-people.png"
-            class="bottom-10 absolute"
-            alt="Drei Icons von Menschen, die neugierig über den Button schauen."
+            src="/images/logo-white.png"
+            alt="Das Logo der Website. Drei Tannen und rechts daneben der Schriftzug: 'Harzklub Hohegeiß' in zwei Zeilen."
           />
-          <a
-            href={UNDER_CONSTRUCTION}
-            class="button button-green rounded-md"
-            style="color: white; box-shadow: none;">Mitglied werden &gt;</a
-          >
+          <p class="text-white font-medium my-5 leading-5">
+            Pflege und Erhaltung von Harzer Brauchtum, Harzer Liedgut, Harzer
+            Festtags- und Arbeitstrachten sowie der Mundart seit 1011.
+          </p>
+          <div>
+            <a href="#"
+              ><i class="ri-instagram-line text-white mr-1 text-xl font-medium"
+              ></i>
+            </a>
+            <a href="mailto:info@harzklub-hohegeiss.de"
+              ><i class="ri-mail-line text-white mr-1 text-xl font-medium"></i>
+            </a>
+          </div>
         </div>
-        <div>
-          <img src="/images/documents.png" alt="Drei Icons von Dokumenten" />
-          <a
-            href={UNDER_CONSTRUCTION}
-            class="button button-green rounded-md"
-            style="color: white; box-shadow: none;">Downloadbereich &gt;</a
+        <div class="col-span-2 flex flex-col flex-wrap h-52">
+          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Startseite</a>
+          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Aktuelles</a>
+          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Heimatgruppe</a>
+          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Jugendgruppe</a>
+          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Wanderungen</a>
+          <a href={UNDER_CONSTRUCTION} class="text-white my-2"
+            >Wanderwegefinder</a
           >
+          <a href={UNDER_CONSTRUCTION} class="text-white my-2"
+            >Alle Wanderwege</a
+          >
+          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Der Harz</a>
+          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Über uns</a>
+          <a href={UNDER_CONSTRUCTION} class="text-white my-2"
+            >Mitglied werden</a
+          >
+          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Datenschutz</a>
+          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Impressum</a>
+        </div>
+        <div class="flex flex-col h-full justify-evenly w-52 items-stretch">
+          <div class="relative">
+            <img
+              src="/images/three-people.png"
+              class="bottom-10 absolute w-2/3 right-10"
+              alt="Drei Icons von Menschen, die neugierig über den Button schauen."
+            />
+            <a
+              href={UNDER_CONSTRUCTION}
+              class="button button-green rounded-md w-full text-center"
+              style="color: white; box-shadow: none;">Mitglied werden &gt;</a
+            >
+          </div>
+          <div class="relative">
+            <img
+              src="/images/documents.png"
+              alt="Drei Icons von Dokumenten"
+              class="absolute bottom-8 w-2/3 right-10"
+            />
+            <a
+              href={UNDER_CONSTRUCTION}
+              class="button button-green rounded-md w-full"
+              style="color: white; box-shadow: none;">Downloadbereich &gt;</a
+            >
+          </div>
         </div>
       </div>
+      <p class="text-white text-center pb-2 font-normal">
+        Copyright 2023 - Harzklub-Zweigverein-Hohegeiß e.V.
+      </p>
     </footer>
   </main>
 
