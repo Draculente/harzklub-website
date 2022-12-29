@@ -1,4 +1,5 @@
 ---
+import "remixicon/fonts/remixicon.css";
 export interface Props {
   title: string;
   description?: string;
@@ -21,10 +22,10 @@ const { title, description } = Astro.props;
     />
     <title>Harzklub Hohegeiß | {title}</title>
   </head>
-  <body>
+  <body class="bg-light-blue pt-20">
     <slot />
     <style>
-      :root {
+      /* :root {
         --font-size-xs: clamp(0.4rem, 0.2vw + 0.55rem, 0.65rem);
         --font-size-small: clamp(0.5rem, 0.2vw + 0.7rem, 0.8rem);
         --font-size-base: clamp(1rem, 0.34vw + 0.91rem, 1.19rem);
@@ -60,7 +61,7 @@ const { title, description } = Astro.props;
       :global(code) {
         font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
           DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-      }
+      } */
     </style>
   </body>
 </html>

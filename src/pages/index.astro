@@ -2,56 +2,194 @@
 import Layout from "../layouts/Layout.astro";
 import Header, { Seite } from "../components/header/Header.astro";
 import VeranstaltungsCard from "@components/VeranstaltungsCard.astro";
-import { veranstaltungen } from "src/utils/directus";
+import { veranstaltungen } from "src/data/veranstaltungen";
+import OrgLogo from "@components/OrgLogo.astro";
 
 const featuredEvent = veranstaltungen[0];
+
+const aufgaben = [
+  {
+    title: "Brauchtumspflege",
+    desc: "Dazu gehören Harzer Liedgut, Harzer Trachten sowie die Mundart",
+    link: "/aktuelles",
+    image:
+      "https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+  },
+  {
+    title: "Wanderwege",
+    desc: "Anlegen, Beschilderung und Erhaltung von Wanderwegen im Naturpark Harz",
+  },
+  {
+    title: "Jugend und Familie",
+    desc: "Hier ein oder zwei nette Sätze über Jugendarbeit",
+  },
+  {
+    title: "Naturparkeinrichtung",
+    desc: "Bänke, Schutzhütten und mehr",
+  },
+];
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Startseite">
   <Header currentPage={Seite.Startseite} />
   <main>
-    <a class="org-logo" href="#heading">
-      <img src="/images/org-logo.png" alt="Logo" />
-    </a>
-    <section id="heading" class="title-section">
-      <div class="layout-box">
-        <div class="action-column">
-          <VeranstaltungsCard veranstaltung={featuredEvent} />
+    <OrgLogo />
+
+    <section id="heading" class="h-screen pt-[15vh] relative">
+      <div class="absolute bottom-24 justify-center w-full icon-text">
+        <i class="ri-mouse-line mr-2"></i>
+        Scroll weiter
+      </div>
+      <div class="layout-box grid grid-cols-5 gap-12 px-[20%] w-full">
+        <div class="col-span-2 h-full grid grid-rows-4 gap-4">
+          <div class="row-span-3">
+            <VeranstaltungsCard veranstaltung={featuredEvent} />
+          </div>
+          <a
+            class="bg-white drop-shadow-md p-4 rounded-4xl w-full row-span-1 flex items-center"
+            href="#"
+          >
+            <i
+              class="ri-flag-line bg-green text-white rounded-full px-2 py-1 mr-3 text-lg"
+            ></i>
+            Probleme auf Wanderweg melden
+          </a>
         </div>
-        <div class="title-column">
-          <h2 class="subtitle">Harz, harzer, am harzesten.</h2>
-          <h1 class="big-title">
+        <div class="col-start-3 col-span-3">
+          <h2 class="font-medium text-lg tracking-wide">
+            Harz, harzer, am harzesten.
+          </h2>
+          <h1 class="font-bold text-5xl leading-tight">
             Hier bitte einen netten Slogan einfügen: Die Website des Harzklub
             Hohegeiß
           </h1>
-          <hr />
-          <!-- TODO: Calendar icon -->
-          <a href="/aktuelles" class="title-link"
-            >Unsere Verantstaltungen &gt;</a
-          >
+          <hr class="border-t-2 border-black" />
+          <a href="/aktuelles" class="flex flex-row items-center mt-3"
+            ><i class="ri-calendar-todo-line mr-2 text-lg"></i><span
+              class="hover:underline"
+            >
+              Veranstaltungen &gt;</span
+            >
+          </a>
         </div>
       </div>
     </section>
+
+    <section id="moin" class="px-[10%]">
+      <div class="">
+        <div class="flex flex-row p-10">
+          <div class="basis-1/2">
+            <h2 class="font-semibold">
+              Moin, moin in <span class="text-green-500">Hohegeiß...</span>
+            </h2>
+            <p class="text-gray-800 leading-5">
+              Das Bergdorf Hohegeiß liegt im Naturpark Harz. Es befindet sich
+              zwischen Sorge im Nordnordosten und Benneckenstein im Osten (beide
+              in Sachsen-Anhalt), Rothesütte im Südosten (Thüringen), Zorge im
+              Süden und Braunlage im Nordnordwesten (beide in Niedersachsen).
+              Durch das auf etwa 570 bis 642 m ü. NN gelegene Dorf führt im
+              Abschnitt zwischen Braunlage und Rothesütte die den Harz querende
+              Bundesstraße 4. Die Landesgrenze zu Sachsen-Anhalt (früher
+              innerdeutsche Grenze) führt am nordöstlichen Ortsrand vorbei; an
+              dieser Grenze liegt etwa 3,3 km südöstlich des Dorfs das
+              Dreiländereck Niedersachsen–Sachsen-Anhalt–Thüringen, wo der
+              Drei-Länder-Stein steht. Nahe dem Dorf breitet sich das
+              Naturdenkmal Dicke Tannen aus.
+            </p>
+          </div>
+          <div class="basis-1/2 flex items-center justify-center">
+            <img
+              src="/images/floating-pics-2.png"
+              alt="Übereinander lagernde Bilder von Hohegeiß. Auf einem sieht man einen Feldweg unter majästetischen Wolken, auf dem anderen den Teich im Kurpark."
+            />
+          </div>
+        </div>
+        <div class="flex flex-row">
+          <div class="basis-1/2 p-10 flex items-center justify-center">
+            <img
+              src="/images/floating-pics-1.png"
+              alt="Übereinander lagernde Bilder von Hohegeiß. Auf einem ist der Kirchturm der roten Holzkirche zu sehen, auf dem anderen der Blick Richtung Berge und eine blaue Harzhütte links im Bild."
+            />
+          </div>
+          <div class="basis-1/2">
+            <h2 class="font-semibold">
+              ...und willkommen beim <span class="text-green-500">Harzklub</span
+              >
+            </h2>
+            <p class="text-gray-800 leading-5">
+              Der Harzklub e. V. (Heimat-, Wander- und Naturschutzbund) mit Sitz
+              in Clausthal-Zellerfeld ist ein Verein zur Pflege des Harzer
+              Brauchtums und sorgt für die Unterhaltung der dortigen Wanderwege.
+              Er wurde 1886 in Seesen gegründet und hat heute ca. 13.000
+              Mitglieder in 87 Zweigvereinen, die sich in den Ortschaften in und
+              um den Harz in Niedersachsen, Thüringen und Sachsen-Anhalt
+              gebildet haben. Wir kümmern uns satzungsgemäß um...
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="aufgaben" class="bg-light-brown py-12">
+      <h1 class="text-center text-4xl font-semibold">
+        Das sind <span class="text-green-500">unsere Aufgaben</span>
+      </h1>
+      <p class="font-medium text-center w-2/5 mx-auto leading-5 my-10">
+        Der Harzklub wurde am 8. August 1886 in Seesen gegründet. Der
+        Eisenbahndirektor Albert Schneider wurde der erste Vorsitzende.
+        Mitbegründer waren u. a. Oberforstrat Carl Reuß als zweiter Vorsitzender
+        und Verlagsbuchhändler Heinrich Conrad Huch als Schriftführer.
+      </p>
+
+      <div class="flex flex-row gap-8 px-[12vw] justify-center">
+        {
+          aufgaben.map((aufgabe) => (
+            <div class="card flex flex-col w-full bg-white">
+              <div class="card-header basis-2/5">
+                <a href={aufgabe.link ?? "/aktuelles"} blur-shadow-image="true">
+                  <img
+                    class="w-auto rounded-t-lg"
+                    src={
+                      aufgabe.image ??
+                      "https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+                    }
+                    alt="card image"
+                  />
+                </a>
+              </div>
+              <div class="card-body flex flex-col basis-3/5 ">
+                <a href={aufgabe.link ?? "/aktuelles"}>
+                  <h4 class="font-medium text-green-500">{aufgabe.title}</h4>
+                </a>
+                <p class="text-gray-800 mb-3">{aufgabe.desc}</p>
+                <div class="h-full flex flex-col justify-end">
+                  <a
+                    href={aufgabe.link ?? "/aktuelles"}
+                    class="button button-green w-full rounded-md text-center"
+                  >
+                    Weiterlesen
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <script src="node_modules/@material-tailwind/html/scripts/dialog.js"
+    ></script>
   </main>
 </Layout>
 
 <style>
-  .title-section {
-    height: 100vh;
-  }
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
 
-  .org-logo {
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-    align-items: center;
-    bottom: 30px;
-    right: 30px;
-    border-radius: 20px;
-    box-shadow: 7px 9px 10px -5px rgba(102, 102, 102, 0.75);
-    -webkit-box-shadow: 7px 9px 10px -5px rgba(102, 102, 102, 0.75);
-    -moz-box-shadow: 7px 9px 10px -5px rgba(102, 102, 102, 0.75);
-    cursor: pointer;
+  @layer components {
+    .icon-text {
+      @apply flex flex-row items-center;
+    }
   }
 </style>

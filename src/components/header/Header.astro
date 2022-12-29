@@ -1,71 +1,74 @@
 ---
-import Button from "../Button.astro";
 import MenuItem from "./MenuItem.astro";
 export interface Props {
-    currentPage: Seite;
+  currentPage: Seite;
 }
 
 export enum Seite {
-    Startseite,
-    Aktuelles,
-    Heimatgruppe,
-    Jugendgruppe,
-    Wanderungen,
-    DerHarz,
-    UeberUns,
+  Startseite,
+  Aktuelles,
+  Heimatgruppe,
+  Jugendgruppe,
+  Wanderungen,
+  DerHarz,
+  UeberUns,
 }
 
 type SeitenInfo = {
-    href: string;
-    page: Seite;
-    name: string;
+  href: string;
+  page: Seite;
+  name: string;
 };
 
 const pages: Array<SeitenInfo> = [
-    { page: Seite.Startseite, href: "/", name: "Startseite" },
-    { page: Seite.Aktuelles, href: "/aktuelles", name: "Aktuelles" },
-    { page: Seite.Heimatgruppe, href: "/heimatgruppe", name: "Heimatgruppe" },
-    { page: Seite.Jugendgruppe, href: "/jugendgruppe", name: "Jugendgruppe" },
-    { page: Seite.Wanderungen, href: "/wanderungen", name: "Wanderungen" },
-    { page: Seite.DerHarz, href: "/der-harz", name: "Der Harz" },
-    { page: Seite.UeberUns, href: "/ueber-uns", name: "Über uns" },
+  { page: Seite.Startseite, href: "/", name: "Startseite" },
+  { page: Seite.Aktuelles, href: "/aktuelles", name: "Aktuelles" },
+  { page: Seite.Heimatgruppe, href: "/heimatgruppe", name: "Heimatgruppe" },
+  { page: Seite.Jugendgruppe, href: "/jugendgruppe", name: "Jugendgruppe" },
+  { page: Seite.Wanderungen, href: "/wanderungen", name: "Wanderungen" },
+  { page: Seite.DerHarz, href: "/der-harz", name: "Der Harz" },
+  { page: Seite.UeberUns, href: "/ueber-uns", name: "Über uns" },
 ];
 
 const { currentPage: page } = Astro.props;
 ---
 
-<header>
-    <a href="/">
-        <img src="/new_logo.svg" alt="Logo des Harzklub" />
-    </a>
-    <div class="menu">
-        {
-            pages.map((seite) => (
-                <MenuItem
-                    href={seite.href}
-                    currentPage={seite.page === page}
-                    name={seite.name}
-                />
-            ))
-        }
-        <Button title="Mach mit" href="about-us" />
-    </div>
+<header
+  class="fixed w-full top-0 my-0 mx-0 bg-light-blue z-10 py-4 px-10 flex flex-row justify-between items-center"
+>
+  <a href="/">
+    <img src="/new_logo.svg" alt="Logo des Harzklub" />
+  </a>
+  <div class="flex flex-row items-center">
+    {
+      pages.map((seite) => (
+        <div class="mx-2">
+          <MenuItem
+            href={seite.href}
+            currentPage={seite.page === page}
+            name={seite.name}
+          />
+        </div>
+      ))
+    }
+    <a class="button button-green" href="about-us">Mach mit</a>
+  </div>
 </header>
 
 <style>
-    header {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        margin-inline: 20px;
-        margin-block: 25px;
-    }
+  /* header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-inline: 20px;
+    margin-block: 25px;
+  }
 
-    .menu {
-        display: flex;
-        flex-direction: row;
-        gap: 20px;
-        align-items: center;
-    }
+  .menu {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+  } */
 </style>

@@ -1,5 +1,5 @@
 ---
-import type { Veranstaltung } from "src/utils/directus";
+import type { Veranstaltung } from "src/data/veranstaltungen";
 import { formatDate } from "src/utils/format-date";
 import sanitizeHtml from "sanitize-html";
 import type sanitize from "sanitize-html";
@@ -14,33 +14,37 @@ const { veranstaltung: v } = Astro.props;
 ---
 
 <div
-  class="container"
+  class="flex flex-row rounded-4xl justify-end bg-cover bg-no-repeat bg-left drop-shadow-md h-full"
   style={`background-image: url(${
     import.meta.env.DIRECTUS_HOST + "/assets/" + v.featured_image
   });`}
 >
-  <div class="infos">
-    <!-- TODO: calender icon -->
-    <div class="header-bar">
-      <p>{v.formattedDate}</p>
+  <div class="bg-white flex flex-col rounded-4xl items-start p-4 w-2/3">
+    <div class="flex w-full flex-row justify-between mb-4">
+      <p class="flex flex-row items-center font-medium">
+        <i class="ri-calendar-event-line text-xl mr-2"></i>{v.formattedDate}
+      </p>
       <Tag title="Veranstaltung" />
     </div>
-    <p class="title">{v.titel}</p>
-    <p class="desc">
+    <p class="font-semibold text-lg">{v.titel}</p>
+    <p class="leading-tight text-gray-800">
       {
         sanitizeHtml(v.beschreibung || "Wir freuen uns auf euch!", {
           allowedTags: [],
         })
       }
     </p>
-    <div class="to-bottom">
-      <InvertedButton title="Mehr erfahren" href={"/veranstaltung/" + v.slug} />
+    <div class="grow flex flex-col justify-center p-2">
+      <a
+        class="button button-outlined button-green px-2 py-1 h-min"
+        href={"/veranstaltung/" + v.slug}>&gt; Mehr erfahren</a
+      >
     </div>
   </div>
 </div>
 
 <style>
-  .container {
+  /* .container {
     max-width: 450px;
     width: 30vw;
     display: flex;
@@ -98,5 +102,5 @@ const { veranstaltung: v } = Astro.props;
     flex-direction: column;
     justify-content: flex-end;
     flex-grow: 100;
-  }
+  } */
 </style>

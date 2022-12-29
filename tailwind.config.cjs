@@ -1,0 +1,34 @@
+/** @type {import('tailwindcss').Config} */
+const withMT = require("@material-tailwind/html/utils/withMT");
+
+module.exports = withMT({
+	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+	theme: {
+		extend: {
+			borderRadius: {
+				'4xl': '20px'
+			}
+		},
+		colors: {
+			'green': {
+				'50': '#f6f8f3',
+				'100': '#ecf2e7',
+				'200': '#d0dec3',
+				'300': '#b4c99e',
+				'400': '#7ba156',
+				'500': '#43790d',
+				'600': '#3c6d0c',
+				'700': '#325b0a',
+				'800': '#284908',
+				'900': '#213b06'
+			},
+			'light-blue': '#F8FAFF',
+			'dark-green': '#374A24',
+			'light-brown': '#E6E6E6',
+		},
+		fontFamily: {
+			sans: ['Manrope', 'sans-serif']
+		}
+	},
+	plugins: [],
+});
