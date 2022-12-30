@@ -59,7 +59,7 @@ const aufgaben = [
         href="#moin"
       >
         <i class="ri-mouse-line mr-2"></i>
-        Scroll weiter
+        <span class="hover:underline">Scroll weiter</span>
       </a>
       <div
         class="layout-box grid grid-cols-5 gap-12 md:flex md:flex-row md:flex-wrap-reverse md:gap-16 2xl:px-[20%] xl:px-[5%] lg:px-[5%] xs:px-[5%] md:px-[15%] w-full"
@@ -71,7 +71,7 @@ const aufgaben = [
             <VeranstaltungsCard veranstaltung={featuredEvent} />
           </div>
           <a
-            class="bg-white drop-shadow-md p-4 rounded-4xl w-full row-span-1 flex items-center sm:text-sm"
+            class="bg-white drop-shadow-md p-4 rounded-4xl w-full row-span-1 flex items-center sm:text-sm cursor-pointer hover:scale-105 transition-all"
             dialog-trigger="true"
           >
             <i
@@ -244,7 +244,7 @@ const aufgaben = [
                 <p class="text-gray-800 mb-3 break-words">{aufgabe.desc}</p>
                 <div class="h-full flex flex-col justify-end">
                   <a
-                    href="{aufgabe.link ?? DEFAULT_AUFGABEN_LINK}"
+                    href={aufgabe.link ?? DEFAULT_AUFGABEN_SECTION_LINK}
                     class="button button-green w-full rounded-md text-center"
                   >
                     Weiterlesen
@@ -453,7 +453,7 @@ const aufgaben = [
           </p>
           <a
             href={MITMACHEN}
-            class="button button-lime text-white rounded-md filter-none"
+            class="button button-lime text-white rounded-md filter-none hover:scale-105 transition-all"
             style="color: white; box-shadow: none;">Mehr erfahren &gt;</a
           >
         </div>

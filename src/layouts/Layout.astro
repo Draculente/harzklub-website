@@ -1,4 +1,5 @@
 ---
+import Footer from "@components/Footer.astro";
 import type { Seite } from "@components/header/Header.astro";
 import Header from "@components/header/Header.astro";
 import OrgLogo from "@components/OrgLogo.astro";
@@ -8,7 +9,6 @@ export interface Props {
   description?: string;
   page?: Seite;
 }
-import { UNDER_CONSTRUCTION, IMPRESSUM, DOWNLOADS } from "src/data/links";
 
 const { title, description, page } = Astro.props;
 ---
@@ -31,84 +31,7 @@ const { title, description, page } = Astro.props;
     <Header currentPage={page} />
     <OrgLogo />
     <slot />
-
-    <footer class="bg-lime-500">
-      <div
-        class="grid grid-cols-4 gap-24 py-20 px-[15%] md:flex md:flex-col md:gap-6 md:pb-10"
-      >
-        <div>
-          <img
-            src="/images/logo-white.svg"
-            alt="Das Logo der Website. Drei Tannen und rechts daneben der Schriftzug: 'Harzklub Hohegeiß' in zwei Zeilen."
-          />
-          <p class="text-white font-medium my-5 leading-5">
-            Pflege und Erhaltung von Harzer Brauchtum, Harzer Liedgut, Harzer
-            Festtags- und Arbeitstrachten sowie der Mundart seit 1011.
-          </p>
-          <div>
-            <a href="#"
-              ><i class="ri-instagram-line text-white mr-1 text-xl font-medium"
-              ></i>
-            </a>
-            <a href="mailto:info@harzklub-hohegeiss.de"
-              ><i class="ri-mail-line text-white mr-1 text-xl font-medium"></i>
-            </a>
-          </div>
-        </div>
-        <div class="col-span-2 flex flex-col flex-wrap h-52 md:h-full">
-          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Startseite</a>
-          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Aktuelles</a>
-          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Heimatgruppe</a>
-          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Jugendgruppe</a>
-          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Wanderungen</a>
-          <a href={UNDER_CONSTRUCTION} class="text-white my-2"
-            >Wanderwegefinder</a
-          >
-          <a href={UNDER_CONSTRUCTION} class="text-white my-2"
-            >Alle Wanderwege</a
-          >
-          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Der Harz</a>
-          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Über uns</a>
-          <a href={UNDER_CONSTRUCTION} class="text-white my-2"
-            >Mitglied werden</a
-          >
-          <a href={IMPRESSUM} class="text-white my-2">Datenschutz</a>
-          <a href={IMPRESSUM} class="text-white my-2">Impressum</a>
-        </div>
-        <div
-          class="flex flex-col h-full justify-evenly w-52 items-stretch md:h-72 sm:w-full sm:max-w-[300px]"
-        >
-          <div class="relative">
-            <img
-              src="/images/three-people.svg"
-              class="bottom-10 absolute w-2/3 right-10"
-              alt="Drei Icons von Menschen, die neugierig über den Button schauen."
-            />
-            <a
-              href={UNDER_CONSTRUCTION}
-              class="button button-green rounded-md w-full text-center"
-              style="color: white; box-shadow: none;">Mitglied werden &gt;</a
-            >
-          </div>
-          <div class="relative">
-            <img
-              src="/images/documents.svg"
-              alt="Drei Icons von Dokumenten"
-              class="absolute bottom-8 w-2/3 right-10"
-            />
-            <a
-              href={DOWNLOADS}
-              class="button button-green text-center rounded-md w-full"
-              style="color: white; box-shadow: none;">Downloadbereich &gt;</a
-            >
-          </div>
-        </div>
-      </div>
-      <p class="text-white text-center pb-2 font-normal px-5 leading-5">
-        Copyright 2023 - Harzklub-Zweigverein-Hohegeiß e.V.
-      </p>
-    </footer>
-
+    <Footer />
     <style>
       :global(input),
       :global(textarea),
