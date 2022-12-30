@@ -41,19 +41,17 @@ const aufgaben = [
 <Layout title="Startseite">
   <Header currentPage={Seite.Startseite} />
   <main>
-    <OrgLogo />
-
     <section
       id="heading"
-      class="h-screen pt-[15vh] sm:pt-[3vh] relative bg-berglinie bg-no-repeat bg-bottom md:bg-right-top xs:bg-berglinie-small bg-origin-padding bg-contain md:bg-cover sm:h-min"
+      class="h-screen pt-[15vh] sm:pt-[3vh] relative bg-berglinie bg-no-repeat bg-bottom md:bg-right-top xs:bg-none bg-origin-padding bg-contain md:bg-cover sm:h-min"
     >
       <img
-        src="/images/dots.png"
+        src="/images/dots.svg"
         class="absolute top-[10vh] right-[30%] sm:hidden"
         aria-hidden="true"
       />
       <img
-        src="/images/dots.png"
+        src="/images/dots.svg"
         class="absolute top-[48vh] left-[12%] sm:hidden"
         aria-hidden="true"
       />
@@ -65,10 +63,10 @@ const aufgaben = [
         Scroll weiter
       </a>
       <div
-        class="layout-box grid grid-cols-5 md:grid-cols-1 md:grid-rows-2 md:place-content-center gap-12 md:gap-0 2xl:px-[20%] xl:px-[5%] lg:px-[5%] xs:px-[5%] md:px-[15%] w-full"
+        class="layout-box grid grid-cols-5 gap-12 md:flex md:flex-row md:flex-wrap-reverse md:gap-16 2xl:px-[20%] xl:px-[5%] lg:px-[5%] xs:px-[5%] md:px-[15%] w-full"
       >
         <div
-          class="col-span-2 md:col-span-3 md:row-start-2 md:w-full h-full grid grid-rows-4 gap-4 sm:-mt-10 sm:flex sm:flex-col"
+          class="col-span-2 md:col-span-3 md:row-start-2 md:w-full h-full grid grid-rows-4 gap-4 sm:flex sm:flex-col"
         >
           <div class="row-span-3">
             <VeranstaltungsCard veranstaltung={featuredEvent} />
@@ -137,7 +135,7 @@ const aufgaben = [
       </div>
     </section>
 
-    <section id="moin" class="px-[10%] pb-20 md:px-[4%] md:pt-[5%]">
+    <section id="moin" class="px-[10%] pb-20 md:px-[4%] md:pt-[20%]">
       <div class="">
         <div class="flex flex-row flex-wrap-reverse md:justify-center">
           <div class="big:basis-1/2 sm:mt-5 min-w-[300px] max-w-[500px]">
@@ -198,12 +196,12 @@ const aufgaben = [
 
     <section id="aufgaben" class="bg-light-brown py-20 relative">
       <img
-        src="/images/dots.png"
+        src="/images/dots.svg"
         class="absolute top-[500px] right-[10%] md:hidden"
         aria-hidden="true"
       />
       <img
-        src="/images/dots.png"
+        src="/images/dots.svg"
         class="absolute bottom-[40vh] left-[12%] md:hidden"
         aria-hidden="true"
       />
@@ -223,7 +221,7 @@ const aufgaben = [
       <div class="flex flex-row gap-8 px-[10vw] justify-center flex-wrap mt-20">
         {
           aufgaben.map((aufgabe) => (
-            <div class="card flex flex-col w-full bg-white basis-1/5 min-w-[260px] shrink-0 hover:scale-105 transition-all z-10">
+            <div class="card flex flex-col w-full bg-white basis-1/5 min-w-[260px] shrink-0 hover:scale-105 transition-all z-10 sm:w-full sm:basis-1/4 sm:min-w-[80vw]">
               <div class="card-header basis-2/5">
                 <a
                   href={aufgabe.link ?? DEFAULT_AUFGABEN_SECTION_LINK}
@@ -260,10 +258,10 @@ const aufgaben = [
       </div>
     </section>
 
-    <!-- <section id="wandern" class="pt-20 relative">
+    <section id="wandern" class="pt-20 relative">
       <img
-        src="/images/dots.png"
-        class="absolute top-[80px] left-[30%]"
+        src="/images/dots.svg"
+        class="absolute top-[80px] left-[30%] md:hidden"
         aria-hidden="true"
       />
       <SectionHeader title="Wandern" subtitle="Egal zu welche Jahreszeit">
@@ -271,13 +269,18 @@ const aufgaben = [
         Harzklub erschließt neue Wanderwege, hält bestehende in Schuss<br /> und
         beschildert Deine Routen.
       </SectionHeader>
-      <div class="p-[10%] flex flex-row items-center">
+      <div
+        class="p-[10%] flex flex-row items-center md:flex-wrap md:justify-center md:px-5"
+      >
         <div
-          class="border-dashed border-grey-300 rounded-md border-2 w-1/2 p-16 -mr-[5vw]"
+          class="border-dashed border-grey-300 rounded-md big:border-2 w-1/2 p-16 -mr-[5vw] md:p-3 md:w-full md:rounded-none md:mr-0 md:border-t-2"
         >
-          <div class="w-3/4">
-            <i class="ri-treasure-map-line text-green-500 text-5xl"></i>
-            <h2 class="font-semibold">Wir helfen dir, Dich zurechtzufinden</h2>
+          <div class="w-3/4 md:w-full">
+            <i class="ri-treasure-map-line text-green-500 text-5xl md:m-auto"
+            ></i>
+            <h2 class="font-semibold md:text-xl">
+              Wir helfen dir, Dich zurechtzufinden
+            </h2>
             <p>
               Du weißt gar nicht, wie du deine Wanderungen beginnen sollst? Wir
               bieten Gruppenwanderungen und viele weitere Aktivitäten rund ums
@@ -287,11 +290,11 @@ const aufgaben = [
             </p>
           </div>
         </div>
-        <div class="relative w-3/5 -mt-52">
+        <div class="relative w-3/5 -mt-52 md:mt-5 md:w-full">
           <img
             src="/images/geiss.png"
             alt="Das Wappentier Hohegeiß"
-            class="absolute -top-28 rotate-6 right-32 -z-10"
+            class="absolute -top-28 rotate-6 right-32 -z-10 md:hidden"
           />
           <img
             src="/images/forest-with-fancy-sky.png"
@@ -304,12 +307,12 @@ const aufgaben = [
           >
         </div>
       </div>
-    </section> -->
+    </section>
 
-    <!-- <section id="tradition" class="pb-20 relative">
+    <section id="tradition" class="pb-20 relative md:bg-light-brown md:py-20">
       <img
-        src="/images/dots.png"
-        class="absolute top-[620px] left-[15%]"
+        src="/images/dots.svg"
+        class="absolute top-[620px] left-[15%] md:hidden"
         aria-hidden="true"
       />
 
@@ -321,8 +324,10 @@ const aufgaben = [
         />Brauchtum, Harzer Liedgut, Harzer Festtags- und Arbeitstrachten sowie<br
         />die Mundart
       </SectionHeader>
-      <div class="flex flex-row justify-center items-center">
-        <div class="-mr-32">
+      <div class="flex flex-row justify-center items-center flex-wrap-reverse">
+        <div
+          class="-mr-32 md:mr-0 md:mt-10 md:px-5 flex flex-col justify-center items-center"
+        >
           <img
             src="/images/tradition.png"
             alt="6 Bilder, auf denen Menschen in Harzer-Trachten zu sehen sind."
@@ -333,7 +338,9 @@ const aufgaben = [
             >Erfahre mehr über die Heimatgruppe &gt;</a
           >
         </div>
-        <div class="w-1/5 rounded-md bg-white drop-shadow-lg p-8 mt-20">
+        <div
+          class="w-1/5 rounded-md bg-white drop-shadow-lg p-8 mt-20 md:w-full md:mx-5"
+        >
           <h3 class="text-xl font-semibold">
             Pflege des Harzer <span class="text-green-500">Brauchtums</span>
           </h3>
@@ -359,12 +366,12 @@ const aufgaben = [
           </p>
         </div>
       </div>
-    </section> -->
+    </section>
 
-    <!-- <section class="py-10 relative">
+    <section class="py-10 relative">
       <img
-        src="/images/dots.png"
-        class="absolute top-[150px] left-[31%] rotate-[35deg]"
+        src="/images/dots.svg"
+        class="absolute top-[150px] left-[31%] rotate-[35deg] md:hidden"
         aria-hidden="true"
       />
 
@@ -373,12 +380,15 @@ const aufgaben = [
         />
         wir bringen dem Nachwuchs den Harz und seine Traditionen nahe.
       </SectionHeader>
-      <div class="p-[10%] flex flex-row items-center mt-20">
+
+      <div
+        class="p-[10%] flex flex-row items-center mt-20 md:flex-wrap md:justify-center md:p-5 md:mt-0"
+      >
         <div
-          class="border-dashed border-grey-300 rounded-md border-2 w-1/2 p-16 -mr-[8vw]"
+          class="border-dashed border-grey-300 rounded-md big:border-2 w-1/2 p-16 -mr-[8vw] md:p-3 md:w-full md:rounded-none md:mr-0 md:border-t-2"
         >
-          <div class="w-3/4">
-            <h2 class="font-bold mb-0">
+          <div class="w-3/4 md:w-full">
+            <h2 class="font-bold mb-0 md:text-xl">
               <span class="text-green-500">Spaß</span> und Spiele
             </h2>
             <h3 class="text-lg mt-0 font-semibold mb-6">
@@ -398,33 +408,41 @@ const aufgaben = [
             </p>
           </div>
         </div>
-        <div class="relative w-3/5 -mt-52">
+        <div
+          class="relative w-3/5 -mt-52 md:mt-5 md:w-full md:flex md:flex-col md:justify-center"
+        >
           <img
             src="/images/youth.png"
             alt="Das Bild ist eine Collage aus 3 verschiedenen Bildern. Auf zweien ist eine Gruppe von Kindern zwischen 5 und 11 auf einer Bühne zu sehen. Auf einem tanzen sie, auf dem anderen singen sie. Das dritte Bild zeigt eine Gruppe junger Kinder in Trachten auf einer Treppe sitzend, im Hintergrund sitzt eine erwachsene Person."
           />
           <a
             href="#"
-            class="text-green-500 font-medium block text-center hover:underline -ml-32"
+            class="text-green-500 font-medium block text-center hover:underline -ml-32 md:ml-0"
             >Erfahre mehr über die Jugendarbeit &gt;</a
           >
         </div>
       </div>
-    </section> -->
+    </section>
 
-    <!-- <section id="call-to-action" class="bg-green-500 relative pb-20">
+    <section id="call-to-action" class="bg-green-500 relative pb-20">
       <div class="w-full h-3 bg-green-300"></div>
       <div class="w-full h-3 bg-green-400"></div>
-      <div class="flex flex-row px-[20%] gap-32 mt-20 items-center">
+      <div
+        class="flex flex-row px-[20%] gap-32 mt-20 items-center md:flex-wrap md:justify-center md:px-5 md:gap-5 md:mt-5"
+      >
         <img
-          class="shrink-0 aspect-square"
-          src="/images/team-icon.png"
+          class="shrink-0 aspect-square md:w-1/2 md:max-w-[200px]"
+          src="/images/team-icon.svg"
           alt="Ein Icon mit 3 nur mit Umrissen gezeichneten Personen. Die vorderste Person hält ein 'Plus'-Zeichen in den Händen."
         />
         <div>
           <div class="chip chip-green">Mitgliedschaft</div>
-          <h1 class="text-5xl font-bold text-white mt-5">Mach Mit</h1>
-          <h2 class="text-gray-300 mb-3">Unterstütze den Harzklub</h2>
+          <h1 class="text-5xl font-bold text-white mt-5 md:text-3xl">
+            Mach Mit
+          </h1>
+          <h2 class="text-gray-300 mb-3 md:text-xl">
+            Unterstütze den Harzklub
+          </h2>
           <p class="break-words text-white my-7">
             Mitglied ist ein konstitutiver Angehöriger (natürliche oder
             juristische Person) eines <br />Kollegialorgans. Konstitutiv
@@ -446,80 +464,7 @@ const aufgaben = [
         alt="Der Hohegeisser Geiss steht stilisiert auf einem Berg."
         class="absolute right-0 bottom-0"
       />
-    </section> -->
-
-    <!-- <footer class="bg-lime-500">
-      <div class="grid grid-cols-4 gap-24 py-20 px-[15%]">
-        <div>
-          <img
-            src="/images/logo-white.png"
-            alt="Das Logo der Website. Drei Tannen und rechts daneben der Schriftzug: 'Harzklub Hohegeiß' in zwei Zeilen."
-          />
-          <p class="text-white font-medium my-5 leading-5">
-            Pflege und Erhaltung von Harzer Brauchtum, Harzer Liedgut, Harzer
-            Festtags- und Arbeitstrachten sowie der Mundart seit 1011.
-          </p>
-          <div>
-            <a href="#"
-              ><i class="ri-instagram-line text-white mr-1 text-xl font-medium"
-              ></i>
-            </a>
-            <a href="mailto:info@harzklub-hohegeiss.de"
-              ><i class="ri-mail-line text-white mr-1 text-xl font-medium"></i>
-            </a>
-          </div>
-        </div>
-        <div class="col-span-2 flex flex-col flex-wrap h-52">
-          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Startseite</a>
-          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Aktuelles</a>
-          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Heimatgruppe</a>
-          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Jugendgruppe</a>
-          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Wanderungen</a>
-          <a href={UNDER_CONSTRUCTION} class="text-white my-2"
-            >Wanderwegefinder</a
-          >
-          <a href={UNDER_CONSTRUCTION} class="text-white my-2"
-            >Alle Wanderwege</a
-          >
-          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Der Harz</a>
-          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Über uns</a>
-          <a href={UNDER_CONSTRUCTION} class="text-white my-2"
-            >Mitglied werden</a
-          >
-          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Datenschutz</a>
-          <a href={UNDER_CONSTRUCTION} class="text-white my-2">Impressum</a>
-        </div>
-        <div class="flex flex-col h-full justify-evenly w-52 items-stretch">
-          <div class="relative">
-            <img
-              src="/images/three-people.png"
-              class="bottom-10 absolute w-2/3 right-10"
-              alt="Drei Icons von Menschen, die neugierig über den Button schauen."
-            />
-            <a
-              href={UNDER_CONSTRUCTION}
-              class="button button-green rounded-md w-full text-center"
-              style="color: white; box-shadow: none;">Mitglied werden &gt;</a
-            >
-          </div>
-          <div class="relative">
-            <img
-              src="/images/documents.png"
-              alt="Drei Icons von Dokumenten"
-              class="absolute bottom-8 w-2/3 right-10"
-            />
-            <a
-              href={UNDER_CONSTRUCTION}
-              class="button button-green rounded-md w-full"
-              style="color: white; box-shadow: none;">Downloadbereich &gt;</a
-            >
-          </div>
-        </div>
-      </div>
-      <p class="text-white text-center pb-2 font-normal">
-        Copyright 2023 - Harzklub-Zweigverein-Hohegeiß e.V.
-      </p>
-    </footer> -->
+    </section>
   </main>
 
   <script src="node_modules/@material-tailwind/html/scripts/dialog.js"></script>
