@@ -41,7 +41,20 @@ const aufgaben = [
   <main>
     <OrgLogo />
 
-    <section id="heading" class="h-screen pt-[15vh] relative">
+    <section
+      id="heading"
+      class="h-screen pt-[15vh] relative bg-berglinie bg-no-repeat bg-bottom bg-origin-padding bg-contain"
+    >
+      <img
+        src="/images/dots.png"
+        class="absolute top-[10vh] right-[30%]"
+        aria-hidden="true"
+      />
+      <img
+        src="/images/dots.png"
+        class="absolute bottom-[48vh] left-[12%]"
+        aria-hidden="true"
+      />
       <a
         class="absolute bottom-24 justify-center w-full icon-text flex"
         href="#moin"
@@ -171,7 +184,18 @@ const aufgaben = [
       </div>
     </section>
 
-    <section id="aufgaben" class="bg-light-brown py-20">
+    <section id="aufgaben" class="bg-light-brown py-20 relative">
+      <img
+        src="/images/dots.png"
+        class="absolute top-[500px] right-[10%]"
+        aria-hidden="true"
+      />
+      <img
+        src="/images/dots.png"
+        class="absolute bottom-[40vh] left-[12%]"
+        aria-hidden="true"
+      />
+
       <h1 class="text-center text-4xl font-semibold">
         Das sind <span class="text-green-500">unsere Aufgaben</span>
       </h1>
@@ -185,7 +209,7 @@ const aufgaben = [
       <div class="flex flex-row gap-8 px-[10vw] justify-center flex-wrap mt-20">
         {
           aufgaben.map((aufgabe) => (
-            <div class="card flex flex-col w-full bg-white basis-1/5 min-w-[260px] shrink-0 hover:scale-105 transition-all">
+            <div class="card flex flex-col w-full bg-white basis-1/5 min-w-[260px] shrink-0 hover:scale-105 transition-all z-10">
               <div class="card-header basis-2/5">
                 <a
                   href={aufgabe.link ?? DEFAULT_AUFGABEN_SECTION_LINK}
@@ -221,7 +245,12 @@ const aufgaben = [
       </div>
     </section>
 
-    <section id="wandern" class="pt-20">
+    <section id="wandern" class="pt-20 relative">
+      <img
+        src="/images/dots.png"
+        class="absolute top-[80px] left-[30%]"
+        aria-hidden="true"
+      />
       <SectionHeader title="Wandern" subtitle="Egal zu welche Jahreszeit">
         Und wir sorgen dafür, dass Du Dich dabei zurechtfindest.<br />Der
         Harzklub erschließt neue Wanderwege, hält bestehende in Schuss<br /> und
@@ -262,7 +291,13 @@ const aufgaben = [
       </div>
     </section>
 
-    <section class="pb-20">
+    <section id="tradition" class="pb-20 relative">
+      <img
+        src="/images/dots.png"
+        class="absolute top-[620px] left-[15%]"
+        aria-hidden="true"
+      />
+
       <SectionHeader
         title="Der Harz"
         subtitle="Ein Mittelgebirge mit Tradition"
@@ -311,7 +346,13 @@ const aufgaben = [
       </div>
     </section>
 
-    <section class="py-10">
+    <section class="py-10 relative">
+      <img
+        src="/images/dots.png"
+        class="absolute top-[150px] left-[31%] rotate-[35deg]"
+        aria-hidden="true"
+      />
+
       <SectionHeader title="Die Jugend" subtitle="Der Harz wird wieder jung">
         Die Kinder und Jugendlichen machen Hohegeiß erst richtig lebendig. Und <br
         />

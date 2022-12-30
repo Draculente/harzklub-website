@@ -7,6 +7,9 @@ module.exports = withMT({
 		extend: {
 			borderRadius: {
 				'4xl': '20px'
+			},
+			backgroundImage: {
+				'berglinie': 'url("/images/berglinie.png")'
 			}
 		},
 		//https://javisperez.github.io/tailwindcolorshades/
