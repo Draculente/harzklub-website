@@ -18,20 +18,22 @@ const aufgaben = [
     title: "Brauchtumspflege",
     desc: "Dazu gehören Harzer Liedgut, Harzer Trachten sowie die Mundart",
     link: "/aktuelles",
-    image:
-      "https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+    image: "/images/raunacht.jpg",
   },
   {
     title: "Wanderwege",
+    image: "/images/steg.jpg",
     desc: "Anlegen, Beschilderung und Erhaltung von Wanderwegen im Naturpark Harz",
   },
   {
     title: "Jugend und Familie",
+    image: "/images/kinder_buehne.jpg",
     desc: "Hier ein oder zwei nette Sätze über Jugendarbeit",
   },
   {
     title: "Naturparkeinrichtung",
     desc: "Bänke, Schutzhütten und mehr",
+    image: "/images/bank.jpg",
   },
 ];
 ---
@@ -43,39 +45,43 @@ const aufgaben = [
 
     <section
       id="heading"
-      class="h-screen pt-[15vh] relative bg-berglinie bg-no-repeat bg-bottom bg-origin-padding bg-contain"
+      class="h-screen pt-[15vh] sm:pt-[3vh] relative bg-berglinie bg-no-repeat bg-bottom md:bg-right-top xs:bg-berglinie-small bg-origin-padding bg-contain md:bg-cover sm:h-min"
     >
       <img
         src="/images/dots.png"
-        class="absolute top-[10vh] right-[30%]"
+        class="absolute top-[10vh] right-[30%] sm:hidden"
         aria-hidden="true"
       />
       <img
         src="/images/dots.png"
-        class="absolute bottom-[48vh] left-[12%]"
+        class="absolute top-[48vh] left-[12%] sm:hidden"
         aria-hidden="true"
       />
       <a
-        class="absolute bottom-24 justify-center w-full icon-text flex"
+        class="absolute bottom-24 justify-center w-full icon-text flex sm:hidden"
         href="#moin"
       >
         <i class="ri-mouse-line mr-2"></i>
         Scroll weiter
       </a>
-      <div class="layout-box grid grid-cols-5 gap-12 px-[20%] w-full">
-        <div class="col-span-2 h-full grid grid-rows-4 gap-4">
+      <div
+        class="layout-box grid grid-cols-5 md:grid-cols-1 md:grid-rows-2 md:place-content-center gap-12 md:gap-0 2xl:px-[20%] xl:px-[5%] lg:px-[5%] xs:px-[5%] md:px-[15%] w-full"
+      >
+        <div
+          class="col-span-2 md:col-span-3 md:row-start-2 md:w-full h-full grid grid-rows-4 gap-4 sm:-mt-10 sm:flex sm:flex-col"
+        >
           <div class="row-span-3">
             <VeranstaltungsCard veranstaltung={featuredEvent} />
           </div>
-          <button
-            class="bg-white drop-shadow-md p-4 rounded-4xl w-full row-span-1 flex items-center"
+          <a
+            class="bg-white drop-shadow-md p-4 rounded-4xl w-full row-span-1 flex items-center sm:text-sm"
             dialog-trigger="true"
           >
             <i
               class="ri-flag-line bg-green text-white rounded-full px-2 py-1 mr-3 text-lg"
             ></i>
             Probleme auf einem Wanderweg melden
-          </button>
+          </a>
           <div class="dialog">
             <div class="dialog-overlay" dialog-close="true"></div>
             <div class="modal-dialog">
@@ -93,8 +99,8 @@ const aufgaben = [
                 </div>
                 <div class="dialog-body">
                   <p class="opacity-60">
-                    Ab Frühjahr kannst du hier einfach und schnell Schäden an
-                    Wanderwegen melden.
+                    Pünktlich zur Saison kannst Du hier ab Frühjahr einfach und
+                    schnell Schäden an Wanderwegen melden.
                   </p>
                 </div>
                 <div class="dialog-footer">
@@ -109,11 +115,13 @@ const aufgaben = [
             </div>
           </div>
         </div>
-        <div class="col-start-3 col-span-3">
-          <h2 class="font-medium text-lg tracking-wide">
+        <div class="col-start-3 col-span-3 md:col-start-1">
+          <h2 class="font-medium text-lg tracking-wide sm:text-base">
             Harz, harzer, am harzesten.
           </h2>
-          <h1 class="font-bold text-5xl leading-tight">
+          <h1
+            class="font-bold text-5xl leading-tight sm:text-2xl sm:font-semibold"
+          >
             Hier bitte einen netten Slogan einfügen: Die Website des Harzklub
             Hohegeiß
           </h1>
@@ -129,11 +137,11 @@ const aufgaben = [
       </div>
     </section>
 
-    <section id="moin" class="px-[10%] pb-20">
+    <section id="moin" class="px-[10%] pb-20 md:px-[4%] md:pt-[5%]">
       <div class="">
-        <div class="flex flex-row p-10">
-          <div class="basis-1/2">
-            <h2 class="font-semibold">
+        <div class="flex flex-row flex-wrap-reverse md:justify-center">
+          <div class="big:basis-1/2 sm:mt-5 min-w-[300px] max-w-[500px]">
+            <h2 class="font-semibold sm:text-2xl">
               Moin, moin in <span class="text-green-500">Hohegeiß...</span>
             </h2>
             <p class="text-gray-800 leading-5">
@@ -151,22 +159,26 @@ const aufgaben = [
               Naturdenkmal Dicke Tannen aus.
             </p>
           </div>
-          <div class="basis-1/2 flex items-center justify-center">
+          <div
+            class="big:basis-1/2 flex p-10 sm:p-0 items-center justify-center sm:my-10"
+          >
             <img
               src="/images/floating-pics-2.png"
               alt="Übereinander lagernde Bilder von Hohegeiß. Auf einem sieht man einen Feldweg unter majästetischen Wolken, auf dem anderen den Teich im Kurpark."
             />
           </div>
         </div>
-        <div class="flex flex-row">
-          <div class="basis-1/2 p-10 flex items-center justify-center">
+        <div class="flex flex-row flex-wrap justify-center">
+          <div
+            class="big:basis-1/2 p-10 sm:p-0 flex items-center justify-center sm:my-10"
+          >
             <img
               src="/images/floating-pics-1.png"
               alt="Übereinander lagernde Bilder von Hohegeiß. Auf einem ist der Kirchturm der roten Holzkirche zu sehen, auf dem anderen der Blick Richtung Berge und eine blaue Harzhütte links im Bild."
             />
           </div>
-          <div class="basis-1/2">
-            <h2 class="font-semibold">
+          <div class="big:basis-1/2 min-w-[300px] max-w-[500px]">
+            <h2 class="font-semibold sm:text-2xl">
               ...und willkommen beim <span class="text-green-500">Harzklub</span
               >
             </h2>
@@ -187,19 +199,21 @@ const aufgaben = [
     <section id="aufgaben" class="bg-light-brown py-20 relative">
       <img
         src="/images/dots.png"
-        class="absolute top-[500px] right-[10%]"
+        class="absolute top-[500px] right-[10%] md:hidden"
         aria-hidden="true"
       />
       <img
         src="/images/dots.png"
-        class="absolute bottom-[40vh] left-[12%]"
+        class="absolute bottom-[40vh] left-[12%] md:hidden"
         aria-hidden="true"
       />
 
       <h1 class="text-center text-4xl font-semibold">
         Das sind <span class="text-green-500">unsere Aufgaben</span>
       </h1>
-      <p class="font-medium text-center w-2/5 mx-auto leading-5 my-12">
+      <p
+        class="font-medium text-center w-2/5 mx-auto leading-5 my-12 sm:w-full sm:px-5"
+      >
         Der Harzklub wurde am 8. August 1886 in Seesen gegründet. Der
         Eisenbahndirektor Albert Schneider wurde der erste Vorsitzende.
         Mitbegründer waren u. a. Oberforstrat Carl Reuß als zweiter Vorsitzender
@@ -216,7 +230,8 @@ const aufgaben = [
                   blur-shadow-image="true"
                 >
                   <img
-                    class="w-auto rounded-t-lg"
+                    class="w-auto rounded-t-lg aspect-4/3"
+                    aria-hidden="true"
                     src={
                       aufgabe.image ??
                       "https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
@@ -245,7 +260,7 @@ const aufgaben = [
       </div>
     </section>
 
-    <section id="wandern" class="pt-20 relative">
+    <!-- <section id="wandern" class="pt-20 relative">
       <img
         src="/images/dots.png"
         class="absolute top-[80px] left-[30%]"
@@ -289,9 +304,9 @@ const aufgaben = [
           >
         </div>
       </div>
-    </section>
+    </section> -->
 
-    <section id="tradition" class="pb-20 relative">
+    <!-- <section id="tradition" class="pb-20 relative">
       <img
         src="/images/dots.png"
         class="absolute top-[620px] left-[15%]"
@@ -344,9 +359,9 @@ const aufgaben = [
           </p>
         </div>
       </div>
-    </section>
+    </section> -->
 
-    <section class="py-10 relative">
+    <!-- <section class="py-10 relative">
       <img
         src="/images/dots.png"
         class="absolute top-[150px] left-[31%] rotate-[35deg]"
@@ -384,11 +399,6 @@ const aufgaben = [
           </div>
         </div>
         <div class="relative w-3/5 -mt-52">
-          <!-- <img
-            src="/images/geiss.png"
-            alt="Das Wappentier Hohegeiß"
-            class="absolute -top-28 rotate-6 right-32 -z-10"
-          /> -->
           <img
             src="/images/youth.png"
             alt="Das Bild ist eine Collage aus 3 verschiedenen Bildern. Auf zweien ist eine Gruppe von Kindern zwischen 5 und 11 auf einer Bühne zu sehen. Auf einem tanzen sie, auf dem anderen singen sie. Das dritte Bild zeigt eine Gruppe junger Kinder in Trachten auf einer Treppe sitzend, im Hintergrund sitzt eine erwachsene Person."
@@ -400,9 +410,9 @@ const aufgaben = [
           >
         </div>
       </div>
-    </section>
+    </section> -->
 
-    <section id="call-to-action" class="bg-green-500 relative pb-20">
+    <!-- <section id="call-to-action" class="bg-green-500 relative pb-20">
       <div class="w-full h-3 bg-green-300"></div>
       <div class="w-full h-3 bg-green-400"></div>
       <div class="flex flex-row px-[20%] gap-32 mt-20 items-center">
@@ -436,9 +446,9 @@ const aufgaben = [
         alt="Der Hohegeisser Geiss steht stilisiert auf einem Berg."
         class="absolute right-0 bottom-0"
       />
-    </section>
+    </section> -->
 
-    <footer class="bg-lime-500">
+    <!-- <footer class="bg-lime-500">
       <div class="grid grid-cols-4 gap-24 py-20 px-[15%]">
         <div>
           <img
@@ -509,7 +519,7 @@ const aufgaben = [
       <p class="text-white text-center pb-2 font-normal">
         Copyright 2023 - Harzklub-Zweigverein-Hohegeiß e.V.
       </p>
-    </footer>
+    </footer> -->
   </main>
 
   <script src="node_modules/@material-tailwind/html/scripts/dialog.js"></script>

@@ -11,7 +11,7 @@ const { href, name, currentPage } = Astro.props;
 
 ---
 
-<a href={href} class={currentPage ? "aktuelle-seite" : ""}>{name}</a>
+<a href={href} class={currentPage ? "aktuelle-seite md:menu-item" : "md:menu-item"}>{name}</a>
 
 <style lang="stylus">
     .aktuelle-seite 

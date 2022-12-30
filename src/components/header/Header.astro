@@ -27,7 +27,7 @@ const pages: Array<SeitenInfo> = [
   { page: Seite.Heimatgruppe, href: "/heimatgruppe", name: "Heimatgruppe" },
   { page: Seite.Jugendgruppe, href: "/jugendgruppe", name: "Jugendgruppe" },
   { page: Seite.Wanderungen, href: "/wanderungen", name: "Wanderungen" },
-  { page: Seite.DerHarz, href: "/der-harz", name: "Der Harz" },
+  // { page: Seite.DerHarz, href: "/der-harz", name: "Der Harz" },
   { page: Seite.UeberUns, href: "/ueber-uns", name: "Über uns" },
 ];
 
@@ -35,28 +35,56 @@ const { currentPage: page } = Astro.props;
 ---
 
 <header
-  class="fixed w-full top-0 my-0 mx-0 bg-light-blue z-10 py-4 px-10 flex flex-row justify-between items-center"
+  class="fixed w-full top-0 my-0 mx-0 bg-light-blue z-20 py-4 px-10 flex flex-row justify-between items-center md:drop-shadow-md md:py-1 md:px-1"
 >
   <a href="/">
     <img
+      class="sm:w-3/4"
       src="/new_logo.svg"
       alt="Das Logo der Website. Drei Tannen und rechts daneben der Schriftzug: 'Harzklub Hohegeiß' in zwei Zeilen."
     />
   </a>
   <div class="flex flex-row items-center">
-    {
-      pages.map((seite) => (
-        <div class="mx-2 hover:underline">
-          <MenuItem
-            href={seite.href}
-            currentPage={seite.page === page}
-            name={seite.name}
-          />
-        </div>
-      ))
-    }
-    <a class="button button-green" href={MITMACHEN}>Mach mit</a>
+    <div class="flex flex-row items-center md:hidden">
+      {
+        pages.map((seite) => (
+          <div class="mx-2 hover:underline">
+            <MenuItem
+              href={seite.href}
+              currentPage={seite.page === page}
+              name={seite.name}
+            />
+          </div>
+        ))
+      }
+    </div>
+    <a class="button button-green sm:px-3" href={MITMACHEN}>Mach mit</a>
+
+    <div class="menu big:hidden">
+      <button
+        class="button button-green button-text"
+        menu-trigger="true"
+        aria-expanded="true"
+        data-ripple-light="true"
+      >
+        <i class="ri-menu-line text-2xl m-0"></i>
+      </button>
+      <ul class="dropdown-menu menu-right p-2">
+        {
+          pages.map((seite) => (
+            <li class="mb-2">
+              <MenuItem
+                href={seite.href}
+                currentPage={seite.page === page}
+                name={seite.name}
+              />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   </div>
+  <script src="node_modules/@material-tailwind/html/scripts/menu.js"></script>
 </header>
 
 <style>

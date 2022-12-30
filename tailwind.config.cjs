@@ -9,8 +9,12 @@ module.exports = withMT({
 				'4xl': '20px'
 			},
 			backgroundImage: {
-				'berglinie': 'url("/images/berglinie.png")'
-			}
+				'berglinie': 'url("/images/berglinie.png")',
+				'berglinie-small': "url('/images/berglinie-mobil.png')"
+			},
+			aspectRatio: {
+				'4/3': '4 / 3',
+			},
 		},
 		//https://javisperez.github.io/tailwindcolorshades/
 		colors: {
@@ -43,6 +47,26 @@ module.exports = withMT({
 		},
 		fontFamily: {
 			sans: ['Manrope', 'sans-serif']
+		},
+		screens: {
+
+			'xs': { 'max': '640px' },
+
+			'sm': { 'max': '768px' },
+			// => @media (min-width: 640px) { ... }
+
+			'md': { 'max': '1024px' },
+			// => @media (min-width: 768px) { ... }
+
+			'lg': { 'max': '1280px' },
+			// => @media (min-width: 1024px) { ... }
+
+			'xl': { 'max': '1536px' },
+			// => @media (min-width: 1280px) { ... }
+
+			'2xl': { 'min': '1536px' },
+			// => @media (min-width: 1536px) { ... }
+			'big': "1024px"
 		}
 	},
 	plugins: [],
