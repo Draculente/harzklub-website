@@ -1,18 +1,29 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Header, { Seite } from "../components/header/Header.astro";
-import { veranstaltungen } from "src/utils/directus";
+import { veranstaltungen } from "src/data/veranstaltungen";
 import VeranstaltungsCard from "@components/VeranstaltungsCard.astro";
 ---
 
 <Layout title="Aktuelles">
-    <Header currentPage={Seite.Aktuelles} />
-    <main>
-        <h1>Aktuelles</h1>
-        {
-            veranstaltungen.map(
-                (v) => v && <VeranstaltungsCard veranstaltung={v} />
-            )
-        }
-    </main>
+  <Header currentPage={Seite.Aktuelles} />
+  <main>
+    <h1>Aktuelles</h1>
+    <div>
+      {
+        veranstaltungen.map(
+          (v) => v && <VeranstaltungsCard veranstaltung={v} />
+        )
+      }
+    </div>
+  </main>
 </Layout>
+
+<style>
+  div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+</style>

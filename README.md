@@ -44,6 +44,14 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`    | Run CLI commands like `astro add`, `astro preview` |
 | `npm run astro --help` | Get help using the Astro CLI                       |
 
-## 👀 Want to learn more?
+## Icons
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Als Icon Library wird [Remix-Icons](https://remixicon.com/) genutzt.
+
+Dev-Dokumentation: https://github.com/Remix-Design/remixicon#usage
+
+Icons können mithilfe eines `<i>`-Tags eingebunden werden: 
+
+```html
+<i class="ri-home-line"></i>
+```

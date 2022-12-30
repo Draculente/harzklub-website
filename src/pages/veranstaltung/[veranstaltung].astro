@@ -2,7 +2,7 @@
 import ArticleBody from "@components/ArticleBody.astro";
 import Header, { Seite } from "@components/header/Header.astro";
 import Layout from "src/layouts/Layout.astro";
-import { Veranstaltung, veranstaltungen } from "src/utils/directus";
+import { Veranstaltung, veranstaltungen } from "src/data/veranstaltungen";
 
 export function getStaticPaths() {
     return veranstaltungen
@@ -18,8 +18,7 @@ export function getStaticPaths() {
 const post = Astro.props as Veranstaltung;
 ---
 
-<Layout title={post.titel ?? "Aktuelles"}>
-    <Header currentPage={Seite.Aktuelles}></Header>
+<Layout title={post.titel ?? "Aktuelles"} page={Seite.Aktuelles}>
     <main>
         <h1>{post.titel}</h1>
         <p class="date">{post.formattedDate}</p>

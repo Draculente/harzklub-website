@@ -1,16 +1,112 @@
 ---
-import type { Veranstaltung } from "src/utils/directus";
+import type { Veranstaltung } from "src/data/veranstaltungen";
 import { formatDate } from "src/utils/format-date";
+import sanitizeHtml from "sanitize-html";
+import type sanitize from "sanitize-html";
+import InvertedButton from "./InvertedButton.astro";
+import Tag from "./Tag.astro";
+import { UNDER_CONSTRUCTION } from "src/data/links";
 
 export type Props = {
-    veranstaltung: Veranstaltung;
+  veranstaltung: Veranstaltung;
 };
 
 const { veranstaltung: v } = Astro.props;
 ---
 
-<a href={`veranstaltung/${v.slug}`}>
-    <h3>{v.titel}</h3>
-    <p>Am: {v.formattedDate}</p>
-    <p>Wo: {v.ort}</p>
-</a>
+<div
+  class="flex flex-row rounded-4xl justify-end bg-cover bg-no-repeat bg-left drop-shadow-md h-min min-h-full"
+  style={`background-image: url(${
+    import.meta.env.DIRECTUS_HOST + "/assets/" + v.featured_image
+  });`}
+>
+  <div
+    class="bg-white flex flex-col rounded-4xl items-start p-4 w-2/3 min-h-min"
+  >
+    <div class="flex w-full flex-row justify-between mb-4 sm:mb-2">
+      <p class="flex flex-row items-center font-medium sm:text-sm">
+        <i class="ri-calendar-event-line text-xl mr-2 sm:text-sm"></i>{
+          v.formattedDate
+        }
+      </p>
+      <Tag title="Veranstaltung" />
+    </div>
+    <p class="font-semibold text-lg">{v.titel}</p>
+    <p class="leading-tight text-gray-800 sm:text-sm">
+      {
+        sanitizeHtml(v.beschreibung || "Wir freuen uns auf euch!", {
+          allowedTags: [],
+        })
+      }
+    </p>
+    <div class="grow flex flex-col justify-center py-2">
+      <!-- href={"/veranstaltung/" + v.slug} -->
+      <a
+        class="button button-outlined button-green px-2 py-1 h-min sm:text-xs hover:scale-105 transition-all"
+        href={UNDER_CONSTRUCTION}>&gt; Mehr erfahren</a
+      >
+    </div>
+  </div>
+</div>
+
+<style>
+  /* .container {
+    max-width: 450px;
+    width: 30vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left;
+    border-radius: 21px;
+    box-shadow: 7px 9px 10px -5px rgba(102, 102, 102, 0.75);
+    -webkit-box-shadow: 7px 9px 10px -5px rgba(102, 102, 102, 0.75);
+    -moz-box-shadow: 7px 9px 10px -5px rgba(102, 102, 102, 0.75);
+  }
+
+  .title {
+    font-weight: 400;
+    font-size: 1.1rem;
+    line-height: 1;
+    padding: 0;
+    margin: 0;
+  }
+
+  .desc {
+    font-weight: 300;
+    font-size: var(--font-size-small);
+  }
+
+  .header-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-bar {
+    font-size: var(--font-size-small);
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .infos {
+    width: 65%;
+    border-radius: 20px;
+    z-index: 1;
+    background-color: var(--color-bg);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .to-bottom {
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex-grow: 100;
+  } */
+</style>
