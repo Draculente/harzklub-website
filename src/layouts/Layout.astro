@@ -8,10 +8,9 @@ export interface Props {
   description?: string;
   page?: Seite;
 }
-import { UNDER_CONSTRUCTION, IMPRESSUM } from "src/data/links";
+import { UNDER_CONSTRUCTION, IMPRESSUM, DOWNLOADS } from "src/data/links";
 
 const { title, description, page } = Astro.props;
-console.log(page);
 ---
 
 <!DOCTYPE html>
@@ -98,7 +97,7 @@ console.log(page);
               class="absolute bottom-8 w-2/3 right-10"
             />
             <a
-              href={UNDER_CONSTRUCTION}
+              href={DOWNLOADS}
               class="button button-green text-center rounded-md w-full"
               style="color: white; box-shadow: none;">Downloadbereich &gt;</a
             >
