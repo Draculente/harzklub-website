@@ -1,0 +1,56 @@
+---
+import Layout from "src/layouts/Layout.astro";
+---
+
+<Layout title="Im Aufbau">
+  <section
+    id="heading"
+    class="h-screen pt-[15vh] sm:pt-[3vh] relative xs:bg-none bg-origin-padding bg-contain md:bg-cover sm:h-min"
+  >
+    <img
+      src="/images/dots.svg"
+      class="absolute top-[10vh] right-[30%] sm:hidden"
+      aria-hidden="true"
+    />
+    <img
+      src="/images/dots.svg"
+      class="absolute top-[48vh] left-[12%] sm:hidden"
+      aria-hidden="true"
+    />
+    <div
+      class="layout-box grid grid-cols-5 gap-12 md:flex md:flex-row md:flex-wrap-reverse md:gap-16 2xl:px-[20%] xl:px-[5%] lg:px-[5%] xs:px-[5%] md:px-[15%] w-full"
+    >
+      <div
+        class="col-span-2 md:col-span-3 md:row-start-2 md:w-full sm:flex sm:flex-col"
+      >
+        <lottie-player
+          class="w-full"
+          src="/animation/Under-Construction.json"
+          background="transparent"
+          speed="1"
+          loop
+          autoplay></lottie-player>
+      </div>
+      <div class="col-start-3 col-span-3 md:col-start-1">
+        <h2 class="font-medium text-lg tracking-wide sm:text-base">
+          Under Construction
+        </h2>
+        <h1
+          class="font-bold text-5xl leading-tight sm:text-2xl sm:font-semibold"
+        >
+          Diese Seite befindet sich noch im Aufbau. Schau gerne in ein paar
+          Tagen nochmal vorbei!
+        </h1>
+        <hr class="border-t-2 border-black" />
+        <a href="/" class="flex flex-row items-center mt-3"
+          ><i class="ri-home-line mr-2 text-lg"></i><span
+            class="hover:underline"
+          >
+            Zurück zur Startseite &gt;</span
+          >
+        </a>
+      </div>
+    </div>
+    <script is:inline src="/js/lottie-player.js"></script>
+  </section>
+</Layout>

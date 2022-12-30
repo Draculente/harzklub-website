@@ -5,6 +5,7 @@ import sanitizeHtml from "sanitize-html";
 import type sanitize from "sanitize-html";
 import InvertedButton from "./InvertedButton.astro";
 import Tag from "./Tag.astro";
+import { UNDER_CONSTRUCTION } from "src/data/links";
 
 export type Props = {
   veranstaltung: Veranstaltung;
@@ -39,9 +40,10 @@ const { veranstaltung: v } = Astro.props;
       }
     </p>
     <div class="grow flex flex-col justify-center py-2">
+      <!-- href={"/veranstaltung/" + v.slug} -->
       <a
         class="button button-outlined button-green px-2 py-1 h-min sm:text-xs"
-        href={"/veranstaltung/" + v.slug}>&gt; Mehr erfahren</a
+        href={UNDER_CONSTRUCTION}>&gt; Mehr erfahren</a
       >
     </div>
   </div>
