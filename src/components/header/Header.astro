@@ -2,7 +2,7 @@
 import { MITMACHEN } from "src/data/links";
 import MenuItem from "./MenuItem.astro";
 export interface Props {
-  currentPage: Seite;
+  currentPage?: Seite;
 }
 
 export enum Seite {
@@ -51,7 +51,7 @@ const { currentPage: page } = Astro.props;
           <div class="mx-2 hover:underline">
             <MenuItem
               href={seite.href}
-              currentPage={seite.page === page}
+              currentPage={seite.page == page}
               name={seite.name}
             />
           </div>

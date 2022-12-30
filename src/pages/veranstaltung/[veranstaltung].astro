@@ -18,8 +18,7 @@ export function getStaticPaths() {
 const post = Astro.props as Veranstaltung;
 ---
 
-<Layout title={post.titel ?? "Aktuelles"}>
-    <Header currentPage={Seite.Aktuelles}></Header>
+<Layout title={post.titel ?? "Aktuelles"} page={Seite.Aktuelles}>
     <main>
         <h1>{post.titel}</h1>
         <p class="date">{post.formattedDate}</p>

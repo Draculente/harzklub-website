@@ -1,13 +1,17 @@
 ---
+import type { Seite } from "@components/header/Header.astro";
+import Header from "@components/header/Header.astro";
 import OrgLogo from "@components/OrgLogo.astro";
 import "remixicon/fonts/remixicon.css";
 export interface Props {
   title: string;
   description?: string;
+  page?: Seite;
 }
 import { UNDER_CONSTRUCTION, IMPRESSUM } from "src/data/links";
 
-const { title, description } = Astro.props;
+const { title, description, page } = Astro.props;
+console.log(page);
 ---
 
 <!DOCTYPE html>
@@ -25,6 +29,7 @@ const { title, description } = Astro.props;
     <title>Harzklub Hohegeiß | {title}</title>
   </head>
   <body class="bg-light-blue pt-20">
+    <Header currentPage={page} />
     <OrgLogo />
     <slot />
 
