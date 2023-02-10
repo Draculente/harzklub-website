@@ -35,7 +35,7 @@ const { currentPage: page } = Astro.props;
 ---
 
 <header
-  class="fixed w-full top-0 my-0 mx-0 bg-light-blue z-20 py-4 px-10 flex flex-row justify-between items-center md:drop-shadow-md md:py-1 md:px-1"
+  class="fixed w-full top-0 my-0 mx-0 bg-base-100 z-20 py-4 px-10 flex flex-row justify-between items-center md:drop-shadow-md md:py-1 md:px-1"
 >
   <a href="/">
     <img
@@ -58,50 +58,25 @@ const { currentPage: page } = Astro.props;
         ))
       }
     </div>
-    <a class="button button-green sm:px-3 big:ml-5" href={MITMACHEN}>Mach mit</a
-    >
 
-    <div class="menu big:hidden">
-      <button
-        class="button button-green button-text"
-        menu-trigger="true"
-        aria-expanded="true"
-        data-ripple-light="true"
-      >
-        <i class="ri-menu-line text-2xl m-0"></i>
-      </button>
-      <ul class="dropdown-menu menu-right p-2">
-        {
-          pages.map((seite) => (
-            <li class="mb-2">
-              <MenuItem
-                href={seite.href}
-                currentPage={seite.page === page}
-                name={seite.name}
-              />
-            </li>
-          ))
-        }
-      </ul>
-    </div>
+    <ul class="menu menu-horizontal big:hidden mr-3">
+      <li tabindex="0">
+        <a><i class="ri-menu-line text-2xl m-0"></i></a>
+        <ul class="bg-base-100">
+          {
+            pages.map((seite) => (
+              <li class="mb-2">
+                <MenuItem
+                  href={seite.href}
+                  currentPage={seite.page === page}
+                  name={seite.name}
+                />
+              </li>
+            ))
+          }
+        </ul>
+      </li>
+    </ul>
+    <a class="btn btn-primary sm:px-3 big:ml-5" href={MITMACHEN}>Mach mit</a>
   </div>
-  <script src="node_modules/@material-tailwind/html/scripts/menu.js"></script>
 </header>
-
-<style>
-  /* header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-inline: 20px;
-    margin-block: 25px;
-  }
-
-  .menu {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    align-items: center;
-  } */
-</style>

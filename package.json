@@ -19,6 +19,8 @@
     "@astrojs/tailwind": "^3.0.1",
     "@directus/sdk": "^10.1.4",
     "@material-tailwind/html": "^1.2.3",
+    "@tailwindcss/typography": "^0.5.9",
+    "daisyui": "^2.50.0",
     "remixicon": "^2.5.0",
     "sanitize-html": "^2.7.2",
     "slugify": "^1.6.5",
