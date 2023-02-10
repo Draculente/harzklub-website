@@ -1,9 +1,8 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Header, { Seite } from "../components/header/Header.astro";
+import Layout from "@layouts/Layout.astro";
+import { Seite } from "@components/header/Header.astro";
 import VeranstaltungsCard from "@components/VeranstaltungsCard.astro";
-import { veranstaltungen } from "src/data/veranstaltungen";
-import OrgLogo from "@components/OrgLogo.astro";
+import veranstaltungen from "src/data/veranstaltungen";
 import SectionHeader from "@components/SectionHeader.astro";
 import {
   DEFAULT_AUFGABEN_SECTION_LINK,

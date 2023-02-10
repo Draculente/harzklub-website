@@ -22,20 +22,28 @@ export interface Veranstaltung extends Record<string, any> {
   featured_image?: ID;
 }
 
-const res = await directus.items("veranstaltung").readByQuery();
+let veranstaltungen: Veranstaltung[] = [];
 
-export const veranstaltungen =
-  res.data?.map((e) => {
-    return {
-      ...e,
-      slug: slugify(e?.titel ?? "error", {
-        replacement: "-", // replace spaces with replacement character, defaults to `-`
-        remove: undefined, // remove characters that match regex, defaults to `undefined`
-        lower: true, // convert to lower case, defaults to `false`
-        strict: false, // strip special characters except replacement, defaults to `false`
-        locale: "de", // language code of the locale to use
-        trim: true, // trim leading and trailing replacement chars, defaults to `true`
-      }),
-      formattedDate: formatDate(new Date(e?.datum ?? "1970")),
-    };
-  }) ?? [];
+try {
+  const res = await directus.items("veranstaltung").readByQuery();
+  veranstaltungen =
+    res.data?.map((e) => {
+      return {
+        ...e,
+        slug: slugify(e?.titel ?? "error", {
+          replacement: "-", // replace spaces with replacement character, defaults to `-`
+          remove: undefined, // remove characters that match regex, defaults to `undefined`
+          lower: true, // convert to lower case, defaults to `false`
+          strict: false, // strip special characters except replacement, defaults to `false`
+          locale: "de", // language code of the locale to use
+          trim: true, // trim leading and trailing replacement chars, defaults to `true`
+        }),
+        formattedDate: formatDate(new Date(e?.datum ?? "1970")),
+      };
+    }) ?? [];
+} catch (error) {
+  console.error(error);
+  throw new Error("Error while fetching veranstaltungen");
+}
+
+export default veranstaltungen;
