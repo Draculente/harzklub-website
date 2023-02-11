@@ -45,12 +45,12 @@ const aufgaben = [
     >
       <img
         src="/images/dots.svg"
-        class="absolute top-[10vh] right-[30%] sm:hidden"
+        class="absolute top-[10vh] right-[30%] sm:hidden z-0"
         aria-hidden="true"
       />
       <img
         src="/images/dots.svg"
-        class="absolute top-[48vh] left-[12%] sm:hidden"
+        class="absolute top-[48vh] left-[12%] sm:hidden z-0"
         aria-hidden="true"
       />
       <a
@@ -79,7 +79,7 @@ const aufgaben = [
             Probleme auf einem Wanderweg melden
           </a>
         </div>
-        <div class="col-start-3 col-span-3 md:col-start-1">
+        <div class="col-start-3 col-span-3 md:col-start-1 z-10">
           <h2 class="font-medium text-lg tracking-wide sm:text-base">
             Harz, harzer, am harzesten.
           </h2>
@@ -89,7 +89,7 @@ const aufgaben = [
             Hier bitte einen netten Slogan einfügen: Die Website des Harzklub
             Hohegeiß
           </h1>
-          <hr class="border-t-2 border-neutral" />
+          <hr class="border-t-2 border-neutral mt-6" />
           <a href={UNDER_CONSTRUCTION} class="flex flex-row items-center mt-3"
             ><i class="ri-calendar-todo-line mr-2 text-lg"></i><span
               class="hover:underline"
@@ -104,10 +104,10 @@ const aufgaben = [
     <section id="moin" class="px-[10%] pb-20 md:px-[4%] md:pt-[20%]">
       <div class="flex flex-row flex-wrap-reverse justify-center">
         <div class="big:basis-1/2 sm:mt-5 min-w-[300px] max-w-[500px]">
-          <h2 class="font-semibold text-3xl sm:text-2xl">
+          <h2 class="font-semibold text-3xl sm:text-2xl mb-3">
             Moin, moin in <span class="text-primary">Hohegeiß...</span>
           </h2>
-          <p class="text-gray-800 leading-5">
+          <p class="text-gray-800 body-text-bigger">
             Das Bergdorf Hohegeiß liegt im Naturpark Harz. Es befindet sich
             zwischen Sorge im Nordnordosten und Benneckenstein im Osten (beide
             in Sachsen-Anhalt), Rothesütte im Südosten (Thüringen), Zorge im
@@ -141,10 +141,10 @@ const aufgaben = [
           />
         </div>
         <div class="big:basis-1/2 min-w-[300px] max-w-[500px]">
-          <h2 class="font-semibold text-3xl sm:text-2xl">
+          <h2 class="font-semibold text-3xl sm:text-2xl mb-3">
             ...und willkommen beim <span class="text-primary">Harzklub</span>
           </h2>
-          <p class="text-gray-800 leading-5">
+          <p class="text-gray-800 body-text-bigger">
             Der Harzklub e. V. (Heimat-, Wander- und Naturschutzbund) mit Sitz
             in Clausthal-Zellerfeld ist ein Verein zur Pflege des Harzer
             Brauchtums und sorgt für die Unterhaltung der dortigen Wanderwege.
@@ -224,17 +224,17 @@ const aufgaben = [
         beschildert Deine Routen.
       </SectionHeader>
       <div
-        class="p-[10%] flex flex-row items-center md:flex-wrap md:justify-center md:px-5"
+        class="p-[10%] flex flex-row items-center md:flex-wrap md:justify-center md:px-5 mt-16"
       >
         <div
           class="border-dashed border-neutral rounded-md big:border-2 w-1/2 p-16 -mr-[5vw] md:p-3 md:w-full md:rounded-none md:mr-0 md:border-t-2"
         >
           <div class="w-3/4 md:w-full">
             <i class="ri-treasure-map-line text-primary text-5xl md:m-auto"></i>
-            <h2 class="font-semibold md:text-xl">
+            <h2 class="font-semibold text-3xl leading-relaxed mb-4">
               Wir helfen dir, Dich zurechtzufinden
             </h2>
-            <p>
+            <p class="body-text-bigger">
               Du weißt gar nicht, wie du deine Wanderungen beginnen sollst? Wir
               bieten Gruppenwanderungen und viele weitere Aktivitäten rund ums
               Wandern an! Außerdem planen wir einen Wanderwege-Finder bei dem Du
@@ -297,23 +297,23 @@ const aufgaben = [
           <h3 class="text-xl font-semibold">
             Pflege des Harzer <span class="text-primary">Brauchtums</span>
           </h3>
-          <p class="text-gray-800 leading-5 my-3 text-sm">
+          <p class="body-text-smaller my-3">
             Der Zweigverein Hohegeiß hat ca. 220 Mitglieder einschl. Kinder und
             Jugendlichen. Die Brauchtumsgruppe setzt sich zusammen aus ca.25
             Mitgliedern.
           </p>
-          <p class="text-gray-800 leading-5 my-3 text-sm">
+          <p class="body-text-smaller my-3">
             Ein wichtiger Bestandteil des heimatlichen Kulturgutes wird in den
             über 40 Heimatgruppen der Harzklub-zweigvereine gepflegt und
             weiterentwickelt: Harzer Liedgut, Glockenspiel, Peitschenknall,
             Teufel / Hexenspuk, Jodeln, Mundart, Trachten und Brauchtum.
           </p>
-          <p class="text-gray-800 leading-5 my-3 text-sm">
+          <p class="body-text-smaller my-3">
             An unzähligen Heimatabenden finden sie in der Saison ihr Publikum.
             Höhepunkt ist der jährlich stattfindende große Harzer Heimattag, der
             einen Querschnitt der Heimgruppenarbeit zeigt.
           </p>
-          <p class="text-gray-800 leading-5 my-3 text-sm">
+          <p class="body-text-smaller my-3">
             In Fernseh- und Rundfunksendungen werben die Gruppen weit über die
             Grenzen des Harzes hinaus für ihre Heimat.
           </p>
@@ -341,13 +341,13 @@ const aufgaben = [
           class="border-dashed border-neutral rounded-md big:border-2 w-1/2 p-16 -mr-[8vw] md:p-3 md:w-full md:rounded-none md:mr-0 md:border-t-2"
         >
           <div class="w-3/4 md:w-full">
-            <h2 class="font-bold mb-0 text-xl">
+            <h2 class="font-bold mb-0 text-3xl">
               <span class="text-primary">Spaß</span> und Spiele
             </h2>
-            <h3 class="text-lg mt-0 font-semibold mb-6">
+            <h3 class="text-xl mt-0 font-semibold mb-6">
               (und Brot gibt's auch)
             </h3>
-            <p class="leading-5 text-gray-800">
+            <p class="body-text-bigger">
               Die Jugendarbeit beziehungsweise Kinder- und Jugendarbeit
               existiert seit dem Ende des 19. Jahrhunderts in Zentraleuropa und
               ist ein klassisches Tätigkeitsfeld der Sozialen Arbeit. Sie ist
@@ -421,4 +421,18 @@ const aufgaben = [
   <script src="node_modules/@material-tailwind/html/scripts/dialog.js"></script>
 </Layout>
 
-<style></style>
+<style>
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+  @layer components {
+    .body-text-bigger {
+      @apply leading-6 font-light tracking-wider;
+    }
+
+    .body-text-smaller {
+      @apply leading-5 text-sm font-light tracking-wider;
+    }
+  }
+</style>
