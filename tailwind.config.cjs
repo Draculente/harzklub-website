@@ -1,8 +1,11 @@
 /** @type {import('tailwindcss').Config} */
-const withMT = require("@material-tailwind/html/utils/withMT");
+// const withMT = require("@material-tailwind/html/utils/withMT");
 
-module.exports = withMT({
+// module.exports = withMT();
+
+module.exports = {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+
 	theme: {
 		extend: {
 			borderRadius: {
@@ -44,6 +47,18 @@ module.exports = withMT({
 				'900': '#1b2412'
 			},
 			'light-brown': '#E6E6E6',
+			'bunker': {
+				'50': '#f3f3f4',
+				'100': '#e8e8e9',
+				'200': '#c5c5c7',
+				'300': '#a1a3a5',
+				'400': '#5b5d62',
+				'500': '#15181E',
+				'600': '#13161b',
+				'700': '#101217',
+				'800': '#0d0e12',
+				'900': '#0a0c0f'
+			}
 		},
 		fontFamily: {
 			sans: ['Manrope', 'sans-serif']
@@ -69,5 +84,81 @@ module.exports = withMT({
 			'big': "1024px"
 		}
 	},
-	plugins: [],
-});
+	plugins: [require("@tailwindcss/typography"), require("daisyui")],
+	daisyui: {
+		styled: true,
+		base: true,
+		utils: true,
+		logs: true,
+		rtl: false,
+		prefix: "",
+		darkTheme: "dark",
+		themes: [
+			{
+				"light": {
+
+					"primary": "#43790D",
+
+					"primary-content": "#ffffff",
+
+					"secondary": "#374A24",
+
+					"secondary-content": "#ffffff",
+
+					"accent": "#1FB2A5",
+
+					"neutral": "#CECECE",
+
+					"base-100": "#F8FAFF",
+
+					"base-300": "#D9D9D9",
+
+					"base-200": "#E6E6E6",
+
+					"base-content": "#212121",
+
+					"info": "#ffffff",
+
+					"info-content": "rgb(75 85 99)",
+
+					"success": "#36D399",
+
+					"warning": "#FBBD23",
+
+					"error": "#F87272"
+				},
+			},
+			{
+				"dark": {
+
+					"primary": "#43790D",
+
+					"primary-content": "#ffffff",
+
+					"secondary": "#374A24",
+
+					"secondary-content": "#ffffff",
+
+					"accent": "#1FB2A5",
+
+					"neutral": "#CECECE",
+
+					"base-100": "#15181E",
+
+					"base-content": "#EEEEEE",
+
+					"info": "#222730",
+
+					"info-content": "rgb(209 213 219)",
+
+					"success": "#36D399",
+
+					"warning": "#FBBD23",
+
+					"error": "#F87272"
+				},
+			},
+		],
+
+	},
+}

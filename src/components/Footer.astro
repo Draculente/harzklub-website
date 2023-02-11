@@ -62,25 +62,32 @@ const footerLinks = [
         src="/images/logo-white.svg"
         alt="Das Logo der Website. Drei Tannen und rechts daneben der Schriftzug: 'Harzklub Hohegeiß' in zwei Zeilen."
       />
-      <p class="text-white font-medium my-5 leading-5">
+      <p class="text-secondary-content font-medium my-5 leading-5">
         Pflege und Erhaltung von Harzer Brauchtum, Harzer Liedgut, Harzer
         Festtags- und Arbeitstrachten sowie der Mundart seit 1011.
       </p>
       <div>
         <a href="#" class="hover:scale-105 transition-all"
-          ><i class="ri-instagram-line text-white mr-1 text-xl font-medium"></i>
+          ><i
+            class="ri-instagram-line text-secondary-content mr-1 text-xl font-medium"
+          ></i>
         </a>
         <a
           href="mailto:info@harzklub-hohegeiss.de"
           class="hover:scale-105 transition-all"
-          ><i class="ri-mail-line text-white mr-1 text-xl font-medium"></i>
+          ><i
+            class="ri-mail-line text-secondary-content mr-1 text-xl font-medium"
+          ></i>
         </a>
       </div>
     </div>
     <div class="col-span-2 flex flex-col flex-wrap h-52 md:h-full">
       {
         footerLinks.map((page) => (
-          <a href={page.link} class="text-white my-2 hover:underline">
+          <a
+            href={page.link}
+            class="text-secondary-content my-2 hover:underline"
+          >
             {page.title}
           </a>
         ))
@@ -97,8 +104,8 @@ const footerLinks = [
         />
         <a
           href={UNDER_CONSTRUCTION}
-          class="button button-green rounded-md w-full text-center hover:scale-105 transition-all"
-          style="color: white; box-shadow: none;">Mitglied werden &gt;</a
+          class="btn btn-primary rounded-md w-full text-center hover:scale-105 transition-all"
+          >Mitglied werden &gt;</a
         >
       </div>
       <div class="relative">
@@ -109,13 +116,13 @@ const footerLinks = [
         />
         <a
           href={DOWNLOADS}
-          class="button button-green text-center rounded-md w-full hover:scale-105 transition-all"
-          style="color: white; box-shadow: none;">Downloadbereich &gt;</a
+          class="btn btn-primary text-center rounded-md w-full hover:scale-105 transition-all"
+          >Downloadbereich &gt;</a
         >
       </div>
     </div>
   </div>
-  <p class="text-white text-center pb-2 font-normal px-5 leading-5">
+  <p class="text-secondary-content text-center pb-2 font-normal px-5 leading-5">
     Copyright 2023 - Harzklub-Zweigverein-Hohegeiß e.V.
   </p>
 </footer>

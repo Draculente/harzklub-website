@@ -18,7 +18,7 @@ const { veranstaltung: v } = Astro.props;
   });`}
 >
   <div
-    class="bg-white flex flex-col rounded-4xl items-start p-4 w-2/3 min-h-min"
+    class="bg-info flex flex-col rounded-4xl items-start p-4 w-2/3 min-h-min"
   >
     <div class="flex w-full flex-row justify-between mb-4 sm:mb-2">
       <p class="flex flex-row items-center font-medium sm:text-sm">
@@ -39,71 +39,9 @@ const { veranstaltung: v } = Astro.props;
     <div class="grow flex flex-col justify-center py-2">
       <!-- href={"/veranstaltung/" + v.slug} -->
       <a
-        class="button button-outlined button-green px-2 py-1 h-min sm:text-xs hover:scale-105 transition-all"
+        class="btn btn-outline btn-primary px-2 py-2 text-xs min-h-0 h-min sm:text-xs hover:scale-105 transition-all"
         href={UNDER_CONSTRUCTION}>&gt; Mehr erfahren</a
       >
     </div>
   </div>
 </div>
-
-<style>
-  /* .container {
-    max-width: 450px;
-    width: 30vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: left;
-    border-radius: 21px;
-    box-shadow: 7px 9px 10px -5px rgba(102, 102, 102, 0.75);
-    -webkit-box-shadow: 7px 9px 10px -5px rgba(102, 102, 102, 0.75);
-    -moz-box-shadow: 7px 9px 10px -5px rgba(102, 102, 102, 0.75);
-  }
-
-  .title {
-    font-weight: 400;
-    font-size: 1.1rem;
-    line-height: 1;
-    padding: 0;
-    margin: 0;
-  }
-
-  .desc {
-    font-weight: 300;
-    font-size: var(--font-size-small);
-  }
-
-  .header-bar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .header-bar {
-    font-size: var(--font-size-small);
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-  }
-
-  .infos {
-    width: 65%;
-    border-radius: 20px;
-    z-index: 1;
-    background-color: var(--color-bg);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .to-bottom {
-    width: max-content;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    flex-grow: 100;
-  } */
-</style>
