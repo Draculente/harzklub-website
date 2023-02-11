@@ -1,25 +1,15 @@
 ---
 import DownloadButton from "@components/Download-Button.astro";
+import downloads from "src/data/downloads";
 import Layout from "src/layouts/Layout.astro";
+import { getFileUrl } from "src/utils/directus";
 
-const downloads = [
-  {
-    title: "Satzung",
-    link: "/downloads/satzung.pdf",
-  },
-  {
-    title: "Änderung der Mitgliedschaft",
-    link: "/downloads/Aenderung-Mitgliedschaft.pdf",
-  },
-  {
-    title: "Änderung Deiner Daten",
-    link: "/downloads/Aenderung-Anschrift-Bank.pdf",
-  },
-  {
-    title: "Beitrittserklärung",
-    link: "/downloads/Beitrittserklaerung-Datenschutzerklaerung.pdf",
-  },
-];
+const downloadLinks = downloads
+  .filter((e) => e.status === "published")
+  .map((e) => {
+    e.link = `${getFileUrl(e.file!)}?download`;
+    return e;
+  });
 ---
 
 <Layout title="Downloads">
@@ -48,8 +38,11 @@ const downloads = [
       </h1>
       <div class="flex flex-row flex-wrap gap-5 mt-5">
         {
-          downloads.map((download) => (
-            <DownloadButton link={download.link} title={download.title} />
+          downloadLinks.map((download) => (
+            <DownloadButton
+              link={download.link}
+              title={download.title ?? "Datei"}
+            />
           ))
         }
       </div>

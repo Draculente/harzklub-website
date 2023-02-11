@@ -4,13 +4,26 @@ import type { Seite } from "@components/header/Header.astro";
 import Header from "@components/header/Header.astro";
 import OrgLogo from "@components/OrgLogo.astro";
 import "remixicon/fonts/remixicon.css";
+import { fetchImageMeta, Image } from "src/data/image";
+import websiteMeta from "src/data/meta";
+import { getFileUrl } from "src/utils/directus";
 export interface Props {
-  title: string;
+  title?: string;
   description?: string;
   page?: Seite;
 }
 
 const { title, description, page } = Astro.props;
+
+const joinedTitle = title
+  ? `${websiteMeta.title} | ${title}`
+  : websiteMeta.title;
+const desc =
+  description ??
+  (websiteMeta.description ||
+    "Die Website des Harzklub Zweigverein Hohegeiß e.V.");
+const ogImage: Image = await fetchImageMeta(websiteMeta.opengraph_image!);
+const favicon: Image = await fetchImageMeta(websiteMeta.favicon!);
 ---
 
 <!DOCTYPE html>
@@ -18,14 +31,23 @@ const { title, description, page } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type={favicon.type} href={getFileUrl(favicon.id)} />
     <link rel="stylesheet" href="/styles/fonts.css" />
+    <meta name="theme-color" content="#43790D" />
+    <meta name="description" content={desc} />
+    <title>{joinedTitle}</title>
+
+    <meta property="og:title" content={joinedTitle} />
+    <meta property="og:description" content={desc} />
     <meta
-      name="description"
-      content={description ??
-        "Die Website des Harzklub Zweigverein Hohegeiß e.V."}
+      property="og:image"
+      content={getFileUrl(websiteMeta.opengraph_image!)}
     />
-    <title>Harzklub Hohegeiß | {title}</title>
+    <meta
+      property="og:image:alt"
+      content={ogImage.description ||
+        "Bild des Harzklub Zweigverein Hohegeiß e.V."}
+    />
   </head>
   <body class="bg-base-100 pt-20">
     <Header currentPage={page} />

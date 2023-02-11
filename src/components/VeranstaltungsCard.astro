@@ -2,6 +2,7 @@
 import type { Veranstaltung } from "src/data/veranstaltungen";
 import sanitizeHtml from "sanitize-html";
 import Tag from "./Tag.astro";
+import { getFileUrl } from "src/utils/directus";
 import { UNDER_CONSTRUCTION } from "src/data/links";
 
 export type Props = {
@@ -13,9 +14,7 @@ const { veranstaltung: v } = Astro.props;
 
 <div
   class="flex flex-row rounded-4xl justify-end bg-cover bg-no-repeat bg-left drop-shadow-md h-min min-h-full"
-  style={`background-image: url(${
-    import.meta.env.DIRECTUS_HOST + "/assets/" + v.featured_image
-  });`}
+  style={`background-image: url(${getFileUrl(v.featured_image!)});`}
 >
   <div
     class="bg-info flex flex-col rounded-4xl items-start p-4 w-2/3 min-h-min"

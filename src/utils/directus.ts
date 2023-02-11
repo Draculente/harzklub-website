@@ -10,3 +10,7 @@ type Collections = {
 export const directus = new Directus<Collections>(
   import.meta.env.DIRECTUS_HOST
 );
+
+export const getFileUrl = (id: ID) => {
+  return `${import.meta.env.DIRECTUS_HOST}/assets/${id}`;
+};
