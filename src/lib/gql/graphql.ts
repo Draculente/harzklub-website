@@ -48,6 +48,7 @@ export type MutationCreate_Wegeschaden_ItemsArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  aktuelles?: Maybe<Aktuelles>;
   aufgaben: Array<Aufgaben>;
   aufgaben_aggregated: Array<Aufgaben_Aggregated>;
   aufgaben_by_id?: Maybe<Aufgaben>;
@@ -348,6 +349,23 @@ export type QueryWegeschaden_AggregatedArgs = {
 
 export type QueryWegeschaden_By_IdArgs = {
   id: Scalars['ID'];
+};
+
+export type Aktuelles = {
+  __typename?: 'aktuelles';
+  date_created?: Maybe<Scalars['Date']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  /** Die Meta-Beschreibung für Google & Co. Sollte nicht länger als zwei Sätze und 155 Zeichen sein. */
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  subtitle?: Maybe<Scalars['String']>;
+  /** Der Text, der unter der Überschrift zu sehen ist. */
+  text?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  user_created?: Maybe<Scalars['String']>;
+  user_updated?: Maybe<Scalars['String']>;
 };
 
 export type Aufgaben = {
@@ -730,6 +748,8 @@ export type Footer_Link = {
   /** Der Link zur Seite auf den der Eintrag verweisen soll. Am besten relativ. */
   link?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  /** Der Wert nachdem die Links sortiert werden. Je größer die Zahl, desto weiter hinten der Link. */
+  sorting?: Maybe<Scalars['Int']>;
 };
 
 
@@ -765,12 +785,16 @@ export type Footer_Link_Aggregated_Count = {
   /** Der Link zur Seite auf den der Eintrag verweisen soll. Am besten relativ. */
   link?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['Int']>;
+  /** Der Wert nachdem die Links sortiert werden. Je größer die Zahl, desto weiter hinten der Link. */
+  sorting?: Maybe<Scalars['Int']>;
 };
 
 export type Footer_Link_Aggregated_Fields = {
   __typename?: 'footer_link_aggregated_fields';
   footer?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
+  /** Der Wert nachdem die Links sortiert werden. Je größer die Zahl, desto weiter hinten der Link. */
+  sorting?: Maybe<Scalars['Float']>;
 };
 
 export type Footer_Link_Filter = {
@@ -784,6 +808,7 @@ export type Footer_Link_Filter = {
   id?: InputMaybe<Number_Filter_Operators>;
   link?: InputMaybe<String_Filter_Operators>;
   name?: InputMaybe<String_Filter_Operators>;
+  sorting?: InputMaybe<Number_Filter_Operators>;
 };
 
 export type Footer_Social_Link = {
@@ -1453,6 +1478,11 @@ export type FooterQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type FooterQueryQuery = { __typename?: 'Query', footer?: { __typename?: 'footer', copyright_text?: string | null, footer_text?: string | null, footer_links?: Array<{ __typename?: 'footer_link', name?: string | null, link?: string | null } | null> | null, footer_social_links?: Array<{ __typename?: 'footer_social_link', icon?: string | null, link?: string | null } | null> | null } | null };
 
+export type AktuellesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AktuellesQueryQuery = { __typename?: 'Query', aktuelles?: { __typename?: 'aktuelles', text?: string | null, subtitle?: string | null, description?: string | null, title?: string | null } | null };
+
 
 export const StartseiteQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"startseiteQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"startseite"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"text_part_one"}},{"kind":"Field","name":{"kind":"Name","value":"text_part_two"}},{"kind":"Field","name":{"kind":"Name","value":"task_section_description"}},{"kind":"Field","name":{"kind":"Name","value":"aufgaben"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"wandern_title"}},{"kind":"Field","name":{"kind":"Name","value":"wandern_text"}},{"kind":"Field","name":{"kind":"Name","value":"wandern_description"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_description"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_title"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_text"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_title"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_description"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_text"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_title"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_text"}}]}}]}}]} as unknown as DocumentNode<StartseiteQueryQuery, StartseiteQueryQueryVariables>;
 export const AufgabenQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"aufgabenQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aufgaben"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"link"}}]}}]}}]} as unknown as DocumentNode<AufgabenQueryQuery, AufgabenQueryQueryVariables>;
@@ -1460,3 +1490,4 @@ export const VeranstaltungsQueryDocument = {"kind":"Document","definitions":[{"k
 export const WebsiteMetaQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"websiteMetaQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"meta"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"favicon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"Field","name":{"kind":"Name","value":"opengraph_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]} as unknown as DocumentNode<WebsiteMetaQueryQuery, WebsiteMetaQueryQueryVariables>;
 export const DownloadsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"downloadsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"downloads"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"status"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"StringValue","value":"published","block":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<DownloadsQueryQuery, DownloadsQueryQueryVariables>;
 export const FooterQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"footerQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"footer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"copyright_text"}},{"kind":"Field","name":{"kind":"Name","value":"footer_text"}},{"kind":"Field","name":{"kind":"Name","value":"footer_links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"link"}}]}},{"kind":"Field","name":{"kind":"Name","value":"footer_social_links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"icon"}},{"kind":"Field","name":{"kind":"Name","value":"link"}}]}}]}}]}}]} as unknown as DocumentNode<FooterQueryQuery, FooterQueryQueryVariables>;
+export const AktuellesQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"aktuellesQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aktuelles"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<AktuellesQueryQuery, AktuellesQueryQueryVariables>;

@@ -21,20 +21,21 @@ type Query {
   downloads(filter: downloads_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [downloads!]!
   downloads_by_id(id: ID!): downloads
   downloads_aggregated(groupBy: [String], filter: downloads_filter, limit: Int, search: String, sort: [String]): [downloads_aggregated!]!
-  footer_link(filter: footer_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [footer_link!]!
-  footer_link_by_id(id: ID!): footer_link
-  footer_link_aggregated(groupBy: [String], filter: footer_link_filter, limit: Int, search: String, sort: [String]): [footer_link_aggregated!]!
   footer: footer
   startseite: startseite
-  footer_social_link(filter: footer_social_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [footer_social_link!]!
-  footer_social_link_by_id(id: ID!): footer_social_link
-  footer_social_link_aggregated(groupBy: [String], filter: footer_social_link_filter, limit: Int, search: String, sort: [String]): [footer_social_link_aggregated!]!
   startseite_aufgaben(filter: startseite_aufgaben_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [startseite_aufgaben!]!
   startseite_aufgaben_by_id(id: ID!): startseite_aufgaben
   startseite_aufgaben_aggregated(groupBy: [String], filter: startseite_aufgaben_filter, limit: Int, search: String, sort: [String]): [startseite_aufgaben_aggregated!]!
   aufgaben(filter: aufgaben_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [aufgaben!]!
   aufgaben_by_id(id: ID!): aufgaben
   aufgaben_aggregated(groupBy: [String], filter: aufgaben_filter, limit: Int, search: String, sort: [String]): [aufgaben_aggregated!]!
+  footer_social_link(filter: footer_social_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [footer_social_link!]!
+  footer_social_link_by_id(id: ID!): footer_social_link
+  footer_social_link_aggregated(groupBy: [String], filter: footer_social_link_filter, limit: Int, search: String, sort: [String]): [footer_social_link_aggregated!]!
+  footer_link(filter: footer_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [footer_link!]!
+  footer_link_by_id(id: ID!): footer_link
+  footer_link_aggregated(groupBy: [String], filter: footer_link_filter, limit: Int, search: String, sort: [String]): [footer_link_aggregated!]!
+  aktuelles: aktuelles
 }
 
 type Mutation {
@@ -83,6 +84,26 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 scalar String
 
 union startseite_aufgaben_item_union = aufgaben
+
+type aktuelles {
+  id: ID!
+  user_created: String
+  date_created: Date
+  date_created_func: datetime_functions
+  user_updated: String
+  date_updated: Date
+  date_updated_func: datetime_functions
+  title: String
+  subtitle: String
+
+  """
+  Die Meta-Beschreibung für Google & Co. Sollte nicht länger als zwei Sätze und 155 Zeichen sein.
+  """
+  description: String
+
+  """Der Text, der unter der Überschrift zu sehen ist."""
+  text: String
+}
 
 type aufgaben {
   id: ID!
@@ -270,6 +291,11 @@ type footer_link {
   """
   link: String
   footer(filter: footer_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): footer
+
+  """
+  Der Wert nachdem die Links sortiert werden. Je größer die Zahl, desto weiter hinten der Link.
+  """
+  sorting: Int
 }
 
 type footer_link_aggregated {
@@ -296,11 +322,21 @@ type footer_link_aggregated_count {
   """
   link: Int
   footer: Int
+
+  """
+  Der Wert nachdem die Links sortiert werden. Je größer die Zahl, desto weiter hinten der Link.
+  """
+  sorting: Int
 }
 
 type footer_link_aggregated_fields {
   id: Float
   footer: Float
+
+  """
+  Der Wert nachdem die Links sortiert werden. Je größer die Zahl, desto weiter hinten der Link.
+  """
+  sorting: Float
 }
 
 type footer_social_link {
@@ -798,6 +834,7 @@ input footer_link_filter {
   name: string_filter_operators
   link: string_filter_operators
   footer: footer_filter
+  sorting: number_filter_operators
   _and: [footer_link_filter]
   _or: [footer_link_filter]
 }

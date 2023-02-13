@@ -18,7 +18,7 @@ const { featured_image_url, titel, beschreibung, date, slug } = Astro.props;
 ---
 
 <div
-  class="flex flex-row rounded-4xl justify-end bg-cover bg-no-repeat bg-left drop-shadow-md h-min min-h-full"
+  class="flex flex-row rounded-4xl justify-end bg-cover bg-no-repeat bg-left drop-shadow-md h-min min-h-full w-full"
   style={`background-image: url(${
     featured_image_url ?? FEATURED_IMAGE_DEFAULT_IMAGE
   });`}
@@ -42,7 +42,7 @@ const { featured_image_url, titel, beschreibung, date, slug } = Astro.props;
         })
       }
     </p>
-    <div class="grow flex flex-col justify-center py-2">
+    <div class="grow flex flex-col justify-end py-2">
       <!-- href={"/veranstaltung/" + v.slug} -->
       <a
         class="btn btn-outline btn-primary px-2 py-2 text-xs min-h-0 h-min sm:text-xs hover:scale-105 transition-all"
