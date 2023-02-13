@@ -18,6 +18,7 @@ const documents = {
     "\n  query veranstaltungsQuery {\n    veranstaltung {\n      id\n      ort\n      slug\n      beschreibung\n      datum\n      titel\n      featured_image {\n        id\n        description\n      }\n      bildergalerie {\n        id\n      }\n    }\n  }\n": types.VeranstaltungsQueryDocument,
     "\n  query websiteMetaQuery {\n    meta {\n      title\n      description\n      favicon {\n        id\n        type\n      }\n      opengraph_image {\n        id\n        description\n      }\n    }\n  }\n": types.WebsiteMetaQueryDocument,
     "\n  query downloadsQuery {\n    downloads(filter: { status: { _eq: \"published\" } }) {\n      title\n      file {\n        id\n      }\n    }\n  }\n": types.DownloadsQueryDocument,
+    "\n  query footerQuery {\n    footer {\n      copyright_text\n      footer_text\n      footer_links {\n        name\n        link\n      }\n      footer_social_links {\n        icon\n        link\n      }\n    }\n  }\n": types.FooterQueryDocument,
 };
 
 /**
@@ -54,6 +55,10 @@ export function graphql(source: "\n  query websiteMetaQuery {\n    meta {\n     
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query downloadsQuery {\n    downloads(filter: { status: { _eq: \"published\" } }) {\n      title\n      file {\n        id\n      }\n    }\n  }\n"): (typeof documents)["\n  query downloadsQuery {\n    downloads(filter: { status: { _eq: \"published\" } }) {\n      title\n      file {\n        id\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query footerQuery {\n    footer {\n      copyright_text\n      footer_text\n      footer_links {\n        name\n        link\n      }\n      footer_social_links {\n        icon\n        link\n      }\n    }\n  }\n"): (typeof documents)["\n  query footerQuery {\n    footer {\n      copyright_text\n      footer_text\n      footer_links {\n        name\n        link\n      }\n      footer_social_links {\n        icon\n        link\n      }\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

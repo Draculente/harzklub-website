@@ -1,56 +1,60 @@
 ---
+import { footerQuery } from "@lib/graphql/queries";
 import { UNDER_CONSTRUCTION, IMPRESSUM, DOWNLOADS } from "@lib/links";
+import gqlClient from "@lib/utils/gql-client";
 
-const footerLinks = [
-  {
-    link: UNDER_CONSTRUCTION,
-    title: "Startseite",
-  },
-  {
-    link: UNDER_CONSTRUCTION,
-    title: "Aktuelles",
-  },
-  {
-    link: UNDER_CONSTRUCTION,
-    title: "Heimatgruppe",
-  },
-  {
-    link: UNDER_CONSTRUCTION,
-    title: "Jugendgruppe",
-  },
-  {
-    link: UNDER_CONSTRUCTION,
-    title: "Wanderungen",
-  },
-  {
-    link: UNDER_CONSTRUCTION,
-    title: "Wanderwegefinder",
-  },
-  {
-    link: UNDER_CONSTRUCTION,
-    title: "Alle Wanderwege",
-  },
-  {
-    link: UNDER_CONSTRUCTION,
-    title: "Der Harz",
-  },
-  {
-    link: UNDER_CONSTRUCTION,
-    title: "Über uns",
-  },
-  {
-    link: UNDER_CONSTRUCTION,
-    title: "Mitglied werden",
-  },
-  {
-    link: IMPRESSUM,
-    title: "Datenschutz",
-  },
-  {
-    link: IMPRESSUM,
-    title: "Impressum",
-  },
-];
+const { footer: footerData } = await gqlClient.request(footerQuery);
+
+// [
+//   {
+//     link: UNDER_CONSTRUCTION,
+//     title: "Startseite",
+//   },
+//   {
+//     link: UNDER_CONSTRUCTION,
+//     title: "Aktuelles",
+//   },
+//   {
+//     link: UNDER_CONSTRUCTION,
+//     title: "Heimatgruppe",
+//   },
+//   {
+//     link: UNDER_CONSTRUCTION,
+//     title: "Jugendgruppe",
+//   },
+//   {
+//     link: UNDER_CONSTRUCTION,
+//     title: "Wanderungen",
+//   },
+//   {
+//     link: UNDER_CONSTRUCTION,
+//     title: "Wanderwegefinder",
+//   },
+//   {
+//     link: UNDER_CONSTRUCTION,
+//     title: "Alle Wanderwege",
+//   },
+//   {
+//     link: UNDER_CONSTRUCTION,
+//     title: "Der Harz",
+//   },
+//   {
+//     link: UNDER_CONSTRUCTION,
+//     title: "Über uns",
+//   },
+//   {
+//     link: UNDER_CONSTRUCTION,
+//     title: "Mitglied werden",
+//   },
+//   {
+//     link: IMPRESSUM,
+//     title: "Datenschutz",
+//   },
+//   {
+//     link: IMPRESSUM,
+//     title: "Impressum",
+//   },
+// ];
 ---
 
 <footer class="bg-lime-500">
@@ -63,11 +67,20 @@ const footerLinks = [
         alt="Das Logo der Website. Drei Tannen und rechts daneben der Schriftzug: 'Harzklub Hohegeiß' in zwei Zeilen."
       />
       <p class="text-secondary-content font-medium my-5 leading-5">
-        Pflege und Erhaltung von Harzer Brauchtum, Harzer Liedgut, Harzer
-        Festtags- und Arbeitstrachten sowie der Mundart seit 1011.
+        {footerData?.footer_text}
       </p>
       <div>
-        <a href="#" class="hover:scale-105 transition-all"
+        {
+          footerData?.footer_social_links?.map((link) => (
+            <a href={link?.link} class="hover:scale-105 transition-all">
+              <i
+                class={`${link?.icon} text-secondary-content mr-1 text-xl font-medium`}
+              />
+            </a>
+          ))
+        }
+
+        <!-- <a href="#" class="hover:scale-105 transition-all"
           ><i
             class="ri-instagram-line text-secondary-content mr-1 text-xl font-medium"
           ></i>
@@ -78,19 +91,21 @@ const footerLinks = [
           ><i
             class="ri-mail-line text-secondary-content mr-1 text-xl font-medium"
           ></i>
-        </a>
+        </a> -->
       </div>
     </div>
     <div class="col-span-2 flex flex-col flex-wrap h-52 md:h-full">
       {
-        footerLinks.map((page) => (
-          <a
-            href={page.link}
-            class="text-secondary-content my-2 hover:underline"
-          >
-            {page.title}
-          </a>
-        ))
+        footerData?.footer_links
+          ?.filter((e) => e?.link && e?.name)
+          .map((page) => (
+            <a
+              href={page?.link}
+              class="text-secondary-content my-2 hover:underline"
+            >
+              {page?.name}
+            </a>
+          ))
       }
     </div>
     <div
@@ -123,6 +138,6 @@ const footerLinks = [
     </div>
   </div>
   <p class="text-secondary-content text-center pb-2 font-normal px-5 leading-5">
-    Copyright 2023 - Harzklub-Zweigverein-Hohegeiß e.V.
+    {footerData?.copyright_text}
   </p>
 </footer>

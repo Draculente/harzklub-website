@@ -91,3 +91,20 @@ export const downloadsQuery = graphql(/* GraphQL */ `
     }
   }
 `);
+
+export const footerQuery = graphql(/* GraphQL */ `
+  query footerQuery {
+    footer {
+      copyright_text
+      footer_text
+      footer_links {
+        name
+        link
+      }
+      footer_social_links {
+        icon
+        link
+      }
+    }
+  }
+`);
