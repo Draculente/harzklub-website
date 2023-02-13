@@ -21,7 +21,14 @@ type Query {
   downloads(filter: downloads_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [downloads!]!
   downloads_by_id(id: ID!): downloads
   downloads_aggregated(groupBy: [String], filter: downloads_filter, limit: Int, search: String, sort: [String]): [downloads_aggregated!]!
+  footer_link(filter: footer_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [footer_link!]!
+  footer_link_by_id(id: ID!): footer_link
+  footer_link_aggregated(groupBy: [String], filter: footer_link_filter, limit: Int, search: String, sort: [String]): [footer_link_aggregated!]!
+  footer: footer
   startseite: startseite
+  footer_social_link(filter: footer_social_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [footer_social_link!]!
+  footer_social_link_by_id(id: ID!): footer_social_link
+  footer_social_link_aggregated(groupBy: [String], filter: footer_social_link_filter, limit: Int, search: String, sort: [String]): [footer_social_link_aggregated!]!
   startseite_aufgaben(filter: startseite_aufgaben_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [startseite_aufgaben!]!
   startseite_aufgaben_by_id(id: ID!): startseite_aufgaben
   startseite_aufgaben_aggregated(groupBy: [String], filter: startseite_aufgaben_filter, limit: Int, search: String, sort: [String]): [startseite_aufgaben_aggregated!]!
@@ -234,6 +241,116 @@ type downloads_aggregated_count {
   date_updated: Int
   title: Int
   file: Int
+}
+
+type footer {
+  id: ID!
+  date_updated: Date
+  date_updated_func: datetime_functions
+  copyright_text: String
+
+  """Der Text, der im Footer unter dem Logo angezeigt wird."""
+  footer_text: String
+  footer_links(filter: footer_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [footer_link]
+  footer_links_func: count_functions
+  footer_social_links(filter: footer_social_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [footer_social_link]
+  footer_social_links_func: count_functions
+}
+
+type footer_link {
+  id: ID!
+  date_created: Date
+  date_created_func: datetime_functions
+  date_updated: Date
+  date_updated_func: datetime_functions
+  name: String
+
+  """
+  Der Link zur Seite auf den der Eintrag verweisen soll. Am besten relativ.
+  """
+  link: String
+  footer(filter: footer_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): footer
+}
+
+type footer_link_aggregated {
+  group: JSON
+  countAll: Int
+  count: footer_link_aggregated_count
+  countDistinct: footer_link_aggregated_count
+  avg: footer_link_aggregated_fields
+  sum: footer_link_aggregated_fields
+  avgDistinct: footer_link_aggregated_fields
+  sumDistinct: footer_link_aggregated_fields
+  min: footer_link_aggregated_fields
+  max: footer_link_aggregated_fields
+}
+
+type footer_link_aggregated_count {
+  id: Int
+  date_created: Int
+  date_updated: Int
+  name: Int
+
+  """
+  Der Link zur Seite auf den der Eintrag verweisen soll. Am besten relativ.
+  """
+  link: Int
+  footer: Int
+}
+
+type footer_link_aggregated_fields {
+  id: Float
+  footer: Float
+}
+
+type footer_social_link {
+  id: ID!
+  date_created: Date
+  date_created_func: datetime_functions
+  date_updated: Date
+  date_updated_func: datetime_functions
+
+  """
+  Das Icon. Als Iconsfont wird Remixicons genutzt: https://remixicon.com/ . Wenn ein Icon in der Liste fehlt, kannst du den Namen aus Remixicons kopieren (der Name, der hinter hinter dem = steht, z.B. "ri-mastodon-fill")
+  """
+  icon: String
+
+  """Der Link auf den das Icon verweisen soll."""
+  link: String
+  footer(filter: footer_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): footer
+}
+
+type footer_social_link_aggregated {
+  group: JSON
+  countAll: Int
+  count: footer_social_link_aggregated_count
+  countDistinct: footer_social_link_aggregated_count
+  avg: footer_social_link_aggregated_fields
+  sum: footer_social_link_aggregated_fields
+  avgDistinct: footer_social_link_aggregated_fields
+  sumDistinct: footer_social_link_aggregated_fields
+  min: footer_social_link_aggregated_fields
+  max: footer_social_link_aggregated_fields
+}
+
+type footer_social_link_aggregated_count {
+  id: Int
+  date_created: Int
+  date_updated: Int
+
+  """
+  Das Icon. Als Iconsfont wird Remixicons genutzt: https://remixicon.com/ . Wenn ein Icon in der Liste fehlt, kannst du den Namen aus Remixicons kopieren (der Name, der hinter hinter dem = steht, z.B. "ri-mastodon-fill")
+  """
+  icon: Int
+
+  """Der Link auf den das Icon verweisen soll."""
+  link: Int
+  footer: Int
+}
+
+type footer_social_link_aggregated_fields {
+  id: Float
+  footer: Float
 }
 
 type meta {
@@ -656,6 +773,46 @@ input downloads_filter {
   file: directus_files_filter
   _and: [downloads_filter]
   _or: [downloads_filter]
+}
+
+input footer_filter {
+  id: number_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  copyright_text: string_filter_operators
+  footer_text: string_filter_operators
+  footer_links: footer_link_filter
+  footer_links_func: count_function_filter_operators
+  footer_social_links: footer_social_link_filter
+  footer_social_links_func: count_function_filter_operators
+  _and: [footer_filter]
+  _or: [footer_filter]
+}
+
+input footer_link_filter {
+  id: number_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  name: string_filter_operators
+  link: string_filter_operators
+  footer: footer_filter
+  _and: [footer_link_filter]
+  _or: [footer_link_filter]
+}
+
+input footer_social_link_filter {
+  id: number_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  icon: string_filter_operators
+  link: string_filter_operators
+  footer: footer_filter
+  _and: [footer_social_link_filter]
+  _or: [footer_social_link_filter]
 }
 
 input geometry_filter_operators {

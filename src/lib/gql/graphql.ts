@@ -57,6 +57,13 @@ export type Query = {
   downloads: Array<Downloads>;
   downloads_aggregated: Array<Downloads_Aggregated>;
   downloads_by_id?: Maybe<Downloads>;
+  footer?: Maybe<Footer>;
+  footer_link: Array<Footer_Link>;
+  footer_link_aggregated: Array<Footer_Link_Aggregated>;
+  footer_link_by_id?: Maybe<Footer_Link>;
+  footer_social_link: Array<Footer_Social_Link>;
+  footer_social_link_aggregated: Array<Footer_Social_Link_Aggregated>;
+  footer_social_link_by_id?: Maybe<Footer_Social_Link>;
   meta?: Maybe<Meta>;
   presse: Array<Presse>;
   presse_aggregated: Array<Presse_Aggregated>;
@@ -148,6 +155,54 @@ export type QueryDownloads_AggregatedArgs = {
 
 
 export type QueryDownloads_By_IdArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryFooter_LinkArgs = {
+  filter?: InputMaybe<Footer_Link_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryFooter_Link_AggregatedArgs = {
+  filter?: InputMaybe<Footer_Link_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryFooter_Link_By_IdArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryFooter_Social_LinkArgs = {
+  filter?: InputMaybe<Footer_Social_Link_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryFooter_Social_Link_AggregatedArgs = {
+  filter?: InputMaybe<Footer_Social_Link_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryFooter_Social_Link_By_IdArgs = {
   id: Scalars['ID'];
 };
 
@@ -614,6 +669,190 @@ export type Downloads_Filter = {
   title?: InputMaybe<String_Filter_Operators>;
   user_created?: InputMaybe<String_Filter_Operators>;
   user_updated?: InputMaybe<String_Filter_Operators>;
+};
+
+export type Footer = {
+  __typename?: 'footer';
+  copyright_text?: Maybe<Scalars['String']>;
+  date_updated?: Maybe<Scalars['Date']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  footer_links?: Maybe<Array<Maybe<Footer_Link>>>;
+  footer_links_func?: Maybe<Count_Functions>;
+  footer_social_links?: Maybe<Array<Maybe<Footer_Social_Link>>>;
+  footer_social_links_func?: Maybe<Count_Functions>;
+  /** Der Text, der im Footer unter dem Logo angezeigt wird. */
+  footer_text?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+};
+
+
+export type FooterFooter_LinksArgs = {
+  filter?: InputMaybe<Footer_Link_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type FooterFooter_Social_LinksArgs = {
+  filter?: InputMaybe<Footer_Social_Link_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type Footer_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Footer_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Footer_Filter>>>;
+  copyright_text?: InputMaybe<String_Filter_Operators>;
+  date_updated?: InputMaybe<Date_Filter_Operators>;
+  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  footer_links?: InputMaybe<Footer_Link_Filter>;
+  footer_links_func?: InputMaybe<Count_Function_Filter_Operators>;
+  footer_social_links?: InputMaybe<Footer_Social_Link_Filter>;
+  footer_social_links_func?: InputMaybe<Count_Function_Filter_Operators>;
+  footer_text?: InputMaybe<String_Filter_Operators>;
+  id?: InputMaybe<Number_Filter_Operators>;
+};
+
+export type Footer_Link = {
+  __typename?: 'footer_link';
+  date_created?: Maybe<Scalars['Date']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  footer?: Maybe<Footer>;
+  id: Scalars['ID'];
+  /** Der Link zur Seite auf den der Eintrag verweisen soll. Am besten relativ. */
+  link?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+
+export type Footer_LinkFooterArgs = {
+  filter?: InputMaybe<Footer_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type Footer_Link_Aggregated = {
+  __typename?: 'footer_link_aggregated';
+  avg?: Maybe<Footer_Link_Aggregated_Fields>;
+  avgDistinct?: Maybe<Footer_Link_Aggregated_Fields>;
+  count?: Maybe<Footer_Link_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']>;
+  countDistinct?: Maybe<Footer_Link_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']>;
+  max?: Maybe<Footer_Link_Aggregated_Fields>;
+  min?: Maybe<Footer_Link_Aggregated_Fields>;
+  sum?: Maybe<Footer_Link_Aggregated_Fields>;
+  sumDistinct?: Maybe<Footer_Link_Aggregated_Fields>;
+};
+
+export type Footer_Link_Aggregated_Count = {
+  __typename?: 'footer_link_aggregated_count';
+  date_created?: Maybe<Scalars['Int']>;
+  date_updated?: Maybe<Scalars['Int']>;
+  footer?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  /** Der Link zur Seite auf den der Eintrag verweisen soll. Am besten relativ. */
+  link?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['Int']>;
+};
+
+export type Footer_Link_Aggregated_Fields = {
+  __typename?: 'footer_link_aggregated_fields';
+  footer?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type Footer_Link_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Footer_Link_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Footer_Link_Filter>>>;
+  date_created?: InputMaybe<Date_Filter_Operators>;
+  date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  date_updated?: InputMaybe<Date_Filter_Operators>;
+  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  footer?: InputMaybe<Footer_Filter>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  link?: InputMaybe<String_Filter_Operators>;
+  name?: InputMaybe<String_Filter_Operators>;
+};
+
+export type Footer_Social_Link = {
+  __typename?: 'footer_social_link';
+  date_created?: Maybe<Scalars['Date']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  footer?: Maybe<Footer>;
+  /** Das Icon. Als Iconsfont wird Remixicons genutzt: https://remixicon.com/ . Wenn ein Icon in der Liste fehlt, kannst du den Namen aus Remixicons kopieren (der Name, der hinter hinter dem = steht, z.B. "ri-mastodon-fill") */
+  icon?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  /** Der Link auf den das Icon verweisen soll. */
+  link?: Maybe<Scalars['String']>;
+};
+
+
+export type Footer_Social_LinkFooterArgs = {
+  filter?: InputMaybe<Footer_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type Footer_Social_Link_Aggregated = {
+  __typename?: 'footer_social_link_aggregated';
+  avg?: Maybe<Footer_Social_Link_Aggregated_Fields>;
+  avgDistinct?: Maybe<Footer_Social_Link_Aggregated_Fields>;
+  count?: Maybe<Footer_Social_Link_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']>;
+  countDistinct?: Maybe<Footer_Social_Link_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']>;
+  max?: Maybe<Footer_Social_Link_Aggregated_Fields>;
+  min?: Maybe<Footer_Social_Link_Aggregated_Fields>;
+  sum?: Maybe<Footer_Social_Link_Aggregated_Fields>;
+  sumDistinct?: Maybe<Footer_Social_Link_Aggregated_Fields>;
+};
+
+export type Footer_Social_Link_Aggregated_Count = {
+  __typename?: 'footer_social_link_aggregated_count';
+  date_created?: Maybe<Scalars['Int']>;
+  date_updated?: Maybe<Scalars['Int']>;
+  footer?: Maybe<Scalars['Int']>;
+  /** Das Icon. Als Iconsfont wird Remixicons genutzt: https://remixicon.com/ . Wenn ein Icon in der Liste fehlt, kannst du den Namen aus Remixicons kopieren (der Name, der hinter hinter dem = steht, z.B. "ri-mastodon-fill") */
+  icon?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  /** Der Link auf den das Icon verweisen soll. */
+  link?: Maybe<Scalars['Int']>;
+};
+
+export type Footer_Social_Link_Aggregated_Fields = {
+  __typename?: 'footer_social_link_aggregated_fields';
+  footer?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type Footer_Social_Link_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Footer_Social_Link_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Footer_Social_Link_Filter>>>;
+  date_created?: InputMaybe<Date_Filter_Operators>;
+  date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  date_updated?: InputMaybe<Date_Filter_Operators>;
+  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  footer?: InputMaybe<Footer_Filter>;
+  icon?: InputMaybe<String_Filter_Operators>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  link?: InputMaybe<String_Filter_Operators>;
 };
 
 export type Geometry_Filter_Operators = {
@@ -1209,9 +1448,15 @@ export type DownloadsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type DownloadsQueryQuery = { __typename?: 'Query', downloads: Array<{ __typename?: 'downloads', title?: string | null, file?: { __typename?: 'directus_files', id: string } | null }> };
 
+export type FooterQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FooterQueryQuery = { __typename?: 'Query', footer?: { __typename?: 'footer', copyright_text?: string | null, footer_text?: string | null, footer_links?: Array<{ __typename?: 'footer_link', name?: string | null, link?: string | null } | null> | null, footer_social_links?: Array<{ __typename?: 'footer_social_link', icon?: string | null, link?: string | null } | null> | null } | null };
+
 
 export const StartseiteQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"startseiteQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"startseite"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"text_part_one"}},{"kind":"Field","name":{"kind":"Name","value":"text_part_two"}},{"kind":"Field","name":{"kind":"Name","value":"task_section_description"}},{"kind":"Field","name":{"kind":"Name","value":"aufgaben"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"wandern_title"}},{"kind":"Field","name":{"kind":"Name","value":"wandern_text"}},{"kind":"Field","name":{"kind":"Name","value":"wandern_description"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_description"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_title"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_text"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_title"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_description"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_text"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_title"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_text"}}]}}]}}]} as unknown as DocumentNode<StartseiteQueryQuery, StartseiteQueryQueryVariables>;
 export const AufgabenQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"aufgabenQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aufgaben"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"link"}}]}}]}}]} as unknown as DocumentNode<AufgabenQueryQuery, AufgabenQueryQueryVariables>;
 export const VeranstaltungsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"veranstaltungsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"veranstaltung"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"ort"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"beschreibung"}},{"kind":"Field","name":{"kind":"Name","value":"datum"}},{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"featured_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"bildergalerie"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<VeranstaltungsQueryQuery, VeranstaltungsQueryQueryVariables>;
 export const WebsiteMetaQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"websiteMetaQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"meta"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"favicon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"Field","name":{"kind":"Name","value":"opengraph_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]} as unknown as DocumentNode<WebsiteMetaQueryQuery, WebsiteMetaQueryQueryVariables>;
 export const DownloadsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"downloadsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"downloads"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"status"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"StringValue","value":"published","block":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<DownloadsQueryQuery, DownloadsQueryQueryVariables>;
+export const FooterQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"footerQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"footer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"copyright_text"}},{"kind":"Field","name":{"kind":"Name","value":"footer_text"}},{"kind":"Field","name":{"kind":"Name","value":"footer_links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"link"}}]}},{"kind":"Field","name":{"kind":"Name","value":"footer_social_links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"icon"}},{"kind":"Field","name":{"kind":"Name","value":"link"}}]}}]}}]}}]} as unknown as DocumentNode<FooterQueryQuery, FooterQueryQueryVariables>;
