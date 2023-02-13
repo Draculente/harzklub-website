@@ -1,20 +1,26 @@
 ---
-import type { Veranstaltung } from "src/data/veranstaltungen";
 import sanitizeHtml from "sanitize-html";
 import Tag from "./Tag.astro";
-import { UNDER_CONSTRUCTION } from "src/data/links";
+import { ERROR_PAGE } from "@lib/links";
+import { formatDate } from "@lib/utils/format-date";
 
 export type Props = {
-  veranstaltung: Veranstaltung;
+  titel: string;
+  beschreibung: string;
+  date: string;
+  featured_image_url?: string;
+  slug?: string;
 };
 
-const { veranstaltung: v } = Astro.props;
+const FEATURED_IMAGE_DEFAULT_IMAGE = "/images/kurpark_teich.jpg";
+
+const { featured_image_url, titel, beschreibung, date, slug } = Astro.props;
 ---
 
 <div
   class="flex flex-row rounded-4xl justify-end bg-cover bg-no-repeat bg-left drop-shadow-md h-min min-h-full"
   style={`background-image: url(${
-    import.meta.env.DIRECTUS_HOST + "/assets/" + v.featured_image
+    featured_image_url ?? FEATURED_IMAGE_DEFAULT_IMAGE
   });`}
 >
   <div
@@ -23,15 +29,15 @@ const { veranstaltung: v } = Astro.props;
     <div class="flex w-full flex-row justify-between mb-4 sm:mb-2">
       <p class="flex flex-row items-center font-medium sm:text-sm">
         <i class="ri-calendar-event-line text-xl mr-2 sm:text-sm"></i>{
-          v.formattedDate
+          formatDate(new Date(date))
         }
       </p>
       <Tag title="Veranstaltung" />
     </div>
-    <p class="font-semibold text-lg">{v.titel}</p>
+    <p class="font-semibold text-lg">{titel}</p>
     <p class="leading-tight text-gray-800 sm:text-sm">
       {
-        sanitizeHtml(v.beschreibung || "Wir freuen uns auf euch!", {
+        sanitizeHtml(beschreibung || "Wir freuen uns auf euch!", {
           allowedTags: [],
         })
       }
@@ -40,7 +46,8 @@ const { veranstaltung: v } = Astro.props;
       <!-- href={"/veranstaltung/" + v.slug} -->
       <a
         class="btn btn-outline btn-primary px-2 py-2 text-xs min-h-0 h-min sm:text-xs hover:scale-105 transition-all"
-        href={UNDER_CONSTRUCTION}>&gt; Mehr erfahren</a
+        href={slug ? "/veranstaltung/" + slug : ERROR_PAGE}
+        >&gt; Mehr erfahren</a
       >
     </div>
   </div>

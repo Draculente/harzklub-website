@@ -8,19 +8,23 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "prepare-hooks": "git config --local core.hooksPath .githooks"
+    "prepare-hooks": "git config --local core.hooksPath .githooks",
+    "codegen": "wget --output-document schema.graphql https://harzklub.draculente.eu/server/specs/graphql/ && graphql-codegen --config codegen.ts"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^3.0.0",
+    "@graphql-codegen/client-preset": "^2.0.0",
     "@types/sanitize-html": "^2.6.2",
     "astro": "^2.0.5",
     "stylus": "^0.59.0"
   },
   "dependencies": {
     "@astrojs/tailwind": "^3.0.1",
-    "@directus/sdk": "^10.1.4",
     "@material-tailwind/html": "^1.2.3",
     "@tailwindcss/typography": "^0.5.9",
     "daisyui": "^2.50.0",
+    "graphql": "^16.6.0",
+    "graphql-request": "^5.1.0",
     "remixicon": "^2.5.0",
     "sanitize-html": "^2.7.2",
     "slugify": "^1.6.5",

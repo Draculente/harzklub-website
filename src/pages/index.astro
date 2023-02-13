@@ -2,42 +2,43 @@
 import Layout from "@layouts/Layout.astro";
 import { Seite } from "@components/header/Header.astro";
 import VeranstaltungsCard from "@components/VeranstaltungsCard.astro";
-import veranstaltungen from "src/data/veranstaltungen";
 import SectionHeader from "@components/SectionHeader.astro";
 import {
   DEFAULT_AUFGABEN_SECTION_LINK,
   MITMACHEN,
   UNDER_CONSTRUCTION,
-} from "src/data/links";
+} from "@lib/links";
+import {
+  aufgabenQuery,
+  startseiteQuery,
+  veranstaltungsQuery,
+} from "@lib/graphql/queries";
+import gqlClient from "@lib/utils/gql-client";
+import { getFileUrl } from "@lib/utils/helper";
+
+const { startseite: frontpageData } = await gqlClient.request(startseiteQuery);
+
+const { veranstaltung: veranstaltungen } = await gqlClient.request(
+  veranstaltungsQuery
+);
 
 const featuredEvent = veranstaltungen[0];
 
-const aufgaben = [
-  {
-    title: "Brauchtumspflege",
-    desc: "Dazu gehören Harzer Liedgut, Harzer Trachten sowie die Mundart",
-    link: UNDER_CONSTRUCTION,
-    image: "/images/raunacht.jpg",
-  },
-  {
-    title: "Wanderwege",
-    image: "/images/steg.jpg",
-    desc: "Anlegen, Beschilderung und Erhaltung von Wanderwegen im Naturpark Harz",
-  },
-  {
-    title: "Jugend und Familie",
-    image: "/images/kinder_buehne.jpg",
-    desc: "Hier ein oder zwei nette Sätze über Jugendarbeit",
-  },
-  {
-    title: "Naturparkeinrichtung",
-    desc: "Bänke, Schutzhütten und mehr",
-    image: "/images/bank.jpg",
-  },
-];
+const AUFGABEN_DEFAULT_IMAGE = "/images/kurpark_teich.jpg";
+
+const aufgaben = (await gqlClient.request(aufgabenQuery)).aufgaben
+  .filter((e) => frontpageData?.aufgaben?.some((f) => f && f.id === e.id))
+  .map((e) => ({
+    ...e,
+    image_link: e.image ? getFileUrl(e.image!.id) : AUFGABEN_DEFAULT_IMAGE,
+  }));
 ---
 
-<Layout title="Startseite" page={Seite.Startseite}>
+<Layout
+  title="Startseite"
+  page={Seite.Startseite}
+  description={frontpageData?.description ?? undefined}
+>
   <main>
     <section
       id="heading"
@@ -67,7 +68,14 @@ const aufgaben = [
           class="col-span-2 md:col-span-3 md:row-start-2 md:w-full h-full grid grid-rows-4 gap-4 sm:flex sm:flex-col"
         >
           <div class="row-span-3">
-            <VeranstaltungsCard veranstaltung={featuredEvent} />
+            <VeranstaltungsCard
+              beschreibung={featuredEvent.beschreibung ??
+                "Ups da ist etwas schiefgelaufen."}
+              date={featuredEvent.datum}
+              featured_image_url={getFileUrl(featuredEvent.featured_image?.id)}
+              titel={featuredEvent.titel ?? "Ups da ist etwas schiefgelaufen."}
+              slug={featuredEvent.slug ?? "#"}
+            />
           </div>
           <a
             class="bg-info drop-shadow-md p-4 rounded-4xl w-full row-span-1 flex items-center sm:text-sm cursor-pointer hover:scale-105 transition-all"
@@ -81,13 +89,12 @@ const aufgaben = [
         </div>
         <div class="col-start-3 col-span-3 md:col-start-1 z-10">
           <h2 class="font-medium text-lg tracking-wide sm:text-base">
-            Harz, harzer, am harzesten.
+            {frontpageData?.subtitle ?? "Ups da ist etwas schiefgelaufen."}
           </h2>
           <h1
             class="font-bold text-5xl leading-tight sm:text-2xl sm:font-semibold"
           >
-            Hier bitte einen netten Slogan einfügen: Die Website des Harzklub
-            Hohegeiß
+            {frontpageData?.title ?? "Ups da ist etwas schiefgelaufen."}
           </h1>
           <hr class="border-t-2 border-neutral mt-6" />
           <a href={UNDER_CONSTRUCTION} class="flex flex-row items-center mt-3"
@@ -105,22 +112,12 @@ const aufgaben = [
       <div class="flex flex-row flex-wrap-reverse justify-center">
         <div class="big:basis-1/2 sm:mt-5 min-w-[300px] max-w-[500px]">
           <h2 class="font-semibold text-3xl sm:text-2xl mb-3">
-            Moin, moin in <span class="text-primary">Hohegeiß...</span>
+            Glück auf in <span class="text-primary">Hohegeiß...</span>
           </h2>
-          <p class="text-gray-800 body-text-bigger">
-            Das Bergdorf Hohegeiß liegt im Naturpark Harz. Es befindet sich
-            zwischen Sorge im Nordnordosten und Benneckenstein im Osten (beide
-            in Sachsen-Anhalt), Rothesütte im Südosten (Thüringen), Zorge im
-            Süden und Braunlage im Nordnordwesten (beide in Niedersachsen).
-            Durch das auf etwa 570 bis 642 m ü. NN gelegene Dorf führt im
-            Abschnitt zwischen Braunlage und Rothesütte die den Harz querende
-            Bundesstraße 4. Die Landesgrenze zu Sachsen-Anhalt (früher
-            innerdeutsche Grenze) führt am nordöstlichen Ortsrand vorbei; an
-            dieser Grenze liegt etwa 3,3 km südöstlich des Dorfs das
-            Dreiländereck Niedersachsen–Sachsen-Anhalt–Thüringen, wo der
-            Drei-Länder-Stein steht. Nahe dem Dorf breitet sich das Naturdenkmal
-            Dicke Tannen aus.
-          </p>
+          <div
+            class="text-gray-800 body-text-bigger"
+            set:html={frontpageData?.text_part_one}
+          />
         </div>
         <div
           class="big:basis-1/2 flex p-10 sm:p-0 items-center justify-center sm:my-10"
@@ -144,15 +141,10 @@ const aufgaben = [
           <h2 class="font-semibold text-3xl sm:text-2xl mb-3">
             ...und willkommen beim <span class="text-primary">Harzklub</span>
           </h2>
-          <p class="text-gray-800 body-text-bigger">
-            Der Harzklub e. V. (Heimat-, Wander- und Naturschutzbund) mit Sitz
-            in Clausthal-Zellerfeld ist ein Verein zur Pflege des Harzer
-            Brauchtums und sorgt für die Unterhaltung der dortigen Wanderwege.
-            Er wurde 1886 in Seesen gegründet und hat heute ca. 13.000
-            Mitglieder in 87 Zweigvereinen, die sich in den Ortschaften in und
-            um den Harz in Niedersachsen, Thüringen und Sachsen-Anhalt gebildet
-            haben. Wir kümmern uns satzungsgemäß um...
-          </p>
+          <div
+            class="text-gray-800 body-text-bigger"
+            set:html={frontpageData?.text_part_two}
+          />
         </div>
       </div>
     </section>
@@ -175,10 +167,10 @@ const aufgaben = [
       <p
         class="font-medium text-center w-2/5 mx-auto leading-5 my-12 sm:w-full sm:px-5"
       >
-        Der Harzklub wurde am 8. August 1886 in Seesen gegründet. Der
-        Eisenbahndirektor Albert Schneider wurde der erste Vorsitzende.
-        Mitbegründer waren u. a. Oberforstrat Carl Reuß als zweiter Vorsitzender
-        und Verlagsbuchhändler Heinrich Conrad Huch als Schriftführer.
+        {
+          frontpageData?.task_section_description ??
+            "Ups da ist etwas schiefgelaufen."
+        }
       </p>
       <div class="flex flex-row gap-8 px-[10vw] justify-center flex-wrap mt-20">
         {
@@ -186,17 +178,17 @@ const aufgaben = [
             <div class="card w-[15vw] bg-base-100 shadow-xl min-w-[260px] sm:w-full sm:basis-1/4 sm:min-w-[80vw]">
               <figure>
                 <img
-                  src={
-                    aufgabe.image ??
-                    "https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                  }
-                  alt="card image"
+                  src={aufgabe.image_link}
+                  alt={aufgabe.image?.description ?? "Bild zu " + aufgabe.title}
                   class="rounded-xl aspect-4/3"
                 />
               </figure>
               <div class="card-body items-center text-center">
                 <h2 class="card-title">{aufgabe.title}</h2>
-                <p>{aufgabe.desc}</p>
+                <p>
+                  {aufgabe.description ??
+                    "Klicke auf den Link um mehr über diesen Aufgabenbereich zu erfahren"}
+                </p>
                 <div class="card-actions">
                   <a
                     href={aufgabe.link ?? DEFAULT_AUFGABEN_SECTION_LINK}
@@ -219,9 +211,10 @@ const aufgaben = [
         aria-hidden="true"
       />
       <SectionHeader title="Wandern" subtitle="Egal zu welcher Jahreszeit">
-        Und wir sorgen dafür, dass Du Dich dabei zurechtfindest.<br />Der
-        Harzklub erschließt neue Wanderwege, hält bestehende in Schuss<br /> und
-        beschildert Deine Routen.
+        {
+          frontpageData?.wandern_description ??
+            "Ups da ist etwas schiefgelaufen."
+        }
       </SectionHeader>
       <div
         class="p-[10%] flex flex-row items-center md:flex-wrap md:justify-center md:px-5 mt-16"
@@ -232,15 +225,12 @@ const aufgaben = [
           <div class="w-3/4 md:w-full">
             <i class="ri-treasure-map-line text-primary text-5xl md:m-auto"></i>
             <h2 class="font-semibold text-3xl leading-relaxed mb-4">
-              Wir helfen dir, Dich zurechtzufinden
+              {frontpageData?.wandern_title}
             </h2>
-            <p class="body-text-bigger">
-              Du weißt gar nicht, wie du deine Wanderungen beginnen sollst? Wir
-              bieten Gruppenwanderungen und viele weitere Aktivitäten rund ums
-              Wandern an! Außerdem planen wir einen Wanderwege-Finder bei dem Du
-              einfach angibst, wie Du am liebsten wanderst und wir den passenden
-              Weg für Dich finden.
-            </p>
+            <div
+              class="body-text-bigger"
+              set:html={frontpageData?.wandern_text}
+            />
           </div>
         </div>
         <div class="relative w-3/5 -mt-52 md:mt-5 md:w-full">
@@ -273,9 +263,10 @@ const aufgaben = [
         title="Der Harz"
         subtitle="Ein Mittelgebirge mit Tradition"
       >
-        Der Harzklub kümmert sich um Pflege und Erhaltung von Harzer <br
-        />Brauchtum, Harzer Liedgut, Harzer Festtags- und Arbeitstrachten sowie<br
-        />die Mundart
+        {
+          frontpageData?.tradition_description ??
+            "Ups da ist etwas schiefgelaufen."
+        }
       </SectionHeader>
       <div class="flex flex-row justify-center items-center flex-wrap-reverse">
         <div
@@ -295,28 +286,15 @@ const aufgaben = [
           class="w-1/5 rounded-md bg-info drop-shadow-lg p-8 mt-20 md:w-full md:mx-5"
         >
           <h3 class="text-xl font-semibold">
-            Pflege des Harzer <span class="text-primary">Brauchtums</span>
+            {frontpageData?.tradition_title?.split(" ").slice(0, -1).join(" ")}
+            <span class="text-primary"
+              >{frontpageData?.tradition_title?.split(" ").pop()}</span
+            >
           </h3>
-          <p class="body-text-smaller my-3">
-            Der Zweigverein Hohegeiß hat ca. 220 Mitglieder einschl. Kinder und
-            Jugendlichen. Die Brauchtumsgruppe setzt sich zusammen aus ca.25
-            Mitgliedern.
-          </p>
-          <p class="body-text-smaller my-3">
-            Ein wichtiger Bestandteil des heimatlichen Kulturgutes wird in den
-            über 40 Heimatgruppen der Harzklub-zweigvereine gepflegt und
-            weiterentwickelt: Harzer Liedgut, Glockenspiel, Peitschenknall,
-            Teufel / Hexenspuk, Jodeln, Mundart, Trachten und Brauchtum.
-          </p>
-          <p class="body-text-smaller my-3">
-            An unzähligen Heimatabenden finden sie in der Saison ihr Publikum.
-            Höhepunkt ist der jährlich stattfindende große Harzer Heimattag, der
-            einen Querschnitt der Heimgruppenarbeit zeigt.
-          </p>
-          <p class="body-text-smaller my-3">
-            In Fernseh- und Rundfunksendungen werben die Gruppen weit über die
-            Grenzen des Harzes hinaus für ihre Heimat.
-          </p>
+          <div
+            class="body-text-smaller"
+            set:html={frontpageData?.tradition_text}
+          />
         </div>
       </div>
     </section>
@@ -329,9 +307,10 @@ const aufgaben = [
       />
 
       <SectionHeader title="Die Jugend" subtitle="Der Harz wird wieder jung">
-        Die Kinder und Jugendlichen machen Hohegeiß erst richtig lebendig. Und <br
-        />
-        wir bringen dem Nachwuchs den Harz und seine Traditionen nahe.
+        {
+          frontpageData?.jugend_description ??
+            "Ups da ist etwas schiefgelaufen."
+        }
       </SectionHeader>
 
       <div
@@ -342,23 +321,20 @@ const aufgaben = [
         >
           <div class="w-3/4 md:w-full">
             <h2 class="font-bold mb-0 text-3xl">
-              <span class="text-primary">Spaß</span> und Spiele
+              <span class="text-primary"
+                >{
+                  frontpageData?.jugend_title?.split(" ").slice(0, 1).join(" ")
+                }</span
+              >
+              {frontpageData?.jugend_title?.split(" ").slice(1).join(" ")}
             </h2>
             <h3 class="text-xl mt-0 font-semibold mb-6">
-              (und Brot gibt's auch)
+              {frontpageData?.jugend_subtitle}
             </h3>
-            <p class="body-text-bigger">
-              Die Jugendarbeit beziehungsweise Kinder- und Jugendarbeit
-              existiert seit dem Ende des 19. Jahrhunderts in Zentraleuropa und
-              ist ein klassisches Tätigkeitsfeld der Sozialen Arbeit. Sie ist
-              heute ein unentbehrlicher Bestandteil der sozialen
-              Infrastruktur.Die Jugendarbeit ist gesetzliche Pflichtaufgabe der
-              Kinder und Jugendhilfe. Sie ist neben der Erziehung und Bildung im
-              Elternhaus und in der Schule, Kindergarten oder beruflichen
-              Ausbildung eine dritte Säule der Jugendbildung. Die Jugendarbeit
-              ist abzugrenzen von der Jugendsozialarbeit für benachteiligte
-              Jugendliche.
-            </p>
+            <div
+              class="body-text-bigger"
+              set:html={frontpageData?.jugend_text}
+            />
           </div>
         </div>
         <div
@@ -391,18 +367,15 @@ const aufgaben = [
         <div>
           <div class="badge badge-secondary">Mitgliedschaft</div>
           <h1 class="text-5xl font-bold mt-5 md:text-3xl text-primary-content">
-            Mach Mit
+            {frontpageData?.mitgliedschaft_title}
           </h1>
-          <h2 class="text-neutral mb-3 text-xl">Unterstütze den Harzklub</h2>
-          <p class="break-words text-primary-content my-7">
-            Mitglied ist ein konstitutiver Angehöriger (natürliche oder
-            juristische Person) eines <br />Kollegialorgans. Konstitutiv
-            bedeutet hier, dass es diese Personenvereinigung ohne Mitglieder gar<br
-            />nicht geben könnte, weil die Existenz einer Personenvereinigung
-            nur durch ihre Mitglieder<br />gewährleistet ist. Nach der Art der
-            Freiwilligkeit gibt es freiwillige Mitglieder oder die<br />
-            Pflichtmitgliedschaft durch Zwang kraft Gesetzes oder öffentlicher Satzung.
-          </p>
+          <h2 class="text-neutral mb-3 text-xl">
+            {frontpageData?.mitgliedschaft_subtitle}
+          </h2>
+          <div
+            class="break-words text-primary-content my-7 max-h-[720px]"
+            set:html={frontpageData?.mitgliedschaft_text}
+          />
           <a
             href={MITMACHEN}
             class="btn btn-secondary rounded-md filter-none hover:scale-105 transition-all"
@@ -434,5 +407,9 @@ const aufgaben = [
     .body-text-smaller {
       @apply leading-5 text-sm font-light tracking-wider;
     }
+  }
+
+  .body-text-smaller p {
+    @apply my-3;
   }
 </style>
