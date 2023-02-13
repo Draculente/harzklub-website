@@ -5,12 +5,26 @@ export const startseiteQuery = graphql(/* GraphQL */ `
     startseite {
       title
       subtitle
-      wandern_title
-      wandern_text
-      tradition_description
+      description
+      text_part_one
+      text_part_two
+      task_section_description
       aufgaben {
         id
       }
+      wandern_title
+      wandern_text
+      wandern_description
+      tradition_description
+      tradition_title
+      tradition_text
+      jugend_title
+      jugend_subtitle
+      jugend_description
+      jugend_text
+      mitgliedschaft_title
+      mitgliedschaft_subtitle
+      mitgliedschaft_text
     }
   }
 `);
