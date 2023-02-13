@@ -1,15 +1,13 @@
 ---
 import DownloadButton from "@components/Download-Button.astro";
-import downloads from "src/data/downloads";
+import { downloadsQuery } from "@lib/graphql/queries";
+import gqlClient from "@lib/utils/gql-client";
+import { getFileUrl } from "@lib/utils/helper";
 import Layout from "src/layouts/Layout.astro";
-import { getFileUrl } from "src/utils/directus";
 
-const downloadLinks = downloads
-  .filter((e) => e.status === "published")
-  .map((e) => {
-    e.link = `${getFileUrl(e.file!)}?download`;
-    return e;
-  });
+const downloads = (await gqlClient.request(downloadsQuery)).downloads.filter(
+  (download) => download.file?.id
+);
 ---
 
 <Layout title="Downloads">
@@ -38,9 +36,9 @@ const downloadLinks = downloads
       </h1>
       <div class="flex flex-row flex-wrap gap-5 mt-5">
         {
-          downloadLinks.map((download) => (
+          downloads.map((download) => (
             <DownloadButton
-              link={download.link}
+              link={getFileUrl(download.file?.id)!}
               title={download.title ?? "Datei"}
             />
           ))

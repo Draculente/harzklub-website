@@ -1,12 +1,13 @@
 ---
 import ArticleBody from "@components/ArticleBody.astro";
 import { Seite } from "@components/header/Header.astro";
+import { veranstaltungsQuery } from "@lib/graphql/queries";
+import { formatDate } from "@lib/utils/format-date";
+import gqlClient from "@lib/utils/gql-client";
 import Layout from "src/layouts/Layout.astro";
-import veranstaltungen, { Veranstaltung } from "src/data/veranstaltungen";
 
-export function getStaticPaths() {
-    return veranstaltungen
-        .filter((e) => e)
+export async function getStaticPaths() {
+    return (await gqlClient.request(veranstaltungsQuery)).veranstaltung
         .map((e) => {
             return {
                 params: { veranstaltung: e.slug },
@@ -15,14 +16,17 @@ export function getStaticPaths() {
         });
 }
 
-const post = Astro.props as Veranstaltung;
+const {slug, titel, datum, beschreibung} = Astro.props;
+
+console.log(slug);
+
 ---
 
-<Layout title={post.titel ?? "Aktuelles"} page={Seite.Aktuelles}>
+<Layout title={titel ?? "Aktuelles"} page={Seite.Aktuelles}>
     <main>
-        <h1>{post.titel}</h1>
-        <p class="date">{post.formattedDate}</p>
-        <ArticleBody html={post.beschreibung ?? "<p>Keine Beschreibung vorhanden.</p>"}></ArticleBody>
+        <h1>{titel}</h1>
+        <p class="date">{formatDate(new Date(datum))}</p>
+        <ArticleBody html={beschreibung ?? "<p>Keine Beschreibung vorhanden.</p>"}></ArticleBody>
     </main>
 </Layout>
 

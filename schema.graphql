@@ -1,0 +1,815 @@
+type Query {
+  veranstaltung_files(filter: veranstaltung_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [veranstaltung_files!]!
+  veranstaltung_files_by_id(id: ID!): veranstaltung_files
+  veranstaltung_files_aggregated(groupBy: [String], filter: veranstaltung_files_filter, limit: Int, search: String, sort: [String]): [veranstaltung_files_aggregated!]!
+  wanderung(filter: wanderung_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [wanderung!]!
+  wanderung_by_id(id: ID!): wanderung
+  wanderung_aggregated(groupBy: [String], filter: wanderung_filter, limit: Int, search: String, sort: [String]): [wanderung_aggregated!]!
+  meta: meta
+  wegeschaden(filter: wegeschaden_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [wegeschaden!]!
+  wegeschaden_by_id(id: ID!): wegeschaden
+  wegeschaden_aggregated(groupBy: [String], filter: wegeschaden_filter, limit: Int, search: String, sort: [String]): [wegeschaden_aggregated!]!
+  der_harz(filter: der_harz_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [der_harz!]!
+  der_harz_by_id(id: ID!): der_harz
+  der_harz_aggregated(groupBy: [String], filter: der_harz_filter, limit: Int, search: String, sort: [String]): [der_harz_aggregated!]!
+  presse(filter: presse_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [presse!]!
+  presse_by_id(id: ID!): presse
+  presse_aggregated(groupBy: [String], filter: presse_filter, limit: Int, search: String, sort: [String]): [presse_aggregated!]!
+  veranstaltung(filter: veranstaltung_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [veranstaltung!]!
+  veranstaltung_by_id(id: ID!): veranstaltung
+  veranstaltung_aggregated(groupBy: [String], filter: veranstaltung_filter, limit: Int, search: String, sort: [String]): [veranstaltung_aggregated!]!
+  downloads(filter: downloads_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [downloads!]!
+  downloads_by_id(id: ID!): downloads
+  downloads_aggregated(groupBy: [String], filter: downloads_filter, limit: Int, search: String, sort: [String]): [downloads_aggregated!]!
+  startseite: startseite
+  startseite_aufgaben(filter: startseite_aufgaben_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [startseite_aufgaben!]!
+  startseite_aufgaben_by_id(id: ID!): startseite_aufgaben
+  startseite_aufgaben_aggregated(groupBy: [String], filter: startseite_aufgaben_filter, limit: Int, search: String, sort: [String]): [startseite_aufgaben_aggregated!]!
+  aufgaben(filter: aufgaben_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [aufgaben!]!
+  aufgaben_by_id(id: ID!): aufgaben
+  aufgaben_aggregated(groupBy: [String], filter: aufgaben_filter, limit: Int, search: String, sort: [String]): [aufgaben_aggregated!]!
+}
+
+type Mutation {
+  create_wegeschaden_items(filter: wegeschaden_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_wegeschaden_input!]): [wegeschaden!]!
+  create_wegeschaden_item(data: create_wegeschaden_input!): wegeschaden
+}
+
+"""The `Boolean` scalar type represents `true` or `false`."""
+scalar Boolean
+
+"""ISO8601 Date values"""
+scalar Date
+
+"""
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
+"""
+scalar Float
+
+"""BigInt value"""
+scalar GraphQLBigInt
+
+"""GeoJSON value"""
+scalar GraphQLGeoJSON
+
+"""A Float or a String"""
+scalar GraphQLStringOrFloat
+
+"""
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+"""
+scalar ID
+
+"""
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+"""
+scalar Int
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+"""
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+"""
+scalar String
+
+union startseite_aufgaben_item_union = aufgaben
+
+type aufgaben {
+  id: ID!
+  date_updated: Date
+  date_updated_func: datetime_functions
+  title: String
+  image(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  description: String
+  link: String
+}
+
+type aufgaben_aggregated {
+  group: JSON
+  countAll: Int
+  count: aufgaben_aggregated_count
+  countDistinct: aufgaben_aggregated_count
+  avg: aufgaben_aggregated_fields
+  sum: aufgaben_aggregated_fields
+  avgDistinct: aufgaben_aggregated_fields
+  sumDistinct: aufgaben_aggregated_fields
+  min: aufgaben_aggregated_fields
+  max: aufgaben_aggregated_fields
+}
+
+type aufgaben_aggregated_count {
+  id: Int
+  date_updated: Int
+  title: Int
+  image: Int
+  description: Int
+  link: Int
+}
+
+type aufgaben_aggregated_fields {
+  id: Float
+}
+
+type count_functions {
+  count: Int
+}
+
+type datetime_functions {
+  year: Int
+  month: Int
+  week: Int
+  day: Int
+  weekday: Int
+  hour: Int
+  minute: Int
+  second: Int
+}
+
+type der_harz {
+  id: ID!
+  status: String
+  sort: Int
+  user_created: String
+  date_created: Date
+  date_created_func: datetime_functions
+  user_updated: String
+  date_updated: Date
+  date_updated_func: datetime_functions
+  titel: String
+  body: String
+  schlagwoerter: JSON
+  schlagwoerter_func: count_functions
+  featured_image(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+}
+
+type der_harz_aggregated {
+  group: JSON
+  countAll: Int
+  count: der_harz_aggregated_count
+  countDistinct: der_harz_aggregated_count
+  avg: der_harz_aggregated_fields
+  sum: der_harz_aggregated_fields
+  avgDistinct: der_harz_aggregated_fields
+  sumDistinct: der_harz_aggregated_fields
+  min: der_harz_aggregated_fields
+  max: der_harz_aggregated_fields
+}
+
+type der_harz_aggregated_count {
+  id: Int
+  status: Int
+  sort: Int
+  user_created: Int
+  date_created: Int
+  user_updated: Int
+  date_updated: Int
+  titel: Int
+  body: Int
+  schlagwoerter: Int
+  featured_image: Int
+}
+
+type der_harz_aggregated_fields {
+  id: Float
+  sort: Float
+}
+
+type directus_files {
+  id: ID!
+  storage: String!
+  filename_disk: String
+  filename_download: String!
+  title: String
+  type: String
+  folder: String
+  uploaded_by: String
+  uploaded_on: Date
+  uploaded_on_func: datetime_functions
+  modified_by: String
+  modified_on: Date
+  modified_on_func: datetime_functions
+  charset: String
+  filesize: GraphQLBigInt
+  width: Int
+  height: Int
+  duration: Int
+  embed: String
+  description: String
+  location: String
+  tags: JSON
+  tags_func: count_functions
+  metadata: JSON
+  metadata_func: count_functions
+}
+
+type downloads {
+  id: ID!
+  status: String
+  user_created: String
+  date_created: Date
+  date_created_func: datetime_functions
+  user_updated: String
+  date_updated: Date
+  date_updated_func: datetime_functions
+  title: String
+  file(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+}
+
+type downloads_aggregated {
+  group: JSON
+  countAll: Int
+  count: downloads_aggregated_count
+  countDistinct: downloads_aggregated_count
+}
+
+type downloads_aggregated_count {
+  id: Int
+  status: Int
+  user_created: Int
+  date_created: Int
+  user_updated: Int
+  date_updated: Int
+  title: Int
+  file: Int
+}
+
+type meta {
+  id: ID!
+  user_updated: String
+  date_updated: Date
+  date_updated_func: datetime_functions
+
+  """
+  Kurzer, knackiger Titel, der automatisch um den Titel der jeweiligen Unterseite ergänzt wird
+  """
+  title: String
+  opengraph_image(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+
+  """
+  Sollte auf einer Unterseite mal eine Beschreibung fehlen, wird diese hier angezeigt. Die Beschreibung ist die, die auch bei z.B. Google auftaucht. Sie sollte aus nicht mehr als zwei Sätzen und 155 Zeichen bestehen.
+  """
+  description: String
+  favicon(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+}
+
+type presse {
+  id: ID!
+  status: String
+  date_created: Date
+  date_created_func: datetime_functions
+  date_updated: Date
+  date_updated_func: datetime_functions
+  titel: String
+  body: String
+}
+
+type presse_aggregated {
+  group: JSON
+  countAll: Int
+  count: presse_aggregated_count
+  countDistinct: presse_aggregated_count
+  avg: presse_aggregated_fields
+  sum: presse_aggregated_fields
+  avgDistinct: presse_aggregated_fields
+  sumDistinct: presse_aggregated_fields
+  min: presse_aggregated_fields
+  max: presse_aggregated_fields
+}
+
+type presse_aggregated_count {
+  id: Int
+  status: Int
+  date_created: Int
+  date_updated: Int
+  titel: Int
+  body: Int
+}
+
+type presse_aggregated_fields {
+  id: Float
+}
+
+type startseite {
+  id: ID!
+  date_updated: Date
+  date_updated_func: datetime_functions
+
+  """Der große, dicke Titel am Anfang der Startseite"""
+  title: String
+
+  """Der Subtitle steht im Design eventuell ÜBER dem Titel."""
+  subtitle: String
+
+  """
+  Wenn leer gelassen wird der default Eintrag aus "meta" genommen. Sollte nicht länger als zwei Sätze und 155 Zeichen sein. Wird nicht im Design angezeigt, sondern ist nur ein Meta-Information für Google und Co
+  """
+  description: String
+  text_part_one: String
+  text_part_two: String
+  task_section_description: String
+  wandern_description: String
+  wandern_title: String
+  wandern_text: String
+  tradition_description: String
+  tradition_title: String
+  tradition_text: String
+  jugend_description: String
+  jugend_title: String
+  jugend_subtitle: String
+  jugend_text: String
+  mitgliedschaft_text: String
+  mitgliedschaft_subtitle: String
+  mitgliedschaft_title: String
+  aufgaben(filter: startseite_aufgaben_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [startseite_aufgaben]
+  aufgaben_func: count_functions
+}
+
+type startseite_aufgaben {
+  id: ID!
+  startseite_id(filter: startseite_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): startseite
+  item: startseite_aufgaben_item_union
+  collection: String
+}
+
+type startseite_aufgaben_aggregated {
+  group: JSON
+  countAll: Int
+  count: startseite_aufgaben_aggregated_count
+  countDistinct: startseite_aufgaben_aggregated_count
+  avg: startseite_aufgaben_aggregated_fields
+  sum: startseite_aufgaben_aggregated_fields
+  avgDistinct: startseite_aufgaben_aggregated_fields
+  sumDistinct: startseite_aufgaben_aggregated_fields
+  min: startseite_aufgaben_aggregated_fields
+  max: startseite_aufgaben_aggregated_fields
+}
+
+type startseite_aufgaben_aggregated_count {
+  id: Int
+  startseite_id: Int
+  item: Int
+  collection: Int
+}
+
+type startseite_aufgaben_aggregated_fields {
+  id: Float
+  startseite_id: Float
+}
+
+type veranstaltung {
+  id: ID!
+  status: String
+  sort: Int
+  date_created: Date
+  date_created_func: datetime_functions
+  date_updated: Date
+  date_updated_func: datetime_functions
+  datum: Date
+  datum_func: datetime_functions
+  titel: String
+  ort: String
+  beschreibung: String
+
+  """
+  Sobald der Event in der Vergangenheit liegt und diese Veranstaltung um Bilder und oder einer Zusammenfassung ergänzt wurde, bitte umstellen.
+  """
+  mehr_info: String
+  featured_image(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  slug: String
+  bildergalerie(filter: veranstaltung_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [veranstaltung_files]
+  bildergalerie_func: count_functions
+}
+
+type veranstaltung_aggregated {
+  group: JSON
+  countAll: Int
+  count: veranstaltung_aggregated_count
+  countDistinct: veranstaltung_aggregated_count
+  avg: veranstaltung_aggregated_fields
+  sum: veranstaltung_aggregated_fields
+  avgDistinct: veranstaltung_aggregated_fields
+  sumDistinct: veranstaltung_aggregated_fields
+  min: veranstaltung_aggregated_fields
+  max: veranstaltung_aggregated_fields
+}
+
+type veranstaltung_aggregated_count {
+  id: Int
+  status: Int
+  sort: Int
+  date_created: Int
+  date_updated: Int
+  datum: Int
+  titel: Int
+  ort: Int
+  beschreibung: Int
+
+  """
+  Sobald der Event in der Vergangenheit liegt und diese Veranstaltung um Bilder und oder einer Zusammenfassung ergänzt wurde, bitte umstellen.
+  """
+  mehr_info: Int
+  featured_image: Int
+  slug: Int
+  bildergalerie: Int
+}
+
+type veranstaltung_aggregated_fields {
+  id: Float
+  sort: Float
+}
+
+type veranstaltung_files {
+  id: ID!
+  veranstaltung_id(filter: veranstaltung_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): veranstaltung
+  directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+}
+
+type veranstaltung_files_aggregated {
+  group: JSON
+  countAll: Int
+  count: veranstaltung_files_aggregated_count
+  countDistinct: veranstaltung_files_aggregated_count
+  avg: veranstaltung_files_aggregated_fields
+  sum: veranstaltung_files_aggregated_fields
+  avgDistinct: veranstaltung_files_aggregated_fields
+  sumDistinct: veranstaltung_files_aggregated_fields
+  min: veranstaltung_files_aggregated_fields
+  max: veranstaltung_files_aggregated_fields
+}
+
+type veranstaltung_files_aggregated_count {
+  id: Int
+  veranstaltung_id: Int
+  directus_files_id: Int
+}
+
+type veranstaltung_files_aggregated_fields {
+  id: Float
+  veranstaltung_id: Float
+}
+
+type wanderung {
+  id: ID!
+  status: String
+  date_created: Date
+  date_created_func: datetime_functions
+  date_updated: Date
+  date_updated_func: datetime_functions
+  titel: String
+  beschreibung: String
+  externer_anbieter: String
+  featured_image(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+}
+
+type wanderung_aggregated {
+  group: JSON
+  countAll: Int
+  count: wanderung_aggregated_count
+  countDistinct: wanderung_aggregated_count
+  avg: wanderung_aggregated_fields
+  sum: wanderung_aggregated_fields
+  avgDistinct: wanderung_aggregated_fields
+  sumDistinct: wanderung_aggregated_fields
+  min: wanderung_aggregated_fields
+  max: wanderung_aggregated_fields
+}
+
+type wanderung_aggregated_count {
+  id: Int
+  status: Int
+  date_created: Int
+  date_updated: Int
+  titel: Int
+  beschreibung: Int
+  externer_anbieter: Int
+
+  """
+  Das Bild wird unter anderem in der Übersicht der aller Wanderungen angezeigt.
+  """
+  featured_image: Int
+}
+
+type wanderung_aggregated_fields {
+  id: Float
+}
+
+type wegeschaden {
+  id: ID!
+  sort: Int
+  date_created: Date
+  date_created_func: datetime_functions
+  user_updated: String
+  date_updated: Date
+  date_updated_func: datetime_functions
+  ort: GraphQLGeoJSON
+  beschreibung: String
+  bild(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  geloest: String
+}
+
+type wegeschaden_aggregated {
+  group: JSON
+  countAll: Int
+  count: wegeschaden_aggregated_count
+  countDistinct: wegeschaden_aggregated_count
+  avg: wegeschaden_aggregated_fields
+  sum: wegeschaden_aggregated_fields
+  avgDistinct: wegeschaden_aggregated_fields
+  sumDistinct: wegeschaden_aggregated_fields
+  min: wegeschaden_aggregated_fields
+  max: wegeschaden_aggregated_fields
+}
+
+type wegeschaden_aggregated_count {
+  id: Int
+  sort: Int
+  date_created: Int
+  user_updated: Int
+  date_updated: Int
+  ort: Int
+  beschreibung: Int
+  bild: Int
+  geloest: Int
+}
+
+type wegeschaden_aggregated_fields {
+  id: Float
+  sort: Float
+}
+
+input aufgaben_filter {
+  id: number_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  title: string_filter_operators
+  image: directus_files_filter
+  description: string_filter_operators
+  link: string_filter_operators
+  _and: [aufgaben_filter]
+  _or: [aufgaben_filter]
+}
+
+input count_function_filter_operators {
+  count: number_filter_operators
+}
+
+input create_wegeschaden_input {
+  id: ID
+  sort: Int
+  date_created: Date
+  user_updated: String
+  date_updated: Date
+  ort: GraphQLGeoJSON
+  beschreibung: String
+  bild: String
+  geloest: String
+}
+
+input date_filter_operators {
+  _eq: String
+  _neq: String
+  _gt: String
+  _gte: String
+  _lt: String
+  _lte: String
+  _null: Boolean
+  _nnull: Boolean
+  _in: [String]
+  _nin: [String]
+  _between: [GraphQLStringOrFloat]
+  _nbetween: [GraphQLStringOrFloat]
+}
+
+input datetime_function_filter_operators {
+  year: number_filter_operators
+  month: number_filter_operators
+  week: number_filter_operators
+  day: number_filter_operators
+  weekday: number_filter_operators
+  hour: number_filter_operators
+  minute: number_filter_operators
+  second: number_filter_operators
+}
+
+input der_harz_filter {
+  id: number_filter_operators
+  status: string_filter_operators
+  sort: number_filter_operators
+  user_created: string_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: string_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  titel: string_filter_operators
+  body: string_filter_operators
+  schlagwoerter: string_filter_operators
+  schlagwoerter_func: count_function_filter_operators
+  featured_image: directus_files_filter
+  _and: [der_harz_filter]
+  _or: [der_harz_filter]
+}
+
+input directus_files_filter {
+  id: string_filter_operators
+  storage: string_filter_operators
+  filename_disk: string_filter_operators
+  filename_download: string_filter_operators
+  title: string_filter_operators
+  type: string_filter_operators
+  folder: string_filter_operators
+  uploaded_by: string_filter_operators
+  uploaded_on: date_filter_operators
+  uploaded_on_func: datetime_function_filter_operators
+  modified_by: string_filter_operators
+  modified_on: date_filter_operators
+  modified_on_func: datetime_function_filter_operators
+  charset: string_filter_operators
+  filesize: number_filter_operators
+  width: number_filter_operators
+  height: number_filter_operators
+  duration: number_filter_operators
+  embed: string_filter_operators
+  description: string_filter_operators
+  location: string_filter_operators
+  tags: string_filter_operators
+  tags_func: count_function_filter_operators
+  metadata: string_filter_operators
+  metadata_func: count_function_filter_operators
+  _and: [directus_files_filter]
+  _or: [directus_files_filter]
+}
+
+input downloads_filter {
+  id: string_filter_operators
+  status: string_filter_operators
+  user_created: string_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: string_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  title: string_filter_operators
+  file: directus_files_filter
+  _and: [downloads_filter]
+  _or: [downloads_filter]
+}
+
+input geometry_filter_operators {
+  _eq: GraphQLGeoJSON
+  _neq: GraphQLGeoJSON
+  _intersects: GraphQLGeoJSON
+  _nintersects: GraphQLGeoJSON
+  _intersects_bbox: GraphQLGeoJSON
+  _nintersects_bbox: GraphQLGeoJSON
+  _null: Boolean
+  _nnull: Boolean
+}
+
+input number_filter_operators {
+  _eq: GraphQLStringOrFloat
+  _neq: GraphQLStringOrFloat
+  _in: [GraphQLStringOrFloat]
+  _nin: [GraphQLStringOrFloat]
+  _gt: GraphQLStringOrFloat
+  _gte: GraphQLStringOrFloat
+  _lt: GraphQLStringOrFloat
+  _lte: GraphQLStringOrFloat
+  _null: Boolean
+  _nnull: Boolean
+  _between: [GraphQLStringOrFloat]
+  _nbetween: [GraphQLStringOrFloat]
+}
+
+input presse_filter {
+  id: number_filter_operators
+  status: string_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  titel: string_filter_operators
+  body: string_filter_operators
+  _and: [presse_filter]
+  _or: [presse_filter]
+}
+
+input startseite_aufgaben_filter {
+  id: number_filter_operators
+  startseite_id: startseite_filter
+  collection: string_filter_operators
+  _and: [startseite_aufgaben_filter]
+  _or: [startseite_aufgaben_filter]
+  item__aufgaben: aufgaben_filter
+}
+
+input startseite_filter {
+  id: number_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  title: string_filter_operators
+  subtitle: string_filter_operators
+  description: string_filter_operators
+  text_part_one: string_filter_operators
+  text_part_two: string_filter_operators
+  task_section_description: string_filter_operators
+  wandern_description: string_filter_operators
+  wandern_title: string_filter_operators
+  wandern_text: string_filter_operators
+  tradition_description: string_filter_operators
+  tradition_title: string_filter_operators
+  tradition_text: string_filter_operators
+  jugend_description: string_filter_operators
+  jugend_title: string_filter_operators
+  jugend_subtitle: string_filter_operators
+  jugend_text: string_filter_operators
+  mitgliedschaft_text: string_filter_operators
+  mitgliedschaft_subtitle: string_filter_operators
+  mitgliedschaft_title: string_filter_operators
+  aufgaben: startseite_aufgaben_filter
+  aufgaben_func: count_function_filter_operators
+  _and: [startseite_filter]
+  _or: [startseite_filter]
+}
+
+input string_filter_operators {
+  _eq: String
+  _neq: String
+  _contains: String
+  _icontains: String
+  _ncontains: String
+  _starts_with: String
+  _nstarts_with: String
+  _ends_with: String
+  _nends_with: String
+  _in: [String]
+  _nin: [String]
+  _null: Boolean
+  _nnull: Boolean
+  _empty: Boolean
+  _nempty: Boolean
+}
+
+input veranstaltung_files_filter {
+  id: number_filter_operators
+  veranstaltung_id: veranstaltung_filter
+  directus_files_id: directus_files_filter
+  _and: [veranstaltung_files_filter]
+  _or: [veranstaltung_files_filter]
+}
+
+input veranstaltung_filter {
+  id: number_filter_operators
+  status: string_filter_operators
+  sort: number_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  datum: date_filter_operators
+  datum_func: datetime_function_filter_operators
+  titel: string_filter_operators
+  ort: string_filter_operators
+  beschreibung: string_filter_operators
+  mehr_info: string_filter_operators
+  featured_image: directus_files_filter
+  slug: string_filter_operators
+  bildergalerie: veranstaltung_files_filter
+  bildergalerie_func: count_function_filter_operators
+  _and: [veranstaltung_filter]
+  _or: [veranstaltung_filter]
+}
+
+input wanderung_filter {
+  id: number_filter_operators
+  status: string_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  titel: string_filter_operators
+  beschreibung: string_filter_operators
+  externer_anbieter: string_filter_operators
+  featured_image: directus_files_filter
+  _and: [wanderung_filter]
+  _or: [wanderung_filter]
+}
+
+input wegeschaden_filter {
+  id: number_filter_operators
+  sort: number_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: string_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  ort: geometry_filter_operators
+  beschreibung: string_filter_operators
+  bild: directus_files_filter
+  geloest: string_filter_operators
+  _and: [wegeschaden_filter]
+  _or: [wegeschaden_filter]
+}
