@@ -4,27 +4,66 @@ import Header, { Seite } from "@components/header/Header.astro";
 import VeranstaltungsCard from "@components/VeranstaltungsCard.astro";
 import gqlClient from "@lib/utils/gql-client";
 import { getFileUrl } from "@lib/utils/helper";
-import { veranstaltungsQuery } from "@lib/graphql/queries";
+import { aktuellesQuery, veranstaltungsQuery } from "@lib/graphql/queries";
 
 const { veranstaltung: veranstaltungen } = await gqlClient.request(
   veranstaltungsQuery
 );
+
+const { aktuelles: aktuellesPageDate } = await gqlClient.request(
+  aktuellesQuery
+);
 ---
 
-<Layout title="Aktuelles">
+<Layout
+  title="Aktuelles"
+  description={aktuellesPageDate?.description ?? undefined}
+>
   <Header currentPage={Seite.Aktuelles} />
-  <main>
-    <h1>Aktuelles</h1>
-    <div>
+  <img
+    src="/images/dots.svg"
+    class="absolute top-[10vh] right-[30%] sm:hidden"
+    aria-hidden="true"
+  />
+  <img
+    src="/images/dots.svg"
+    class="absolute top-[48vh] left-[12%] sm:hidden"
+    aria-hidden="true"
+  />
+  <main
+    id="heading"
+    class="pt-[5vh] sm:pt-[3vh] relative xs:bg-none bg-origin-padding bg-contain md:bg-cover sm:h-min sm:pb-52 2xl:px-[12%] xl:px-[5%] lg:px-[5%] xs:px-[5%] md:px-[15%]"
+  >
+    <div class="w-full flex flex-col items-start">
+      <h2 class="font-medium text-lg tracking-wide sm:text-base">
+        {aktuellesPageDate?.subtitle}
+      </h2>
+      <h1
+        class="font-bold text-5xl leading-tight sm:text-4xl sm:font-semibold -mt-5"
+      >
+        {aktuellesPageDate?.title}
+      </h1>
+      <div
+        class="max-w-2xl body-text-bigger sm:body-text-smaller"
+        set:html={aktuellesPageDate?.text}
+      />
+    </div>
+    <div
+      class="flex flex-row flex-wrap gap-14 pt-36 pb-20 md:justify-center md:pt-10"
+    >
       {
         veranstaltungen.map((v) => (
-          <VeranstaltungsCard
-            beschreibung={v.beschreibung ?? "Ups da ist etwas schiefgelaufen."}
-            date={v.datum}
-            featured_image_url={getFileUrl(v.featured_image?.id)}
-            titel={v.titel ?? "Ups da ist etwas schiefgelaufen."}
-            slug={v.slug ?? undefined}
-          />
+          <div class="w-[400px] max-w-[100%] ">
+            <VeranstaltungsCard
+              beschreibung={
+                v.beschreibung ?? "Ups da ist etwas schiefgelaufen."
+              }
+              date={v.datum}
+              featured_image_url={getFileUrl(v.featured_image?.id)}
+              titel={v.titel ?? "Ups da ist etwas schiefgelaufen."}
+              slug={v.slug ?? undefined}
+            />
+          </div>
         ))
       }
     </div>

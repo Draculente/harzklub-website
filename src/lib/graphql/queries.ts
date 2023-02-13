@@ -108,3 +108,14 @@ export const footerQuery = graphql(/* GraphQL */ `
     }
   }
 `);
+
+export const aktuellesQuery = graphql(/* GraphQL */ `
+  query aktuellesQuery {
+    aktuelles {
+      text
+      subtitle
+      description
+      title
+    }
+  }
+`);
