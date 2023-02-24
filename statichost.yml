@@ -1,5 +1,6 @@
 domains:
   # Primary domain
-  - test.draculente.eu
+  - new-website.harzklub-hohegeiss.de
   # Domains that redirect to the primary
   - www.test.draculente.eu
+  - test.draculente.eu
