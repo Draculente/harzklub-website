@@ -119,3 +119,12 @@ export const aktuellesQuery = graphql(/* GraphQL */ `
     }
   }
 `);
+
+export const impressumsQuery = graphql(/* GraphQL */ `
+  query impressumsQuery {
+    Impressum {
+      description
+      date_updated
+      text
+    }  
+  }`);

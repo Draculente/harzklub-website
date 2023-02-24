@@ -36,6 +36,7 @@ type Query {
   footer_link_by_id(id: ID!): footer_link
   footer_link_aggregated(groupBy: [String], filter: footer_link_filter, limit: Int, search: String, sort: [String]): [footer_link_aggregated!]!
   aktuelles: aktuelles
+  Impressum: Impressum
 }
 
 type Mutation {
@@ -387,6 +388,23 @@ type footer_social_link_aggregated_count {
 type footer_social_link_aggregated_fields {
   id: Float
   footer: Float
+}
+
+type Impressum {
+  id: ID!
+  user_updated: String
+  date_updated: Date
+  date_updated_func: datetime_functions
+
+  """
+  Wenn leer gelassen wird der default Eintrag aus "meta" genommen. Sollte nicht länger als zwei Sätze und 155 Zeichen sein. Wird nicht im Design angezeigt, sondern ist nur ein Meta-Information für Google und Co
+  """
+  description: String
+
+  """
+  Sinn des Impressums ist es klar erkenntlich zu machen, wer der oder die Verantwortlichen für die Inhalte einer Website sind. Es ist gesetzlich vorgegeben, welche Informationen vorhanden sein müssen. Informiere dich also gut, bevor du hier Änderungen vornimmst!
+  """
+  text: String
 }
 
 type meta {
