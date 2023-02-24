@@ -24,6 +24,18 @@ export type Scalars = {
   JSON: any;
 };
 
+export type Impressum = {
+  __typename?: 'Impressum';
+  date_updated?: Maybe<Scalars['Date']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  /** Wenn leer gelassen wird der default Eintrag aus "meta" genommen. Sollte nicht länger als zwei Sätze und 155 Zeichen sein. Wird nicht im Design angezeigt, sondern ist nur ein Meta-Information für Google und Co */
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  /** Sinn des Impressums ist es klar erkenntlich zu machen, wer der oder die Verantwortlichen für die Inhalte einer Website sind. Es ist gesetzlich vorgegeben, welche Informationen vorhanden sein müssen. Informiere dich also gut, bevor du hier Änderungen vornimmst! */
+  text?: Maybe<Scalars['String']>;
+  user_updated?: Maybe<Scalars['String']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   create_wegeschaden_item?: Maybe<Wegeschaden>;
@@ -48,6 +60,7 @@ export type MutationCreate_Wegeschaden_ItemsArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  Impressum?: Maybe<Impressum>;
   aktuelles?: Maybe<Aktuelles>;
   aufgaben: Array<Aufgaben>;
   aufgaben_aggregated: Array<Aufgaben_Aggregated>;
@@ -1483,6 +1496,11 @@ export type AktuellesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type AktuellesQueryQuery = { __typename?: 'Query', aktuelles?: { __typename?: 'aktuelles', text?: string | null, subtitle?: string | null, description?: string | null, title?: string | null } | null };
 
+export type ImpressumsQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ImpressumsQueryQuery = { __typename?: 'Query', Impressum?: { __typename?: 'Impressum', description?: string | null, date_updated?: any | null, text?: string | null } | null };
+
 
 export const StartseiteQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"startseiteQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"startseite"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"text_part_one"}},{"kind":"Field","name":{"kind":"Name","value":"text_part_two"}},{"kind":"Field","name":{"kind":"Name","value":"task_section_description"}},{"kind":"Field","name":{"kind":"Name","value":"aufgaben"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"wandern_title"}},{"kind":"Field","name":{"kind":"Name","value":"wandern_text"}},{"kind":"Field","name":{"kind":"Name","value":"wandern_description"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_description"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_title"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_text"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_title"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_description"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_text"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_title"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_text"}}]}}]}}]} as unknown as DocumentNode<StartseiteQueryQuery, StartseiteQueryQueryVariables>;
 export const AufgabenQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"aufgabenQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aufgaben"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"link"}}]}}]}}]} as unknown as DocumentNode<AufgabenQueryQuery, AufgabenQueryQueryVariables>;
@@ -1491,3 +1509,4 @@ export const WebsiteMetaQueryDocument = {"kind":"Document","definitions":[{"kind
 export const DownloadsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"downloadsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"downloads"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"status"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"StringValue","value":"published","block":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<DownloadsQueryQuery, DownloadsQueryQueryVariables>;
 export const FooterQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"footerQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"footer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"copyright_text"}},{"kind":"Field","name":{"kind":"Name","value":"footer_text"}},{"kind":"Field","name":{"kind":"Name","value":"footer_links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"link"}}]}},{"kind":"Field","name":{"kind":"Name","value":"footer_social_links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"icon"}},{"kind":"Field","name":{"kind":"Name","value":"link"}}]}}]}}]}}]} as unknown as DocumentNode<FooterQueryQuery, FooterQueryQueryVariables>;
 export const AktuellesQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"aktuellesQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aktuelles"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<AktuellesQueryQuery, AktuellesQueryQueryVariables>;
+export const ImpressumsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"impressumsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Impressum"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"date_updated"}},{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]} as unknown as DocumentNode<ImpressumsQueryQuery, ImpressumsQueryQueryVariables>;
