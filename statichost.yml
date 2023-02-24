@@ -1,0 +1,5 @@
+domains:
+  # Primary domain
+  - test.draculente.eu
+  # Domains that redirect to the primary
+  - www.test.draculente.eu
