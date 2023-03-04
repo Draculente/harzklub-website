@@ -155,3 +155,21 @@ export const getOneVeranstaltungQuery = graphql(/* GraphQL */ `
     }
   }
 `);
+
+export const featuredEventQuery = graphql(/* GraphQL */ `
+  query featuredEventQuery {
+    featured_event {
+      event {
+        slug
+        datum
+        mehr_info
+        beschreibung
+        featured_image {
+          id
+          description
+        }
+        titel
+      }
+    }
+  }
+`);

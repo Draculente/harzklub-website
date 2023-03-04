@@ -1,10 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Header, { Seite } from "@components/header/Header.astro";
-import VeranstaltungsCard from "@components/VeranstaltungsCard.astro";
+import Header from "@components/header/Header.astro";
 import gqlClient from "@lib/utils/gql-client";
-import { getFileUrl } from "@lib/utils/helper";
 import { aktuellesQuery, veranstaltungsQuery } from "@lib/graphql/queries";
+import { Seite } from "@lib/links";
+import VeranstaltungsList from "@components/VeranstaltungsList.astro";
+import { rrulestr, datetime } from "rrule";
+import { addWeeks } from "@lib/utils/helper";
 
 const { veranstaltung: veranstaltungen } = await gqlClient.request(
   veranstaltungsQuery
@@ -12,6 +14,23 @@ const { veranstaltung: veranstaltungen } = await gqlClient.request(
 
 const { aktuelles: aktuellesPageDate } = await gqlClient.request(
   aktuellesQuery
+);
+
+const rEvents = veranstaltungen
+  .filter((e) => e.recurring && e.wiederholung)
+  .flatMap((e) => {
+    const rrule = rrulestr(e.wiederholung!);
+    const dates = rrule.between(new Date(), addWeeks(new Date(), 4));
+    return dates.map((d) => ({
+      ...e,
+      datum: d,
+    }));
+  });
+
+console.log(rEvents);
+
+const nextEvents = veranstaltungen.filter(
+  (event) => !event.recurring && new Date(event.datum) > new Date()
 );
 ---
 
@@ -38,9 +57,7 @@ const { aktuelles: aktuellesPageDate } = await gqlClient.request(
       <h2 class="font-medium text-lg tracking-wide sm:text-base">
         {aktuellesPageDate?.subtitle}
       </h2>
-      <h1
-        class="font-bold text-5xl leading-tight sm:text-4xl sm:font-semibold -mt-5"
-      >
+      <h1 class="font-bold text-5xl leading-tight sm:text-4xl sm:font-semibold">
         {aktuellesPageDate?.title}
       </h1>
       <div
@@ -48,33 +65,41 @@ const { aktuelles: aktuellesPageDate } = await gqlClient.request(
         set:html={aktuellesPageDate?.text}
       />
     </div>
-    <div
-      class="flex flex-row flex-wrap gap-14 pt-36 pb-20 md:justify-center md:pt-10"
-    >
-      {
-        veranstaltungen.map((v) => (
-          <div class="w-[400px] max-w-[100%] ">
-            <VeranstaltungsCard
-              beschreibung={
-                v.beschreibung ?? "Ups da ist etwas schiefgelaufen."
-              }
-              date={v.datum}
-              featured_image_url={getFileUrl(v.featured_image?.id)}
-              titel={v.titel ?? "Ups da ist etwas schiefgelaufen."}
-              slug={v.slug ?? undefined}
-            />
-          </div>
-        ))
-      }
+    <!-- <div class="tabs mt-10 flex-nowrap w-fit tabs-boxed">
+      <a id="next-events" class="tab tab-active">Kommende</a>
+      <a id="past-events" class="tab">Vergangene</a>
+    </div> -->
+    <h2 class="font-medium text-3xl mt-10">Veranstaltungen</h2>
+    <div class="next-events">
+      <VeranstaltungsList veranstaltungen={nextEvents} />
+    </div>
+    <h2 class="font-medium text-3xl">Vereinsleben</h2>
+    <div class="past-events">
+      <VeranstaltungsList veranstaltungen={rEvents} />
     </div>
   </main>
+  <!-- <script lang="js">
+    const nextEventsEl = document.getElementById("next-events");
+    const pastEventsEl = document.getElementById("past-events");
+
+    nextEventsEl.addEventListener("click", clickHandler);
+    pastEventsEl.addEventListener("click", clickHandler);
+
+    function clickHandler(e) {
+      e.preventDefault();
+      if (e.target.id === "next-events") {
+        nextEventsEl.classList.add("tab-active");
+        pastEventsEl.classList.remove("tab-active");
+        document.querySelector(".next-events").classList.remove("hidden");
+        document.querySelector(".past-events").classList.add("hidden");
+      } else {
+        nextEventsEl.classList.remove("tab-active");
+        pastEventsEl.classList.add("tab-active");
+        document.querySelector(".next-events").classList.add("hidden");
+        document.querySelector(".past-events").classList.remove("hidden");
+      }
+    }
+  </script> -->
 </Layout>
 
-<style>
-  div {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-</style>
+<style></style>

@@ -1,35 +1,9 @@
 ---
-import { MITMACHEN, UNDER_CONSTRUCTION } from "@lib/links";
+import { MITMACHEN, pages, Seite } from "@lib/links";
 import MenuItem from "./MenuItem.astro";
 export interface Props {
   currentPage?: Seite;
 }
-
-export enum Seite {
-  Startseite,
-  Aktuelles,
-  Heimatgruppe,
-  Jugendgruppe,
-  Wanderungen,
-  DerHarz,
-  UeberUns,
-}
-
-type SeitenInfo = {
-  href: string;
-  page: Seite;
-  name: string;
-};
-
-const pages: Array<SeitenInfo> = [
-  { page: Seite.Startseite, href: "/", name: "Startseite" },
-  { page: Seite.Aktuelles, href: "/aktuelles", name: "Aktuelles" },
-  { page: Seite.Heimatgruppe, href: UNDER_CONSTRUCTION, name: "Heimatgruppe" },
-  { page: Seite.Jugendgruppe, href: UNDER_CONSTRUCTION, name: "Jugendgruppe" },
-  { page: Seite.Wanderungen, href: UNDER_CONSTRUCTION, name: "Wanderungen" },
-  // { page: Seite.DerHarz, href: UNDER_CONSTRUCTION, "/de name: "Der Harz" },
-  { page: Seite.UeberUns, href: UNDER_CONSTRUCTION, name: "Über uns" },
-];
 
 const { currentPage: page } = Astro.props;
 ---
@@ -47,15 +21,17 @@ const { currentPage: page } = Astro.props;
   <div class="flex flex-row items-center">
     <div class="flex flex-row items-center md:hidden">
       {
-        pages.map((seite) => (
-          <div class="mx-2 hover:underline">
-            <MenuItem
-              href={seite.href}
-              currentPage={seite.page == page}
-              name={seite.name}
-            />
-          </div>
-        ))
+        pages
+          .filter((e) => e.menu)
+          .map((seite) => (
+            <div class="mx-2 hover:underline">
+              <MenuItem
+                href={seite.href}
+                currentPage={seite.page == page}
+                name={seite.name}
+              />
+            </div>
+          ))
       }
     </div>
 

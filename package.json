@@ -27,6 +27,7 @@
     "graphql-request": "^5.1.0",
     "ics": "^3.1.0",
     "remixicon": "^2.5.0",
+    "rrule": "^2.7.2",
     "sanitize-html": "^2.7.2",
     "slugify": "^1.6.5",
     "tailwindcss": "^3.2.4"

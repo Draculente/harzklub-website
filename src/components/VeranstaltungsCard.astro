@@ -5,9 +5,9 @@ import { ERROR_PAGE } from "@lib/links";
 import { formatDate } from "@lib/utils/format-date";
 
 export type Props = {
-  titel: string;
-  beschreibung: string;
-  date: string;
+  titel?: string;
+  beschreibung?: string;
+  date?: string;
   featured_image_url?: string;
   slug?: string;
 };
@@ -29,12 +29,12 @@ const { featured_image_url, titel, beschreibung, date, slug } = Astro.props;
     <div class="flex w-full flex-row justify-between mb-4 sm:mb-2">
       <p class="flex flex-row items-center font-medium sm:text-sm">
         <i class="ri-calendar-event-line text-xl mr-2 sm:text-sm"></i>{
-          formatDate(new Date(date))
+          date ? formatDate(new Date(date)) : "Datum unbekannt"
         }
       </p>
       <Tag title="Veranstaltung" />
     </div>
-    <p class="font-semibold text-lg">{titel}</p>
+    <p class="font-semibold text-lg">{titel ?? "Nächtes Event"}</p>
     <p class="leading-tight text-gray-800 sm:text-sm">
       {
         sanitizeHtml(beschreibung || "Wir freuen uns auf euch!", {
@@ -43,7 +43,6 @@ const { featured_image_url, titel, beschreibung, date, slug } = Astro.props;
       }
     </p>
     <div class="grow flex flex-col justify-end py-2">
-      <!-- href={"/veranstaltung/" + v.slug} -->
       <a
         class="btn btn-outline btn-primary px-2 py-2 text-xs min-h-0 h-min sm:text-xs hover:scale-105 transition-all"
         href={slug ? "/veranstaltung/" + slug : ERROR_PAGE}

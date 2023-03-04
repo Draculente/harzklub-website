@@ -1,6 +1,6 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import { Seite } from "@components/header/Header.astro";
+import l, { Seite } from "@lib/links";
 import VeranstaltungsCard from "@components/VeranstaltungsCard.astro";
 import SectionHeader from "@components/SectionHeader.astro";
 import {
@@ -10,19 +10,17 @@ import {
 } from "@lib/links";
 import {
   aufgabenQuery,
+  featuredEventQuery,
   startseiteQuery,
-  veranstaltungsQuery,
 } from "@lib/graphql/queries";
 import gqlClient from "@lib/utils/gql-client";
 import { getFileUrl } from "@lib/utils/helper";
 
 const { startseite: frontpageData } = await gqlClient.request(startseiteQuery);
 
-const { veranstaltung: veranstaltungen } = await gqlClient.request(
-  veranstaltungsQuery
-);
+const { featured_event } = await gqlClient.request(featuredEventQuery);
 
-const featuredEvent = veranstaltungen[0];
+const featuredEvent = featured_event?.event;
 
 const AUFGABEN_DEFAULT_IMAGE = "/images/kurpark_teich.jpg";
 
@@ -69,12 +67,11 @@ const aufgaben = (await gqlClient.request(aufgabenQuery)).aufgaben
         >
           <div class="row-span-3">
             <VeranstaltungsCard
-              beschreibung={featuredEvent.beschreibung ??
-                "Ups da ist etwas schiefgelaufen."}
-              date={featuredEvent.datum}
-              featured_image_url={getFileUrl(featuredEvent.featured_image?.id)}
-              titel={featuredEvent.titel ?? "Ups da ist etwas schiefgelaufen."}
-              slug={featuredEvent.slug ?? "#"}
+              beschreibung={featuredEvent?.beschreibung ?? undefined}
+              date={featuredEvent?.datum}
+              featured_image_url={getFileUrl(featuredEvent?.featured_image?.id)}
+              titel={featuredEvent?.titel ?? undefined}
+              slug={featuredEvent?.slug ?? undefined}
             />
           </div>
           <a
@@ -97,7 +94,7 @@ const aufgaben = (await gqlClient.request(aufgabenQuery)).aufgaben
             {frontpageData?.title ?? "Ups da ist etwas schiefgelaufen."}
           </h1>
           <hr class="border-t-2 border-neutral mt-6" />
-          <a href={UNDER_CONSTRUCTION} class="flex flex-row items-center mt-3"
+          <a href={l(Seite.Aktuelles)} class="flex flex-row items-center mt-3"
             ><i class="ri-calendar-todo-line mr-2 text-lg"></i><span
               class="hover:underline"
             >

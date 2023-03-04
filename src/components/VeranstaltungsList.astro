@@ -1,0 +1,33 @@
+---
+import type { Veranstaltung } from "@lib/gql/graphql";
+import VeranstaltungsCard from "./VeranstaltungsCard.astro";
+import { getFileUrl } from "@lib/utils/helper";
+
+export type Props = {
+  veranstaltungen: Veranstaltung[] | any;
+};
+
+const { veranstaltungen } = Astro.props;
+---
+
+<div
+  class="flex flex-row flex-wrap gap-14 pt-10 pb-20 md:justify-center md:pt-10"
+>
+  {
+    veranstaltungen.length > 0 ? (
+      veranstaltungen.map((v: Veranstaltung) => (
+        <div class="w-[400px] max-w-[100%] ">
+          <VeranstaltungsCard
+            beschreibung={v.beschreibung ?? "Ups da ist etwas schiefgelaufen."}
+            date={v.datum}
+            featured_image_url={getFileUrl(v.featured_image?.id)}
+            titel={v.titel ?? "Ups da ist etwas schiefgelaufen."}
+            slug={v.slug ?? undefined}
+          />
+        </div>
+      ))
+    ) : (
+      <div class="text-center">Aktuell sind keine Veranstaltungen geplant.</div>
+    )
+  }
+</div>
