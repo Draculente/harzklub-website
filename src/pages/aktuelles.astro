@@ -22,7 +22,7 @@ const rEvents = veranstaltungen
   .filter((e) => e.recurring && e.wiederholung)
   .flatMap((e) => {
     const rrule = rrulestr(e.wiederholung!);
-    const dates = rrule.between(new Date(), addWeeks(new Date(), 4));
+    const dates = rrule.between(new Date(), addWeeks(new Date(), 5));
     return dates.map((d) => ({
       ...e,
       datum: d,

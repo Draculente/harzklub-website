@@ -18,7 +18,9 @@ const { veranstaltungen } = Astro.props;
       veranstaltungen.map((v: Veranstaltung) => (
         <div class="w-[400px] max-w-[100%] ">
           <VeranstaltungsCard
-            beschreibung={v.beschreibung ?? "Ups da ist etwas schiefgelaufen."}
+            short_description={
+              v.short_description ?? "Ups da ist etwas schiefgelaufen."
+            }
             date={v.datum}
             featured_image_url={getFileUrl(v.featured_image?.id)}
             titel={v.titel ?? "Ups da ist etwas schiefgelaufen."}

@@ -39,7 +39,9 @@ export function icsAttributesFromVeranstaltung(
     ),
     location: veranstaltung.ort ?? "Kein Ort vorhanden",
     url: `https://www.harzklub-hohegeiss.de/veranstaltung/${veranstaltung.slug}`,
-    recurrenceRule: veranstaltung.wiederholung ?? undefined,
+    recurrenceRule: veranstaltung.recurring
+      ? veranstaltung.wiederholung ?? undefined
+      : undefined,
     busyStatus: "BUSY",
     organizer: {
       name: "Harzklub Hohegeiß",
