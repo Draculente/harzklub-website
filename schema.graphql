@@ -37,6 +37,7 @@ type Query {
   footer_link_aggregated(groupBy: [String], filter: footer_link_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [footer_link_aggregated!]!
   aktuelles: aktuelles
   Impressum: Impressum
+  featured_event: featured_event
 }
 
 type Mutation {
@@ -263,6 +264,14 @@ type downloads_aggregated_count {
   date_updated: Int
   title: Int
   file: Int
+}
+
+type featured_event {
+  id: ID!
+  user_updated: String
+  date_updated: Date
+  date_updated_func: datetime_functions
+  event(filter: veranstaltung_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): veranstaltung
 }
 
 type footer {
@@ -556,7 +565,12 @@ type veranstaltung {
   """
   wiederholung: String
   recurring: Boolean
+
+  """Die Dauer der Veranstaltung in Minuten"""
   duration: Int
+
+  """Wie der Termin wiederholt wird."""
+  human_readable_interval: String
   bildergalerie(filter: veranstaltung_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [veranstaltung_files]
   bildergalerie_func: count_functions
 }
@@ -597,13 +611,20 @@ type veranstaltung_aggregated_count {
   """
   wiederholung: Int
   recurring: Int
+
+  """Die Dauer der Veranstaltung in Minuten"""
   duration: Int
+
+  """Wie der Termin wiederholt wird."""
+  human_readable_interval: Int
   bildergalerie: Int
 }
 
 type veranstaltung_aggregated_fields {
   id: Float
   sort: Float
+
+  """Die Dauer der Veranstaltung in Minuten"""
   duration: Float
 }
 
@@ -1014,6 +1035,7 @@ input veranstaltung_filter {
   wiederholung: string_filter_operators
   recurring: boolean_filter_operators
   duration: number_filter_operators
+  human_readable_interval: string_filter_operators
   bildergalerie: veranstaltung_files_filter
   bildergalerie_func: count_function_filter_operators
   _and: [veranstaltung_filter]

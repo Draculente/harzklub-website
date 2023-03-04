@@ -71,6 +71,7 @@ export type Query = {
   downloads: Array<Downloads>;
   downloads_aggregated: Array<Downloads_Aggregated>;
   downloads_by_id?: Maybe<Downloads>;
+  featured_event?: Maybe<Featured_Event>;
   footer?: Maybe<Footer>;
   footer_link: Array<Footer_Link>;
   footer_link_aggregated: Array<Footer_Link_Aggregated>;
@@ -731,6 +732,25 @@ export type Downloads_Filter = {
   user_updated?: InputMaybe<String_Filter_Operators>;
 };
 
+export type Featured_Event = {
+  __typename?: 'featured_event';
+  date_updated?: Maybe<Scalars['Date']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  event?: Maybe<Veranstaltung>;
+  id: Scalars['ID'];
+  user_updated?: Maybe<Scalars['String']>;
+};
+
+
+export type Featured_EventEventArgs = {
+  filter?: InputMaybe<Veranstaltung_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
 export type Footer = {
   __typename?: 'footer';
   copyright_text?: Maybe<Scalars['String']>;
@@ -1192,8 +1212,11 @@ export type Veranstaltung = {
   date_updated_func?: Maybe<Datetime_Functions>;
   datum?: Maybe<Scalars['Date']>;
   datum_func?: Maybe<Datetime_Functions>;
+  /** Die Dauer der Veranstaltung in Minuten */
   duration?: Maybe<Scalars['Int']>;
   featured_image?: Maybe<Directus_Files>;
+  /** Wie der Termin wiederholt wird. */
+  human_readable_interval?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   /** Sobald der Event in der Vergangenheit liegt und diese Veranstaltung um Bilder und oder einer Zusammenfassung ergänzt wurde, bitte umstellen. */
   mehr_info?: Maybe<Scalars['String']>;
@@ -1248,8 +1271,11 @@ export type Veranstaltung_Aggregated_Count = {
   date_created?: Maybe<Scalars['Int']>;
   date_updated?: Maybe<Scalars['Int']>;
   datum?: Maybe<Scalars['Int']>;
+  /** Die Dauer der Veranstaltung in Minuten */
   duration?: Maybe<Scalars['Int']>;
   featured_image?: Maybe<Scalars['Int']>;
+  /** Wie der Termin wiederholt wird. */
+  human_readable_interval?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
   /** Sobald der Event in der Vergangenheit liegt und diese Veranstaltung um Bilder und oder einer Zusammenfassung ergänzt wurde, bitte umstellen. */
   mehr_info?: Maybe<Scalars['Int']>;
@@ -1265,6 +1291,7 @@ export type Veranstaltung_Aggregated_Count = {
 
 export type Veranstaltung_Aggregated_Fields = {
   __typename?: 'veranstaltung_aggregated_fields';
+  /** Die Dauer der Veranstaltung in Minuten */
   duration?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   sort?: Maybe<Scalars['Float']>;
@@ -1346,6 +1373,7 @@ export type Veranstaltung_Filter = {
   datum_func?: InputMaybe<Datetime_Function_Filter_Operators>;
   duration?: InputMaybe<Number_Filter_Operators>;
   featured_image?: InputMaybe<Directus_Files_Filter>;
+  human_readable_interval?: InputMaybe<String_Filter_Operators>;
   id?: InputMaybe<Number_Filter_Operators>;
   mehr_info?: InputMaybe<String_Filter_Operators>;
   ort?: InputMaybe<String_Filter_Operators>;
@@ -1549,6 +1577,11 @@ export type GetOneVeranstaltungQueryQueryVariables = Exact<{
 
 export type GetOneVeranstaltungQueryQuery = { __typename?: 'Query', veranstaltung: Array<{ __typename?: 'veranstaltung', id: string, ort?: string | null, slug?: string | null, beschreibung?: string | null, datum?: any | null, duration?: number | null, recurring?: boolean | null, wiederholung?: string | null, titel?: string | null, featured_image?: { __typename?: 'directus_files', id: string, description?: string | null } | null, bildergalerie?: Array<{ __typename?: 'veranstaltung_files', id: string } | null> | null }> };
 
+export type FeaturedEventQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FeaturedEventQueryQuery = { __typename?: 'Query', featured_event?: { __typename?: 'featured_event', event?: { __typename?: 'veranstaltung', slug?: string | null, datum?: any | null, mehr_info?: string | null, beschreibung?: string | null, titel?: string | null, featured_image?: { __typename?: 'directus_files', id: string, description?: string | null } | null } | null } | null };
+
 
 export const StartseiteQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"startseiteQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"startseite"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"text_part_one"}},{"kind":"Field","name":{"kind":"Name","value":"text_part_two"}},{"kind":"Field","name":{"kind":"Name","value":"task_section_description"}},{"kind":"Field","name":{"kind":"Name","value":"aufgaben"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"wandern_title"}},{"kind":"Field","name":{"kind":"Name","value":"wandern_text"}},{"kind":"Field","name":{"kind":"Name","value":"wandern_description"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_description"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_title"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_text"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_title"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_description"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_text"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_title"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_text"}}]}}]}}]} as unknown as DocumentNode<StartseiteQueryQuery, StartseiteQueryQueryVariables>;
 export const AufgabenQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"aufgabenQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aufgaben"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"link"}}]}}]}}]} as unknown as DocumentNode<AufgabenQueryQuery, AufgabenQueryQueryVariables>;
@@ -1559,3 +1592,4 @@ export const FooterQueryDocument = {"kind":"Document","definitions":[{"kind":"Op
 export const AktuellesQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"aktuellesQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aktuelles"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<AktuellesQueryQuery, AktuellesQueryQueryVariables>;
 export const ImpressumsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"impressumsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Impressum"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"date_updated"}},{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]} as unknown as DocumentNode<ImpressumsQueryQuery, ImpressumsQueryQueryVariables>;
 export const GetOneVeranstaltungQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getOneVeranstaltungQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"veranstaltung"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"ort"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"beschreibung"}},{"kind":"Field","name":{"kind":"Name","value":"datum"}},{"kind":"Field","name":{"kind":"Name","value":"duration"}},{"kind":"Field","name":{"kind":"Name","value":"recurring"}},{"kind":"Field","name":{"kind":"Name","value":"wiederholung"}},{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"featured_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"bildergalerie"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<GetOneVeranstaltungQueryQuery, GetOneVeranstaltungQueryQueryVariables>;
+export const FeaturedEventQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"featuredEventQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"featured_event"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"event"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"datum"}},{"kind":"Field","name":{"kind":"Name","value":"mehr_info"}},{"kind":"Field","name":{"kind":"Name","value":"beschreibung"}},{"kind":"Field","name":{"kind":"Name","value":"featured_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"titel"}}]}}]}}]}}]} as unknown as DocumentNode<FeaturedEventQueryQuery, FeaturedEventQueryQueryVariables>;
