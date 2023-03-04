@@ -4,8 +4,10 @@ import { veranstaltungsQuery } from "@lib/graphql/queries";
 import { Seite } from "@lib/links";
 import { formatDate } from "@lib/utils/format-date";
 import gqlClient from "@lib/utils/gql-client";
-import { RRule, rrulestr } from "rrule";
+import rule from "rrule";
 import Layout from "src/layouts/Layout.astro";
+
+const { RRule, rrulestr } = rule;
 
 export async function getStaticPaths() {
     return (await gqlClient.request(veranstaltungsQuery)).veranstaltung
@@ -19,19 +21,21 @@ export async function getStaticPaths() {
 
 const {slug, titel, datum, beschreibung, recurring, human_readable_interval, wiederholung, short_description} = Astro.props;
 
-const rrule = new RRule({...rrulestr(wiederholung).options, count: 1}, false);
+function getNextOccurence(): string {
+    const rrule = new RRule({...rrulestr(wiederholung).options, count: 1}, false);
 
-const nextOccurrence = new Date(rrule.after(new Date(), true) ?? 0).toLocaleDateString("de-DE", {
-    month: "2-digit",
-    day: "2-digit",
-    year: "2-digit",
-  });
+    return new Date(rrule.after(new Date(), true) ?? 0).toLocaleDateString("de-DE", {
+        month: "2-digit",
+        day: "2-digit",
+        year: "2-digit",
+    });
+}
 ---
 
 <Layout title={titel ?? "Aktuelles"} page={Seite.Aktuelles} description={short_description}>
     <main>
         <h1>{titel}</h1>
-        <p class="date">{recurring ? `${human_readable_interval} (Nächstes Event: ${nextOccurrence})` : formatDate(new Date(datum))}</p>
+        <p class="date">{recurring ? `${human_readable_interval} (Nächstes Event: ${getNextOccurence()})` : formatDate(new Date(datum))}</p>
         <a class="btn gap-2 btn-primary" href={slug + ".ics"} target="_blank" rel="noopener noreferrer">
             <i class="ri-calendar-event-line"></i>Zum Kalender hinzufügen
         </a>
