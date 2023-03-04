@@ -5,8 +5,10 @@ import gqlClient from "@lib/utils/gql-client";
 import { aktuellesQuery, veranstaltungsQuery } from "@lib/graphql/queries";
 import { Seite } from "@lib/links";
 import VeranstaltungsList from "@components/VeranstaltungsList.astro";
-import { rrulestr, datetime } from "rrule";
+import rrule from "rrule";
 import { addWeeks } from "@lib/utils/helper";
+
+const { rrulestr } = rrule;
 
 const { veranstaltung: veranstaltungen } = await gqlClient.request(
   veranstaltungsQuery
@@ -26,8 +28,6 @@ const rEvents = veranstaltungen
       datum: d,
     }));
   });
-
-console.log(rEvents);
 
 const nextEvents = veranstaltungen.filter(
   (event) => !event.recurring && new Date(event.datum) > new Date()
