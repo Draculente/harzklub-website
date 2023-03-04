@@ -1,60 +1,9 @@
 ---
 import { footerQuery } from "@lib/graphql/queries";
-import { UNDER_CONSTRUCTION, IMPRESSUM, DOWNLOADS } from "@lib/links";
+import { UNDER_CONSTRUCTION, DOWNLOADS } from "@lib/links";
 import gqlClient from "@lib/utils/gql-client";
 
 const { footer: footerData } = await gqlClient.request(footerQuery);
-
-// [
-//   {
-//     link: UNDER_CONSTRUCTION,
-//     title: "Startseite",
-//   },
-//   {
-//     link: UNDER_CONSTRUCTION,
-//     title: "Aktuelles",
-//   },
-//   {
-//     link: UNDER_CONSTRUCTION,
-//     title: "Heimatgruppe",
-//   },
-//   {
-//     link: UNDER_CONSTRUCTION,
-//     title: "Jugendgruppe",
-//   },
-//   {
-//     link: UNDER_CONSTRUCTION,
-//     title: "Wanderungen",
-//   },
-//   {
-//     link: UNDER_CONSTRUCTION,
-//     title: "Wanderwegefinder",
-//   },
-//   {
-//     link: UNDER_CONSTRUCTION,
-//     title: "Alle Wanderwege",
-//   },
-//   {
-//     link: UNDER_CONSTRUCTION,
-//     title: "Der Harz",
-//   },
-//   {
-//     link: UNDER_CONSTRUCTION,
-//     title: "Über uns",
-//   },
-//   {
-//     link: UNDER_CONSTRUCTION,
-//     title: "Mitglied werden",
-//   },
-//   {
-//     link: IMPRESSUM,
-//     title: "Datenschutz",
-//   },
-//   {
-//     link: IMPRESSUM,
-//     title: "Impressum",
-//   },
-// ];
 ---
 
 <footer class="bg-lime-500">
@@ -72,26 +21,18 @@ const { footer: footerData } = await gqlClient.request(footerQuery);
       <div>
         {
           footerData?.footer_social_links?.map((link) => (
-            <a href={link?.link} class="hover:scale-105 transition-all">
+            <a
+              href={link?.link}
+              class="hover:scale-105 transition-all"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <i
                 class={`${link?.icon} text-secondary-content mr-1 text-xl font-medium`}
               />
             </a>
           ))
         }
-
-        <!-- <a href="#" class="hover:scale-105 transition-all"
-          ><i
-            class="ri-instagram-line text-secondary-content mr-1 text-xl font-medium"
-          ></i>
-        </a>
-        <a
-          href="mailto:info@harzklub-hohegeiss.de"
-          class="hover:scale-105 transition-all"
-          ><i
-            class="ri-mail-line text-secondary-content mr-1 text-xl font-medium"
-          ></i>
-        </a> -->
       </div>
     </div>
     <div class="col-span-2 flex flex-col flex-wrap h-52 md:h-full">
