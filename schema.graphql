@@ -1,40 +1,40 @@
 type Query {
   veranstaltung_files(filter: veranstaltung_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [veranstaltung_files!]!
   veranstaltung_files_by_id(id: ID!): veranstaltung_files
-  veranstaltung_files_aggregated(groupBy: [String], filter: veranstaltung_files_filter, limit: Int, search: String, sort: [String]): [veranstaltung_files_aggregated!]!
+  veranstaltung_files_aggregated(groupBy: [String], filter: veranstaltung_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [veranstaltung_files_aggregated!]!
   wanderung(filter: wanderung_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [wanderung!]!
   wanderung_by_id(id: ID!): wanderung
-  wanderung_aggregated(groupBy: [String], filter: wanderung_filter, limit: Int, search: String, sort: [String]): [wanderung_aggregated!]!
+  wanderung_aggregated(groupBy: [String], filter: wanderung_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [wanderung_aggregated!]!
   meta: meta
   wegeschaden(filter: wegeschaden_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [wegeschaden!]!
   wegeschaden_by_id(id: ID!): wegeschaden
-  wegeschaden_aggregated(groupBy: [String], filter: wegeschaden_filter, limit: Int, search: String, sort: [String]): [wegeschaden_aggregated!]!
+  wegeschaden_aggregated(groupBy: [String], filter: wegeschaden_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [wegeschaden_aggregated!]!
   der_harz(filter: der_harz_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [der_harz!]!
   der_harz_by_id(id: ID!): der_harz
-  der_harz_aggregated(groupBy: [String], filter: der_harz_filter, limit: Int, search: String, sort: [String]): [der_harz_aggregated!]!
+  der_harz_aggregated(groupBy: [String], filter: der_harz_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [der_harz_aggregated!]!
   presse(filter: presse_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [presse!]!
   presse_by_id(id: ID!): presse
-  presse_aggregated(groupBy: [String], filter: presse_filter, limit: Int, search: String, sort: [String]): [presse_aggregated!]!
+  presse_aggregated(groupBy: [String], filter: presse_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [presse_aggregated!]!
   veranstaltung(filter: veranstaltung_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [veranstaltung!]!
   veranstaltung_by_id(id: ID!): veranstaltung
-  veranstaltung_aggregated(groupBy: [String], filter: veranstaltung_filter, limit: Int, search: String, sort: [String]): [veranstaltung_aggregated!]!
+  veranstaltung_aggregated(groupBy: [String], filter: veranstaltung_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [veranstaltung_aggregated!]!
   downloads(filter: downloads_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [downloads!]!
   downloads_by_id(id: ID!): downloads
-  downloads_aggregated(groupBy: [String], filter: downloads_filter, limit: Int, search: String, sort: [String]): [downloads_aggregated!]!
+  downloads_aggregated(groupBy: [String], filter: downloads_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [downloads_aggregated!]!
   footer: footer
   startseite: startseite
   startseite_aufgaben(filter: startseite_aufgaben_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [startseite_aufgaben!]!
   startseite_aufgaben_by_id(id: ID!): startseite_aufgaben
-  startseite_aufgaben_aggregated(groupBy: [String], filter: startseite_aufgaben_filter, limit: Int, search: String, sort: [String]): [startseite_aufgaben_aggregated!]!
+  startseite_aufgaben_aggregated(groupBy: [String], filter: startseite_aufgaben_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [startseite_aufgaben_aggregated!]!
   aufgaben(filter: aufgaben_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [aufgaben!]!
   aufgaben_by_id(id: ID!): aufgaben
-  aufgaben_aggregated(groupBy: [String], filter: aufgaben_filter, limit: Int, search: String, sort: [String]): [aufgaben_aggregated!]!
+  aufgaben_aggregated(groupBy: [String], filter: aufgaben_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [aufgaben_aggregated!]!
   footer_social_link(filter: footer_social_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [footer_social_link!]!
   footer_social_link_by_id(id: ID!): footer_social_link
-  footer_social_link_aggregated(groupBy: [String], filter: footer_social_link_filter, limit: Int, search: String, sort: [String]): [footer_social_link_aggregated!]!
+  footer_social_link_aggregated(groupBy: [String], filter: footer_social_link_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [footer_social_link_aggregated!]!
   footer_link(filter: footer_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [footer_link!]!
   footer_link_by_id(id: ID!): footer_link
-  footer_link_aggregated(groupBy: [String], filter: footer_link_filter, limit: Int, search: String, sort: [String]): [footer_link_aggregated!]!
+  footer_link_aggregated(groupBy: [String], filter: footer_link_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [footer_link_aggregated!]!
   aktuelles: aktuelles
   Impressum: Impressum
 }
@@ -550,6 +550,13 @@ type veranstaltung {
   mehr_info: String
   featured_image(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
   slug: String
+
+  """
+  Wenn das Event wiederkehrend ist, kann man hier das Intervall einstellen.
+  """
+  wiederholung: String
+  recurring: Boolean
+  duration: Int
   bildergalerie(filter: veranstaltung_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [veranstaltung_files]
   bildergalerie_func: count_functions
 }
@@ -584,12 +591,20 @@ type veranstaltung_aggregated_count {
   mehr_info: Int
   featured_image: Int
   slug: Int
+
+  """
+  Wenn das Event wiederkehrend ist, kann man hier das Intervall einstellen.
+  """
+  wiederholung: Int
+  recurring: Int
+  duration: Int
   bildergalerie: Int
 }
 
 type veranstaltung_aggregated_fields {
   id: Float
   sort: Float
+  duration: Float
 }
 
 type veranstaltung_files {
@@ -721,6 +736,13 @@ input aufgaben_filter {
   link: string_filter_operators
   _and: [aufgaben_filter]
   _or: [aufgaben_filter]
+}
+
+input boolean_filter_operators {
+  _eq: Boolean
+  _neq: Boolean
+  _null: Boolean
+  _nnull: Boolean
 }
 
 input count_function_filter_operators {
@@ -989,6 +1011,9 @@ input veranstaltung_filter {
   mehr_info: string_filter_operators
   featured_image: directus_files_filter
   slug: string_filter_operators
+  wiederholung: string_filter_operators
+  recurring: boolean_filter_operators
+  duration: number_filter_operators
   bildergalerie: veranstaltung_files_filter
   bildergalerie_func: count_function_filter_operators
   _and: [veranstaltung_filter]

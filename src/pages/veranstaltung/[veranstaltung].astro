@@ -17,15 +17,15 @@ export async function getStaticPaths() {
 }
 
 const {slug, titel, datum, beschreibung} = Astro.props;
-
-console.log(slug);
-
 ---
 
 <Layout title={titel ?? "Aktuelles"} page={Seite.Aktuelles}>
     <main>
         <h1>{titel}</h1>
         <p class="date">{formatDate(new Date(datum))}</p>
+        <a class="btn gap-2 btn-primary" href={slug + ".ics"} target="_blank" rel="noopener noreferrer">
+            <i class="ri-calendar-event-line"></i>Zum Kalender hinzufügen
+        </a>
         <ArticleBody html={beschreibung ?? "<p>Keine Beschreibung vorhanden.</p>"}></ArticleBody>
     </main>
 </Layout>
