@@ -31,12 +31,7 @@ export function icsAttributesFromVeranstaltung(
     start: ics.convertTimestampToArray(veranstaltung.datum, "local"),
     duration: { minutes: veranstaltung.duration ?? 30 },
     title: veranstaltung.titel ?? "Harzklub Hohegeiss Event",
-    description: sanitizeHtml(
-      veranstaltung.beschreibung || "Wir freuen uns auf euch!",
-      {
-        allowedTags: [],
-      }
-    ),
+    description: veranstaltung.short_description ?? "Wir freuen uns auf euch!",
     location: veranstaltung.ort ?? "Kein Ort vorhanden",
     url: `https://www.harzklub-hohegeiss.de/veranstaltung/${veranstaltung.slug}`,
     recurrenceRule: veranstaltung.recurring

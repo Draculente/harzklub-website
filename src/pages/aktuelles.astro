@@ -8,7 +8,7 @@ import VeranstaltungsList from "@components/VeranstaltungsList.astro";
 import rrule from "rrule";
 import { addWeeks } from "@lib/utils/helper";
 
-const { rrulestr } = rrule;
+const { rrulestr, RRule } = rrule;
 
 const { veranstaltung: veranstaltungen } = await gqlClient.request(
   veranstaltungsQuery
@@ -20,13 +20,14 @@ const { aktuelles: aktuellesPageDate } = await gqlClient.request(
 
 const rEvents = veranstaltungen
   .filter((e) => e.recurring && e.wiederholung)
-  .flatMap((e) => {
-    const rrule = rrulestr(e.wiederholung!);
-    const dates = rrule.between(new Date(), addWeeks(new Date(), 5));
-    return dates.map((d) => ({
-      ...e,
-      datum: d,
-    }));
+  .map((e) => {
+    // count: 1, because we only want the next event
+    const rrule = new RRule(
+      { ...rrulestr(e.wiederholung!).options, count: 1 },
+      false
+    );
+    const date = rrule.after(new Date());
+    return { ...e, datum: date };
   });
 
 const nextEvents = veranstaltungen.filter(
