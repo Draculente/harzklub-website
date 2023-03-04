@@ -25,6 +25,7 @@
     "daisyui": "^2.50.0",
     "graphql": "^16.6.0",
     "graphql-request": "^5.1.0",
+    "ics": "^3.1.0",
     "remixicon": "^2.5.0",
     "sanitize-html": "^2.7.2",
     "slugify": "^1.6.5",

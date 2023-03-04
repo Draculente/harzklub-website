@@ -51,6 +51,9 @@ export const veranstaltungsQuery = graphql(/* GraphQL */ `
       ort
       slug
       beschreibung
+      duration
+      recurring
+      wiederholung
       datum
       titel
       featured_image {
@@ -126,5 +129,29 @@ export const impressumsQuery = graphql(/* GraphQL */ `
       description
       date_updated
       text
-    }  
-  }`);
+    }
+  }
+`);
+
+export const getOneVeranstaltungQuery = graphql(/* GraphQL */ `
+  query getOneVeranstaltungQuery($slug: String!) {
+    veranstaltung(filter: { slug: { _eq: $slug } }) {
+      id
+      ort
+      slug
+      beschreibung
+      datum
+      duration
+      recurring
+      wiederholung
+      titel
+      featured_image {
+        id
+        description
+      }
+      bildergalerie {
+        id
+      }
+    }
+  }
+`);
