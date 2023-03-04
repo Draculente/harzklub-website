@@ -571,6 +571,7 @@ type veranstaltung {
 
   """Wie der Termin wiederholt wird."""
   human_readable_interval: String
+  short_description: String
   bildergalerie(filter: veranstaltung_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [veranstaltung_files]
   bildergalerie_func: count_functions
 }
@@ -617,6 +618,7 @@ type veranstaltung_aggregated_count {
 
   """Wie der Termin wiederholt wird."""
   human_readable_interval: Int
+  short_description: Int
   bildergalerie: Int
 }
 
@@ -1036,6 +1038,7 @@ input veranstaltung_filter {
   recurring: boolean_filter_operators
   duration: number_filter_operators
   human_readable_interval: string_filter_operators
+  short_description: string_filter_operators
   bildergalerie: veranstaltung_files_filter
   bildergalerie_func: count_function_filter_operators
   _and: [veranstaltung_filter]

@@ -69,7 +69,7 @@ const aufgaben = (await gqlClient.request(aufgabenQuery)).aufgaben
         >
           <div class="row-span-3">
             <VeranstaltungsCard
-              beschreibung={featuredEvent?.beschreibung ?? undefined}
+              short_description={featuredEvent?.short_description ?? undefined}
               date={featuredEvent?.datum}
               featured_image_url={getFileUrl(featuredEvent?.featured_image?.id)}
               titel={featuredEvent?.titel ?? undefined}

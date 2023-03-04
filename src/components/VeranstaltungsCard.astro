@@ -6,21 +6,23 @@ import { formatDate } from "@lib/utils/format-date";
 
 export type Props = {
   titel?: string;
-  beschreibung?: string;
   date?: string;
   featured_image_url?: string;
   slug?: string;
+  short_description?: string;
 };
 
 const FEATURED_IMAGE_DEFAULT_IMAGE = "/images/kurpark_teich.jpg";
 
-const { featured_image_url, titel, beschreibung, date, slug } = Astro.props;
+const { featured_image_url, titel, date, slug, short_description } =
+  Astro.props;
 ---
 
 <div
   class="flex flex-row rounded-4xl justify-end bg-cover bg-no-repeat bg-left drop-shadow-md h-min min-h-full w-full"
   style={`background-image: url(${
-    featured_image_url ?? FEATURED_IMAGE_DEFAULT_IMAGE
+    featured_image_url + "?fit=cover&with=500&quality=50" ??
+    FEATURED_IMAGE_DEFAULT_IMAGE
   });`}
 >
   <div
@@ -37,7 +39,7 @@ const { featured_image_url, titel, beschreibung, date, slug } = Astro.props;
     <p class="font-semibold text-lg">{titel ?? "Nächtes Event"}</p>
     <p class="leading-tight text-gray-800 sm:text-sm">
       {
-        sanitizeHtml(beschreibung || "Wir freuen uns auf euch!", {
+        sanitizeHtml(short_description || "Wir freuen uns auf euch!", {
           allowedTags: [],
         })
       }

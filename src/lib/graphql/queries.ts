@@ -54,6 +54,8 @@ export const veranstaltungsQuery = graphql(/* GraphQL */ `
       duration
       recurring
       wiederholung
+      human_readable_interval
+      short_description
       datum
       titel
       featured_image {
@@ -164,6 +166,7 @@ export const featuredEventQuery = graphql(/* GraphQL */ `
         datum
         mehr_info
         beschreibung
+        short_description
         featured_image {
           id
           description
