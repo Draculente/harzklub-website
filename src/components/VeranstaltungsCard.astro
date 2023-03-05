@@ -2,7 +2,7 @@
 import sanitizeHtml from "sanitize-html";
 import Tag from "./Tag.astro";
 import { ERROR_PAGE } from "@lib/links";
-import { formatDate } from "@lib/utils/format-date";
+import NextEvent from "./NextEvent.svelte";
 
 export type Props = {
   titel?: string;
@@ -10,12 +10,21 @@ export type Props = {
   featured_image_url?: string;
   slug?: string;
   short_description?: string;
+  recurring?: boolean;
+  wiederholung?: string;
 };
 
 const FEATURED_IMAGE_DEFAULT_IMAGE = "/images/kurpark_teich.jpg";
 
-const { featured_image_url, titel, date, slug, short_description } =
-  Astro.props;
+const {
+  featured_image_url,
+  titel,
+  date,
+  slug,
+  short_description,
+  recurring,
+  wiederholung,
+} = Astro.props;
 ---
 
 <div
@@ -29,11 +38,18 @@ const { featured_image_url, titel, date, slug, short_description } =
     class="bg-info flex flex-col rounded-4xl items-start p-4 w-2/3 min-h-min"
   >
     <div class="flex w-full flex-row justify-between mb-4 sm:mb-2">
-      <p class="flex flex-row items-center font-medium sm:text-sm">
-        <i class="ri-calendar-event-line text-xl mr-2 sm:text-sm"></i>{
-          date ? formatDate(new Date(date)) : "Datum unbekannt"
-        }
-      </p>
+      <div
+        class="flex flex-row items-center font-medium sm:text-sm justify-start"
+      >
+        <i class="ri-calendar-event-line text-xl mr-2 sm:text-sm"></i>
+        <NextEvent
+          date={date!}
+          recurring={recurring}
+          wiederholungsRule={wiederholung}
+          formatDateConfig={{ month: "2-digit", day: "2-digit" }}
+          client:load
+        />
+      </div>
       <Tag title="Veranstaltung" />
     </div>
     <p class="font-semibold text-lg">{titel ?? "Nächtes Event"}</p>

@@ -1,0 +1,21 @@
+---
+import SimplePage from "@components/SimplePage.astro";
+import type { Seite } from "@lib/links";
+import Layout from "./Layout.astro";
+
+export type Props = {
+  title: string;
+  page?: Seite;
+  subtitle: string;
+  description?: string;
+  text?: string;
+};
+
+const { title, page, subtitle, description, text } = Astro.props;
+---
+
+<Layout title={title} description={description} page={page}>
+  <SimplePage title={title} subtitle={subtitle} text={text}>
+    <slot />
+  </SimplePage>
+</Layout>

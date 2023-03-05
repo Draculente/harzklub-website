@@ -1,49 +1,28 @@
 ---
 import DownloadButton from "@components/Download-Button.astro";
+import SimplePageLayout from "@layouts/SimplePageLayout.astro";
 import { downloadsQuery } from "@lib/graphql/queries";
 import gqlClient from "@lib/utils/gql-client";
 import { getFileUrl } from "@lib/utils/helper";
-import Layout from "src/layouts/Layout.astro";
 
 const downloads = (await gqlClient.request(downloadsQuery)).downloads.filter(
   (download) => download.file?.id
 );
 ---
 
-<Layout title="Downloads">
-  <section
-    id="heading"
-    class="h-screen pt-[15vh] sm:pt-[3vh] relative xs:bg-none bg-origin-padding bg-contain md:bg-cover sm:h-min sm:pb-52"
-  >
-    <img
-      src="/images/dots.svg"
-      class="absolute top-[10vh] right-[30%] sm:hidden"
-      aria-hidden="true"
-    />
-    <img
-      src="/images/dots.svg"
-      class="absolute top-[48vh] left-[12%] sm:hidden"
-      aria-hidden="true"
-    />
-    <div
-      class="2xl:px-[20%] xl:px-[5%] lg:px-[5%] xs:px-[5%] md:px-[15%] w-full"
-    >
-      <h2 class="font-medium text-lg tracking-wide sm:text-base">
-        Stets auf Abruf!
-      </h2>
-      <h1 class="font-bold text-5xl leading-tight sm:text-2xl sm:font-semibold">
-        Unsere Downloads
-      </h1>
-      <div class="flex flex-row flex-wrap gap-5 mt-5">
-        {
-          downloads.map((download) => (
-            <DownloadButton
-              link={getFileUrl(download.file?.id)!}
-              title={download.title ?? "Datei"}
-            />
-          ))
-        }
-      </div>
-    </div>
-  </section>
-</Layout>
+<SimplePageLayout
+  subtitle="Stets auf Abruf!"
+  title="Downloads"
+  description="Unsere Downloads. Wichtige Dokumente stets auf Abruf!"
+>
+  <div class="flex flex-row flex-wrap gap-5 mt-5 min-h-[50vh]">
+    {
+      downloads.map((download) => (
+        <DownloadButton
+          link={getFileUrl(download.file?.id)!}
+          title={download.title ?? "Datei"}
+        />
+      ))
+    }
+  </div>
+</SimplePageLayout>

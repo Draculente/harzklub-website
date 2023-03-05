@@ -1,12 +1,10 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Header from "@components/header/Header.astro";
 import gqlClient from "@lib/utils/gql-client";
 import { aktuellesQuery, veranstaltungsQuery } from "@lib/graphql/queries";
 import { Seite } from "@lib/links";
 import VeranstaltungsList from "@components/VeranstaltungsList.astro";
 import rrule from "rrule";
-import SimplePage from "@components/SimplePage.astro";
+import SimplePageLayout from "@layouts/SimplePageLayout.astro";
 
 const { rrulestr, RRule } = rrule;
 
@@ -35,23 +33,19 @@ const nextEvents = veranstaltungen.filter(
 );
 ---
 
-<Layout
-  title="Aktuelles"
+<SimplePageLayout
+  title={aktuellesPageDate?.title ?? "Aktuelles"}
   description={aktuellesPageDate?.description ?? undefined}
+  page={Seite.Aktuelles}
+  subtitle={aktuellesPageDate?.subtitle ?? "Veranstaltungen und mehr!"}
+  text={aktuellesPageDate?.text ?? undefined}
 >
-  <SimplePage
-    page={Seite.Aktuelles}
-    title={aktuellesPageDate?.title ?? "Aktuelles"}
-    subtitle={aktuellesPageDate?.subtitle ?? "Veranstaltungen und mehr!"}
-    text={aktuellesPageDate?.text ?? undefined}
-  >
-    <h2 class="font-medium text-3xl mt-10">Veranstaltungen</h2>
-    <div class="next-events">
-      <VeranstaltungsList veranstaltungen={nextEvents} />
-    </div>
-    <h2 class="font-medium text-3xl">Vereinsleben</h2>
-    <div class="past-events">
-      <VeranstaltungsList veranstaltungen={rEvents} />
-    </div>
-  </SimplePage>
-</Layout>
+  <h2 class="font-medium text-3xl mt-10">Veranstaltungen</h2>
+  <div class="next-events">
+    <VeranstaltungsList veranstaltungen={nextEvents} />
+  </div>
+  <h2 class="font-medium text-3xl">Vereinsleben</h2>
+  <div class="past-events">
+    <VeranstaltungsList veranstaltungen={rEvents} />
+  </div>
+</SimplePageLayout>

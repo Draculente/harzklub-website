@@ -2,11 +2,12 @@
   import type { Image } from "@lib/imageGallery";
   import { LottiePlayer } from "@lottiefiles/svelte-lottie-player";
   import { swipe } from "svelte-gestures";
-  import { fly } from "svelte/transition";
+  import { fade, fly } from "svelte/transition";
 
   export let images: Image[];
   export let showInfo = false;
   export let showTitle = true;
+  export let iconBackground = false;
 
   if (images.length === 0) {
     throw new Error("ImageGallery must have at least one image");
@@ -20,6 +21,7 @@
   let fullscreen = false;
   let iconsHidden = false;
   let timeout: NodeJS.Timeout | null = null;
+  let infoSeen = false;
 
   $: iconsAreHidden = fullscreen && iconsHidden;
 
@@ -32,6 +34,7 @@
       loading = true;
     };
   }
+
   function toggleModal() {
     modalIsOpen = !modalIsOpen;
     document.body.classList.toggle("overflow-hidden");
@@ -40,6 +43,7 @@
       document.exitFullscreen();
     }
   }
+
   function toggleFullscreen() {
     fullscreen = !fullscreen;
     if (fullscreen) {
@@ -49,17 +53,24 @@
       document.exitFullscreen();
     }
   }
+
   function hideIcons() {
     if (timeout) clearTimeout(timeout);
     timeout = setTimeout(() => {
       if (fullscreen) iconsHidden = true;
     }, 3000);
   }
+
   function showIcons() {
     iconsHidden = false;
     console.log(iconsAreHidden);
 
     hideIcons();
+  }
+
+  function showInfoF() {
+    info = true;
+    if (info) infoSeen = true;
   }
   const touch = matchMedia("(hover: none), (pointer: coarse)").matches;
 </script>
@@ -127,7 +138,7 @@
           nextImage("previous")();
           break;
         case "top":
-          info = true;
+          showInfoF();
           break;
         case "bottom":
           info = false;
@@ -172,11 +183,11 @@
       </div>
     {/if}
 
-    {#if info && showInfo}
-      <div
-        class="absolute bottom-0 left-0 w-full flex flex-row justify-center shadow-md"
-        on:click|stopPropagation={() => {}}
-      >
+    <div
+      class="absolute bottom-0 left-0 w-full flex flex-row justify-center shadow-md"
+      on:click|stopPropagation={() => {}}
+    >
+      {#if info && showInfo}
         <div
           class="w-screen max-w-lg flex flex-col gap-5 p-4 rounded-t-md bg-base-100"
           transition:fly={{ x: 0, y: 100, duration: 300 }}
@@ -194,13 +205,20 @@
             {selectedImage.location ?? "Kein Ort angegeben"}
           </div>
         </div>
-      </div>
-    {/if}
+      {:else if touch && !infoSeen}
+        <i
+          class="ri-arrow-up-s-line text-2xl mb-2 animate-bounce"
+          in:fly={{ delay: 300, duration: 400, y: 40 }}
+        />
+      {/if}
+    </div>
 
     {#if !iconsAreHidden}
       <div class="h-screen flex flex-col justify-center absolute top-0 left-0">
         <button
-          class="p-4 rounded-full "
+          class="{iconBackground
+            ? 'bg-info'
+            : 'bg-transparent'} flex text-center justify-center items-center bg-opacity-50 m-2 px-2 py-1 rounded-full "
           on:click|stopPropagation={nextImage("previous")}
           ><i class="ri-arrow-left-s-line text-3xl" />
         </button>
@@ -208,36 +226,47 @@
 
       <div class="h-screen flex flex-col justify-center absolute top-0 right-0">
         <button
-          class="p-4 rounded-full "
+          class="{iconBackground
+            ? 'bg-info'
+            : 'bg-transparent'} flex text-center justify-center items-center bg-opacity-50 m-2 px-2 py-1 rounded-full "
           on:click|stopPropagation={nextImage("next")}
           ><i class="ri-arrow-right-s-line text-3xl" />
         </button>
       </div>
 
       <button
-        class="absolute bottom-0 right-0 p-4 rounded-full md:hidden"
+        class="{iconBackground
+          ? 'bg-info'
+          : 'bg-transparent'} flex text-center justify-center items-center bg-opacity-50 m-2 absolute bottom-0 right-0 px-2 py-1 rounded-full md:hidden"
         on:click|stopPropagation={() => {
-          info = !info;
+          showInfoF();
         }}
         ><i class="ri-information-line text-3xl" />
       </button>
 
-      <button class="absolute top-0 right-0 p-4 rounded-full"
+      <button
+        class="{iconBackground
+          ? 'bg-info'
+          : 'bg-transparent'} flex text-center justify-center items-center bg-opacity-50 m-2 absolute top-0 right-0 px-2 py-1 rounded-full"
         ><i class="ri-close-line text-3xl" />
       </button>
 
-      <button
-        class="absolute top-0 left-0 p-4 rounded-full"
-        on:click|stopPropagation={() => {
-          toggleFullscreen();
-        }}
-      >
-        {#if fullscreen}
-          <i class={"text-2xl ri-fullscreen-exit-line"} />
-        {:else}
-          <i class={"text-2xl ri-fullscreen-line"} />
-        {/if}
-      </button>
+      {#if showInfo && touch}
+        <button
+          class="{iconBackground
+            ? 'bg-info'
+            : 'bg-transparent'} flex text-center justify-center items-center bg-opacity-50 m-2 absolute top-0 left-0 px-2 py-1 rounded-full"
+          on:click|stopPropagation={() => {
+            toggleFullscreen();
+          }}
+        >
+          {#if fullscreen}
+            <i class={"text-2xl ri-fullscreen-exit-line"} />
+          {:else}
+            <i class={"text-2xl ri-fullscreen-line"} />
+          {/if}
+        </button>
+      {/if}
     {/if}
   </div>
 {/if}
