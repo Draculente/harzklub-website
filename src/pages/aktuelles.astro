@@ -6,7 +6,7 @@ import { aktuellesQuery, veranstaltungsQuery } from "@lib/graphql/queries";
 import { Seite } from "@lib/links";
 import VeranstaltungsList from "@components/VeranstaltungsList.astro";
 import rrule from "rrule";
-import { addWeeks } from "@lib/utils/helper";
+import SimplePage from "@components/SimplePage.astro";
 
 const { rrulestr, RRule } = rrule;
 
@@ -39,37 +39,12 @@ const nextEvents = veranstaltungen.filter(
   title="Aktuelles"
   description={aktuellesPageDate?.description ?? undefined}
 >
-  <Header currentPage={Seite.Aktuelles} />
-  <img
-    src="/images/dots.svg"
-    class="absolute top-[10vh] right-[30%] sm:hidden"
-    aria-hidden="true"
-  />
-  <img
-    src="/images/dots.svg"
-    class="absolute top-[48vh] left-[12%] sm:hidden"
-    aria-hidden="true"
-  />
-  <main
-    id="heading"
-    class="pt-[5vh] sm:pt-[3vh] relative xs:bg-none bg-origin-padding bg-contain md:bg-cover sm:h-min sm:pb-52 2xl:px-[12%] xl:px-[5%] lg:px-[5%] xs:px-[5%] md:px-[15%]"
+  <SimplePage
+    page={Seite.Aktuelles}
+    title={aktuellesPageDate?.title ?? "Aktuelles"}
+    subtitle={aktuellesPageDate?.subtitle ?? "Veranstaltungen und mehr!"}
+    text={aktuellesPageDate?.text ?? undefined}
   >
-    <div class="w-full flex flex-col items-start">
-      <h2 class="font-medium text-lg tracking-wide sm:text-base">
-        {aktuellesPageDate?.subtitle}
-      </h2>
-      <h1 class="font-bold text-5xl leading-tight sm:text-4xl sm:font-semibold">
-        {aktuellesPageDate?.title}
-      </h1>
-      <div
-        class="max-w-2xl body-text-bigger sm:body-text-smaller"
-        set:html={aktuellesPageDate?.text}
-      />
-    </div>
-    <!-- <div class="tabs mt-10 flex-nowrap w-fit tabs-boxed">
-      <a id="next-events" class="tab tab-active">Kommende</a>
-      <a id="past-events" class="tab">Vergangene</a>
-    </div> -->
     <h2 class="font-medium text-3xl mt-10">Veranstaltungen</h2>
     <div class="next-events">
       <VeranstaltungsList veranstaltungen={nextEvents} />
@@ -78,29 +53,5 @@ const nextEvents = veranstaltungen.filter(
     <div class="past-events">
       <VeranstaltungsList veranstaltungen={rEvents} />
     </div>
-  </main>
-  <!-- <script lang="js">
-    const nextEventsEl = document.getElementById("next-events");
-    const pastEventsEl = document.getElementById("past-events");
-
-    nextEventsEl.addEventListener("click", clickHandler);
-    pastEventsEl.addEventListener("click", clickHandler);
-
-    function clickHandler(e) {
-      e.preventDefault();
-      if (e.target.id === "next-events") {
-        nextEventsEl.classList.add("tab-active");
-        pastEventsEl.classList.remove("tab-active");
-        document.querySelector(".next-events").classList.remove("hidden");
-        document.querySelector(".past-events").classList.add("hidden");
-      } else {
-        nextEventsEl.classList.remove("tab-active");
-        pastEventsEl.classList.add("tab-active");
-        document.querySelector(".next-events").classList.add("hidden");
-        document.querySelector(".past-events").classList.remove("hidden");
-      }
-    }
-  </script> -->
+  </SimplePage>
 </Layout>
-
-<style></style>

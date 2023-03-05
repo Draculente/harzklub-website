@@ -176,3 +176,23 @@ export const featuredEventQuery = graphql(/* GraphQL */ `
     }
   }
 `);
+
+export const impressionsQuery = graphql(/* GraphQL */ `
+  query impressionsQuery {
+    impressions {
+      title
+      text
+      description
+      subtitle
+      bildergalerie {
+        directus_files_id {
+          description
+          title
+          id
+          location
+          metadata
+        }
+      }
+    }
+  }
+`);

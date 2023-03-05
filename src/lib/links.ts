@@ -16,6 +16,7 @@ export enum Seite {
   UeberUns,
   Error,
   Impressum,
+  Impressionen,
 }
 
 export default function l(seite: Seite): string {
@@ -52,11 +53,17 @@ export const pages: Array<SeitenInfo> = [
     name: "Wanderungen",
     menu: true,
   },
+  {
+    page: Seite.Impressionen,
+    href: "/impressionen",
+    name: "Impressionen",
+    menu: true,
+  },
   // { page: Seite.DerHarz, href: UNDER_CONSTRUCTION, "/de name: "Der Harz" },
   {
     page: Seite.UeberUns,
     href: UNDER_CONSTRUCTION,
     name: "Über uns",
-    menu: true,
+    menu: false,
   },
 ];

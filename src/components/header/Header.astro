@@ -6,6 +6,8 @@ export interface Props {
 }
 
 const { currentPage: page } = Astro.props;
+
+const menuItems = pages.filter((e) => e.menu);
 ---
 
 <header
@@ -21,17 +23,15 @@ const { currentPage: page } = Astro.props;
   <div class="flex flex-row items-center">
     <div class="flex flex-row items-center md:hidden">
       {
-        pages
-          .filter((e) => e.menu)
-          .map((seite) => (
-            <div class="mx-2 hover:underline">
-              <MenuItem
-                href={seite.href}
-                currentPage={seite.page == page}
-                name={seite.name}
-              />
-            </div>
-          ))
+        menuItems.map((seite) => (
+          <div class="mx-2 hover:underline">
+            <MenuItem
+              href={seite.href}
+              currentPage={seite.page == page}
+              name={seite.name}
+            />
+          </div>
+        ))
       }
     </div>
 
@@ -40,7 +40,7 @@ const { currentPage: page } = Astro.props;
         <a><i class="ri-menu-line text-2xl m-0"></i></a>
         <ul class="bg-base-100">
           {
-            pages.map((seite) => (
+            menuItems.map((seite) => (
               <li class="mb-2">
                 <MenuItem
                   href={seite.href}

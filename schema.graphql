@@ -38,6 +38,10 @@ type Query {
   aktuelles: aktuelles
   Impressum: Impressum
   featured_event: featured_event
+  impressions: impressions
+  impressions_files(filter: impressions_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [impressions_files!]!
+  impressions_files_by_id(id: ID!): impressions_files
+  impressions_files_aggregated(groupBy: [String], filter: impressions_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [impressions_files_aggregated!]!
 }
 
 type Mutation {
@@ -397,6 +401,51 @@ type footer_social_link_aggregated_count {
 type footer_social_link_aggregated_fields {
   id: Float
   footer: Float
+}
+
+type impressions {
+  id: ID!
+  user_updated: String
+  date_updated: Date
+  date_updated_func: datetime_functions
+  title: String
+  subtitle: String
+  text: String
+
+  """Die Meta-Beschreibung für Google & Co."""
+  description: String
+  bildergalerie(filter: impressions_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [impressions_files]
+  bildergalerie_func: count_functions
+}
+
+type impressions_files {
+  id: ID!
+  impressions_id(filter: impressions_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): impressions
+  directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+}
+
+type impressions_files_aggregated {
+  group: JSON
+  countAll: Int
+  count: impressions_files_aggregated_count
+  countDistinct: impressions_files_aggregated_count
+  avg: impressions_files_aggregated_fields
+  sum: impressions_files_aggregated_fields
+  avgDistinct: impressions_files_aggregated_fields
+  sumDistinct: impressions_files_aggregated_fields
+  min: impressions_files_aggregated_fields
+  max: impressions_files_aggregated_fields
+}
+
+type impressions_files_aggregated_count {
+  id: Int
+  impressions_id: Int
+  directus_files_id: Int
+}
+
+type impressions_files_aggregated_fields {
+  id: Float
+  impressions_id: Float
 }
 
 type Impressum {
@@ -924,6 +973,29 @@ input geometry_filter_operators {
   _nintersects_bbox: GraphQLGeoJSON
   _null: Boolean
   _nnull: Boolean
+}
+
+input impressions_files_filter {
+  id: number_filter_operators
+  impressions_id: impressions_filter
+  directus_files_id: directus_files_filter
+  _and: [impressions_files_filter]
+  _or: [impressions_files_filter]
+}
+
+input impressions_filter {
+  id: number_filter_operators
+  user_updated: string_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  title: string_filter_operators
+  subtitle: string_filter_operators
+  text: string_filter_operators
+  description: string_filter_operators
+  bildergalerie: impressions_files_filter
+  bildergalerie_func: count_function_filter_operators
+  _and: [impressions_filter]
+  _or: [impressions_filter]
 }
 
 input number_filter_operators {
