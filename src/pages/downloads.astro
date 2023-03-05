@@ -1,11 +1,9 @@
 ---
 import DownloadButton from "@components/Download-Button.astro";
-import SimplePage from "@components/SimplePage.astro";
 import SimplePageLayout from "@layouts/SimplePageLayout.astro";
 import { downloadsQuery } from "@lib/graphql/queries";
 import gqlClient from "@lib/utils/gql-client";
 import { getFileUrl } from "@lib/utils/helper";
-import Layout from "src/layouts/Layout.astro";
 
 const downloads = (await gqlClient.request(downloadsQuery)).downloads.filter(
   (download) => download.file?.id
