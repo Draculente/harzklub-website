@@ -23,6 +23,7 @@ const documents = {
     "\n  query impressumsQuery {\n    Impressum {\n      description\n      date_updated\n      text\n    }\n  }\n": types.ImpressumsQueryDocument,
     "\n  query getOneVeranstaltungQuery($slug: String!) {\n    veranstaltung(filter: { slug: { _eq: $slug } }) {\n      id\n      ort\n      slug\n      beschreibung\n      datum\n      duration\n      recurring\n      wiederholung\n      titel\n      featured_image {\n        id\n        description\n      }\n      bildergalerie {\n        id\n      }\n    }\n  }\n": types.GetOneVeranstaltungQueryDocument,
     "\n  query featuredEventQuery {\n    featured_event {\n      event {\n        slug\n        datum\n        mehr_info\n        beschreibung\n        short_description\n        featured_image {\n          id\n          description\n        }\n        titel\n      }\n    }\n  }\n": types.FeaturedEventQueryDocument,
+    "\n  query impressionsQuery {\n    impressions {\n      title\n      text\n      description\n      subtitle\n      bildergalerie {\n        directus_files_id {\n          description\n          title\n          id\n          location\n          metadata\n        }\n      }\n    }\n  }\n": types.ImpressionsQueryDocument,
 };
 
 /**
@@ -79,6 +80,10 @@ export function graphql(source: "\n  query getOneVeranstaltungQuery($slug: Strin
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query featuredEventQuery {\n    featured_event {\n      event {\n        slug\n        datum\n        mehr_info\n        beschreibung\n        short_description\n        featured_image {\n          id\n          description\n        }\n        titel\n      }\n    }\n  }\n"): (typeof documents)["\n  query featuredEventQuery {\n    featured_event {\n      event {\n        slug\n        datum\n        mehr_info\n        beschreibung\n        short_description\n        featured_image {\n          id\n          description\n        }\n        titel\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query impressionsQuery {\n    impressions {\n      title\n      text\n      description\n      subtitle\n      bildergalerie {\n        directus_files_id {\n          description\n          title\n          id\n          location\n          metadata\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query impressionsQuery {\n    impressions {\n      title\n      text\n      description\n      subtitle\n      bildergalerie {\n        directus_files_id {\n          description\n          title\n          id\n          location\n          metadata\n        }\n      }\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

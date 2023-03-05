@@ -79,6 +79,10 @@ export type Query = {
   footer_social_link: Array<Footer_Social_Link>;
   footer_social_link_aggregated: Array<Footer_Social_Link_Aggregated>;
   footer_social_link_by_id?: Maybe<Footer_Social_Link>;
+  impressions?: Maybe<Impressions>;
+  impressions_files: Array<Impressions_Files>;
+  impressions_files_aggregated: Array<Impressions_Files_Aggregated>;
+  impressions_files_by_id?: Maybe<Impressions_Files>;
   meta?: Maybe<Meta>;
   presse: Array<Presse>;
   presse_aggregated: Array<Presse_Aggregated>;
@@ -228,6 +232,32 @@ export type QueryFooter_Social_Link_AggregatedArgs = {
 
 
 export type QueryFooter_Social_Link_By_IdArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryImpressions_FilesArgs = {
+  filter?: InputMaybe<Impressions_Files_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryImpressions_Files_AggregatedArgs = {
+  filter?: InputMaybe<Impressions_Files_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryImpressions_Files_By_IdArgs = {
   id: Scalars['ID'];
 };
 
@@ -953,6 +983,108 @@ export type Geometry_Filter_Operators = {
   _null?: InputMaybe<Scalars['Boolean']>;
 };
 
+export type Impressions = {
+  __typename?: 'impressions';
+  bildergalerie?: Maybe<Array<Maybe<Impressions_Files>>>;
+  bildergalerie_func?: Maybe<Count_Functions>;
+  date_updated?: Maybe<Scalars['Date']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  /** Die Meta-Beschreibung für Google & Co. */
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  subtitle?: Maybe<Scalars['String']>;
+  text?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  user_updated?: Maybe<Scalars['String']>;
+};
+
+
+export type ImpressionsBildergalerieArgs = {
+  filter?: InputMaybe<Impressions_Files_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type Impressions_Files = {
+  __typename?: 'impressions_files';
+  directus_files_id?: Maybe<Directus_Files>;
+  id: Scalars['ID'];
+  impressions_id?: Maybe<Impressions>;
+};
+
+
+export type Impressions_FilesDirectus_Files_IdArgs = {
+  filter?: InputMaybe<Directus_Files_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type Impressions_FilesImpressions_IdArgs = {
+  filter?: InputMaybe<Impressions_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type Impressions_Files_Aggregated = {
+  __typename?: 'impressions_files_aggregated';
+  avg?: Maybe<Impressions_Files_Aggregated_Fields>;
+  avgDistinct?: Maybe<Impressions_Files_Aggregated_Fields>;
+  count?: Maybe<Impressions_Files_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']>;
+  countDistinct?: Maybe<Impressions_Files_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']>;
+  max?: Maybe<Impressions_Files_Aggregated_Fields>;
+  min?: Maybe<Impressions_Files_Aggregated_Fields>;
+  sum?: Maybe<Impressions_Files_Aggregated_Fields>;
+  sumDistinct?: Maybe<Impressions_Files_Aggregated_Fields>;
+};
+
+export type Impressions_Files_Aggregated_Count = {
+  __typename?: 'impressions_files_aggregated_count';
+  directus_files_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  impressions_id?: Maybe<Scalars['Int']>;
+};
+
+export type Impressions_Files_Aggregated_Fields = {
+  __typename?: 'impressions_files_aggregated_fields';
+  id?: Maybe<Scalars['Float']>;
+  impressions_id?: Maybe<Scalars['Float']>;
+};
+
+export type Impressions_Files_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Impressions_Files_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Impressions_Files_Filter>>>;
+  directus_files_id?: InputMaybe<Directus_Files_Filter>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  impressions_id?: InputMaybe<Impressions_Filter>;
+};
+
+export type Impressions_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Impressions_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Impressions_Filter>>>;
+  bildergalerie?: InputMaybe<Impressions_Files_Filter>;
+  bildergalerie_func?: InputMaybe<Count_Function_Filter_Operators>;
+  date_updated?: InputMaybe<Date_Filter_Operators>;
+  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  description?: InputMaybe<String_Filter_Operators>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  subtitle?: InputMaybe<String_Filter_Operators>;
+  text?: InputMaybe<String_Filter_Operators>;
+  title?: InputMaybe<String_Filter_Operators>;
+  user_updated?: InputMaybe<String_Filter_Operators>;
+};
+
 export type Meta = {
   __typename?: 'meta';
   date_updated?: Maybe<Scalars['Date']>;
@@ -1585,6 +1717,11 @@ export type FeaturedEventQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type FeaturedEventQueryQuery = { __typename?: 'Query', featured_event?: { __typename?: 'featured_event', event?: { __typename?: 'veranstaltung', slug?: string | null, datum?: any | null, mehr_info?: string | null, beschreibung?: string | null, short_description?: string | null, titel?: string | null, featured_image?: { __typename?: 'directus_files', id: string, description?: string | null } | null } | null } | null };
 
+export type ImpressionsQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ImpressionsQueryQuery = { __typename?: 'Query', impressions?: { __typename?: 'impressions', title?: string | null, text?: string | null, description?: string | null, subtitle?: string | null, bildergalerie?: Array<{ __typename?: 'impressions_files', directus_files_id?: { __typename?: 'directus_files', description?: string | null, title?: string | null, id: string, location?: string | null, metadata?: any | null } | null } | null> | null } | null };
+
 
 export const StartseiteQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"startseiteQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"startseite"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"text_part_one"}},{"kind":"Field","name":{"kind":"Name","value":"text_part_two"}},{"kind":"Field","name":{"kind":"Name","value":"task_section_description"}},{"kind":"Field","name":{"kind":"Name","value":"aufgaben"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"wandern_title"}},{"kind":"Field","name":{"kind":"Name","value":"wandern_text"}},{"kind":"Field","name":{"kind":"Name","value":"wandern_description"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_description"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_title"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_text"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_title"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_description"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_text"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_title"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_text"}}]}}]}}]} as unknown as DocumentNode<StartseiteQueryQuery, StartseiteQueryQueryVariables>;
 export const AufgabenQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"aufgabenQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aufgaben"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"link"}}]}}]}}]} as unknown as DocumentNode<AufgabenQueryQuery, AufgabenQueryQueryVariables>;
@@ -1596,3 +1733,4 @@ export const AktuellesQueryDocument = {"kind":"Document","definitions":[{"kind":
 export const ImpressumsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"impressumsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Impressum"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"date_updated"}},{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]} as unknown as DocumentNode<ImpressumsQueryQuery, ImpressumsQueryQueryVariables>;
 export const GetOneVeranstaltungQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getOneVeranstaltungQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"veranstaltung"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"ort"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"beschreibung"}},{"kind":"Field","name":{"kind":"Name","value":"datum"}},{"kind":"Field","name":{"kind":"Name","value":"duration"}},{"kind":"Field","name":{"kind":"Name","value":"recurring"}},{"kind":"Field","name":{"kind":"Name","value":"wiederholung"}},{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"featured_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"bildergalerie"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<GetOneVeranstaltungQueryQuery, GetOneVeranstaltungQueryQueryVariables>;
 export const FeaturedEventQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"featuredEventQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"featured_event"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"event"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"datum"}},{"kind":"Field","name":{"kind":"Name","value":"mehr_info"}},{"kind":"Field","name":{"kind":"Name","value":"beschreibung"}},{"kind":"Field","name":{"kind":"Name","value":"short_description"}},{"kind":"Field","name":{"kind":"Name","value":"featured_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"titel"}}]}}]}}]}}]} as unknown as DocumentNode<FeaturedEventQueryQuery, FeaturedEventQueryQueryVariables>;
+export const ImpressionsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"impressionsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"impressions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"bildergalerie"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"directus_files_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}}]}}]}}]}}]}}]} as unknown as DocumentNode<ImpressionsQueryQuery, ImpressionsQueryQueryVariables>;

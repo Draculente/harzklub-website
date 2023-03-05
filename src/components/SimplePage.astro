@@ -1,0 +1,49 @@
+---
+import type { Seite } from "@lib/links";
+import Header from "@components/header/Header.astro";
+
+export type Props = {
+  page: Seite;
+  title: string;
+  subtitle: string;
+  text?: string;
+};
+
+const { page, title, subtitle, text } = Astro.props;
+---
+
+<div>
+  <Header currentPage={page} />
+  <img
+    src="/images/dots.svg"
+    class="absolute top-[10vh] right-[30%] sm:hidden"
+    aria-hidden="true"
+  />
+  <img
+    src="/images/dots.svg"
+    class="absolute top-[48vh] left-[12%] sm:hidden"
+    aria-hidden="true"
+  />
+  <main
+    id="heading"
+    class="pt-[5vh] sm:pt-[3vh] relative xs:bg-none bg-origin-padding bg-contain md:bg-cover sm:h-min sm:pb-10 2xl:px-[12%] xl:px-[5%] lg:px-[5%] xs:px-[5%] md:px-[15%]"
+  >
+    <div class="w-full flex flex-col items-start">
+      <h2 class="font-medium text-lg tracking-wide sm:text-base">
+        {subtitle}
+      </h2>
+      <h1 class="font-bold text-5xl leading-tight sm:text-4xl sm:font-semibold">
+        {title}
+      </h1>
+      {
+        text && text.length > 0 && (
+          <div
+            class="max-w-2xl body-text-bigger sm:body-text-smaller"
+            set:html={text}
+          />
+        )
+      }
+    </div>
+    <slot />
+  </main>
+</div>

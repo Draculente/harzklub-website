@@ -36,7 +36,7 @@ function getNextOccurence(): string {
     <main>
         <h1>{titel}</h1>
         <p class="date">{recurring ? `${human_readable_interval} (Nächstes Event: ${getNextOccurence()})` : formatDate(new Date(datum))}</p>
-        <a class="btn gap-2 btn-primary" href={slug + ".ics"} target="_blank" rel="noopener noreferrer">
+        <a class="btn gap-2 btn-primary" href={"/veranstaltung/" + slug + ".ics"} target="_blank" rel="noopener noreferrer">
             <i class="ri-calendar-event-line"></i>Zum Kalender hinzufügen
         </a>
         <ArticleBody html={beschreibung ?? "<p>Keine Beschreibung vorhanden.</p>"}></ArticleBody>

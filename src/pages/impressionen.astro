@@ -1,0 +1,53 @@
+---
+import ImageGallery from "@components/ImageGallery.svelte";
+import SimplePage from "@components/SimplePage.astro";
+import Layout from "@layouts/Layout.astro";
+import { impressionsQuery } from "@lib/graphql/queries";
+import { Seite } from "@lib/links";
+import gqlClient from "@lib/utils/gql-client";
+import type { Image } from "@lib/imageGallery";
+import { getFileUrl } from "@lib/utils/helper";
+
+const { impressions } = await gqlClient.request(impressionsQuery);
+
+if (!impressions) {
+  throw new Error("No impressions found");
+}
+
+const page = Seite.Impressionen;
+
+const { title, subtitle, description, text } = impressions;
+
+const images = impressions.bildergalerie
+  ?.filter((e) => e)
+  .map((e): Image => {
+    const { description, title, id, location, metadata } =
+      e!.directus_files_id!;
+
+    return {
+      description: description ?? undefined,
+      title: title ?? undefined,
+      src: getFileUrl(id)!,
+      id: id!,
+      location: location ?? undefined,
+      metadata: metadata ?? undefined,
+    };
+  });
+---
+
+<Layout
+  description={description ?? undefined}
+  page={page}
+  title={title ?? "Impressionen"}
+>
+  <SimplePage
+    title={title ?? "Impressionen"}
+    subtitle={subtitle ?? "So schön kann der Harz sein!"}
+    text={text ?? undefined}
+    page={page}
+  >
+    <div class="py-10">
+      <ImageGallery images={images ?? []} showInfo={true} client:load />
+    </div>
+  </SimplePage>
+</Layout>
