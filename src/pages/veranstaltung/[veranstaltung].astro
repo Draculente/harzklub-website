@@ -1,51 +1,61 @@
 ---
 import ArticleBody from "@components/ArticleBody.astro";
+import NextEvent from "@components/NextEvent.svelte";
 import { veranstaltungsQuery } from "@lib/graphql/queries";
 import { Seite } from "@lib/links";
-import { formatDate } from "@lib/utils/format-date";
 import gqlClient from "@lib/utils/gql-client";
-import rule from "rrule";
 import Layout from "src/layouts/Layout.astro";
 
-const { RRule, rrulestr } = rule;
-
 export async function getStaticPaths() {
-    return (await gqlClient.request(veranstaltungsQuery)).veranstaltung
-        .map((e) => {
-            return {
-                params: { veranstaltung: e.slug },
-                props: e,
-            };
-        });
+  return (await gqlClient.request(veranstaltungsQuery)).veranstaltung.map(
+    (e) => {
+      return {
+        params: { veranstaltung: e.slug },
+        props: e,
+      };
+    }
+  );
 }
 
-const {slug, titel, datum, beschreibung, recurring, human_readable_interval, wiederholung, short_description} = Astro.props;
-
-function getNextOccurence(): string {
-    const rrule = new RRule({...rrulestr(wiederholung).options, count: 1}, false);
-
-    return new Date(rrule.after(new Date(), true) ?? 0).toLocaleDateString("de-DE", {
-        month: "2-digit",
-        day: "2-digit",
-        year: "2-digit",
-    });
-}
+const {
+  slug,
+  titel,
+  datum,
+  beschreibung,
+  recurring,
+  human_readable_interval,
+  wiederholung,
+  short_description,
+} = Astro.props;
 ---
 
-<Layout title={titel ?? "Aktuelles"} page={Seite.Aktuelles} description={short_description}>
-    <main>
-        <h1>{titel}</h1>
-        <p class="date">{recurring ? `${human_readable_interval} (Nächstes Event: ${getNextOccurence()})` : formatDate(new Date(datum))}</p>
-        <a class="btn gap-2 btn-primary" href={"/veranstaltung/" + slug + ".ics"} target="_blank" rel="noopener noreferrer">
-            <i class="ri-calendar-event-line"></i>Zum Kalender hinzufügen
-        </a>
-        <ArticleBody html={beschreibung ?? "<p>Keine Beschreibung vorhanden.</p>"}></ArticleBody>
-    </main>
+<Layout
+  title={titel ?? "Aktuelles"}
+  page={Seite.Aktuelles}
+  description={short_description}
+>
+  <main>
+    <h1>{titel}</h1>
+    {recurring && <p>{human_readable_interval}</p>}
+    <div class="badge badge-primary">
+      Nächstes Event:&nbsp;
+      <NextEvent
+        date={datum}
+        recurring={recurring}
+        wiederholungsRule={wiederholung}
+        client:load
+      />
+    </div>
+    <a
+      class="btn gap-2 btn-primary"
+      href={"/veranstaltung/" + slug + ".ics"}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <i class="ri-calendar-event-line"></i>Zum Kalender hinzufügen
+    </a>
+    <ArticleBody
+      html={beschreibung ?? "<p>Keine Beschreibung vorhanden.</p>"}
+    />
+  </main>
 </Layout>
-
-<style lang="stylus">
-    main
-        width 90%
-        max-width: 800px
-        margin: auto
-</style>
