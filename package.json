@@ -14,6 +14,7 @@
   "devDependencies": {
     "@graphql-codegen/cli": "^3.0.0",
     "@graphql-codegen/client-preset": "^2.0.0",
+    "@types/luxon": "^3.2.0",
     "@types/sanitize-html": "^2.6.2",
     "astro": "^2.0.17",
     "stylus": "^0.59.0"
@@ -28,6 +29,7 @@
     "graphql": "^16.6.0",
     "graphql-request": "^5.1.0",
     "ics": "^3.1.0",
+    "luxon": "^3.3.0",
     "remixicon": "^2.5.0",
     "rrule": "^2.7.2",
     "sanitize-html": "^2.7.2",

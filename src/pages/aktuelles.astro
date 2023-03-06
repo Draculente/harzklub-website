@@ -5,6 +5,7 @@ import { Seite } from "@lib/links";
 import VeranstaltungsList from "@components/VeranstaltungsList.astro";
 import rrule from "rrule";
 import SimplePageLayout from "@layouts/SimplePageLayout.astro";
+import { getNextOccurence } from "@lib/utils/date-helper";
 
 const { rrulestr, RRule } = rrule;
 
@@ -20,11 +21,12 @@ const rEvents = veranstaltungen
   .filter((e) => e.recurring && e.wiederholung)
   .map((e) => {
     // count: 1, because we only want the next event
-    const rrule = new RRule(
-      { ...rrulestr(e.wiederholung!).options, count: 1 },
-      false
-    );
-    const date = rrule.after(new Date());
+    // const rrule = new RRule(
+    //   { ...rrulestr(e.wiederholung!).options, count: 1 },
+    //   false
+    // );
+    // const date = rrule.after(new Date());
+    const date = getNextOccurence(e.wiederholung!, e.datum!);
     return { ...e, datum: date };
   });
 

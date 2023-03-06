@@ -50,6 +50,8 @@ export const veranstaltungsQuery = graphql(/* GraphQL */ `
       id
       ort
       slug
+      date_created
+      date_updated
       beschreibung
       duration
       recurring
@@ -140,6 +142,8 @@ export const getOneVeranstaltungQuery = graphql(/* GraphQL */ `
     veranstaltung(filter: { slug: { _eq: $slug } }) {
       id
       ort
+      date_created
+      date_updated
       slug
       beschreibung
       datum

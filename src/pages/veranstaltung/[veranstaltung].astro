@@ -27,6 +27,11 @@ const {
   wiederholung,
   short_description,
 } = Astro.props;
+
+const time = new Date(datum).toLocaleTimeString("de-DE", {
+  hour: "2-digit",
+  minute: "2-digit",
+});
 ---
 
 <Layout
@@ -40,11 +45,10 @@ const {
     <div class="badge badge-primary">
       Nächstes Event:&nbsp;
       <NextEvent
-        date={datum}
+        date={datum!}
         recurring={recurring}
         wiederholungsRule={wiederholung}
-        client:load
-      />
+      />&nbsp;{time}
     </div>
     <a
       class="btn gap-2 btn-primary"
