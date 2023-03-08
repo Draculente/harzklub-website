@@ -95,7 +95,7 @@
   {#each images as image, i}
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <img
-      class="rounded-md cursor-pointer h-[200px] max-w-full"
+      class="rounded-md cursor-pointer h-[200px] max-w-full md:w-full md:h-auto"
       on:click={() => {
         toggleModal();
         loading = true;

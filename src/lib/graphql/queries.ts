@@ -61,7 +61,7 @@ export const veranstaltungsQuery = graphql(/* GraphQL */ `
       datum
       titel
       mehr_info
-      important_event_changes {
+      event_changes {
         info
         date_created
       }
@@ -159,6 +159,13 @@ export const getOneVeranstaltungQuery = graphql(/* GraphQL */ `
       datum
       duration
       recurring
+      event_changes {
+        info
+        date_created
+        user_created
+        user_updated
+        date_updated
+      }
       wiederholung
       titel
       featured_image {
