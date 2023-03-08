@@ -60,10 +60,10 @@ const images: Image[] | undefined = bildergalerie
   description={short_description ?? undefined}
 >
   <main class="max-w-5xl mx-auto mb-20 md:mb-5 p-4">
-    <div class="flex flex-col gap-5 mb-4">
+    <div class="flex flex-col gap-5 my-4">
       {
         event_changes?.map((e) => (
-          <div class="flex bg-error text-error-content items-center rounded-lg gap-3 py-4 px-3 shadow-lg justify-start flex-nowrap flex-row my-3">
+          <div class="flex bg-error text-error-content items-center rounded-lg gap-3 py-4 px-3 shadow-lg justify-start flex-nowrap flex-row">
             <i class="ri-information-line text-xl" />
             <span class="mt-0">{e!.info}</span>
           </div>
