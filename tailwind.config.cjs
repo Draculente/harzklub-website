@@ -125,7 +125,9 @@ module.exports = {
 
 					"warning": "#FBBD23",
 
-					"error": "#F87272"
+					"error": "#DE4343",
+
+					"error-content": "#ffffff",
 				},
 			},
 			{
@@ -155,7 +157,9 @@ module.exports = {
 
 					"warning": "#FBBD23",
 
-					"error": "#F87272"
+					"error": "#DE4343",
+
+					"error-content": "#ffffff",
 				},
 			},
 		],

@@ -1,0 +1,76 @@
+---
+import NextEvent from "./NextEvent.svelte";
+
+export type Props = {
+  recurring?: boolean;
+  human_readable_interval?: string;
+  ort?: string;
+  datum?: string;
+  wiederholung?: string;
+  slug?: string;
+};
+
+const { recurring, human_readable_interval, ort, datum, wiederholung, slug } =
+  Astro.props;
+
+const time = new Date(datum!).toLocaleTimeString("de-DE", {
+  hour: "2-digit",
+  minute: "2-digit",
+});
+---
+
+<div class="shadow-xl rounded-lg w-fit px-4 py-4 bg-info">
+  {
+    recurring && (
+      <div class="info-text mb-4">
+        <i class="ri-calendar-event-line" />
+        <span>{human_readable_interval}</span>
+      </div>
+    )
+  }
+  <div class="info-text mb-4">
+    <i class="ri-map-pin-line"></i>
+    <span>{ort?.trim()}</span>
+  </div>
+  {
+    recurring && (
+      <p>
+        <strong>Nächster Termin: </strong>
+      </p>
+    )
+  }
+  <div class="info-text">
+    <i class="ri-calendar-event-line"></i>
+    <span>
+      <NextEvent
+        date={datum!}
+        recurring={recurring ?? undefined}
+        wiederholungsRule={wiederholung}
+        formatDateConfig={{
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        }}
+      />
+    </span>
+  </div>
+  <div class="info-text">
+    <i class="ri-time-line"></i>
+    <span>{time} Uhr</span>
+  </div>
+  <a
+    class="btn gap-2 btn-primary mt-4 p-2 font-medium text-sm w-full"
+    href={"/veranstaltung/" + slug + ".ics"}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <i class="ri-calendar-event-line text-lg"></i>Zum Kalender hinzufügen
+  </a>
+</div>
+
+<style>
+  .info-text {
+    @apply flex flex-row items-center gap-2;
+  }
+</style>

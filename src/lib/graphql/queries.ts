@@ -60,12 +60,22 @@ export const veranstaltungsQuery = graphql(/* GraphQL */ `
       short_description
       datum
       titel
+      mehr_info
+      important_event_changes {
+        info
+        date_created
+      }
       featured_image {
         id
         description
       }
       bildergalerie {
-        id
+        directus_files_id {
+          description
+          title
+          id
+          location
+        }
       }
     }
   }

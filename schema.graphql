@@ -42,6 +42,9 @@ type Query {
   impressions_files(filter: impressions_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [impressions_files!]!
   impressions_files_by_id(id: ID!): impressions_files
   impressions_files_aggregated(groupBy: [String], filter: impressions_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [impressions_files_aggregated!]!
+  important_event_changes(filter: important_event_changes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [important_event_changes!]!
+  important_event_changes_by_id(id: ID!): important_event_changes
+  important_event_changes_aggregated(groupBy: [String], filter: important_event_changes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [important_event_changes_aggregated!]!
 }
 
 type Mutation {
@@ -403,6 +406,46 @@ type footer_social_link_aggregated_fields {
   footer: Float
 }
 
+type important_event_changes {
+  id: ID!
+  user_created: String
+  date_created: Date
+  date_created_func: datetime_functions
+  user_updated: String
+  date_updated: Date
+  date_updated_func: datetime_functions
+  event(filter: veranstaltung_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): veranstaltung
+  info: String
+}
+
+type important_event_changes_aggregated {
+  group: JSON
+  countAll: Int
+  count: important_event_changes_aggregated_count
+  countDistinct: important_event_changes_aggregated_count
+  avg: important_event_changes_aggregated_fields
+  sum: important_event_changes_aggregated_fields
+  avgDistinct: important_event_changes_aggregated_fields
+  sumDistinct: important_event_changes_aggregated_fields
+  min: important_event_changes_aggregated_fields
+  max: important_event_changes_aggregated_fields
+}
+
+type important_event_changes_aggregated_count {
+  id: Int
+  user_created: Int
+  date_created: Int
+  user_updated: Int
+  date_updated: Int
+  event: Int
+  info: Int
+}
+
+type important_event_changes_aggregated_fields {
+  id: Float
+  event: Float
+}
+
 type impressions {
   id: ID!
   user_updated: String
@@ -623,6 +666,8 @@ type veranstaltung {
   short_description: String
   bildergalerie(filter: veranstaltung_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [veranstaltung_files]
   bildergalerie_func: count_functions
+  important_event_changes(filter: important_event_changes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [important_event_changes]
+  important_event_changes_func: count_functions
 }
 
 type veranstaltung_aggregated {
@@ -669,6 +714,7 @@ type veranstaltung_aggregated_count {
   human_readable_interval: Int
   short_description: Int
   bildergalerie: Int
+  important_event_changes: Int
 }
 
 type veranstaltung_aggregated_fields {
@@ -975,6 +1021,20 @@ input geometry_filter_operators {
   _nnull: Boolean
 }
 
+input important_event_changes_filter {
+  id: number_filter_operators
+  user_created: string_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: string_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  event: veranstaltung_filter
+  info: string_filter_operators
+  _and: [important_event_changes_filter]
+  _or: [important_event_changes_filter]
+}
+
 input impressions_files_filter {
   id: number_filter_operators
   impressions_id: impressions_filter
@@ -1113,6 +1173,8 @@ input veranstaltung_filter {
   short_description: string_filter_operators
   bildergalerie: veranstaltung_files_filter
   bildergalerie_func: count_function_filter_operators
+  important_event_changes: important_event_changes_filter
+  important_event_changes_func: count_function_filter_operators
   _and: [veranstaltung_filter]
   _or: [veranstaltung_filter]
 }
