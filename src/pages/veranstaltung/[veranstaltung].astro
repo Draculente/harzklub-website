@@ -2,7 +2,6 @@
 import ArticleBody from "@components/ArticleBody.astro";
 import EventInfoCard from "@components/EventInfoCard.astro";
 import ImageGallery from "@components/ImageGallery.svelte";
-import NextEvent from "@components/NextEvent.svelte";
 import type { Veranstaltung } from "@lib/gql/graphql";
 import { veranstaltungsQuery } from "@lib/graphql/queries";
 import type { Image } from "@lib/imageGallery";
@@ -31,7 +30,7 @@ const {
   human_readable_interval,
   wiederholung,
   short_description,
-  important_event_changes,
+  event_changes,
   featured_image,
   ort,
   mehr_info,
@@ -60,11 +59,11 @@ const images: Image[] | undefined = bildergalerie
   page={Seite.Aktuelles}
   description={short_description ?? undefined}
 >
-  <main class="max-w-4xl mx-auto mb-20 md:mb-5 p-4">
+  <main class="max-w-5xl mx-auto mb-20 md:mb-5 p-4">
     <div class="flex flex-col gap-5 mb-4">
       {
-        important_event_changes?.map((e) => (
-          <div class="flex bg-error text-error-content items-center rounded-lg gap-3 py-4 px-3 shadow-lg justify-start flex-nowrap flex-row m-3">
+        event_changes?.map((e) => (
+          <div class="flex bg-error text-error-content items-center rounded-lg gap-3 py-4 px-3 shadow-lg justify-start flex-nowrap flex-row my-3">
             <i class="ri-information-line text-xl" />
             <span class="mt-0">{e!.info}</span>
           </div>
@@ -76,8 +75,8 @@ const images: Image[] | undefined = bildergalerie
       src={getFileUrl(featured_image?.id)}
       alt={featured_image?.description}
     />
-    <div class="flex flex-row md:flex-wrap gap-4">
-      <div class="">
+    <div class="flex flex-row md:flex-wrap-reverse gap-4">
+      <div>
         <div
           class={"-translate-y-2 badge" +
             ` ${recurring ? "badge-warning" : "badge-primary"}`}
@@ -102,7 +101,7 @@ const images: Image[] | undefined = bildergalerie
           />
         </div>
       </div>
-      <div class="min-w-fit -translate-y-5 mx-auto">
+      <div class="min-w-fit -translate-y-5 mx-auto md:w-full">
         <EventInfoCard
           datum={datum}
           human_readable_interval={human_readable_interval ?? undefined}

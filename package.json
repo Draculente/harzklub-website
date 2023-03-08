@@ -26,6 +26,7 @@
     "@material-tailwind/html": "^1.2.3",
     "@tailwindcss/typography": "^0.5.9",
     "daisyui": "^2.50.0",
+    "feed": "^4.2.2",
     "graphql": "^16.6.0",
     "graphql-request": "^5.1.0",
     "ics": "^3.1.0",

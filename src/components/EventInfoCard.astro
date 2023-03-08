@@ -17,9 +17,11 @@ const time = new Date(datum!).toLocaleTimeString("de-DE", {
   hour: "2-digit",
   minute: "2-digit",
 });
+
+const selfUrl = "/veranstaltung/" + slug;
 ---
 
-<div class="shadow-xl rounded-lg w-fit px-4 py-4 bg-info">
+<div class="shadow-xl rounded-lg px-4 py-4 bg-info w-full">
   {
     recurring && (
       <div class="info-text mb-4">
@@ -59,14 +61,32 @@ const time = new Date(datum!).toLocaleTimeString("de-DE", {
     <i class="ri-time-line"></i>
     <span>{time} Uhr</span>
   </div>
-  <a
+  <div class="flex flex-row mt-4 gap-2 items-center justify-center">
+    <a
+      class="btn btn-square btn-primary p-2"
+      href={selfUrl + ".rss"}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <i class="ri-rss-fill text-lg"></i>
+    </a>
+    <a
+      class="btn gap-2 btn-primary p-2 font-medium text-sm"
+      href={selfUrl + ".ics"}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <i class="ri-calendar-event-line text-lg"></i>Zum Kalender hinzufügen
+    </a>
+  </div>
+  <!-- <a
     class="btn gap-2 btn-primary mt-4 p-2 font-medium text-sm w-full"
-    href={"/veranstaltung/" + slug + ".ics"}
+    href={selfUrl + ".rss"}
     target="_blank"
     rel="noopener noreferrer"
   >
-    <i class="ri-calendar-event-line text-lg"></i>Zum Kalender hinzufügen
-  </a>
+    <i class="ri-rss-fill text-lg"></i>RSS-Feed abonnieren</a
+  > -->
 </div>
 
 <style>
