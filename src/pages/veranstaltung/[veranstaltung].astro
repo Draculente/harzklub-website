@@ -1,9 +1,14 @@
 ---
 import ArticleBody from "@components/ArticleBody.astro";
+import EventInfoCard from "@components/EventInfoCard.astro";
+import ImageGallery from "@components/ImageGallery.svelte";
 import NextEvent from "@components/NextEvent.svelte";
+import type { Veranstaltung } from "@lib/gql/graphql";
 import { veranstaltungsQuery } from "@lib/graphql/queries";
+import type { Image } from "@lib/imageGallery";
 import { Seite } from "@lib/links";
 import gqlClient from "@lib/utils/gql-client";
+import { getFileUrl } from "@lib/utils/helper";
 import Layout from "src/layouts/Layout.astro";
 
 export async function getStaticPaths() {
@@ -26,40 +31,94 @@ const {
   human_readable_interval,
   wiederholung,
   short_description,
-} = Astro.props;
+  important_event_changes,
+  featured_image,
+  ort,
+  mehr_info,
+  bildergalerie,
+} = Astro.props as Veranstaltung;
 
-const time = new Date(datum).toLocaleTimeString("de-DE", {
-  hour: "2-digit",
-  minute: "2-digit",
-});
+const images: Image[] | undefined = bildergalerie
+  ?.filter((e) => e)
+  .map((e): Image => {
+    const { description, title, id, location, metadata } =
+      e!.directus_files_id!;
+
+    return {
+      description: description ?? undefined,
+      title: title ?? undefined,
+      src: getFileUrl(id)!,
+      id: id!,
+      location: location ?? undefined,
+      metadata: metadata ?? undefined,
+    };
+  });
 ---
 
 <Layout
   title={titel ?? "Aktuelles"}
   page={Seite.Aktuelles}
-  description={short_description}
+  description={short_description ?? undefined}
 >
-  <main>
-    <h1>{titel}</h1>
-    {recurring && <p>{human_readable_interval}</p>}
-    <div class="badge badge-primary">
-      Nächstes Event:&nbsp;
-      <NextEvent
-        date={datum!}
-        recurring={recurring}
-        wiederholungsRule={wiederholung}
-      />&nbsp;{time}
+  <main class="max-w-4xl mx-auto mb-20 md:mb-5 p-4">
+    <div class="flex flex-col gap-5 mb-4">
+      {
+        important_event_changes?.map((e) => (
+          <div class="flex bg-error text-error-content items-center rounded-lg gap-3 py-4 px-3 shadow-lg justify-start flex-nowrap flex-row m-3">
+            <i class="ri-information-line text-xl" />
+            <span class="mt-0">{e!.info}</span>
+          </div>
+        ))
+      }
     </div>
-    <a
-      class="btn gap-2 btn-primary"
-      href={"/veranstaltung/" + slug + ".ics"}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <i class="ri-calendar-event-line"></i>Zum Kalender hinzufügen
-    </a>
-    <ArticleBody
-      html={beschreibung ?? "<p>Keine Beschreibung vorhanden.</p>"}
+    <img
+      class="rounded-lg h-40 w-full object-cover object-center shadow-lg"
+      src={getFileUrl(featured_image?.id)}
+      alt={featured_image?.description}
     />
+    <div class="flex flex-row md:flex-wrap gap-4">
+      <div class="">
+        <div
+          class={"-translate-y-2 badge" +
+            ` ${recurring ? "badge-warning" : "badge-primary"}`}
+        >
+          {recurring ? "Wiederholend" : "Einmalig"}
+        </div>
+        <h1 class="text-6xl font-bold md:text-4xl">{titel}</h1>
+        {
+          mehr_info && mehr_info === "infos" && (
+            <div class="flex bg-primary text-primary-content items-center rounded-lg gap-3 py-4 px-3 shadow-lg justify-start flex-nowrap flex-row my-4">
+              <i class="ri-information-line text-xl" />
+              <span>
+                Diese Veranstaltung hat bereits stattgefunden. Wir hoffen, Dir
+                hat es Spaß gemacht. Hier sind einige Impressionen.
+              </span>
+            </div>
+          )
+        }
+        <div class="py-4">
+          <ArticleBody
+            html={beschreibung ?? "<p>Keine Beschreibung vorhanden.</p>"}
+          />
+        </div>
+      </div>
+      <div class="min-w-fit -translate-y-5 mx-auto">
+        <EventInfoCard
+          datum={datum}
+          human_readable_interval={human_readable_interval ?? undefined}
+          ort={ort ?? undefined}
+          recurring={recurring ?? undefined}
+          slug={slug ?? undefined}
+          wiederholung={wiederholung ?? undefined}
+        />
+      </div>
+    </div>
+    {
+      images && images.length > 0 && (
+        <div>
+          <ImageGallery images={images} showInfo={true} client:load />
+        </div>
+      )
+    }
   </main>
 </Layout>
