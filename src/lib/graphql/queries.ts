@@ -217,3 +217,30 @@ export const impressionsQuery = graphql(/* GraphQL */ `
     }
   }
 `);
+
+export const wanderungenQuery = graphql(/* GraphQL */ `
+  query wanderungenQuery {
+     wanderung{
+      titel
+      id
+      strecke
+      schwierigkeitsgrad
+      natur
+      dauer
+      barrierefrei
+      date_created
+      date_updated
+      featured_image {
+        id
+      }
+      wander_step {
+        id
+        description
+        bilder {
+          directus_files_id {
+            id
+            description
+          }
+        }
+      }
+     }}`)

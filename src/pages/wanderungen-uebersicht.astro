@@ -1,0 +1,31 @@
+---
+import WanderungCard from "@components/WanderungCard.astro";
+import SimplePageLayout from "@layouts/SimplePageLayout.astro";
+import { wanderungenQuery } from "@lib/graphql/queries";
+import gqlClient from "@lib/utils/gql-client";
+import { getFileUrl } from "@lib/utils/helper";
+const { wanderung } = await gqlClient.request(wanderungenQuery);
+---
+
+<SimplePageLayout
+    subtitle="Raus in die Natur"
+    description="Hier findest du alle unsere Wanderungen."
+    title="Hier findest du unsere Wanderungen!"
+>
+    <div class="pt-32 pb-32 flex flex-row flex-wrap gap-4 2xs:pt-16 2xs:gap-6">
+        {
+            wanderung.map((wanderung) => (
+                <WanderungCard
+                    titel={wanderung.titel ?? undefined}
+                    strecke={wanderung.strecke ?? undefined}
+                    schwierigkeit={wanderung.schwierigkeitsgrad ?? undefined}
+                    slug={wanderung.id ?? undefined}
+                    featured_image_url={
+                        getFileUrl(wanderung.featured_image?.id) ?? undefined
+                    }
+                    dauer={wanderung.dauer ?? undefined}
+                />
+            ))
+        }
+    </div>
+</SimplePageLayout>

@@ -34,6 +34,8 @@ module.exports = {
 				'900': '#213b06'
 			},
 			'light-blue': '#F8FAFF',
+			'dark-grey': '#484848',
+			'light-grey': '#A7A7A7',
 			'lime': {
 				'50': '#f5f6f4',
 				'100': '#ebede9',
@@ -64,6 +66,8 @@ module.exports = {
 			sans: ['Manrope', 'sans-serif']
 		},
 		screens: {
+			
+			'2xs': { 'max': '500px' },
 
 			'xs': { 'max': '640px' },
 
