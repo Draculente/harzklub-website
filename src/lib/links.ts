@@ -10,7 +10,7 @@ export enum Seite {
   Startseite,
   Aktuelles,
   Heimatgruppe,
-  Jugendgruppe,
+  Jugendarbeit,
   Wanderungen,
   DerHarz,
   UeberUns,
@@ -42,9 +42,9 @@ export const pages: Array<SeitenInfo> = [
     menu: true,
   },
   {
-    page: Seite.Jugendgruppe,
-    href: UNDER_CONSTRUCTION,
-    name: "Jugendgruppe",
+    page: Seite.Jugendarbeit,
+    href: "/unsere-arbeit/jugendarbeit",
+    name: "Jugendarbeit",
     menu: true,
   },
   {

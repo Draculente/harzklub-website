@@ -2,9 +2,6 @@ type Query {
   veranstaltung_files(filter: veranstaltung_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [veranstaltung_files!]!
   veranstaltung_files_by_id(id: ID!): veranstaltung_files
   veranstaltung_files_aggregated(groupBy: [String], filter: veranstaltung_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [veranstaltung_files_aggregated!]!
-  wanderung(filter: wanderung_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [wanderung!]!
-  wanderung_by_id(id: ID!): wanderung
-  wanderung_aggregated(groupBy: [String], filter: wanderung_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [wanderung_aggregated!]!
   meta: meta
   wegeschaden(filter: wegeschaden_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [wegeschaden!]!
   wegeschaden_by_id(id: ID!): wegeschaden
@@ -15,6 +12,9 @@ type Query {
   presse(filter: presse_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [presse!]!
   presse_by_id(id: ID!): presse
   presse_aggregated(groupBy: [String], filter: presse_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [presse_aggregated!]!
+  wanderung(filter: wanderung_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [wanderung!]!
+  wanderung_by_id(id: ID!): wanderung
+  wanderung_aggregated(groupBy: [String], filter: wanderung_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [wanderung_aggregated!]!
   veranstaltung(filter: veranstaltung_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [veranstaltung!]!
   veranstaltung_by_id(id: ID!): veranstaltung
   veranstaltung_aggregated(groupBy: [String], filter: veranstaltung_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [veranstaltung_aggregated!]!
@@ -22,7 +22,6 @@ type Query {
   downloads_by_id(id: ID!): downloads
   downloads_aggregated(groupBy: [String], filter: downloads_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [downloads_aggregated!]!
   footer: footer
-  startseite: startseite
   startseite_aufgaben(filter: startseite_aufgaben_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [startseite_aufgaben!]!
   startseite_aufgaben_by_id(id: ID!): startseite_aufgaben
   startseite_aufgaben_aggregated(groupBy: [String], filter: startseite_aufgaben_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [startseite_aufgaben_aggregated!]!
@@ -36,15 +35,34 @@ type Query {
   footer_link_by_id(id: ID!): footer_link
   footer_link_aggregated(groupBy: [String], filter: footer_link_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [footer_link_aggregated!]!
   aktuelles: aktuelles
+  startseite: startseite
   Impressum: Impressum
   featured_event: featured_event
   impressions: impressions
   impressions_files(filter: impressions_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [impressions_files!]!
   impressions_files_by_id(id: ID!): impressions_files
   impressions_files_aggregated(groupBy: [String], filter: impressions_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [impressions_files_aggregated!]!
+  group_section_files(filter: group_section_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [group_section_files!]!
+  group_section_files_by_id(id: ID!): group_section_files
+  group_section_files_aggregated(groupBy: [String], filter: group_section_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [group_section_files_aggregated!]!
+  group_page_veranstaltung(filter: group_page_veranstaltung_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [group_page_veranstaltung!]!
+  group_page_veranstaltung_by_id(id: ID!): group_page_veranstaltung
+  group_page_veranstaltung_aggregated(groupBy: [String], filter: group_page_veranstaltung_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [group_page_veranstaltung_aggregated!]!
   event_changes(filter: event_changes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [event_changes!]!
   event_changes_by_id(id: ID!): event_changes
   event_changes_aggregated(groupBy: [String], filter: event_changes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [event_changes_aggregated!]!
+  group_section(filter: group_section_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [group_section!]!
+  group_section_by_id(id: ID!): group_section
+  group_section_aggregated(groupBy: [String], filter: group_section_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [group_section_aggregated!]!
+  group_page(filter: group_page_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [group_page!]!
+  group_page_by_id(id: ID!): group_page
+  group_page_aggregated(groupBy: [String], filter: group_page_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [group_page_aggregated!]!
+  wander_step(filter: wander_step_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [wander_step!]!
+  wander_step_by_id(id: ID!): wander_step
+  wander_step_aggregated(groupBy: [String], filter: wander_step_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [wander_step_aggregated!]!
+  wander_step_files(filter: wander_step_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [wander_step_files!]!
+  wander_step_files_by_id(id: ID!): wander_step_files
+  wander_step_files_aggregated(groupBy: [String], filter: wander_step_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [wander_step_files_aggregated!]!
 }
 
 type Mutation {
@@ -446,6 +464,167 @@ type footer_social_link_aggregated_fields {
   footer: Float
 }
 
+type group_page {
+  id: ID!
+  user_created: String
+  date_created: Date
+  date_created_func: datetime_functions
+  user_updated: String
+  date_updated: Date
+  date_updated_func: datetime_functions
+  title: String
+  subtitle: String
+
+  """Die Meta-Description für Google und Co"""
+  description: String
+  slug: String
+  group_section(filter: group_section_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [group_section]
+  group_section_func: count_functions
+  events(filter: group_page_veranstaltung_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [group_page_veranstaltung]
+  events_func: count_functions
+}
+
+type group_page_aggregated {
+  group: JSON
+  countAll: Int
+  count: group_page_aggregated_count
+  countDistinct: group_page_aggregated_count
+  avg: group_page_aggregated_fields
+  sum: group_page_aggregated_fields
+  avgDistinct: group_page_aggregated_fields
+  sumDistinct: group_page_aggregated_fields
+  min: group_page_aggregated_fields
+  max: group_page_aggregated_fields
+}
+
+type group_page_aggregated_count {
+  id: Int
+  user_created: Int
+  date_created: Int
+  user_updated: Int
+  date_updated: Int
+  title: Int
+  subtitle: Int
+
+  """Die Meta-Description für Google und Co"""
+  description: Int
+  slug: Int
+  group_section: Int
+  events: Int
+}
+
+type group_page_aggregated_fields {
+  id: Float
+}
+
+type group_page_veranstaltung {
+  id: ID!
+  group_page_id(filter: group_page_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): group_page
+  veranstaltung_id(filter: veranstaltung_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): veranstaltung
+}
+
+type group_page_veranstaltung_aggregated {
+  group: JSON
+  countAll: Int
+  count: group_page_veranstaltung_aggregated_count
+  countDistinct: group_page_veranstaltung_aggregated_count
+  avg: group_page_veranstaltung_aggregated_fields
+  sum: group_page_veranstaltung_aggregated_fields
+  avgDistinct: group_page_veranstaltung_aggregated_fields
+  sumDistinct: group_page_veranstaltung_aggregated_fields
+  min: group_page_veranstaltung_aggregated_fields
+  max: group_page_veranstaltung_aggregated_fields
+}
+
+type group_page_veranstaltung_aggregated_count {
+  id: Int
+  group_page_id: Int
+  veranstaltung_id: Int
+}
+
+type group_page_veranstaltung_aggregated_fields {
+  id: Float
+  group_page_id: Float
+  veranstaltung_id: Float
+}
+
+type group_section {
+  id: ID!
+  user_created: String
+  date_created: Date
+  date_created_func: datetime_functions
+  user_updated: String
+  date_updated: Date
+  date_updated_func: datetime_functions
+  title: String
+  description: String
+  group_page(filter: group_page_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): group_page
+  bilder(filter: group_section_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [group_section_files]
+  bilder_func: count_functions
+}
+
+type group_section_aggregated {
+  group: JSON
+  countAll: Int
+  count: group_section_aggregated_count
+  countDistinct: group_section_aggregated_count
+  avg: group_section_aggregated_fields
+  sum: group_section_aggregated_fields
+  avgDistinct: group_section_aggregated_fields
+  sumDistinct: group_section_aggregated_fields
+  min: group_section_aggregated_fields
+  max: group_section_aggregated_fields
+}
+
+type group_section_aggregated_count {
+  id: Int
+  user_created: Int
+  date_created: Int
+  user_updated: Int
+  date_updated: Int
+  title: Int
+  description: Int
+  group_page: Int
+
+  """Bitte am besten 3 Bilder!"""
+  bilder: Int
+}
+
+type group_section_aggregated_fields {
+  id: Float
+  group_page: Float
+}
+
+type group_section_files {
+  id: ID!
+  group_section_id(filter: group_section_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): group_section
+  directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+}
+
+type group_section_files_aggregated {
+  group: JSON
+  countAll: Int
+  count: group_section_files_aggregated_count
+  countDistinct: group_section_files_aggregated_count
+  avg: group_section_files_aggregated_fields
+  sum: group_section_files_aggregated_fields
+  avgDistinct: group_section_files_aggregated_fields
+  sumDistinct: group_section_files_aggregated_fields
+  min: group_section_files_aggregated_fields
+  max: group_section_files_aggregated_fields
+}
+
+type group_section_files_aggregated_count {
+  id: Int
+  group_section_id: Int
+  directus_files_id: Int
+}
+
+type group_section_files_aggregated_fields {
+  id: Float
+  group_section_id: Float
+}
+
 type impressions {
   id: ID!
   user_updated: String
@@ -595,6 +774,9 @@ type startseite {
   mitgliedschaft_text: String
   mitgliedschaft_subtitle: String
   mitgliedschaft_title: String
+  wandern_link: String
+  heimat_link: String
+  jugend_link: String
   aufgaben(filter: startseite_aufgaben_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [startseite_aufgaben]
   aufgaben_func: count_functions
 }
@@ -755,17 +937,102 @@ type veranstaltung_files_aggregated_fields {
   veranstaltung_id: Float
 }
 
+type wander_step {
+  id: ID!
+  user_created: String
+  date_created: Date
+  date_created_func: datetime_functions
+  user_updated: String
+  date_updated: Date
+  date_updated_func: datetime_functions
+  description: String
+  wanderung(filter: wanderung_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): wanderung
+  bilder(filter: wander_step_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [wander_step_files]
+  bilder_func: count_functions
+}
+
+type wander_step_aggregated {
+  group: JSON
+  countAll: Int
+  count: wander_step_aggregated_count
+  countDistinct: wander_step_aggregated_count
+  avg: wander_step_aggregated_fields
+  sum: wander_step_aggregated_fields
+  avgDistinct: wander_step_aggregated_fields
+  sumDistinct: wander_step_aggregated_fields
+  min: wander_step_aggregated_fields
+  max: wander_step_aggregated_fields
+}
+
+type wander_step_aggregated_count {
+  id: Int
+  user_created: Int
+  date_created: Int
+  user_updated: Int
+  date_updated: Int
+  description: Int
+  wanderung: Int
+  bilder: Int
+}
+
+type wander_step_aggregated_fields {
+  id: Float
+  wanderung: Float
+}
+
+type wander_step_files {
+  id: ID!
+  wander_step_id(filter: wander_step_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): wander_step
+  directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+}
+
+type wander_step_files_aggregated {
+  group: JSON
+  countAll: Int
+  count: wander_step_files_aggregated_count
+  countDistinct: wander_step_files_aggregated_count
+  avg: wander_step_files_aggregated_fields
+  sum: wander_step_files_aggregated_fields
+  avgDistinct: wander_step_files_aggregated_fields
+  sumDistinct: wander_step_files_aggregated_fields
+  min: wander_step_files_aggregated_fields
+  max: wander_step_files_aggregated_fields
+}
+
+type wander_step_files_aggregated_count {
+  id: Int
+  wander_step_id: Int
+  directus_files_id: Int
+}
+
+type wander_step_files_aggregated_fields {
+  id: Float
+  wander_step_id: Float
+}
+
 type wanderung {
   id: ID!
-  status: String
   date_created: Date
   date_created_func: datetime_functions
   date_updated: Date
   date_updated_func: datetime_functions
   titel: String
-  beschreibung: String
-  externer_anbieter: String
   featured_image(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  description: String
+
+  """Link zum externen Anbieter"""
+  link: String
+
+  """Dauer in Stunden"""
+  dauer: Int
+
+  """Die Länge der Strecke in Kilometern"""
+  strecke: Float
+  schwierigkeitsgrad: String
+  natur: String
+  barrierefrei: Boolean
+  wander_step(filter: wander_step_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [wander_step]
+  wander_step_func: count_functions
 }
 
 type wanderung_aggregated {
@@ -783,21 +1050,38 @@ type wanderung_aggregated {
 
 type wanderung_aggregated_count {
   id: Int
-  status: Int
   date_created: Int
   date_updated: Int
   titel: Int
-  beschreibung: Int
-  externer_anbieter: Int
 
   """
   Das Bild wird unter anderem in der Übersicht der aller Wanderungen angezeigt.
   """
   featured_image: Int
+  description: Int
+
+  """Link zum externen Anbieter"""
+  link: Int
+
+  """Dauer in Stunden"""
+  dauer: Int
+
+  """Die Länge der Strecke in Kilometern"""
+  strecke: Int
+  schwierigkeitsgrad: Int
+  natur: Int
+  barrierefrei: Int
+  wander_step: Int
 }
 
 type wanderung_aggregated_fields {
   id: Float
+
+  """Dauer in Stunden"""
+  dauer: Float
+
+  """Die Länge der Strecke in Kilometern"""
+  strecke: Float
 }
 
 type wegeschaden {
@@ -1035,6 +1319,59 @@ input geometry_filter_operators {
   _nnull: Boolean
 }
 
+input group_page_filter {
+  id: number_filter_operators
+  user_created: string_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: string_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  title: string_filter_operators
+  subtitle: string_filter_operators
+  description: string_filter_operators
+  slug: string_filter_operators
+  group_section: group_section_filter
+  group_section_func: count_function_filter_operators
+  events: group_page_veranstaltung_filter
+  events_func: count_function_filter_operators
+  _and: [group_page_filter]
+  _or: [group_page_filter]
+}
+
+input group_page_veranstaltung_filter {
+  id: number_filter_operators
+  group_page_id: group_page_filter
+  veranstaltung_id: veranstaltung_filter
+  _and: [group_page_veranstaltung_filter]
+  _or: [group_page_veranstaltung_filter]
+}
+
+input group_section_files_filter {
+  id: number_filter_operators
+  group_section_id: group_section_filter
+  directus_files_id: directus_files_filter
+  _and: [group_section_files_filter]
+  _or: [group_section_files_filter]
+}
+
+input group_section_filter {
+  id: number_filter_operators
+  user_created: string_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: string_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  title: string_filter_operators
+  description: string_filter_operators
+  group_page: group_page_filter
+  bilder: group_section_files_filter
+  bilder_func: count_function_filter_operators
+  _and: [group_section_filter]
+  _or: [group_section_filter]
+}
+
 input impressions_files_filter {
   id: number_filter_operators
   impressions_id: impressions_filter
@@ -1118,6 +1455,9 @@ input startseite_filter {
   mitgliedschaft_text: string_filter_operators
   mitgliedschaft_subtitle: string_filter_operators
   mitgliedschaft_title: string_filter_operators
+  wandern_link: string_filter_operators
+  heimat_link: string_filter_operators
+  jugend_link: string_filter_operators
   aufgaben: startseite_aufgaben_filter
   aufgaben_func: count_function_filter_operators
   _and: [startseite_filter]
@@ -1179,17 +1519,47 @@ input veranstaltung_filter {
   _or: [veranstaltung_filter]
 }
 
+input wander_step_files_filter {
+  id: number_filter_operators
+  wander_step_id: wander_step_filter
+  directus_files_id: directus_files_filter
+  _and: [wander_step_files_filter]
+  _or: [wander_step_files_filter]
+}
+
+input wander_step_filter {
+  id: number_filter_operators
+  user_created: string_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: string_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  description: string_filter_operators
+  wanderung: wanderung_filter
+  bilder: wander_step_files_filter
+  bilder_func: count_function_filter_operators
+  _and: [wander_step_filter]
+  _or: [wander_step_filter]
+}
+
 input wanderung_filter {
   id: number_filter_operators
-  status: string_filter_operators
   date_created: date_filter_operators
   date_created_func: datetime_function_filter_operators
   date_updated: date_filter_operators
   date_updated_func: datetime_function_filter_operators
   titel: string_filter_operators
-  beschreibung: string_filter_operators
-  externer_anbieter: string_filter_operators
   featured_image: directus_files_filter
+  description: string_filter_operators
+  link: string_filter_operators
+  dauer: number_filter_operators
+  strecke: number_filter_operators
+  schwierigkeitsgrad: string_filter_operators
+  natur: string_filter_operators
+  barrierefrei: boolean_filter_operators
+  wander_step: wander_step_filter
+  wander_step_func: count_function_filter_operators
   _and: [wanderung_filter]
   _or: [wanderung_filter]
 }

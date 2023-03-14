@@ -253,7 +253,7 @@ const aufgaben = (await gqlClient.request(aufgabenQuery)).aufgaben
             loading="lazy"
           />
           <a
-            href="#"
+            href={frontpageData?.wandern_link}
             class="text-primary font-medium block text-center hover:underline"
             >Erfahre mehr über Wanderungen &gt;</a
           >
@@ -288,7 +288,7 @@ const aufgaben = (await gqlClient.request(aufgabenQuery)).aufgaben
             loading="lazy"
           />
           <a
-            href="#"
+            href={frontpageData?.heimat_link}
             class="text-primary font-medium block text-center hover:underline mt-7"
             >Erfahre mehr über die Heimatgruppe &gt;</a
           >
@@ -358,7 +358,7 @@ const aufgaben = (await gqlClient.request(aufgabenQuery)).aufgaben
             loading="lazy"
           />
           <a
-            href="#"
+            href={frontpageData?.jugend_link}
             class="text-primary font-medium block text-center hover:underline -ml-32 md:ml-0"
             >Erfahre mehr über die Jugendarbeit &gt;</a
           >

@@ -82,6 +82,18 @@ export type Query = {
   footer_social_link: Array<Footer_Social_Link>;
   footer_social_link_aggregated: Array<Footer_Social_Link_Aggregated>;
   footer_social_link_by_id?: Maybe<Footer_Social_Link>;
+  group_page: Array<Group_Page>;
+  group_page_aggregated: Array<Group_Page_Aggregated>;
+  group_page_by_id?: Maybe<Group_Page>;
+  group_page_veranstaltung: Array<Group_Page_Veranstaltung>;
+  group_page_veranstaltung_aggregated: Array<Group_Page_Veranstaltung_Aggregated>;
+  group_page_veranstaltung_by_id?: Maybe<Group_Page_Veranstaltung>;
+  group_section: Array<Group_Section>;
+  group_section_aggregated: Array<Group_Section_Aggregated>;
+  group_section_by_id?: Maybe<Group_Section>;
+  group_section_files: Array<Group_Section_Files>;
+  group_section_files_aggregated: Array<Group_Section_Files_Aggregated>;
+  group_section_files_by_id?: Maybe<Group_Section_Files>;
   impressions?: Maybe<Impressions>;
   impressions_files: Array<Impressions_Files>;
   impressions_files_aggregated: Array<Impressions_Files_Aggregated>;
@@ -100,6 +112,12 @@ export type Query = {
   veranstaltung_files: Array<Veranstaltung_Files>;
   veranstaltung_files_aggregated: Array<Veranstaltung_Files_Aggregated>;
   veranstaltung_files_by_id?: Maybe<Veranstaltung_Files>;
+  wander_step: Array<Wander_Step>;
+  wander_step_aggregated: Array<Wander_Step_Aggregated>;
+  wander_step_by_id?: Maybe<Wander_Step>;
+  wander_step_files: Array<Wander_Step_Files>;
+  wander_step_files_aggregated: Array<Wander_Step_Files_Aggregated>;
+  wander_step_files_by_id?: Maybe<Wander_Step_Files>;
   wanderung: Array<Wanderung>;
   wanderung_aggregated: Array<Wanderung_Aggregated>;
   wanderung_by_id?: Maybe<Wanderung>;
@@ -265,6 +283,110 @@ export type QueryFooter_Social_Link_By_IdArgs = {
 };
 
 
+export type QueryGroup_PageArgs = {
+  filter?: InputMaybe<Group_Page_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryGroup_Page_AggregatedArgs = {
+  filter?: InputMaybe<Group_Page_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryGroup_Page_By_IdArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryGroup_Page_VeranstaltungArgs = {
+  filter?: InputMaybe<Group_Page_Veranstaltung_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryGroup_Page_Veranstaltung_AggregatedArgs = {
+  filter?: InputMaybe<Group_Page_Veranstaltung_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryGroup_Page_Veranstaltung_By_IdArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryGroup_SectionArgs = {
+  filter?: InputMaybe<Group_Section_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryGroup_Section_AggregatedArgs = {
+  filter?: InputMaybe<Group_Section_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryGroup_Section_By_IdArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryGroup_Section_FilesArgs = {
+  filter?: InputMaybe<Group_Section_Files_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryGroup_Section_Files_AggregatedArgs = {
+  filter?: InputMaybe<Group_Section_Files_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryGroup_Section_Files_By_IdArgs = {
+  id: Scalars['ID'];
+};
+
+
 export type QueryImpressions_FilesArgs = {
   filter?: InputMaybe<Impressions_Files_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -391,6 +513,58 @@ export type QueryVeranstaltung_Files_AggregatedArgs = {
 
 
 export type QueryVeranstaltung_Files_By_IdArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryWander_StepArgs = {
+  filter?: InputMaybe<Wander_Step_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryWander_Step_AggregatedArgs = {
+  filter?: InputMaybe<Wander_Step_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryWander_Step_By_IdArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryWander_Step_FilesArgs = {
+  filter?: InputMaybe<Wander_Step_Files_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryWander_Step_Files_AggregatedArgs = {
+  filter?: InputMaybe<Wander_Step_Files_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryWander_Step_Files_By_IdArgs = {
   id: Scalars['ID'];
 };
 
@@ -1080,6 +1254,313 @@ export type Geometry_Filter_Operators = {
   _null?: InputMaybe<Scalars['Boolean']>;
 };
 
+export type Group_Page = {
+  __typename?: 'group_page';
+  date_created?: Maybe<Scalars['Date']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  /** Die Meta-Description für Google und Co */
+  description?: Maybe<Scalars['String']>;
+  events?: Maybe<Array<Maybe<Group_Page_Veranstaltung>>>;
+  events_func?: Maybe<Count_Functions>;
+  group_section?: Maybe<Array<Maybe<Group_Section>>>;
+  group_section_func?: Maybe<Count_Functions>;
+  id: Scalars['ID'];
+  slug?: Maybe<Scalars['String']>;
+  subtitle?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  user_created?: Maybe<Scalars['String']>;
+  user_updated?: Maybe<Scalars['String']>;
+};
+
+
+export type Group_PageEventsArgs = {
+  filter?: InputMaybe<Group_Page_Veranstaltung_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type Group_PageGroup_SectionArgs = {
+  filter?: InputMaybe<Group_Section_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type Group_Page_Aggregated = {
+  __typename?: 'group_page_aggregated';
+  avg?: Maybe<Group_Page_Aggregated_Fields>;
+  avgDistinct?: Maybe<Group_Page_Aggregated_Fields>;
+  count?: Maybe<Group_Page_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']>;
+  countDistinct?: Maybe<Group_Page_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']>;
+  max?: Maybe<Group_Page_Aggregated_Fields>;
+  min?: Maybe<Group_Page_Aggregated_Fields>;
+  sum?: Maybe<Group_Page_Aggregated_Fields>;
+  sumDistinct?: Maybe<Group_Page_Aggregated_Fields>;
+};
+
+export type Group_Page_Aggregated_Count = {
+  __typename?: 'group_page_aggregated_count';
+  date_created?: Maybe<Scalars['Int']>;
+  date_updated?: Maybe<Scalars['Int']>;
+  /** Die Meta-Description für Google und Co */
+  description?: Maybe<Scalars['Int']>;
+  events?: Maybe<Scalars['Int']>;
+  group_section?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  slug?: Maybe<Scalars['Int']>;
+  subtitle?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['Int']>;
+  user_created?: Maybe<Scalars['Int']>;
+  user_updated?: Maybe<Scalars['Int']>;
+};
+
+export type Group_Page_Aggregated_Fields = {
+  __typename?: 'group_page_aggregated_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type Group_Page_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Group_Page_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Group_Page_Filter>>>;
+  date_created?: InputMaybe<Date_Filter_Operators>;
+  date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  date_updated?: InputMaybe<Date_Filter_Operators>;
+  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  description?: InputMaybe<String_Filter_Operators>;
+  events?: InputMaybe<Group_Page_Veranstaltung_Filter>;
+  events_func?: InputMaybe<Count_Function_Filter_Operators>;
+  group_section?: InputMaybe<Group_Section_Filter>;
+  group_section_func?: InputMaybe<Count_Function_Filter_Operators>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  slug?: InputMaybe<String_Filter_Operators>;
+  subtitle?: InputMaybe<String_Filter_Operators>;
+  title?: InputMaybe<String_Filter_Operators>;
+  user_created?: InputMaybe<String_Filter_Operators>;
+  user_updated?: InputMaybe<String_Filter_Operators>;
+};
+
+export type Group_Page_Veranstaltung = {
+  __typename?: 'group_page_veranstaltung';
+  group_page_id?: Maybe<Group_Page>;
+  id: Scalars['ID'];
+  veranstaltung_id?: Maybe<Veranstaltung>;
+};
+
+
+export type Group_Page_VeranstaltungGroup_Page_IdArgs = {
+  filter?: InputMaybe<Group_Page_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type Group_Page_VeranstaltungVeranstaltung_IdArgs = {
+  filter?: InputMaybe<Veranstaltung_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type Group_Page_Veranstaltung_Aggregated = {
+  __typename?: 'group_page_veranstaltung_aggregated';
+  avg?: Maybe<Group_Page_Veranstaltung_Aggregated_Fields>;
+  avgDistinct?: Maybe<Group_Page_Veranstaltung_Aggregated_Fields>;
+  count?: Maybe<Group_Page_Veranstaltung_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']>;
+  countDistinct?: Maybe<Group_Page_Veranstaltung_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']>;
+  max?: Maybe<Group_Page_Veranstaltung_Aggregated_Fields>;
+  min?: Maybe<Group_Page_Veranstaltung_Aggregated_Fields>;
+  sum?: Maybe<Group_Page_Veranstaltung_Aggregated_Fields>;
+  sumDistinct?: Maybe<Group_Page_Veranstaltung_Aggregated_Fields>;
+};
+
+export type Group_Page_Veranstaltung_Aggregated_Count = {
+  __typename?: 'group_page_veranstaltung_aggregated_count';
+  group_page_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  veranstaltung_id?: Maybe<Scalars['Int']>;
+};
+
+export type Group_Page_Veranstaltung_Aggregated_Fields = {
+  __typename?: 'group_page_veranstaltung_aggregated_fields';
+  group_page_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  veranstaltung_id?: Maybe<Scalars['Float']>;
+};
+
+export type Group_Page_Veranstaltung_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Group_Page_Veranstaltung_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Group_Page_Veranstaltung_Filter>>>;
+  group_page_id?: InputMaybe<Group_Page_Filter>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  veranstaltung_id?: InputMaybe<Veranstaltung_Filter>;
+};
+
+export type Group_Section = {
+  __typename?: 'group_section';
+  bilder?: Maybe<Array<Maybe<Group_Section_Files>>>;
+  bilder_func?: Maybe<Count_Functions>;
+  date_created?: Maybe<Scalars['Date']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  description?: Maybe<Scalars['String']>;
+  group_page?: Maybe<Group_Page>;
+  id: Scalars['ID'];
+  title?: Maybe<Scalars['String']>;
+  user_created?: Maybe<Scalars['String']>;
+  user_updated?: Maybe<Scalars['String']>;
+};
+
+
+export type Group_SectionBilderArgs = {
+  filter?: InputMaybe<Group_Section_Files_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type Group_SectionGroup_PageArgs = {
+  filter?: InputMaybe<Group_Page_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type Group_Section_Aggregated = {
+  __typename?: 'group_section_aggregated';
+  avg?: Maybe<Group_Section_Aggregated_Fields>;
+  avgDistinct?: Maybe<Group_Section_Aggregated_Fields>;
+  count?: Maybe<Group_Section_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']>;
+  countDistinct?: Maybe<Group_Section_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']>;
+  max?: Maybe<Group_Section_Aggregated_Fields>;
+  min?: Maybe<Group_Section_Aggregated_Fields>;
+  sum?: Maybe<Group_Section_Aggregated_Fields>;
+  sumDistinct?: Maybe<Group_Section_Aggregated_Fields>;
+};
+
+export type Group_Section_Aggregated_Count = {
+  __typename?: 'group_section_aggregated_count';
+  /** Bitte am besten 3 Bilder! */
+  bilder?: Maybe<Scalars['Int']>;
+  date_created?: Maybe<Scalars['Int']>;
+  date_updated?: Maybe<Scalars['Int']>;
+  description?: Maybe<Scalars['Int']>;
+  group_page?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['Int']>;
+  user_created?: Maybe<Scalars['Int']>;
+  user_updated?: Maybe<Scalars['Int']>;
+};
+
+export type Group_Section_Aggregated_Fields = {
+  __typename?: 'group_section_aggregated_fields';
+  group_page?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type Group_Section_Files = {
+  __typename?: 'group_section_files';
+  directus_files_id?: Maybe<Directus_Files>;
+  group_section_id?: Maybe<Group_Section>;
+  id: Scalars['ID'];
+};
+
+
+export type Group_Section_FilesDirectus_Files_IdArgs = {
+  filter?: InputMaybe<Directus_Files_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type Group_Section_FilesGroup_Section_IdArgs = {
+  filter?: InputMaybe<Group_Section_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type Group_Section_Files_Aggregated = {
+  __typename?: 'group_section_files_aggregated';
+  avg?: Maybe<Group_Section_Files_Aggregated_Fields>;
+  avgDistinct?: Maybe<Group_Section_Files_Aggregated_Fields>;
+  count?: Maybe<Group_Section_Files_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']>;
+  countDistinct?: Maybe<Group_Section_Files_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']>;
+  max?: Maybe<Group_Section_Files_Aggregated_Fields>;
+  min?: Maybe<Group_Section_Files_Aggregated_Fields>;
+  sum?: Maybe<Group_Section_Files_Aggregated_Fields>;
+  sumDistinct?: Maybe<Group_Section_Files_Aggregated_Fields>;
+};
+
+export type Group_Section_Files_Aggregated_Count = {
+  __typename?: 'group_section_files_aggregated_count';
+  directus_files_id?: Maybe<Scalars['Int']>;
+  group_section_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+export type Group_Section_Files_Aggregated_Fields = {
+  __typename?: 'group_section_files_aggregated_fields';
+  group_section_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type Group_Section_Files_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Group_Section_Files_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Group_Section_Files_Filter>>>;
+  directus_files_id?: InputMaybe<Directus_Files_Filter>;
+  group_section_id?: InputMaybe<Group_Section_Filter>;
+  id?: InputMaybe<Number_Filter_Operators>;
+};
+
+export type Group_Section_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Group_Section_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Group_Section_Filter>>>;
+  bilder?: InputMaybe<Group_Section_Files_Filter>;
+  bilder_func?: InputMaybe<Count_Function_Filter_Operators>;
+  date_created?: InputMaybe<Date_Filter_Operators>;
+  date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  date_updated?: InputMaybe<Date_Filter_Operators>;
+  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  description?: InputMaybe<String_Filter_Operators>;
+  group_page?: InputMaybe<Group_Page_Filter>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  title?: InputMaybe<String_Filter_Operators>;
+  user_created?: InputMaybe<String_Filter_Operators>;
+  user_updated?: InputMaybe<String_Filter_Operators>;
+};
+
 export type Impressions = {
   __typename?: 'impressions';
   bildergalerie?: Maybe<Array<Maybe<Impressions_Files>>>;
@@ -1293,8 +1774,10 @@ export type Startseite = {
   date_updated_func?: Maybe<Datetime_Functions>;
   /** Wenn leer gelassen wird der default Eintrag aus "meta" genommen. Sollte nicht länger als zwei Sätze und 155 Zeichen sein. Wird nicht im Design angezeigt, sondern ist nur ein Meta-Information für Google und Co */
   description?: Maybe<Scalars['String']>;
+  heimat_link?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   jugend_description?: Maybe<Scalars['String']>;
+  jugend_link?: Maybe<Scalars['String']>;
   jugend_subtitle?: Maybe<Scalars['String']>;
   jugend_text?: Maybe<Scalars['String']>;
   jugend_title?: Maybe<Scalars['String']>;
@@ -1312,6 +1795,7 @@ export type Startseite = {
   tradition_text?: Maybe<Scalars['String']>;
   tradition_title?: Maybe<Scalars['String']>;
   wandern_description?: Maybe<Scalars['String']>;
+  wandern_link?: Maybe<Scalars['String']>;
   wandern_text?: Maybe<Scalars['String']>;
   wandern_title?: Maybe<Scalars['String']>;
 };
@@ -1391,8 +1875,10 @@ export type Startseite_Filter = {
   date_updated?: InputMaybe<Date_Filter_Operators>;
   date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
   description?: InputMaybe<String_Filter_Operators>;
+  heimat_link?: InputMaybe<String_Filter_Operators>;
   id?: InputMaybe<Number_Filter_Operators>;
   jugend_description?: InputMaybe<String_Filter_Operators>;
+  jugend_link?: InputMaybe<String_Filter_Operators>;
   jugend_subtitle?: InputMaybe<String_Filter_Operators>;
   jugend_text?: InputMaybe<String_Filter_Operators>;
   jugend_title?: InputMaybe<String_Filter_Operators>;
@@ -1408,6 +1894,7 @@ export type Startseite_Filter = {
   tradition_text?: InputMaybe<String_Filter_Operators>;
   tradition_title?: InputMaybe<String_Filter_Operators>;
   wandern_description?: InputMaybe<String_Filter_Operators>;
+  wandern_link?: InputMaybe<String_Filter_Operators>;
   wandern_text?: InputMaybe<String_Filter_Operators>;
   wandern_title?: InputMaybe<String_Filter_Operators>;
 };
@@ -1632,23 +2119,187 @@ export type Veranstaltung_Filter = {
   wiederholung?: InputMaybe<String_Filter_Operators>;
 };
 
-export type Wanderung = {
-  __typename?: 'wanderung';
-  beschreibung?: Maybe<Scalars['String']>;
+export type Wander_Step = {
+  __typename?: 'wander_step';
+  bilder?: Maybe<Array<Maybe<Wander_Step_Files>>>;
+  bilder_func?: Maybe<Count_Functions>;
   date_created?: Maybe<Scalars['Date']>;
   date_created_func?: Maybe<Datetime_Functions>;
   date_updated?: Maybe<Scalars['Date']>;
   date_updated_func?: Maybe<Datetime_Functions>;
-  externer_anbieter?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  user_created?: Maybe<Scalars['String']>;
+  user_updated?: Maybe<Scalars['String']>;
+  wanderung?: Maybe<Wanderung>;
+};
+
+
+export type Wander_StepBilderArgs = {
+  filter?: InputMaybe<Wander_Step_Files_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type Wander_StepWanderungArgs = {
+  filter?: InputMaybe<Wanderung_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type Wander_Step_Aggregated = {
+  __typename?: 'wander_step_aggregated';
+  avg?: Maybe<Wander_Step_Aggregated_Fields>;
+  avgDistinct?: Maybe<Wander_Step_Aggregated_Fields>;
+  count?: Maybe<Wander_Step_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']>;
+  countDistinct?: Maybe<Wander_Step_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']>;
+  max?: Maybe<Wander_Step_Aggregated_Fields>;
+  min?: Maybe<Wander_Step_Aggregated_Fields>;
+  sum?: Maybe<Wander_Step_Aggregated_Fields>;
+  sumDistinct?: Maybe<Wander_Step_Aggregated_Fields>;
+};
+
+export type Wander_Step_Aggregated_Count = {
+  __typename?: 'wander_step_aggregated_count';
+  bilder?: Maybe<Scalars['Int']>;
+  date_created?: Maybe<Scalars['Int']>;
+  date_updated?: Maybe<Scalars['Int']>;
+  description?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  user_created?: Maybe<Scalars['Int']>;
+  user_updated?: Maybe<Scalars['Int']>;
+  wanderung?: Maybe<Scalars['Int']>;
+};
+
+export type Wander_Step_Aggregated_Fields = {
+  __typename?: 'wander_step_aggregated_fields';
+  id?: Maybe<Scalars['Float']>;
+  wanderung?: Maybe<Scalars['Float']>;
+};
+
+export type Wander_Step_Files = {
+  __typename?: 'wander_step_files';
+  directus_files_id?: Maybe<Directus_Files>;
+  id: Scalars['ID'];
+  wander_step_id?: Maybe<Wander_Step>;
+};
+
+
+export type Wander_Step_FilesDirectus_Files_IdArgs = {
+  filter?: InputMaybe<Directus_Files_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type Wander_Step_FilesWander_Step_IdArgs = {
+  filter?: InputMaybe<Wander_Step_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type Wander_Step_Files_Aggregated = {
+  __typename?: 'wander_step_files_aggregated';
+  avg?: Maybe<Wander_Step_Files_Aggregated_Fields>;
+  avgDistinct?: Maybe<Wander_Step_Files_Aggregated_Fields>;
+  count?: Maybe<Wander_Step_Files_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']>;
+  countDistinct?: Maybe<Wander_Step_Files_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']>;
+  max?: Maybe<Wander_Step_Files_Aggregated_Fields>;
+  min?: Maybe<Wander_Step_Files_Aggregated_Fields>;
+  sum?: Maybe<Wander_Step_Files_Aggregated_Fields>;
+  sumDistinct?: Maybe<Wander_Step_Files_Aggregated_Fields>;
+};
+
+export type Wander_Step_Files_Aggregated_Count = {
+  __typename?: 'wander_step_files_aggregated_count';
+  directus_files_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  wander_step_id?: Maybe<Scalars['Int']>;
+};
+
+export type Wander_Step_Files_Aggregated_Fields = {
+  __typename?: 'wander_step_files_aggregated_fields';
+  id?: Maybe<Scalars['Float']>;
+  wander_step_id?: Maybe<Scalars['Float']>;
+};
+
+export type Wander_Step_Files_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Wander_Step_Files_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Wander_Step_Files_Filter>>>;
+  directus_files_id?: InputMaybe<Directus_Files_Filter>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  wander_step_id?: InputMaybe<Wander_Step_Filter>;
+};
+
+export type Wander_Step_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Wander_Step_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Wander_Step_Filter>>>;
+  bilder?: InputMaybe<Wander_Step_Files_Filter>;
+  bilder_func?: InputMaybe<Count_Function_Filter_Operators>;
+  date_created?: InputMaybe<Date_Filter_Operators>;
+  date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  date_updated?: InputMaybe<Date_Filter_Operators>;
+  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  description?: InputMaybe<String_Filter_Operators>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  user_created?: InputMaybe<String_Filter_Operators>;
+  user_updated?: InputMaybe<String_Filter_Operators>;
+  wanderung?: InputMaybe<Wanderung_Filter>;
+};
+
+export type Wanderung = {
+  __typename?: 'wanderung';
+  barrierefrei?: Maybe<Scalars['Boolean']>;
+  date_created?: Maybe<Scalars['Date']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  /** Dauer in Stunden */
+  dauer?: Maybe<Scalars['Int']>;
+  description?: Maybe<Scalars['String']>;
   featured_image?: Maybe<Directus_Files>;
   id: Scalars['ID'];
-  status?: Maybe<Scalars['String']>;
+  /** Link zum externen Anbieter */
+  link?: Maybe<Scalars['String']>;
+  natur?: Maybe<Scalars['String']>;
+  schwierigkeitsgrad?: Maybe<Scalars['String']>;
+  /** Die Länge der Strecke in Kilometern */
+  strecke?: Maybe<Scalars['Float']>;
   titel?: Maybe<Scalars['String']>;
+  wander_step?: Maybe<Array<Maybe<Wander_Step>>>;
+  wander_step_func?: Maybe<Count_Functions>;
 };
 
 
 export type WanderungFeatured_ImageArgs = {
   filter?: InputMaybe<Directus_Files_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type WanderungWander_StepArgs = {
+  filter?: InputMaybe<Wander_Step_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
@@ -1672,35 +2323,53 @@ export type Wanderung_Aggregated = {
 
 export type Wanderung_Aggregated_Count = {
   __typename?: 'wanderung_aggregated_count';
-  beschreibung?: Maybe<Scalars['Int']>;
+  barrierefrei?: Maybe<Scalars['Int']>;
   date_created?: Maybe<Scalars['Int']>;
   date_updated?: Maybe<Scalars['Int']>;
-  externer_anbieter?: Maybe<Scalars['Int']>;
+  /** Dauer in Stunden */
+  dauer?: Maybe<Scalars['Int']>;
+  description?: Maybe<Scalars['Int']>;
   /** Das Bild wird unter anderem in der Übersicht der aller Wanderungen angezeigt. */
   featured_image?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  status?: Maybe<Scalars['Int']>;
+  /** Link zum externen Anbieter */
+  link?: Maybe<Scalars['Int']>;
+  natur?: Maybe<Scalars['Int']>;
+  schwierigkeitsgrad?: Maybe<Scalars['Int']>;
+  /** Die Länge der Strecke in Kilometern */
+  strecke?: Maybe<Scalars['Int']>;
   titel?: Maybe<Scalars['Int']>;
+  wander_step?: Maybe<Scalars['Int']>;
 };
 
 export type Wanderung_Aggregated_Fields = {
   __typename?: 'wanderung_aggregated_fields';
+  /** Dauer in Stunden */
+  dauer?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
+  /** Die Länge der Strecke in Kilometern */
+  strecke?: Maybe<Scalars['Float']>;
 };
 
 export type Wanderung_Filter = {
   _and?: InputMaybe<Array<InputMaybe<Wanderung_Filter>>>;
   _or?: InputMaybe<Array<InputMaybe<Wanderung_Filter>>>;
-  beschreibung?: InputMaybe<String_Filter_Operators>;
+  barrierefrei?: InputMaybe<Boolean_Filter_Operators>;
   date_created?: InputMaybe<Date_Filter_Operators>;
   date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
   date_updated?: InputMaybe<Date_Filter_Operators>;
   date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
-  externer_anbieter?: InputMaybe<String_Filter_Operators>;
+  dauer?: InputMaybe<Number_Filter_Operators>;
+  description?: InputMaybe<String_Filter_Operators>;
   featured_image?: InputMaybe<Directus_Files_Filter>;
   id?: InputMaybe<Number_Filter_Operators>;
-  status?: InputMaybe<String_Filter_Operators>;
+  link?: InputMaybe<String_Filter_Operators>;
+  natur?: InputMaybe<String_Filter_Operators>;
+  schwierigkeitsgrad?: InputMaybe<String_Filter_Operators>;
+  strecke?: InputMaybe<Number_Filter_Operators>;
   titel?: InputMaybe<String_Filter_Operators>;
+  wander_step?: InputMaybe<Wander_Step_Filter>;
+  wander_step_func?: InputMaybe<Count_Function_Filter_Operators>;
 };
 
 export type Wegeschaden = {
@@ -1780,7 +2449,7 @@ export type Wegeschaden_Filter = {
 export type StartseiteQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type StartseiteQueryQuery = { __typename?: 'Query', startseite?: { __typename?: 'startseite', title?: string | null, subtitle?: string | null, description?: string | null, text_part_one?: string | null, text_part_two?: string | null, task_section_description?: string | null, wandern_title?: string | null, wandern_text?: string | null, wandern_description?: string | null, tradition_description?: string | null, tradition_title?: string | null, tradition_text?: string | null, jugend_title?: string | null, jugend_subtitle?: string | null, jugend_description?: string | null, jugend_text?: string | null, mitgliedschaft_title?: string | null, mitgliedschaft_subtitle?: string | null, mitgliedschaft_text?: string | null, aufgaben?: Array<{ __typename?: 'startseite_aufgaben', id: string } | null> | null } | null };
+export type StartseiteQueryQuery = { __typename?: 'Query', startseite?: { __typename?: 'startseite', title?: string | null, subtitle?: string | null, description?: string | null, text_part_one?: string | null, text_part_two?: string | null, task_section_description?: string | null, wandern_title?: string | null, wandern_text?: string | null, wandern_description?: string | null, wandern_link?: string | null, tradition_description?: string | null, tradition_title?: string | null, tradition_text?: string | null, heimat_link?: string | null, jugend_title?: string | null, jugend_subtitle?: string | null, jugend_description?: string | null, jugend_text?: string | null, jugend_link?: string | null, mitgliedschaft_title?: string | null, mitgliedschaft_subtitle?: string | null, mitgliedschaft_text?: string | null, aufgaben?: Array<{ __typename?: 'startseite_aufgaben', id: string } | null> | null } | null };
 
 export type AufgabenQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1834,8 +2503,13 @@ export type ImpressionsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ImpressionsQueryQuery = { __typename?: 'Query', impressions?: { __typename?: 'impressions', title?: string | null, text?: string | null, description?: string | null, subtitle?: string | null, bildergalerie?: Array<{ __typename?: 'impressions_files', directus_files_id?: { __typename?: 'directus_files', description?: string | null, title?: string | null, id: string, location?: string | null, metadata?: any | null } | null } | null> | null } | null };
 
+export type GroupPagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
-export const StartseiteQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"startseiteQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"startseite"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"text_part_one"}},{"kind":"Field","name":{"kind":"Name","value":"text_part_two"}},{"kind":"Field","name":{"kind":"Name","value":"task_section_description"}},{"kind":"Field","name":{"kind":"Name","value":"aufgaben"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"wandern_title"}},{"kind":"Field","name":{"kind":"Name","value":"wandern_text"}},{"kind":"Field","name":{"kind":"Name","value":"wandern_description"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_description"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_title"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_text"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_title"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_description"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_text"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_title"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_text"}}]}}]}}]} as unknown as DocumentNode<StartseiteQueryQuery, StartseiteQueryQueryVariables>;
+
+export type GroupPagesQueryQuery = { __typename?: 'Query', group_page: Array<{ __typename?: 'group_page', slug?: string | null, title?: string | null, description?: string | null, subtitle?: string | null, events?: Array<{ __typename?: 'group_page_veranstaltung', veranstaltung_id?: { __typename?: 'veranstaltung', titel?: string | null, datum?: any | null, slug?: string | null, short_description?: string | null, recurring?: boolean | null, wiederholung?: string | null, featured_image?: { __typename?: 'directus_files', id: string } | null } | null } | null> | null, group_section?: Array<{ __typename?: 'group_section', title?: string | null, description?: string | null, bilder?: Array<{ __typename?: 'group_section_files', directus_files_id?: { __typename?: 'directus_files', id: string, description?: string | null } | null } | null> | null } | null> | null }> };
+
+
+export const StartseiteQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"startseiteQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"startseite"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"text_part_one"}},{"kind":"Field","name":{"kind":"Name","value":"text_part_two"}},{"kind":"Field","name":{"kind":"Name","value":"task_section_description"}},{"kind":"Field","name":{"kind":"Name","value":"aufgaben"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"wandern_title"}},{"kind":"Field","name":{"kind":"Name","value":"wandern_text"}},{"kind":"Field","name":{"kind":"Name","value":"wandern_description"}},{"kind":"Field","name":{"kind":"Name","value":"wandern_link"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_description"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_title"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_text"}},{"kind":"Field","name":{"kind":"Name","value":"heimat_link"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_title"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_description"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_text"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_link"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_title"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_text"}}]}}]}}]} as unknown as DocumentNode<StartseiteQueryQuery, StartseiteQueryQueryVariables>;
 export const AufgabenQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"aufgabenQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aufgaben"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"link"}}]}}]}}]} as unknown as DocumentNode<AufgabenQueryQuery, AufgabenQueryQueryVariables>;
 export const VeranstaltungsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"veranstaltungsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"veranstaltung"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"ort"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"date_created"}},{"kind":"Field","name":{"kind":"Name","value":"date_updated"}},{"kind":"Field","name":{"kind":"Name","value":"beschreibung"}},{"kind":"Field","name":{"kind":"Name","value":"duration"}},{"kind":"Field","name":{"kind":"Name","value":"recurring"}},{"kind":"Field","name":{"kind":"Name","value":"wiederholung"}},{"kind":"Field","name":{"kind":"Name","value":"human_readable_interval"}},{"kind":"Field","name":{"kind":"Name","value":"short_description"}},{"kind":"Field","name":{"kind":"Name","value":"datum"}},{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"mehr_info"}},{"kind":"Field","name":{"kind":"Name","value":"event_changes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"info"}},{"kind":"Field","name":{"kind":"Name","value":"date_created"}}]}},{"kind":"Field","name":{"kind":"Name","value":"featured_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"bildergalerie"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"directus_files_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"location"}}]}}]}}]}}]}}]} as unknown as DocumentNode<VeranstaltungsQueryQuery, VeranstaltungsQueryQueryVariables>;
 export const WebsiteMetaQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"websiteMetaQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"meta"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"favicon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"Field","name":{"kind":"Name","value":"opengraph_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]} as unknown as DocumentNode<WebsiteMetaQueryQuery, WebsiteMetaQueryQueryVariables>;
@@ -1846,3 +2520,4 @@ export const ImpressumsQueryDocument = {"kind":"Document","definitions":[{"kind"
 export const GetOneVeranstaltungQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getOneVeranstaltungQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"veranstaltung"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"ort"}},{"kind":"Field","name":{"kind":"Name","value":"date_created"}},{"kind":"Field","name":{"kind":"Name","value":"date_updated"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"beschreibung"}},{"kind":"Field","name":{"kind":"Name","value":"datum"}},{"kind":"Field","name":{"kind":"Name","value":"duration"}},{"kind":"Field","name":{"kind":"Name","value":"recurring"}},{"kind":"Field","name":{"kind":"Name","value":"event_changes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"info"}},{"kind":"Field","name":{"kind":"Name","value":"date_created"}},{"kind":"Field","name":{"kind":"Name","value":"user_created"}},{"kind":"Field","name":{"kind":"Name","value":"user_updated"}},{"kind":"Field","name":{"kind":"Name","value":"date_updated"}}]}},{"kind":"Field","name":{"kind":"Name","value":"wiederholung"}},{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"featured_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"bildergalerie"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<GetOneVeranstaltungQueryQuery, GetOneVeranstaltungQueryQueryVariables>;
 export const FeaturedEventQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"featuredEventQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"featured_event"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"event"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"datum"}},{"kind":"Field","name":{"kind":"Name","value":"mehr_info"}},{"kind":"Field","name":{"kind":"Name","value":"beschreibung"}},{"kind":"Field","name":{"kind":"Name","value":"short_description"}},{"kind":"Field","name":{"kind":"Name","value":"featured_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"titel"}}]}}]}}]}}]} as unknown as DocumentNode<FeaturedEventQueryQuery, FeaturedEventQueryQueryVariables>;
 export const ImpressionsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"impressionsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"impressions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"bildergalerie"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"directus_files_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}}]}}]}}]}}]}}]} as unknown as DocumentNode<ImpressionsQueryQuery, ImpressionsQueryQueryVariables>;
+export const GroupPagesQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"groupPagesQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group_page"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"events"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"veranstaltung_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"datum"}},{"kind":"Field","name":{"kind":"Name","value":"featured_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"short_description"}},{"kind":"Field","name":{"kind":"Name","value":"recurring"}},{"kind":"Field","name":{"kind":"Name","value":"wiederholung"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"group_section"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"bilder"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"directus_files_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GroupPagesQueryQuery, GroupPagesQueryQueryVariables>;

@@ -15,13 +15,16 @@ export const startseiteQuery = graphql(/* GraphQL */ `
       wandern_title
       wandern_text
       wandern_description
+      wandern_link
       tradition_description
       tradition_title
       tradition_text
+      heimat_link
       jugend_title
       jugend_subtitle
       jugend_description
       jugend_text
+      jugend_link
       mitgliedschaft_title
       mitgliedschaft_subtitle
       mitgliedschaft_text
@@ -212,6 +215,40 @@ export const impressionsQuery = graphql(/* GraphQL */ `
           id
           location
           metadata
+        }
+      }
+    }
+  }
+`);
+
+export const groupPagesQuery = graphql(/* GraphQL */ `
+  query groupPagesQuery {
+    group_page {
+      slug
+      title
+      description
+      subtitle
+      events {
+        veranstaltung_id {
+          titel
+          datum
+          featured_image {
+            id
+          }
+          slug
+          short_description
+          recurring
+          wiederholung
+        }
+      }
+      group_section {
+        title
+        description
+        bilder {
+          directus_files_id {
+            id
+            description
+          }
         }
       }
     }
