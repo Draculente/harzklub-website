@@ -2,7 +2,7 @@
   import type { Image } from "@lib/imageGallery";
   import { LottiePlayer } from "@lottiefiles/svelte-lottie-player";
   import { swipe } from "svelte-gestures";
-  import { fade, fly } from "svelte/transition";
+  import { fly } from "svelte/transition";
 
   export let images: Image[];
   export let showInfo = false;
@@ -70,8 +70,8 @@
   }
 
   function showInfoF() {
-    info = true;
-    if (info) infoSeen = true;
+    info = !info;
+    infoSeen = true;
   }
   const touch = matchMedia("(hover: none), (pointer: coarse)").matches;
 </script>
