@@ -228,8 +228,8 @@ export const groupPagesQuery = graphql(/* GraphQL */ `
       title
       description
       subtitle
-      events {
-        veranstaltung_id {
+      gp_event {
+        veranstaltung {
           titel
           datum
           featured_image {

@@ -45,9 +45,6 @@ type Query {
   group_section_files(filter: group_section_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [group_section_files!]!
   group_section_files_by_id(id: ID!): group_section_files
   group_section_files_aggregated(groupBy: [String], filter: group_section_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [group_section_files_aggregated!]!
-  group_page_veranstaltung(filter: group_page_veranstaltung_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [group_page_veranstaltung!]!
-  group_page_veranstaltung_by_id(id: ID!): group_page_veranstaltung
-  group_page_veranstaltung_aggregated(groupBy: [String], filter: group_page_veranstaltung_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [group_page_veranstaltung_aggregated!]!
   event_changes(filter: event_changes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [event_changes!]!
   event_changes_by_id(id: ID!): event_changes
   event_changes_aggregated(groupBy: [String], filter: event_changes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [event_changes_aggregated!]!
@@ -63,6 +60,16 @@ type Query {
   wander_step_files(filter: wander_step_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [wander_step_files!]!
   wander_step_files_by_id(id: ID!): wander_step_files
   wander_step_files_aggregated(groupBy: [String], filter: wander_step_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [wander_step_files_aggregated!]!
+  member_benefits(filter: member_benefits_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [member_benefits!]!
+  member_benefits_by_id(id: ID!): member_benefits
+  member_benefits_aggregated(groupBy: [String], filter: member_benefits_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [member_benefits_aggregated!]!
+  member_page: member_page
+  member_options(filter: member_options_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [member_options!]!
+  member_options_by_id(id: ID!): member_options
+  member_options_aggregated(groupBy: [String], filter: member_options_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [member_options_aggregated!]!
+  gp_event(filter: gp_event_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [gp_event!]!
+  gp_event_by_id(id: ID!): gp_event
+  gp_event_aggregated(groupBy: [String], filter: gp_event_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [gp_event_aggregated!]!
 }
 
 type Mutation {
@@ -464,6 +471,37 @@ type footer_social_link_aggregated_fields {
   footer: Float
 }
 
+type gp_event {
+  id: ID!
+  group_page(filter: group_page_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): group_page
+  veranstaltung(filter: veranstaltung_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): veranstaltung
+}
+
+type gp_event_aggregated {
+  group: JSON
+  countAll: Int
+  count: gp_event_aggregated_count
+  countDistinct: gp_event_aggregated_count
+  avg: gp_event_aggregated_fields
+  sum: gp_event_aggregated_fields
+  avgDistinct: gp_event_aggregated_fields
+  sumDistinct: gp_event_aggregated_fields
+  min: gp_event_aggregated_fields
+  max: gp_event_aggregated_fields
+}
+
+type gp_event_aggregated_count {
+  id: Int
+  group_page: Int
+  veranstaltung: Int
+}
+
+type gp_event_aggregated_fields {
+  id: Float
+  group_page: Float
+  veranstaltung: Float
+}
+
 type group_page {
   id: ID!
   user_created: String
@@ -480,8 +518,8 @@ type group_page {
   slug: String
   group_section(filter: group_section_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [group_section]
   group_section_func: count_functions
-  events(filter: group_page_veranstaltung_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [group_page_veranstaltung]
-  events_func: count_functions
+  gp_event(filter: gp_event_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [gp_event]
+  gp_event_func: count_functions
 }
 
 type group_page_aggregated {
@@ -510,42 +548,11 @@ type group_page_aggregated_count {
   description: Int
   slug: Int
   group_section: Int
-  events: Int
+  gp_event: Int
 }
 
 type group_page_aggregated_fields {
   id: Float
-}
-
-type group_page_veranstaltung {
-  id: ID!
-  group_page_id(filter: group_page_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): group_page
-  veranstaltung_id(filter: veranstaltung_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): veranstaltung
-}
-
-type group_page_veranstaltung_aggregated {
-  group: JSON
-  countAll: Int
-  count: group_page_veranstaltung_aggregated_count
-  countDistinct: group_page_veranstaltung_aggregated_count
-  avg: group_page_veranstaltung_aggregated_fields
-  sum: group_page_veranstaltung_aggregated_fields
-  avgDistinct: group_page_veranstaltung_aggregated_fields
-  sumDistinct: group_page_veranstaltung_aggregated_fields
-  min: group_page_veranstaltung_aggregated_fields
-  max: group_page_veranstaltung_aggregated_fields
-}
-
-type group_page_veranstaltung_aggregated_count {
-  id: Int
-  group_page_id: Int
-  veranstaltung_id: Int
-}
-
-type group_page_veranstaltung_aggregated_fields {
-  id: Float
-  group_page_id: Float
-  veranstaltung_id: Float
 }
 
 type group_section {
@@ -685,6 +692,122 @@ type Impressum {
   Sinn des Impressums ist es klar erkenntlich zu machen, wer der oder die Verantwortlichen für die Inhalte einer Website sind. Es ist gesetzlich vorgegeben, welche Informationen vorhanden sein müssen. Informiere dich also gut, bevor du hier Änderungen vornimmst!
   """
   text: String
+}
+
+type member_benefits {
+  id: ID!
+  user_created: String
+  date_created: Date
+  date_created_func: datetime_functions
+  user_updated: String
+  date_updated: Date
+  date_updated_func: datetime_functions
+  text: String
+  member_page(filter: member_page_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): member_page
+}
+
+type member_benefits_aggregated {
+  group: JSON
+  countAll: Int
+  count: member_benefits_aggregated_count
+  countDistinct: member_benefits_aggregated_count
+  avg: member_benefits_aggregated_fields
+  sum: member_benefits_aggregated_fields
+  avgDistinct: member_benefits_aggregated_fields
+  sumDistinct: member_benefits_aggregated_fields
+  min: member_benefits_aggregated_fields
+  max: member_benefits_aggregated_fields
+}
+
+type member_benefits_aggregated_count {
+  id: Int
+  user_created: Int
+  date_created: Int
+  user_updated: Int
+  date_updated: Int
+  text: Int
+  member_page: Int
+}
+
+type member_benefits_aggregated_fields {
+  id: Float
+  member_page: Float
+}
+
+type member_options {
+  id: ID!
+  user_created: String
+  date_created: Date
+  date_created_func: datetime_functions
+  user_updated: String
+  date_updated: Date
+  date_updated_func: datetime_functions
+  name: String
+
+  """Preis pro Jahr"""
+  price: Int
+
+  """Kurze Beschreibung"""
+  description: String
+  member_page(filter: member_page_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): member_page
+}
+
+type member_options_aggregated {
+  group: JSON
+  countAll: Int
+  count: member_options_aggregated_count
+  countDistinct: member_options_aggregated_count
+  avg: member_options_aggregated_fields
+  sum: member_options_aggregated_fields
+  avgDistinct: member_options_aggregated_fields
+  sumDistinct: member_options_aggregated_fields
+  min: member_options_aggregated_fields
+  max: member_options_aggregated_fields
+}
+
+type member_options_aggregated_count {
+  id: Int
+  user_created: Int
+  date_created: Int
+  user_updated: Int
+  date_updated: Int
+  name: Int
+
+  """Preis pro Jahr"""
+  price: Int
+
+  """Kurze Beschreibung"""
+  description: Int
+  member_page: Int
+}
+
+type member_options_aggregated_fields {
+  id: Float
+
+  """Preis pro Jahr"""
+  price: Float
+  member_page: Float
+}
+
+type member_page {
+  id: ID!
+  user_created: String
+  date_created: Date
+  date_created_func: datetime_functions
+  user_updated: String
+  date_updated: Date
+  date_updated_func: datetime_functions
+  title: String
+  subtitle: String
+  benefits_heading: String
+
+  """Die Meta Description für Google und Co"""
+  description: String
+  member_option_heading: String
+  member_benefits(filter: member_benefits_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [member_benefits]
+  member_benefits_func: count_functions
+  member_options(filter: member_options_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [member_options]
+  member_options_func: count_functions
 }
 
 type meta {
@@ -1319,6 +1442,14 @@ input geometry_filter_operators {
   _nnull: Boolean
 }
 
+input gp_event_filter {
+  id: number_filter_operators
+  group_page: group_page_filter
+  veranstaltung: veranstaltung_filter
+  _and: [gp_event_filter]
+  _or: [gp_event_filter]
+}
+
 input group_page_filter {
   id: number_filter_operators
   user_created: string_filter_operators
@@ -1333,18 +1464,10 @@ input group_page_filter {
   slug: string_filter_operators
   group_section: group_section_filter
   group_section_func: count_function_filter_operators
-  events: group_page_veranstaltung_filter
-  events_func: count_function_filter_operators
+  gp_event: gp_event_filter
+  gp_event_func: count_function_filter_operators
   _and: [group_page_filter]
   _or: [group_page_filter]
-}
-
-input group_page_veranstaltung_filter {
-  id: number_filter_operators
-  group_page_id: group_page_filter
-  veranstaltung_id: veranstaltung_filter
-  _and: [group_page_veranstaltung_filter]
-  _or: [group_page_veranstaltung_filter]
 }
 
 input group_section_files_filter {
@@ -1393,6 +1516,57 @@ input impressions_filter {
   bildergalerie_func: count_function_filter_operators
   _and: [impressions_filter]
   _or: [impressions_filter]
+}
+
+input member_benefits_filter {
+  id: number_filter_operators
+  user_created: string_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: string_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  text: string_filter_operators
+  member_page: member_page_filter
+  _and: [member_benefits_filter]
+  _or: [member_benefits_filter]
+}
+
+input member_options_filter {
+  id: number_filter_operators
+  user_created: string_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: string_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  name: string_filter_operators
+  price: number_filter_operators
+  description: string_filter_operators
+  member_page: member_page_filter
+  _and: [member_options_filter]
+  _or: [member_options_filter]
+}
+
+input member_page_filter {
+  id: number_filter_operators
+  user_created: string_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: string_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  title: string_filter_operators
+  subtitle: string_filter_operators
+  benefits_heading: string_filter_operators
+  description: string_filter_operators
+  member_option_heading: string_filter_operators
+  member_benefits: member_benefits_filter
+  member_benefits_func: count_function_filter_operators
+  member_options: member_options_filter
+  member_options_func: count_function_filter_operators
+  _and: [member_page_filter]
+  _or: [member_page_filter]
 }
 
 input number_filter_operators {

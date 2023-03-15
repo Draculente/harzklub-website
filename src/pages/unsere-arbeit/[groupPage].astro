@@ -15,8 +15,13 @@ export async function getStaticPaths() {
   });
 }
 
-const { title, description, subtitle, events, group_section } =
-  Astro.props as Group_Page;
+const {
+  title,
+  description,
+  subtitle,
+  gp_event: events,
+  group_section,
+} = Astro.props as Group_Page;
 
 console.log(group_section);
 ---
@@ -73,18 +78,16 @@ console.log(group_section);
               return (
                 <div class="w-[400px] max-w-full">
                   <VeranstaltungsCard
-                    date={e?.veranstaltung_id?.datum}
-                    titel={e?.veranstaltung_id?.titel ?? undefined}
+                    date={e?.veranstaltung?.datum}
+                    titel={e?.veranstaltung?.titel ?? undefined}
                     short_description={
-                      e?.veranstaltung_id?.beschreibung ?? undefined
+                      e?.veranstaltung?.beschreibung ?? undefined
                     }
-                    slug={e?.veranstaltung_id?.slug ?? undefined}
-                    wiederholung={
-                      e?.veranstaltung_id?.wiederholung ?? undefined
-                    }
-                    recurring={e?.veranstaltung_id?.recurring ?? undefined}
+                    slug={e?.veranstaltung?.slug ?? undefined}
+                    wiederholung={e?.veranstaltung?.wiederholung ?? undefined}
+                    recurring={e?.veranstaltung?.recurring ?? undefined}
                     featured_image_url={getFileUrl(
-                      e?.veranstaltung_id?.featured_image?.id
+                      e?.veranstaltung?.featured_image?.id
                     )}
                   />
                 </div>
