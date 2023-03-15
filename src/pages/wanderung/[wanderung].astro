@@ -1,0 +1,240 @@
+---
+import ImageGallery from "@components/ImageGallery.svelte";
+import Tag from "@components/Tag.astro";
+import Layout from "@layouts/Layout.astro";
+import type { Image } from "@lib/imageGallery";
+import gqlClient from "@lib/utils/gql-client";
+
+// export async function getStaticPaths() {
+//     return (await gqlClient.request(wanderungQuery)).veranstaltung.map((e) => {
+//         return {
+//             params: { veranstaltung: e.slug },
+//             props: e,
+//         };
+//     });
+// }
+
+const {
+    titel,
+    id,
+    strecke,
+    schwierigkeit,
+    natur,
+    dauer,
+    dateCreated,
+    featured_image,
+    wanderSteps,
+    description,
+} = {
+    titel: "Zum Brockenblick",
+    strecke: 2.0,
+    schwierigkeit: "Genießer",
+    natur: "Nah am Ort",
+    dauer: 1,
+    id: 1,
+    dateCreated: "2021-01-01",
+    featured_image:
+        "https://images.unsplash.com/photo-1502082553048-f009c37129b9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+    wanderSteps: [
+        {
+            id: 1,
+            description: "Starte am Parkplatz am Brockenblick",
+        },
+    ],
+    description:
+        "Der „Brockenblick“ ist die Stelle in der nahen Umgebung des Ortes, von der man bei guter Sicht einenbesonders schönen Blick auf den Brocken und die ihn umgebenden Harzer Berge hat.",
+};
+
+const stats = [
+    {
+        icon: "ri-route-line",
+        text: `${strecke} km`,
+    },
+    {
+        icon: "ri-scales-line",
+        text: `${schwierigkeit}`,
+    },
+    {
+        icon: "ri-time-line",
+        text: `ca. ${dauer} h`,
+    },
+];
+
+const images: Image[] = [
+    {
+        src: "https://images.unsplash.com/photo-1528183429752-a97d0bf99b5a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+        id: "S297j2CsdlM",
+    },
+    {
+        src: "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1474&q=80",
+        id: "S297j2CsdlM",
+    },
+];
+---
+
+<Layout description={description} title={titel}>
+    <div
+        class="pt-10 pb-32 2xl:px-[12%] xl:px-[5%] lg:px-[5%] xs:px-[5%] md:px-[15%]"
+    >
+        <section class="w-full">
+            <div
+                class="relative h-96 w-full overflow-hidden rounded-lg flex justify-center items-center"
+            >
+                <img
+                    class="min-h-full min-w-full object-cover z-0"
+                    src={featured_image}
+                    alt="Dies ist ein Test"
+                />
+                <div
+                    class="z-10 absolute flex flex-row gap-5 items-center justify-center -mt-10 flex-wrap mx-4"
+                >
+                    <div
+                        class="bg-info rounded-lg flex flex-row w-64 px-5 py-5 place-content-around gap-5 flex-wrap"
+                    >
+                        {
+                            stats.map((element) => {
+                                return (
+                                    <div class="flex justify-center items-center flex-col">
+                                        <i
+                                            class={
+                                                "dark:text-light-grey text-dark-grey " +
+                                                element.icon
+                                            }
+                                        />
+                                        <p class="dark:text-light-grey text-dark-grey text-sm font-medium p-0 -mt-1">
+                                            {element.text}
+                                        </p>
+                                    </div>
+                                );
+                            })
+                        }
+                    </div>
+                    <div
+                        class="flex items-center justify-center bg-info rounded-lg px-5 py-5"
+                    >
+                        <a
+                            href={}
+                            class="flex justify-center items-center flex-col"
+                        >
+                            <i
+                                class={"dark:text-light-grey text-dark-grey ri-map-2-line"}
+                            ></i>
+                            <p
+                                class="dark:text-light-grey text-dark-grey text-sm font-medium p-0 -mt-1"
+                            >
+                                Karte
+                            </p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="flex flex-col gap-2 min-w-80 max-w-2xl rounded-t-2xl mx-auto -translate-y-10 z-10 bg-base-100 py-6 px-5 relative"
+            >
+                <div class="absolute left-5 -top-3">
+                    <Tag title="Spaziergang" />
+                </div>
+
+                <h1 class="text-3xl font-bold">{titel}</h1>
+                <p class="text-sm text-dark-grey">{description}</p>
+            </div>
+        </section>
+        <section class="flex justify-center">
+            <div class="zeitleiste after:bg-info-content flex gap-20 flex-col">
+                <div
+                    class="step after:bg-info-content box-border w-full flex flex-row sm:flex-col gap-20 sm:gap-5 justify-center sm:justify-start sm:pl-10"
+                >
+                    <div
+                        class="text basis-1/2 text-right sm:text-left flex items-center"
+                    >
+                        <p>
+                            Von der Tourist-Information gehen Sie zunächst 100 m
+                            Richtung Kirche und biegen dann links auf die
+                            Brockenblick-straße ab. Am Ende dieser Straße führt
+                            der asphaltierte Weg nach rechts. Dort gehen Sie
+                            jetzt noch nicht, sondernzunächst in der
+                            Verlängerung der Brockenblickstraße noch etwa 100 m
+                            weiter zum Brockenblick.
+                        </p>
+                    </div>
+                    <div class="images basis-1/2">
+                        <ImageGallery
+                            images={images}
+                            client:load
+                            small={true}
+                        />
+                    </div>
+                </div>
+
+                <div
+                    class="step after:bg-info-content box-border w-full flex flex-row-reverse sm:flex-col gap-20 sm:gap-5 justify-center sm:justify-start sm:pl-10"
+                >
+                    <div
+                        class="text basis-1/2 text-left sm:text-left flex items-center"
+                    >
+                        <p>
+                            Von der Tourist-Information gehen Sie zunächst 100 m
+                            Richtung Kirche und biegen dann links auf die
+                            Brockenblick-straße ab. Am Ende dieser Straße führt
+                            der asphaltierte Weg nach rechts. Dort gehen Sie
+                            jetzt noch nicht, sondernzunächst in der
+                            Verlängerung der Brockenblickstraße noch etwa 100 m
+                            weiter zum Brockenblick.
+                        </p>
+                    </div>
+                    <div class="images basis-1/2 flex justify-end items-end">
+                        <ImageGallery
+                            images={images}
+                            client:load
+                            small={true}
+                        />
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</Layout>
+
+<style>
+    .zeitleiste {
+        position: relative;
+        width: 100%;
+        max-width: 1200px;
+    }
+
+    .zeitleiste:after {
+        content: "";
+        position: absolute;
+        width: 2px;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -1px;
+    }
+
+    .step {
+        position: relative;
+    }
+
+    .step::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        top: 50%;
+        border-radius: 50%;
+        z-index: 1;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+
+    @media (max-width: 768px) {
+        .zeitleiste:after {
+            left: 1.25rem;
+        }
+
+        .step::after {
+            left: 1.25rem;
+        }
+    }
+</style>

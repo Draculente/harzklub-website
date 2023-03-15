@@ -64,6 +64,7 @@ module.exports = {
 			sans: ['Manrope', 'sans-serif']
 		},
 		screens: {
+			'3xs': { 'max': '400px' },
 
 			'xs': { 'max': '640px' },
 
