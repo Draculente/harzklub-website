@@ -230,8 +230,11 @@ export const wanderungenQuery = graphql(/* GraphQL */ `
       barrierefrei
       date_created
       date_updated
+      description
+      link
       featured_image {
         id
+        description
       }
       wander_step {
         id
@@ -240,6 +243,9 @@ export const wanderungenQuery = graphql(/* GraphQL */ `
           directus_files_id {
             id
             description
+            title
+            location
+            metadata
           }
         }
       }

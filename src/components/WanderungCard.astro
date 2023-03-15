@@ -1,4 +1,5 @@
 ---
+import { getSchwierigkeit, dauerToString } from "@lib/utils/helper";
 import Tag from "./Tag.astro";
 
 export type Props = {
@@ -12,33 +13,6 @@ export type Props = {
 
 const { titel, dauer, strecke, schwierigkeit, slug, featured_image_url } =
     Astro.props;
-
-function getSchwierigkeit(schwierigkeit?: string) {
-    switch (schwierigkeit) {
-        case "easy":
-            return "Genießer";
-        case "medium":
-            return "Wanderer";
-        case "hard":
-            return "Sportler";
-        default:
-            return "Wanderer";
-    }
-}
-
-function dauerToString(dauer?: number): string {
-    if (dauer) {
-        if (dauer < 2) {
-            return "Spaziergang";
-        } else if (dauer < 5) {
-            return `Mehrstündig`;
-        } else {
-            return `Ganztägig`;
-        }
-    } else {
-        return "Wanderung";
-    }
-}
 
 const kurzDaten = [
     {
@@ -56,7 +30,7 @@ const kurzDaten = [
 ];
 ---
 
-<a href={slug} class="w-max 2xs:w-full">
+<a href={"wanderung/" + slug} class="w-max 2xs:w-full">
     <div class="w-64 shadow-md rounded-2xl relative 2xs:w-full 2xs:min-w-full">
         <div class="absolute top-1 left-1">
             <Tag title={dauerToString(dauer)} />

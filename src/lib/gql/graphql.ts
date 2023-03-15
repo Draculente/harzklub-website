@@ -82,12 +82,12 @@ export type Query = {
   footer_social_link: Array<Footer_Social_Link>;
   footer_social_link_aggregated: Array<Footer_Social_Link_Aggregated>;
   footer_social_link_by_id?: Maybe<Footer_Social_Link>;
+  gp_event: Array<Gp_Event>;
+  gp_event_aggregated: Array<Gp_Event_Aggregated>;
+  gp_event_by_id?: Maybe<Gp_Event>;
   group_page: Array<Group_Page>;
   group_page_aggregated: Array<Group_Page_Aggregated>;
   group_page_by_id?: Maybe<Group_Page>;
-  group_page_veranstaltung: Array<Group_Page_Veranstaltung>;
-  group_page_veranstaltung_aggregated: Array<Group_Page_Veranstaltung_Aggregated>;
-  group_page_veranstaltung_by_id?: Maybe<Group_Page_Veranstaltung>;
   group_section: Array<Group_Section>;
   group_section_aggregated: Array<Group_Section_Aggregated>;
   group_section_by_id?: Maybe<Group_Section>;
@@ -98,6 +98,13 @@ export type Query = {
   impressions_files: Array<Impressions_Files>;
   impressions_files_aggregated: Array<Impressions_Files_Aggregated>;
   impressions_files_by_id?: Maybe<Impressions_Files>;
+  member_benefits: Array<Member_Benefits>;
+  member_benefits_aggregated: Array<Member_Benefits_Aggregated>;
+  member_benefits_by_id?: Maybe<Member_Benefits>;
+  member_options: Array<Member_Options>;
+  member_options_aggregated: Array<Member_Options_Aggregated>;
+  member_options_by_id?: Maybe<Member_Options>;
+  member_page?: Maybe<Member_Page>;
   meta?: Maybe<Meta>;
   presse: Array<Presse>;
   presse_aggregated: Array<Presse_Aggregated>;
@@ -283,6 +290,32 @@ export type QueryFooter_Social_Link_By_IdArgs = {
 };
 
 
+export type QueryGp_EventArgs = {
+  filter?: InputMaybe<Gp_Event_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryGp_Event_AggregatedArgs = {
+  filter?: InputMaybe<Gp_Event_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryGp_Event_By_IdArgs = {
+  id: Scalars['ID'];
+};
+
+
 export type QueryGroup_PageArgs = {
   filter?: InputMaybe<Group_Page_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -305,32 +338,6 @@ export type QueryGroup_Page_AggregatedArgs = {
 
 
 export type QueryGroup_Page_By_IdArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type QueryGroup_Page_VeranstaltungArgs = {
-  filter?: InputMaybe<Group_Page_Veranstaltung_Filter>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  page?: InputMaybe<Scalars['Int']>;
-  search?: InputMaybe<Scalars['String']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-};
-
-
-export type QueryGroup_Page_Veranstaltung_AggregatedArgs = {
-  filter?: InputMaybe<Group_Page_Veranstaltung_Filter>;
-  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  page?: InputMaybe<Scalars['Int']>;
-  search?: InputMaybe<Scalars['String']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-};
-
-
-export type QueryGroup_Page_Veranstaltung_By_IdArgs = {
   id: Scalars['ID'];
 };
 
@@ -409,6 +416,58 @@ export type QueryImpressions_Files_AggregatedArgs = {
 
 
 export type QueryImpressions_Files_By_IdArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryMember_BenefitsArgs = {
+  filter?: InputMaybe<Member_Benefits_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryMember_Benefits_AggregatedArgs = {
+  filter?: InputMaybe<Member_Benefits_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryMember_Benefits_By_IdArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryMember_OptionsArgs = {
+  filter?: InputMaybe<Member_Options_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryMember_Options_AggregatedArgs = {
+  filter?: InputMaybe<Member_Options_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryMember_Options_By_IdArgs = {
   id: Scalars['ID'];
 };
 
@@ -1254,6 +1313,69 @@ export type Geometry_Filter_Operators = {
   _null?: InputMaybe<Scalars['Boolean']>;
 };
 
+export type Gp_Event = {
+  __typename?: 'gp_event';
+  group_page?: Maybe<Group_Page>;
+  id: Scalars['ID'];
+  veranstaltung?: Maybe<Veranstaltung>;
+};
+
+
+export type Gp_EventGroup_PageArgs = {
+  filter?: InputMaybe<Group_Page_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type Gp_EventVeranstaltungArgs = {
+  filter?: InputMaybe<Veranstaltung_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type Gp_Event_Aggregated = {
+  __typename?: 'gp_event_aggregated';
+  avg?: Maybe<Gp_Event_Aggregated_Fields>;
+  avgDistinct?: Maybe<Gp_Event_Aggregated_Fields>;
+  count?: Maybe<Gp_Event_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']>;
+  countDistinct?: Maybe<Gp_Event_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']>;
+  max?: Maybe<Gp_Event_Aggregated_Fields>;
+  min?: Maybe<Gp_Event_Aggregated_Fields>;
+  sum?: Maybe<Gp_Event_Aggregated_Fields>;
+  sumDistinct?: Maybe<Gp_Event_Aggregated_Fields>;
+};
+
+export type Gp_Event_Aggregated_Count = {
+  __typename?: 'gp_event_aggregated_count';
+  group_page?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  veranstaltung?: Maybe<Scalars['Int']>;
+};
+
+export type Gp_Event_Aggregated_Fields = {
+  __typename?: 'gp_event_aggregated_fields';
+  group_page?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  veranstaltung?: Maybe<Scalars['Float']>;
+};
+
+export type Gp_Event_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Gp_Event_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Gp_Event_Filter>>>;
+  group_page?: InputMaybe<Group_Page_Filter>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  veranstaltung?: InputMaybe<Veranstaltung_Filter>;
+};
+
 export type Group_Page = {
   __typename?: 'group_page';
   date_created?: Maybe<Scalars['Date']>;
@@ -1262,8 +1384,8 @@ export type Group_Page = {
   date_updated_func?: Maybe<Datetime_Functions>;
   /** Die Meta-Description für Google und Co */
   description?: Maybe<Scalars['String']>;
-  events?: Maybe<Array<Maybe<Group_Page_Veranstaltung>>>;
-  events_func?: Maybe<Count_Functions>;
+  gp_event?: Maybe<Array<Maybe<Gp_Event>>>;
+  gp_event_func?: Maybe<Count_Functions>;
   group_section?: Maybe<Array<Maybe<Group_Section>>>;
   group_section_func?: Maybe<Count_Functions>;
   id: Scalars['ID'];
@@ -1275,8 +1397,8 @@ export type Group_Page = {
 };
 
 
-export type Group_PageEventsArgs = {
-  filter?: InputMaybe<Group_Page_Veranstaltung_Filter>;
+export type Group_PageGp_EventArgs = {
+  filter?: InputMaybe<Gp_Event_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
@@ -1314,7 +1436,7 @@ export type Group_Page_Aggregated_Count = {
   date_updated?: Maybe<Scalars['Int']>;
   /** Die Meta-Description für Google und Co */
   description?: Maybe<Scalars['Int']>;
-  events?: Maybe<Scalars['Int']>;
+  gp_event?: Maybe<Scalars['Int']>;
   group_section?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
   slug?: Maybe<Scalars['Int']>;
@@ -1337,8 +1459,8 @@ export type Group_Page_Filter = {
   date_updated?: InputMaybe<Date_Filter_Operators>;
   date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
   description?: InputMaybe<String_Filter_Operators>;
-  events?: InputMaybe<Group_Page_Veranstaltung_Filter>;
-  events_func?: InputMaybe<Count_Function_Filter_Operators>;
+  gp_event?: InputMaybe<Gp_Event_Filter>;
+  gp_event_func?: InputMaybe<Count_Function_Filter_Operators>;
   group_section?: InputMaybe<Group_Section_Filter>;
   group_section_func?: InputMaybe<Count_Function_Filter_Operators>;
   id?: InputMaybe<Number_Filter_Operators>;
@@ -1347,69 +1469,6 @@ export type Group_Page_Filter = {
   title?: InputMaybe<String_Filter_Operators>;
   user_created?: InputMaybe<String_Filter_Operators>;
   user_updated?: InputMaybe<String_Filter_Operators>;
-};
-
-export type Group_Page_Veranstaltung = {
-  __typename?: 'group_page_veranstaltung';
-  group_page_id?: Maybe<Group_Page>;
-  id: Scalars['ID'];
-  veranstaltung_id?: Maybe<Veranstaltung>;
-};
-
-
-export type Group_Page_VeranstaltungGroup_Page_IdArgs = {
-  filter?: InputMaybe<Group_Page_Filter>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  page?: InputMaybe<Scalars['Int']>;
-  search?: InputMaybe<Scalars['String']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-};
-
-
-export type Group_Page_VeranstaltungVeranstaltung_IdArgs = {
-  filter?: InputMaybe<Veranstaltung_Filter>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  page?: InputMaybe<Scalars['Int']>;
-  search?: InputMaybe<Scalars['String']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-};
-
-export type Group_Page_Veranstaltung_Aggregated = {
-  __typename?: 'group_page_veranstaltung_aggregated';
-  avg?: Maybe<Group_Page_Veranstaltung_Aggregated_Fields>;
-  avgDistinct?: Maybe<Group_Page_Veranstaltung_Aggregated_Fields>;
-  count?: Maybe<Group_Page_Veranstaltung_Aggregated_Count>;
-  countAll?: Maybe<Scalars['Int']>;
-  countDistinct?: Maybe<Group_Page_Veranstaltung_Aggregated_Count>;
-  group?: Maybe<Scalars['JSON']>;
-  max?: Maybe<Group_Page_Veranstaltung_Aggregated_Fields>;
-  min?: Maybe<Group_Page_Veranstaltung_Aggregated_Fields>;
-  sum?: Maybe<Group_Page_Veranstaltung_Aggregated_Fields>;
-  sumDistinct?: Maybe<Group_Page_Veranstaltung_Aggregated_Fields>;
-};
-
-export type Group_Page_Veranstaltung_Aggregated_Count = {
-  __typename?: 'group_page_veranstaltung_aggregated_count';
-  group_page_id?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  veranstaltung_id?: Maybe<Scalars['Int']>;
-};
-
-export type Group_Page_Veranstaltung_Aggregated_Fields = {
-  __typename?: 'group_page_veranstaltung_aggregated_fields';
-  group_page_id?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  veranstaltung_id?: Maybe<Scalars['Float']>;
-};
-
-export type Group_Page_Veranstaltung_Filter = {
-  _and?: InputMaybe<Array<InputMaybe<Group_Page_Veranstaltung_Filter>>>;
-  _or?: InputMaybe<Array<InputMaybe<Group_Page_Veranstaltung_Filter>>>;
-  group_page_id?: InputMaybe<Group_Page_Filter>;
-  id?: InputMaybe<Number_Filter_Operators>;
-  veranstaltung_id?: InputMaybe<Veranstaltung_Filter>;
 };
 
 export type Group_Section = {
@@ -1663,6 +1722,216 @@ export type Impressions_Filter = {
   user_updated?: InputMaybe<String_Filter_Operators>;
 };
 
+export type Member_Benefits = {
+  __typename?: 'member_benefits';
+  date_created?: Maybe<Scalars['Date']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  id: Scalars['ID'];
+  member_page?: Maybe<Member_Page>;
+  text?: Maybe<Scalars['String']>;
+  user_created?: Maybe<Scalars['String']>;
+  user_updated?: Maybe<Scalars['String']>;
+};
+
+
+export type Member_BenefitsMember_PageArgs = {
+  filter?: InputMaybe<Member_Page_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type Member_Benefits_Aggregated = {
+  __typename?: 'member_benefits_aggregated';
+  avg?: Maybe<Member_Benefits_Aggregated_Fields>;
+  avgDistinct?: Maybe<Member_Benefits_Aggregated_Fields>;
+  count?: Maybe<Member_Benefits_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']>;
+  countDistinct?: Maybe<Member_Benefits_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']>;
+  max?: Maybe<Member_Benefits_Aggregated_Fields>;
+  min?: Maybe<Member_Benefits_Aggregated_Fields>;
+  sum?: Maybe<Member_Benefits_Aggregated_Fields>;
+  sumDistinct?: Maybe<Member_Benefits_Aggregated_Fields>;
+};
+
+export type Member_Benefits_Aggregated_Count = {
+  __typename?: 'member_benefits_aggregated_count';
+  date_created?: Maybe<Scalars['Int']>;
+  date_updated?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  member_page?: Maybe<Scalars['Int']>;
+  text?: Maybe<Scalars['Int']>;
+  user_created?: Maybe<Scalars['Int']>;
+  user_updated?: Maybe<Scalars['Int']>;
+};
+
+export type Member_Benefits_Aggregated_Fields = {
+  __typename?: 'member_benefits_aggregated_fields';
+  id?: Maybe<Scalars['Float']>;
+  member_page?: Maybe<Scalars['Float']>;
+};
+
+export type Member_Benefits_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Member_Benefits_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Member_Benefits_Filter>>>;
+  date_created?: InputMaybe<Date_Filter_Operators>;
+  date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  date_updated?: InputMaybe<Date_Filter_Operators>;
+  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  member_page?: InputMaybe<Member_Page_Filter>;
+  text?: InputMaybe<String_Filter_Operators>;
+  user_created?: InputMaybe<String_Filter_Operators>;
+  user_updated?: InputMaybe<String_Filter_Operators>;
+};
+
+export type Member_Options = {
+  __typename?: 'member_options';
+  date_created?: Maybe<Scalars['Date']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  /** Kurze Beschreibung */
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  member_page?: Maybe<Member_Page>;
+  name?: Maybe<Scalars['String']>;
+  /** Preis pro Jahr */
+  price?: Maybe<Scalars['Int']>;
+  user_created?: Maybe<Scalars['String']>;
+  user_updated?: Maybe<Scalars['String']>;
+};
+
+
+export type Member_OptionsMember_PageArgs = {
+  filter?: InputMaybe<Member_Page_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type Member_Options_Aggregated = {
+  __typename?: 'member_options_aggregated';
+  avg?: Maybe<Member_Options_Aggregated_Fields>;
+  avgDistinct?: Maybe<Member_Options_Aggregated_Fields>;
+  count?: Maybe<Member_Options_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']>;
+  countDistinct?: Maybe<Member_Options_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']>;
+  max?: Maybe<Member_Options_Aggregated_Fields>;
+  min?: Maybe<Member_Options_Aggregated_Fields>;
+  sum?: Maybe<Member_Options_Aggregated_Fields>;
+  sumDistinct?: Maybe<Member_Options_Aggregated_Fields>;
+};
+
+export type Member_Options_Aggregated_Count = {
+  __typename?: 'member_options_aggregated_count';
+  date_created?: Maybe<Scalars['Int']>;
+  date_updated?: Maybe<Scalars['Int']>;
+  /** Kurze Beschreibung */
+  description?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  member_page?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['Int']>;
+  /** Preis pro Jahr */
+  price?: Maybe<Scalars['Int']>;
+  user_created?: Maybe<Scalars['Int']>;
+  user_updated?: Maybe<Scalars['Int']>;
+};
+
+export type Member_Options_Aggregated_Fields = {
+  __typename?: 'member_options_aggregated_fields';
+  id?: Maybe<Scalars['Float']>;
+  member_page?: Maybe<Scalars['Float']>;
+  /** Preis pro Jahr */
+  price?: Maybe<Scalars['Float']>;
+};
+
+export type Member_Options_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Member_Options_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Member_Options_Filter>>>;
+  date_created?: InputMaybe<Date_Filter_Operators>;
+  date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  date_updated?: InputMaybe<Date_Filter_Operators>;
+  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  description?: InputMaybe<String_Filter_Operators>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  member_page?: InputMaybe<Member_Page_Filter>;
+  name?: InputMaybe<String_Filter_Operators>;
+  price?: InputMaybe<Number_Filter_Operators>;
+  user_created?: InputMaybe<String_Filter_Operators>;
+  user_updated?: InputMaybe<String_Filter_Operators>;
+};
+
+export type Member_Page = {
+  __typename?: 'member_page';
+  benefits_heading?: Maybe<Scalars['String']>;
+  date_created?: Maybe<Scalars['Date']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  /** Die Meta Description für Google und Co */
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  member_benefits?: Maybe<Array<Maybe<Member_Benefits>>>;
+  member_benefits_func?: Maybe<Count_Functions>;
+  member_option_heading?: Maybe<Scalars['String']>;
+  member_options?: Maybe<Array<Maybe<Member_Options>>>;
+  member_options_func?: Maybe<Count_Functions>;
+  subtitle?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  user_created?: Maybe<Scalars['String']>;
+  user_updated?: Maybe<Scalars['String']>;
+};
+
+
+export type Member_PageMember_BenefitsArgs = {
+  filter?: InputMaybe<Member_Benefits_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type Member_PageMember_OptionsArgs = {
+  filter?: InputMaybe<Member_Options_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type Member_Page_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Member_Page_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Member_Page_Filter>>>;
+  benefits_heading?: InputMaybe<String_Filter_Operators>;
+  date_created?: InputMaybe<Date_Filter_Operators>;
+  date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  date_updated?: InputMaybe<Date_Filter_Operators>;
+  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  description?: InputMaybe<String_Filter_Operators>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  member_benefits?: InputMaybe<Member_Benefits_Filter>;
+  member_benefits_func?: InputMaybe<Count_Function_Filter_Operators>;
+  member_option_heading?: InputMaybe<String_Filter_Operators>;
+  member_options?: InputMaybe<Member_Options_Filter>;
+  member_options_func?: InputMaybe<Count_Function_Filter_Operators>;
+  subtitle?: InputMaybe<String_Filter_Operators>;
+  title?: InputMaybe<String_Filter_Operators>;
+  user_created?: InputMaybe<String_Filter_Operators>;
+  user_updated?: InputMaybe<String_Filter_Operators>;
+};
+
 export type Meta = {
   __typename?: 'meta';
   date_updated?: Maybe<Scalars['Date']>;
@@ -1774,8 +2043,10 @@ export type Startseite = {
   date_updated_func?: Maybe<Datetime_Functions>;
   /** Wenn leer gelassen wird der default Eintrag aus "meta" genommen. Sollte nicht länger als zwei Sätze und 155 Zeichen sein. Wird nicht im Design angezeigt, sondern ist nur ein Meta-Information für Google und Co */
   description?: Maybe<Scalars['String']>;
+  heimat_link?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   jugend_description?: Maybe<Scalars['String']>;
+  jugend_link?: Maybe<Scalars['String']>;
   jugend_subtitle?: Maybe<Scalars['String']>;
   jugend_text?: Maybe<Scalars['String']>;
   jugend_title?: Maybe<Scalars['String']>;
@@ -1793,6 +2064,7 @@ export type Startseite = {
   tradition_text?: Maybe<Scalars['String']>;
   tradition_title?: Maybe<Scalars['String']>;
   wandern_description?: Maybe<Scalars['String']>;
+  wandern_link?: Maybe<Scalars['String']>;
   wandern_text?: Maybe<Scalars['String']>;
   wandern_title?: Maybe<Scalars['String']>;
 };
@@ -1872,8 +2144,10 @@ export type Startseite_Filter = {
   date_updated?: InputMaybe<Date_Filter_Operators>;
   date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
   description?: InputMaybe<String_Filter_Operators>;
+  heimat_link?: InputMaybe<String_Filter_Operators>;
   id?: InputMaybe<Number_Filter_Operators>;
   jugend_description?: InputMaybe<String_Filter_Operators>;
+  jugend_link?: InputMaybe<String_Filter_Operators>;
   jugend_subtitle?: InputMaybe<String_Filter_Operators>;
   jugend_text?: InputMaybe<String_Filter_Operators>;
   jugend_title?: InputMaybe<String_Filter_Operators>;
@@ -1889,6 +2163,7 @@ export type Startseite_Filter = {
   tradition_text?: InputMaybe<String_Filter_Operators>;
   tradition_title?: InputMaybe<String_Filter_Operators>;
   wandern_description?: InputMaybe<String_Filter_Operators>;
+  wandern_link?: InputMaybe<String_Filter_Operators>;
   wandern_text?: InputMaybe<String_Filter_Operators>;
   wandern_title?: InputMaybe<String_Filter_Operators>;
 };
@@ -2500,7 +2775,7 @@ export type ImpressionsQueryQuery = { __typename?: 'Query', impressions?: { __ty
 export type WanderungenQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type WanderungenQueryQuery = { __typename?: 'Query', wanderung: Array<{ __typename?: 'wanderung', titel?: string | null, id: string, strecke?: number | null, schwierigkeitsgrad?: string | null, natur?: string | null, dauer?: number | null, barrierefrei?: boolean | null, date_created?: any | null, date_updated?: any | null, featured_image?: { __typename?: 'directus_files', id: string } | null, wander_step?: Array<{ __typename?: 'wander_step', id: string, description?: string | null, bilder?: Array<{ __typename?: 'wander_step_files', directus_files_id?: { __typename?: 'directus_files', id: string, description?: string | null } | null } | null> | null } | null> | null }> };
+export type WanderungenQueryQuery = { __typename?: 'Query', wanderung: Array<{ __typename?: 'wanderung', titel?: string | null, id: string, strecke?: number | null, schwierigkeitsgrad?: string | null, natur?: string | null, dauer?: number | null, barrierefrei?: boolean | null, date_created?: any | null, date_updated?: any | null, description?: string | null, link?: string | null, featured_image?: { __typename?: 'directus_files', id: string, description?: string | null } | null, wander_step?: Array<{ __typename?: 'wander_step', id: string, description?: string | null, bilder?: Array<{ __typename?: 'wander_step_files', directus_files_id?: { __typename?: 'directus_files', id: string, description?: string | null, title?: string | null, location?: string | null, metadata?: any | null } | null } | null> | null } | null> | null }> };
 
 
 export const StartseiteQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"startseiteQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"startseite"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"text_part_one"}},{"kind":"Field","name":{"kind":"Name","value":"text_part_two"}},{"kind":"Field","name":{"kind":"Name","value":"task_section_description"}},{"kind":"Field","name":{"kind":"Name","value":"aufgaben"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"wandern_title"}},{"kind":"Field","name":{"kind":"Name","value":"wandern_text"}},{"kind":"Field","name":{"kind":"Name","value":"wandern_description"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_description"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_title"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_text"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_title"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_description"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_text"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_title"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_text"}}]}}]}}]} as unknown as DocumentNode<StartseiteQueryQuery, StartseiteQueryQueryVariables>;
@@ -2514,4 +2789,4 @@ export const ImpressumsQueryDocument = {"kind":"Document","definitions":[{"kind"
 export const GetOneVeranstaltungQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getOneVeranstaltungQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"veranstaltung"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"ort"}},{"kind":"Field","name":{"kind":"Name","value":"date_created"}},{"kind":"Field","name":{"kind":"Name","value":"date_updated"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"beschreibung"}},{"kind":"Field","name":{"kind":"Name","value":"datum"}},{"kind":"Field","name":{"kind":"Name","value":"duration"}},{"kind":"Field","name":{"kind":"Name","value":"recurring"}},{"kind":"Field","name":{"kind":"Name","value":"event_changes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"info"}},{"kind":"Field","name":{"kind":"Name","value":"date_created"}},{"kind":"Field","name":{"kind":"Name","value":"user_created"}},{"kind":"Field","name":{"kind":"Name","value":"user_updated"}},{"kind":"Field","name":{"kind":"Name","value":"date_updated"}}]}},{"kind":"Field","name":{"kind":"Name","value":"wiederholung"}},{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"featured_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"bildergalerie"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<GetOneVeranstaltungQueryQuery, GetOneVeranstaltungQueryQueryVariables>;
 export const FeaturedEventQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"featuredEventQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"featured_event"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"event"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"datum"}},{"kind":"Field","name":{"kind":"Name","value":"mehr_info"}},{"kind":"Field","name":{"kind":"Name","value":"beschreibung"}},{"kind":"Field","name":{"kind":"Name","value":"short_description"}},{"kind":"Field","name":{"kind":"Name","value":"featured_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"titel"}}]}}]}}]}}]} as unknown as DocumentNode<FeaturedEventQueryQuery, FeaturedEventQueryQueryVariables>;
 export const ImpressionsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"impressionsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"impressions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"bildergalerie"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"directus_files_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}}]}}]}}]}}]}}]} as unknown as DocumentNode<ImpressionsQueryQuery, ImpressionsQueryQueryVariables>;
-export const WanderungenQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"wanderungenQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"wanderung"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"strecke"}},{"kind":"Field","name":{"kind":"Name","value":"schwierigkeitsgrad"}},{"kind":"Field","name":{"kind":"Name","value":"natur"}},{"kind":"Field","name":{"kind":"Name","value":"dauer"}},{"kind":"Field","name":{"kind":"Name","value":"barrierefrei"}},{"kind":"Field","name":{"kind":"Name","value":"date_created"}},{"kind":"Field","name":{"kind":"Name","value":"date_updated"}},{"kind":"Field","name":{"kind":"Name","value":"featured_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"wander_step"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"bilder"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"directus_files_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<WanderungenQueryQuery, WanderungenQueryQueryVariables>;
+export const WanderungenQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"wanderungenQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"wanderung"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"strecke"}},{"kind":"Field","name":{"kind":"Name","value":"schwierigkeitsgrad"}},{"kind":"Field","name":{"kind":"Name","value":"natur"}},{"kind":"Field","name":{"kind":"Name","value":"dauer"}},{"kind":"Field","name":{"kind":"Name","value":"barrierefrei"}},{"kind":"Field","name":{"kind":"Name","value":"date_created"}},{"kind":"Field","name":{"kind":"Name","value":"date_updated"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"featured_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"wander_step"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"bilder"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"directus_files_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<WanderungenQueryQuery, WanderungenQueryQueryVariables>;
