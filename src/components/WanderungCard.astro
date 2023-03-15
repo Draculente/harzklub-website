@@ -1,0 +1,97 @@
+---
+import Tag from "./Tag.astro";
+
+export type Props = {
+    titel?: string;
+    dauer?: number;
+    strecke?: number;
+    schwierigkeit?: string;
+    slug?: string;
+    featured_image_url?: string;
+};
+
+const { titel, dauer, strecke, schwierigkeit, slug, featured_image_url } =
+    Astro.props;
+
+function getSchwierigkeit(schwierigkeit?: string) {
+    switch (schwierigkeit) {
+        case "easy":
+            return "Genießer";
+        case "medium":
+            return "Wanderer";
+        case "hard":
+            return "Sportler";
+        default:
+            return "Wanderer";
+    }
+}
+
+function dauerToString(dauer?: number): string {
+    if (dauer) {
+        if (dauer < 2) {
+            return "Spaziergang";
+        } else if (dauer < 5) {
+            return `Mehrstündig`;
+        } else {
+            return `Ganztägig`;
+        }
+    } else {
+        return "Wanderung";
+    }
+}
+
+const kurzDaten = [
+    {
+        icon: "ri-route-line",
+        text: `${strecke} km`,
+    },
+    {
+        icon: "ri-scales-line",
+        text: `${getSchwierigkeit(schwierigkeit)}`,
+    },
+    {
+        icon: "ri-time-line",
+        text: `ca. ${dauer} h`,
+    },
+];
+---
+
+<a href={slug} class="w-max 2xs:w-full">
+    <div class="w-64 shadow-md rounded-2xl relative 2xs:w-full 2xs:min-w-full">
+        <div class="absolute top-1 left-1">
+            <Tag title={dauerToString(dauer)} />
+        </div>
+
+        <div
+            class="w-full h-28 bg-cover bg-center rounded-t-2xl"
+            style={`background-image: url(${
+                featured_image_url + "?fit=cover&with=500&quality=50"
+            })`}
+        >
+        </div>
+        <div
+            class="bg-info py-3 px-5 -mt-5 rounded-2xl flex justify-center flex-col items-center"
+        >
+            <h2 class="font-semibold pb-2">{titel}</h2>
+            <div class="flex flex-row justify-around items-center w-full">
+                {
+                    kurzDaten.map((element) => {
+                        return (
+                            <div class="flex justify-center items-center flex-col">
+                                <i
+                                    class={
+                                        "dark:text-light-grey text-dark-grey " +
+                                        element.icon
+                                    }
+                                />
+                                <p class="dark:text-light-grey text-dark-grey text-sm font-medium p-0 -mt-1">
+                                    {element.text}
+                                </p>
+                            </div>
+                        );
+                    })
+                }
+            </div>
+        </div>
+    </div>
+</a>

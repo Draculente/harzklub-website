@@ -24,6 +24,7 @@ const documents = {
     "\n  query getOneVeranstaltungQuery($slug: String!) {\n    veranstaltung(filter: { slug: { _eq: $slug } }) {\n      id\n      ort\n      date_created\n      date_updated\n      slug\n      beschreibung\n      datum\n      duration\n      recurring\n      event_changes {\n        info\n        date_created\n        user_created\n        user_updated\n        date_updated\n      }\n      wiederholung\n      titel\n      featured_image {\n        id\n        description\n      }\n      bildergalerie {\n        id\n      }\n    }\n  }\n": types.GetOneVeranstaltungQueryDocument,
     "\n  query featuredEventQuery {\n    featured_event {\n      event {\n        slug\n        datum\n        mehr_info\n        beschreibung\n        short_description\n        featured_image {\n          id\n          description\n        }\n        titel\n      }\n    }\n  }\n": types.FeaturedEventQueryDocument,
     "\n  query impressionsQuery {\n    impressions {\n      title\n      text\n      description\n      subtitle\n      bildergalerie {\n        directus_files_id {\n          description\n          title\n          id\n          location\n          metadata\n        }\n      }\n    }\n  }\n": types.ImpressionsQueryDocument,
+    "\n  query wanderungenQuery {\n     wanderung{\n      titel\n      id\n      strecke\n      schwierigkeitsgrad\n      natur\n      dauer\n      barrierefrei\n      date_created\n      date_updated\n      featured_image {\n        id\n      }\n      wander_step {\n        id\n        description\n        bilder {\n          directus_files_id {\n            id\n            description\n          }\n        }\n      }\n     }}": types.WanderungenQueryDocument,
 };
 
 /**
@@ -84,6 +85,10 @@ export function graphql(source: "\n  query featuredEventQuery {\n    featured_ev
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query impressionsQuery {\n    impressions {\n      title\n      text\n      description\n      subtitle\n      bildergalerie {\n        directus_files_id {\n          description\n          title\n          id\n          location\n          metadata\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query impressionsQuery {\n    impressions {\n      title\n      text\n      description\n      subtitle\n      bildergalerie {\n        directus_files_id {\n          description\n          title\n          id\n          location\n          metadata\n        }\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query wanderungenQuery {\n     wanderung{\n      titel\n      id\n      strecke\n      schwierigkeitsgrad\n      natur\n      dauer\n      barrierefrei\n      date_created\n      date_updated\n      featured_image {\n        id\n      }\n      wander_step {\n        id\n        description\n        bilder {\n          directus_files_id {\n            id\n            description\n          }\n        }\n      }\n     }}"): (typeof documents)["\n  query wanderungenQuery {\n     wanderung{\n      titel\n      id\n      strecke\n      schwierigkeitsgrad\n      natur\n      dauer\n      barrierefrei\n      date_created\n      date_updated\n      featured_image {\n        id\n      }\n      wander_step {\n        id\n        description\n        bilder {\n          directus_files_id {\n            id\n            description\n          }\n        }\n      }\n     }}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
