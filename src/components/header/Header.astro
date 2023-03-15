@@ -24,12 +24,32 @@ const menuItems = pages.filter((e) => e.menu);
     <div class="flex flex-row items-center md:hidden">
       {
         menuItems.map((seite) => (
-          <div class="mx-2 hover:underline">
-            <MenuItem
-              href={seite.href}
-              currentPage={seite.page == page}
-              name={seite.name}
-            />
+          <div
+            class={`mx-2 hover:underline ${
+              seite.submenu ? "dropdown dropdown-hover" : ""
+            }`}
+          >
+            <div tabindex="0">
+              <MenuItem
+                href={seite.href}
+                currentPage={seite.page == page}
+                name={seite.name}
+              />
+            </div>
+
+            {seite.submenu && (
+              <ul class="menu dropdown-content p-2 shadow bg-info rounded-box">
+                {seite.submenu.map((unterseite) => (
+                  <li>
+                    <MenuItem
+                      href={unterseite.href}
+                      currentPage={unterseite.page == page}
+                      name={unterseite.name}
+                    />
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         ))
       }
@@ -40,15 +60,33 @@ const menuItems = pages.filter((e) => e.menu);
         <a><i class="ri-menu-line text-2xl m-0"></i></a>
         <ul class="bg-base-100">
           {
-            menuItems.map((seite) => (
-              <li class="mb-2">
-                <MenuItem
-                  href={seite.href}
-                  currentPage={seite.page === page}
-                  name={seite.name}
-                />
-              </li>
-            ))
+            menuItems.map((seite) => {
+              return (
+                <>
+                  <li class="mb-2">
+                    <MenuItem
+                      href={seite.href}
+                      currentPage={seite.page === page}
+                      name={seite.name}
+                    />
+                  </li>
+                  <>
+                    {seite.submenu &&
+                      seite.submenu?.map((e) => {
+                        return (
+                          <li class="mb-2 ml-2 opacity-70 px-0">
+                            <MenuItem
+                              href={e.href}
+                              currentPage={e.page === page}
+                              name={e.name}
+                            />
+                          </li>
+                        );
+                      })}
+                  </>
+                </>
+              );
+            })
           }
         </ul>
       </li>

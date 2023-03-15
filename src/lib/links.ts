@@ -17,6 +17,7 @@ export enum Seite {
   Error,
   Impressum,
   Impressionen,
+  Wanderwege
 }
 
 export default function l(seite: Seite): string {
@@ -28,6 +29,7 @@ export type SeitenInfo = {
   page: Seite;
   name: string;
   menu?: boolean;
+  submenu?: Array<SeitenInfo>;
 };
 
 export const pages: Array<SeitenInfo> = [
@@ -49,9 +51,16 @@ export const pages: Array<SeitenInfo> = [
   },
   {
     page: Seite.Wanderungen,
-    href: UNDER_CONSTRUCTION,
+    href: "/wanderungen",
     name: "Wanderungen",
     menu: true,
+    submenu: [
+      {
+        page: Seite.Wanderwege,
+        href: UNDER_CONSTRUCTION,
+        name: "Wanderwege",
+      }
+    ]
   },
   {
     page: Seite.Impressionen,
