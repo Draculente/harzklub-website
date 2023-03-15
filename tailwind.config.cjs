@@ -81,7 +81,8 @@ module.exports = {
 
 			'2xl': { 'min': '1536px' },
 			// => @media (min-width: 1536px) { ... }
-			'big': "1024px"
+			'big': "1024px",
+			'no-sm': "768px"
 		}
 	},
 	plugins: [require("@tailwindcss/typography"), require("daisyui")],

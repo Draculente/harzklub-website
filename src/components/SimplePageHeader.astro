@@ -1,0 +1,26 @@
+---
+export type Props = {
+  title: string;
+  subtitle: string;
+  text?: string;
+};
+
+const { title, subtitle, text } = Astro.props;
+---
+
+<div class="w-full flex flex-col items-start">
+  <h2 class="font-medium text-lg tracking-wide sm:text-base">
+    {subtitle}
+  </h2>
+  <h1 class="font-bold text-5xl leading-tight sm:text-4xl sm:font-semibold">
+    {title}
+  </h1>
+  {
+    text && text.length > 0 && (
+      <div
+        class="max-w-2xl body-text-bigger sm:body-text-smaller"
+        set:html={text}
+      />
+    )
+  }
+</div>

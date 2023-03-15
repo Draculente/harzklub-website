@@ -1,0 +1,162 @@
+---
+import PageWrapper from "@components/PageWrapper.astro";
+import SimplePageHeader from "@components/SimplePageHeader.astro";
+import Layout from "@layouts/Layout.astro";
+import { getMemberPageQuery } from "@lib/graphql/queries";
+import gqlClient from "@lib/utils/gql-client";
+
+const { member_page } = await gqlClient.request(getMemberPageQuery);
+
+const TO_FORMULAR = "/downloads";
+---
+
+<Layout title={"Mach Mit!"} description={member_page?.description ?? undefined}>
+  <PageWrapper displayDots={false}>
+    <div class="flex flex-row sm:flex-wrap-reverse items-center">
+      <div class="max-w-2xl">
+        <SimplePageHeader
+          title={member_page?.title ?? "Mach Mit!"}
+          subtitle={member_page?.description ?? "Werde Mitglied!"}
+        />
+        <div class="flex flex-row w-full gap-5 items-center pt-10 flex-wrap">
+          <a href={TO_FORMULAR} class="btn btn-primary"
+            >Mitgliedsantrag ausfüllen</a
+          >
+          <a href="#benefits" class="hover:underline">Deine Vorteile &gt;</a>
+        </div>
+      </div>
+      <div class="w-full flex justify-center items-center">
+        <div
+          class="bg-contain bg-no-repeat flex justify-center items-center w-full sm:hidden aspect-[15/9] splash-image"
+        >
+          <img
+            src="/images/team-icon.svg"
+            alt="Drei gezeichnete Menschen"
+            class="w-1/5 floating"
+          />
+        </div>
+        <div class="flex justify-center items-center w-full no-sm:hidden pb-10">
+          <img
+            src="/images/team-icon.svg"
+            alt="Drei gezeichnete Menschen"
+            class="w-2/5 floating"
+          />
+        </div>
+      </div>
+    </div>
+
+    <section
+      class="pt-20 flex flex-row gap-10 md:flex-wrap relative"
+      id="benefits"
+    >
+      <img
+        src="/images/dots.svg"
+        class="absolute top-[10vh] right-[30%] sm:hidden"
+        aria-hidden="true"
+      />
+      <img
+        src="/images/dots.svg"
+        class="absolute top-[48vh] left-[12%] sm:hidden"
+        aria-hidden="true"
+      />
+      <div>
+        <h1 class="text-3xl font-semibold pb-8">
+          {member_page?.benefits_heading?.split(" ").slice(0, -1).join(" ")}
+          <span class="text-primary"
+            >{member_page?.benefits_heading?.split(" ").pop()}</span
+          >
+        </h1>
+        <div class="max-w-[90vw] w-[600px] flex flex-col gap-3">
+          {
+            member_page?.member_benefits?.map((benefit) => {
+              return (
+                <div class="flex flex-row gap-2 w-full">
+                  <i class="ri-checkbox-circle-fill text-primary text-lg" />
+                  <p class="">{benefit?.text}</p>
+                </div>
+              );
+            })
+          }
+        </div>
+      </div>
+      <div class="flex flex-row justify-center w-full">
+        <div
+          class="flex flex-col justify-center items-center max-w-full w-[16rem] gap-2 z-10"
+        >
+          <img
+            src="/images/mitgliedskarte.jpg"
+            alt="Ein Bild der Mitgliedskarte des deutschen Wanderverbands."
+            class="rounded-lg shadow-lg w-full"
+          />
+          <a
+            href="https://www.wanderverband.de/verband/mitgliedskarte"
+            class="text-primary hover:underline"
+            >Die Vorteile der Mitgliedskarte &gt;</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <section class="pt-20 font-semibold">
+      <h1 class="text-3xl mb-10 break-words">
+        {member_page?.member_option_heading?.split(" ").slice(0, -1).join(" ")}
+        <span class="text-primary"
+          >{member_page?.member_option_heading?.split(" ").pop()}</span
+        >
+      </h1>
+      <div
+        class="max-w-full w-[800px] flex flex-row gap-7 flex-wrap z-10 sm:justify-center sm:items-center"
+      >
+        {
+          member_page?.member_options?.map((option) => {
+            return (
+              <div class="flex flex-col gap-2 rounded-2xl shadow-lg p-4 z-10 w-[200px] min-w-min bg-info sm:w-full sm:pb-6">
+                <div class="flex flex-row items-end my-4">
+                  <p class="text-3xl text-primary">{option?.price}€</p>
+                  <span class="font-light ml-1">pro Jahr</span>
+                </div>
+                <div class="text-lg font-medium">
+                  <span class="text-primary">
+                    {option?.name?.split(" ")[0]}
+                  </span>
+                  {option?.name?.split(" ").slice(1).join(" ")}
+                </div>
+                <p class="font-light text-sm">{option?.description}</p>
+              </div>
+            );
+          })
+        }
+      </div>
+    </section>
+    <div
+      class="flex flex-row sm:justify-center justify-start mb-44 mt-28 sm:mb-20"
+    >
+      <a class="btn btn-primary px-10" href={TO_FORMULAR}>Zum Formular &gt;</a>
+    </div>
+  </PageWrapper>
+</Layout>
+
+<style>
+  .floating {
+    animation-name: floating;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+  }
+
+  @keyframes floating {
+    0% {
+      transform: translate(0, 0px);
+    }
+    50% {
+      transform: translate(0, -15px);
+    }
+    100% {
+      transform: translate(0, -0px);
+    }
+  }
+
+  .splash-image {
+    background-image: url(/images/member_splash.svg);
+  }
+</style>

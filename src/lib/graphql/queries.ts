@@ -254,3 +254,23 @@ export const groupPagesQuery = graphql(/* GraphQL */ `
     }
   }
 `);
+
+export const getMemberPageQuery = graphql(/* GraphQL */ `
+  query getMemberPageQuery {
+    member_page {
+      description
+      title
+      subtitle
+      member_option_heading
+      member_options {
+        name
+        price
+        description
+      }
+      member_benefits {
+        text
+      }
+      benefits_heading
+    }
+  }
+`);

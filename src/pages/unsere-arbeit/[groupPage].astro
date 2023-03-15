@@ -1,4 +1,5 @@
 ---
+import PageWrapper from "@components/PageWrapper.astro";
 import VeranstaltungsCard from "@components/VeranstaltungsCard.astro";
 import Layout from "@layouts/Layout.astro";
 import type { Group_Page } from "@lib/gql/graphql";
@@ -27,106 +28,92 @@ console.log(group_section);
 ---
 
 <Layout description={description ?? undefined} title={title ?? undefined}>
-  <div>
-    <img
-      src="/images/dots.svg"
-      class="absolute top-[10vh] right-[30%] sm:hidden"
-      aria-hidden="true"
-    />
-    <img
-      src="/images/dots.svg"
-      class="absolute top-[48vh] left-[12%] sm:hidden"
-      aria-hidden="true"
-    />
-    <main
-      class="pt-[5vh] sm:pt-[3vh] relative xs:bg-none bg-origin-padding bg-contain md:bg-cover sm:h-min sm:pb-10 2xl:px-[12%] xl:px-[5%] lg:px-[5%] xs:px-[5%] md:px-[15%]"
-    >
-      <section class="flex flex-row justify-start flex-wrap md:gap-11">
-        <div class="max-w-xl w-full flex flex-col items-start">
-          <h2 class="font-medium text-lg tracking-wide sm:text-base">
-            {subtitle}
-          </h2>
-          <h1
-            class="font-bold text-4xl leading-tight sm:text-4xl sm:font-semibold"
-          >
-            {title}
-          </h1>
-        </div>
-        <div class="flex flex-row justify-center grow max-w-full">
-          <div class="relative w-[500px] h-[60vw] max-h-[350px]">
-            <img
-              class="rounded-lg max-w-full w-[75%] shadow-lg absolute top-0 left-0"
-              src="/images/kinder_buehne.jpg"
-              alt="Kinder auf einer Bühne."
-            />
-            <img
-              class="rounded-lg max-w-full w-[60%] shadow-lg absolute right-0 bottom-0"
-              src="/images/012-Jugend.jpg"
-              alt="Kinder und Betreuer*innen sitzen auf einer Treppe in Trachten"
-            />
-          </div>
-        </div>
-      </section>
-
-      <section class="mt-24">
-        <h1 class="text-4xl font-semibold mb-11">
-          Unsere nächsten <span class="text-primary">Veranstaltungen</span>
+  <PageWrapper>
+    <section class="flex flex-row justify-start flex-wrap md:gap-11">
+      <div class="max-w-xl w-full flex flex-col items-start">
+        <h2 class="font-medium text-lg tracking-wide sm:text-base">
+          {subtitle}
+        </h2>
+        <h1
+          class="font-bold text-4xl leading-tight sm:text-4xl sm:font-semibold"
+        >
+          {title}
         </h1>
-        <div class="flex flex-row flex-wrap gap-4 w-full">
-          {
-            events?.map((e) => {
-              return (
-                <div class="w-[400px] max-w-full">
-                  <VeranstaltungsCard
-                    date={e?.veranstaltung?.datum}
-                    titel={e?.veranstaltung?.titel ?? undefined}
-                    short_description={
-                      e?.veranstaltung?.beschreibung ?? undefined
-                    }
-                    slug={e?.veranstaltung?.slug ?? undefined}
-                    wiederholung={e?.veranstaltung?.wiederholung ?? undefined}
-                    recurring={e?.veranstaltung?.recurring ?? undefined}
-                    featured_image_url={getFileUrl(
-                      e?.veranstaltung?.featured_image?.id
-                    )}
-                  />
-                </div>
-              );
-            })
-          }
+      </div>
+      <div class="flex flex-row justify-center grow max-w-full">
+        <div class="relative w-[500px] h-[60vw] max-h-[350px]">
+          <img
+            class="rounded-lg max-w-full w-[75%] shadow-lg absolute top-0 left-0"
+            src="/images/kinder_buehne.jpg"
+            alt="Kinder auf einer Bühne."
+          />
+          <img
+            class="rounded-lg max-w-full w-[60%] shadow-lg absolute right-0 bottom-0"
+            src="/images/012-Jugend.jpg"
+            alt="Kinder und Betreuer*innen sitzen auf einer Treppe in Trachten"
+          />
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="py-24 flex flex-col gap-24">
+    <section class="mt-24">
+      <h1 class="text-4xl font-semibold mb-11">
+        Unsere nächsten <span class="text-primary">Veranstaltungen</span>
+      </h1>
+      <div class="flex flex-row flex-wrap gap-4 w-full">
         {
-          group_section?.map((e) => {
+          events?.map((e) => {
             return (
-              <div class="md:flex relative md:flex-wrap gap-10 md:h-fit">
-                <div class="w-[45%] md:w-full">
-                  <h1 class="text-3xl font-semibold pb-10">
-                    <span class="text-primary">{e?.title?.split(" ")[0]}</span>
-                    {e?.title?.split(" ").slice(1).join(" ")}
-                  </h1>
-                  <div set:html={e?.description} />
-                </div>
-                <div class="max-h-full md:h-80 gap-4 sm:gap-2 grid grid-rows-5 grid-cols-12 image-container md:w-full w-[45%] absolute bottom-0 right-0 md:relative">
-                  {e?.bilder?.map((b) => {
-                    return (
-                      <img
-                        src={getFileUrl(b?.directus_files_id?.id)}
-                        alt={b?.directus_files_id?.description}
-                        class="object-cover h-full w-full"
-                      />
-                    );
-                  })}
-                </div>
+              <div class="w-[400px] max-w-full">
+                <VeranstaltungsCard
+                  date={e?.veranstaltung?.datum}
+                  titel={e?.veranstaltung?.titel ?? undefined}
+                  short_description={
+                    e?.veranstaltung?.beschreibung ?? undefined
+                  }
+                  slug={e?.veranstaltung?.slug ?? undefined}
+                  wiederholung={e?.veranstaltung?.wiederholung ?? undefined}
+                  recurring={e?.veranstaltung?.recurring ?? undefined}
+                  featured_image_url={getFileUrl(
+                    e?.veranstaltung?.featured_image?.id
+                  )}
+                />
               </div>
             );
           })
         }
-      </section>
-    </main>
-  </div>
+      </div>
+    </section>
+
+    <section class="py-24 flex flex-col gap-24">
+      {
+        group_section?.map((e) => {
+          return (
+            <div class="md:flex relative md:flex-wrap gap-10 md:h-fit">
+              <div class="w-[45%] md:w-full">
+                <h1 class="text-3xl font-semibold pb-10">
+                  <span class="text-primary">{e?.title?.split(" ")[0]}</span>
+                  {e?.title?.split(" ").slice(1).join(" ")}
+                </h1>
+                <div set:html={e?.description} />
+              </div>
+              <div class="max-h-full md:h-80 gap-4 sm:gap-2 grid grid-rows-5 grid-cols-12 image-container md:w-full w-[45%] absolute bottom-0 right-0 md:relative">
+                {e?.bilder?.map((b) => {
+                  return (
+                    <img
+                      src={getFileUrl(b?.directus_files_id?.id)}
+                      alt={b?.directus_files_id?.description}
+                      class="object-cover h-full w-full"
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })
+      }
+    </section>
+  </PageWrapper>
 </Layout>
 
 <style>

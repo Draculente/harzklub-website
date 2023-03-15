@@ -287,11 +287,19 @@ const aufgaben = (await gqlClient.request(aufgabenQuery)).aufgaben
             alt="6 Bilder, auf denen Menschen in Harzer-Trachten zu sehen sind."
             loading="lazy"
           />
-          <a
-            href={frontpageData?.heimat_link}
-            class="text-primary font-medium block text-center hover:underline mt-7"
-            >Erfahre mehr über die Heimatgruppe &gt;</a
-          >
+          {
+            frontpageData?.heimat_link &&
+            frontpageData?.heimat_link.length > 0 ? (
+              <a
+                href={frontpageData?.heimat_link}
+                class="text-primary font-medium block text-center hover:underline mt-7"
+              >
+                Erfahre mehr über die Heimatgruppe &gt;
+              </a>
+            ) : (
+              <div />
+            )
+          }
         </div>
         <div
           class="w-1/5 rounded-md bg-info drop-shadow-lg p-8 mt-24 md:w-full md:mx-5"

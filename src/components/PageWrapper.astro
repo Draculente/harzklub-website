@@ -1,0 +1,36 @@
+---
+import type { Seite } from "@lib/links";
+import Header from "./header/Header.astro";
+
+export type Props = {
+  page?: Seite;
+  displayDots?: boolean;
+};
+
+const { page, displayDots } = Astro.props as Props;
+---
+
+<div>
+  <Header currentPage={page} />
+  {
+    (displayDots == undefined || displayDots) && (
+      <>
+        <img
+          src="/images/dots.svg"
+          class="absolute top-[10vh] right-[30%] sm:hidden"
+          aria-hidden="true"
+        />
+        <img
+          src="/images/dots.svg"
+          class="absolute top-[48vh] left-[12%] sm:hidden"
+          aria-hidden="true"
+        />
+      </>
+    )
+  }
+  <main
+    class="pt-[5vh] sm:pt-[3vh] relative xs:bg-none bg-origin-padding bg-contain md:bg-cover sm:h-min sm:pb-10 2xl:px-[12%] xl:px-[5%] lg:px-[5%] xs:px-[5%] md:px-[15%]"
+  >
+    <slot />
+  </main>
+</div>
