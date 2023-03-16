@@ -39,6 +39,7 @@ const { footer: footerData } = await gqlClient.request(footerQuery);
       {
         footerData?.footer_links
           ?.filter((e) => e?.link && e?.name)
+          .sort((a, b) => (a?.sorting ?? 0) - (b?.sorting ?? 0))
           .map((page) => (
             <a
               href={page?.link}

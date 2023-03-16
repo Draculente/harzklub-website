@@ -17,6 +17,7 @@ export enum Seite {
   Error,
   Impressum,
   Impressionen,
+  Wanderwege
 }
 
 export default function l(seite: Seite): string {
@@ -28,6 +29,7 @@ export type SeitenInfo = {
   page: Seite;
   name: string;
   menu?: boolean;
+  submenu?: Array<SeitenInfo>;
 };
 
 export const pages: Array<SeitenInfo> = [
@@ -39,7 +41,7 @@ export const pages: Array<SeitenInfo> = [
     page: Seite.Heimatgruppe,
     href: UNDER_CONSTRUCTION,
     name: "Heimatgruppe",
-    menu: true,
+    menu: false,
   },
   {
     page: Seite.Jugendarbeit,
@@ -48,15 +50,15 @@ export const pages: Array<SeitenInfo> = [
     menu: true,
   },
   {
-    page: Seite.Wanderungen,
-    href: UNDER_CONSTRUCTION,
-    name: "Wanderungen",
+    page: Seite.Wanderwege,
+    href: "/unsere-arbeit/wanderwege",
+    name: "Wanderwege",
     menu: true,
   },
   {
-    page: Seite.Impressionen,
-    href: "/impressionen",
-    name: "Impressionen",
+    page: Seite.Wanderungen,
+    href: "/wanderungen",
+    name: "Wanderungen",
     menu: true,
   },
   // { page: Seite.DerHarz, href: UNDER_CONSTRUCTION, "/de name: "Der Harz" },

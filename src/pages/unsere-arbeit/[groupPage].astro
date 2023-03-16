@@ -22,9 +22,21 @@ const {
   subtitle,
   gp_event: events,
   group_section,
+  header_images,
 } = Astro.props as Group_Page;
 
-console.log(group_section);
+const images = header_images?.map((e) => {
+  return {
+    desc: e?.directus_files_id?.description,
+    src: getFileUrl(e?.directus_files_id?.id),
+  };
+});
+
+if (images?.length != 2) {
+  throw new Error("Please provide two header-images per groupPage!");
+}
+
+const [header_image1, header_image2] = images;
 ---
 
 <Layout description={description ?? undefined} title={title ?? undefined}>
@@ -44,46 +56,50 @@ console.log(group_section);
         <div class="relative w-[500px] h-[60vw] max-h-[350px]">
           <img
             class="rounded-lg max-w-full w-[75%] shadow-lg absolute top-0 left-0"
-            src="/images/kinder_buehne.jpg"
-            alt="Kinder auf einer Bühne."
+            src={header_image1.src}
+            alt={header_image1.desc}
           />
           <img
             class="rounded-lg max-w-full w-[60%] shadow-lg absolute right-0 bottom-0"
-            src="/images/012-Jugend.jpg"
-            alt="Kinder und Betreuer*innen sitzen auf einer Treppe in Trachten"
+            src={header_image2.src}
+            alt={header_image2.desc}
           />
         </div>
       </div>
     </section>
 
-    <section class="mt-24">
-      <h1 class="text-4xl font-semibold mb-11">
-        Unsere nächsten <span class="text-primary">Veranstaltungen</span>
-      </h1>
-      <div class="flex flex-row flex-wrap gap-4 w-full">
-        {
-          events?.map((e) => {
-            return (
-              <div class="w-[400px] max-w-full">
-                <VeranstaltungsCard
-                  date={e?.veranstaltung?.datum}
-                  titel={e?.veranstaltung?.titel ?? undefined}
-                  short_description={
-                    e?.veranstaltung?.beschreibung ?? undefined
-                  }
-                  slug={e?.veranstaltung?.slug ?? undefined}
-                  wiederholung={e?.veranstaltung?.wiederholung ?? undefined}
-                  recurring={e?.veranstaltung?.recurring ?? undefined}
-                  featured_image_url={getFileUrl(
-                    e?.veranstaltung?.featured_image?.id
-                  )}
-                />
-              </div>
-            );
-          })
-        }
-      </div>
-    </section>
+    {
+      events?.length && events?.length > 0 ? (
+        <section class="mt-24">
+          <h1 class="text-4xl font-semibold mb-11">
+            Unsere nächsten <span class="text-primary">Veranstaltungen</span>
+          </h1>
+          <div class="flex flex-row flex-wrap gap-4 w-full">
+            {events?.map((e) => {
+              return (
+                <div class="w-[400px] max-w-full">
+                  <VeranstaltungsCard
+                    date={e?.veranstaltung?.datum}
+                    titel={e?.veranstaltung?.titel ?? undefined}
+                    short_description={
+                      e?.veranstaltung?.beschreibung ?? undefined
+                    }
+                    slug={e?.veranstaltung?.slug ?? undefined}
+                    wiederholung={e?.veranstaltung?.wiederholung ?? undefined}
+                    recurring={e?.veranstaltung?.recurring ?? undefined}
+                    featured_image_url={getFileUrl(
+                      e?.veranstaltung?.featured_image?.id
+                    )}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      ) : (
+        <div />
+      )
+    }
 
     <section class="py-24 flex flex-col gap-24">
       {

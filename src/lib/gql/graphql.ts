@@ -88,6 +88,9 @@ export type Query = {
   group_page: Array<Group_Page>;
   group_page_aggregated: Array<Group_Page_Aggregated>;
   group_page_by_id?: Maybe<Group_Page>;
+  group_page_files: Array<Group_Page_Files>;
+  group_page_files_aggregated: Array<Group_Page_Files_Aggregated>;
+  group_page_files_by_id?: Maybe<Group_Page_Files>;
   group_section: Array<Group_Section>;
   group_section_aggregated: Array<Group_Section_Aggregated>;
   group_section_by_id?: Maybe<Group_Section>;
@@ -338,6 +341,32 @@ export type QueryGroup_Page_AggregatedArgs = {
 
 
 export type QueryGroup_Page_By_IdArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryGroup_Page_FilesArgs = {
+  filter?: InputMaybe<Group_Page_Files_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryGroup_Page_Files_AggregatedArgs = {
+  filter?: InputMaybe<Group_Page_Files_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryGroup_Page_Files_By_IdArgs = {
   id: Scalars['ID'];
 };
 
@@ -1388,6 +1417,8 @@ export type Group_Page = {
   gp_event_func?: Maybe<Count_Functions>;
   group_section?: Maybe<Array<Maybe<Group_Section>>>;
   group_section_func?: Maybe<Count_Functions>;
+  header_images?: Maybe<Array<Maybe<Group_Page_Files>>>;
+  header_images_func?: Maybe<Count_Functions>;
   id: Scalars['ID'];
   slug?: Maybe<Scalars['String']>;
   subtitle?: Maybe<Scalars['String']>;
@@ -1409,6 +1440,16 @@ export type Group_PageGp_EventArgs = {
 
 export type Group_PageGroup_SectionArgs = {
   filter?: InputMaybe<Group_Section_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type Group_PageHeader_ImagesArgs = {
+  filter?: InputMaybe<Group_Page_Files_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
@@ -1438,6 +1479,7 @@ export type Group_Page_Aggregated_Count = {
   description?: Maybe<Scalars['Int']>;
   gp_event?: Maybe<Scalars['Int']>;
   group_section?: Maybe<Scalars['Int']>;
+  header_images?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
   slug?: Maybe<Scalars['Int']>;
   subtitle?: Maybe<Scalars['Int']>;
@@ -1449,6 +1491,68 @@ export type Group_Page_Aggregated_Count = {
 export type Group_Page_Aggregated_Fields = {
   __typename?: 'group_page_aggregated_fields';
   id?: Maybe<Scalars['Float']>;
+};
+
+export type Group_Page_Files = {
+  __typename?: 'group_page_files';
+  directus_files_id?: Maybe<Directus_Files>;
+  group_page_id?: Maybe<Group_Page>;
+  id: Scalars['ID'];
+};
+
+
+export type Group_Page_FilesDirectus_Files_IdArgs = {
+  filter?: InputMaybe<Directus_Files_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type Group_Page_FilesGroup_Page_IdArgs = {
+  filter?: InputMaybe<Group_Page_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type Group_Page_Files_Aggregated = {
+  __typename?: 'group_page_files_aggregated';
+  avg?: Maybe<Group_Page_Files_Aggregated_Fields>;
+  avgDistinct?: Maybe<Group_Page_Files_Aggregated_Fields>;
+  count?: Maybe<Group_Page_Files_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']>;
+  countDistinct?: Maybe<Group_Page_Files_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']>;
+  max?: Maybe<Group_Page_Files_Aggregated_Fields>;
+  min?: Maybe<Group_Page_Files_Aggregated_Fields>;
+  sum?: Maybe<Group_Page_Files_Aggregated_Fields>;
+  sumDistinct?: Maybe<Group_Page_Files_Aggregated_Fields>;
+};
+
+export type Group_Page_Files_Aggregated_Count = {
+  __typename?: 'group_page_files_aggregated_count';
+  directus_files_id?: Maybe<Scalars['Int']>;
+  group_page_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+export type Group_Page_Files_Aggregated_Fields = {
+  __typename?: 'group_page_files_aggregated_fields';
+  group_page_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type Group_Page_Files_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Group_Page_Files_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Group_Page_Files_Filter>>>;
+  directus_files_id?: InputMaybe<Directus_Files_Filter>;
+  group_page_id?: InputMaybe<Group_Page_Filter>;
+  id?: InputMaybe<Number_Filter_Operators>;
 };
 
 export type Group_Page_Filter = {
@@ -1463,6 +1567,8 @@ export type Group_Page_Filter = {
   gp_event_func?: InputMaybe<Count_Function_Filter_Operators>;
   group_section?: InputMaybe<Group_Section_Filter>;
   group_section_func?: InputMaybe<Count_Function_Filter_Operators>;
+  header_images?: InputMaybe<Group_Page_Files_Filter>;
+  header_images_func?: InputMaybe<Count_Function_Filter_Operators>;
   id?: InputMaybe<Number_Filter_Operators>;
   slug?: InputMaybe<String_Filter_Operators>;
   subtitle?: InputMaybe<String_Filter_Operators>;
@@ -2743,7 +2849,7 @@ export type DownloadsQueryQuery = { __typename?: 'Query', downloads: Array<{ __t
 export type FooterQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FooterQueryQuery = { __typename?: 'Query', footer?: { __typename?: 'footer', copyright_text?: string | null, footer_text?: string | null, footer_links?: Array<{ __typename?: 'footer_link', name?: string | null, link?: string | null } | null> | null, footer_social_links?: Array<{ __typename?: 'footer_social_link', icon?: string | null, link?: string | null } | null> | null } | null };
+export type FooterQueryQuery = { __typename?: 'Query', footer?: { __typename?: 'footer', copyright_text?: string | null, footer_text?: string | null, footer_links?: Array<{ __typename?: 'footer_link', name?: string | null, sorting?: number | null, link?: string | null } | null> | null, footer_social_links?: Array<{ __typename?: 'footer_social_link', icon?: string | null, link?: string | null } | null> | null } | null };
 
 export type AktuellesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2775,12 +2881,17 @@ export type ImpressionsQueryQuery = { __typename?: 'Query', impressions?: { __ty
 export type GroupPagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GroupPagesQueryQuery = { __typename?: 'Query', group_page: Array<{ __typename?: 'group_page', slug?: string | null, title?: string | null, description?: string | null, subtitle?: string | null, gp_event?: Array<{ __typename?: 'gp_event', veranstaltung?: { __typename?: 'veranstaltung', titel?: string | null, datum?: any | null, slug?: string | null, short_description?: string | null, recurring?: boolean | null, wiederholung?: string | null, featured_image?: { __typename?: 'directus_files', id: string } | null } | null } | null> | null, group_section?: Array<{ __typename?: 'group_section', title?: string | null, description?: string | null, bilder?: Array<{ __typename?: 'group_section_files', directus_files_id?: { __typename?: 'directus_files', id: string, description?: string | null } | null } | null> | null } | null> | null }> };
+export type GroupPagesQueryQuery = { __typename?: 'Query', group_page: Array<{ __typename?: 'group_page', slug?: string | null, title?: string | null, description?: string | null, subtitle?: string | null, header_images?: Array<{ __typename?: 'group_page_files', directus_files_id?: { __typename?: 'directus_files', id: string, description?: string | null } | null } | null> | null, gp_event?: Array<{ __typename?: 'gp_event', veranstaltung?: { __typename?: 'veranstaltung', titel?: string | null, datum?: any | null, slug?: string | null, short_description?: string | null, recurring?: boolean | null, wiederholung?: string | null, featured_image?: { __typename?: 'directus_files', id: string } | null } | null } | null> | null, group_section?: Array<{ __typename?: 'group_section', title?: string | null, description?: string | null, bilder?: Array<{ __typename?: 'group_section_files', directus_files_id?: { __typename?: 'directus_files', id: string, description?: string | null } | null } | null> | null } | null> | null }> };
 
 export type GetMemberPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetMemberPageQueryQuery = { __typename?: 'Query', member_page?: { __typename?: 'member_page', description?: string | null, title?: string | null, subtitle?: string | null, member_option_heading?: string | null, benefits_heading?: string | null, member_options?: Array<{ __typename?: 'member_options', name?: string | null, price?: number | null, description?: string | null } | null> | null, member_benefits?: Array<{ __typename?: 'member_benefits', text?: string | null } | null> | null } | null };
+
+export type WanderungenQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type WanderungenQueryQuery = { __typename?: 'Query', wanderung: Array<{ __typename?: 'wanderung', titel?: string | null, id: string, strecke?: number | null, schwierigkeitsgrad?: string | null, natur?: string | null, dauer?: number | null, barrierefrei?: boolean | null, date_created?: any | null, date_updated?: any | null, description?: string | null, link?: string | null, featured_image?: { __typename?: 'directus_files', id: string, description?: string | null } | null, wander_step?: Array<{ __typename?: 'wander_step', id: string, description?: string | null, bilder?: Array<{ __typename?: 'wander_step_files', directus_files_id?: { __typename?: 'directus_files', id: string, description?: string | null, title?: string | null, location?: string | null, metadata?: any | null } | null } | null> | null } | null> | null }> };
 
 
 export const StartseiteQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"startseiteQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"startseite"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"text_part_one"}},{"kind":"Field","name":{"kind":"Name","value":"text_part_two"}},{"kind":"Field","name":{"kind":"Name","value":"task_section_description"}},{"kind":"Field","name":{"kind":"Name","value":"aufgaben"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"wandern_title"}},{"kind":"Field","name":{"kind":"Name","value":"wandern_text"}},{"kind":"Field","name":{"kind":"Name","value":"wandern_description"}},{"kind":"Field","name":{"kind":"Name","value":"wandern_link"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_description"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_title"}},{"kind":"Field","name":{"kind":"Name","value":"tradition_text"}},{"kind":"Field","name":{"kind":"Name","value":"heimat_link"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_title"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_description"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_text"}},{"kind":"Field","name":{"kind":"Name","value":"jugend_link"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_title"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"mitgliedschaft_text"}}]}}]}}]} as unknown as DocumentNode<StartseiteQueryQuery, StartseiteQueryQueryVariables>;
@@ -2788,11 +2899,12 @@ export const AufgabenQueryDocument = {"kind":"Document","definitions":[{"kind":"
 export const VeranstaltungsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"veranstaltungsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"veranstaltung"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"ort"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"date_created"}},{"kind":"Field","name":{"kind":"Name","value":"date_updated"}},{"kind":"Field","name":{"kind":"Name","value":"beschreibung"}},{"kind":"Field","name":{"kind":"Name","value":"duration"}},{"kind":"Field","name":{"kind":"Name","value":"recurring"}},{"kind":"Field","name":{"kind":"Name","value":"wiederholung"}},{"kind":"Field","name":{"kind":"Name","value":"human_readable_interval"}},{"kind":"Field","name":{"kind":"Name","value":"short_description"}},{"kind":"Field","name":{"kind":"Name","value":"datum"}},{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"mehr_info"}},{"kind":"Field","name":{"kind":"Name","value":"event_changes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"info"}},{"kind":"Field","name":{"kind":"Name","value":"date_created"}}]}},{"kind":"Field","name":{"kind":"Name","value":"featured_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"bildergalerie"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"directus_files_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"location"}}]}}]}}]}}]}}]} as unknown as DocumentNode<VeranstaltungsQueryQuery, VeranstaltungsQueryQueryVariables>;
 export const WebsiteMetaQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"websiteMetaQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"meta"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"favicon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"Field","name":{"kind":"Name","value":"opengraph_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]} as unknown as DocumentNode<WebsiteMetaQueryQuery, WebsiteMetaQueryQueryVariables>;
 export const DownloadsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"downloadsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"downloads"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"status"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"StringValue","value":"published","block":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<DownloadsQueryQuery, DownloadsQueryQueryVariables>;
-export const FooterQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"footerQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"footer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"copyright_text"}},{"kind":"Field","name":{"kind":"Name","value":"footer_text"}},{"kind":"Field","name":{"kind":"Name","value":"footer_links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"link"}}]}},{"kind":"Field","name":{"kind":"Name","value":"footer_social_links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"icon"}},{"kind":"Field","name":{"kind":"Name","value":"link"}}]}}]}}]}}]} as unknown as DocumentNode<FooterQueryQuery, FooterQueryQueryVariables>;
+export const FooterQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"footerQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"footer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"copyright_text"}},{"kind":"Field","name":{"kind":"Name","value":"footer_text"}},{"kind":"Field","name":{"kind":"Name","value":"footer_links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"sorting"}},{"kind":"Field","name":{"kind":"Name","value":"link"}}]}},{"kind":"Field","name":{"kind":"Name","value":"footer_social_links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"icon"}},{"kind":"Field","name":{"kind":"Name","value":"link"}}]}}]}}]}}]} as unknown as DocumentNode<FooterQueryQuery, FooterQueryQueryVariables>;
 export const AktuellesQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"aktuellesQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aktuelles"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<AktuellesQueryQuery, AktuellesQueryQueryVariables>;
 export const ImpressumsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"impressumsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Impressum"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"date_updated"}},{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]} as unknown as DocumentNode<ImpressumsQueryQuery, ImpressumsQueryQueryVariables>;
 export const GetOneVeranstaltungQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getOneVeranstaltungQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"veranstaltung"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"ort"}},{"kind":"Field","name":{"kind":"Name","value":"date_created"}},{"kind":"Field","name":{"kind":"Name","value":"date_updated"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"beschreibung"}},{"kind":"Field","name":{"kind":"Name","value":"datum"}},{"kind":"Field","name":{"kind":"Name","value":"duration"}},{"kind":"Field","name":{"kind":"Name","value":"recurring"}},{"kind":"Field","name":{"kind":"Name","value":"event_changes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"info"}},{"kind":"Field","name":{"kind":"Name","value":"date_created"}},{"kind":"Field","name":{"kind":"Name","value":"user_created"}},{"kind":"Field","name":{"kind":"Name","value":"user_updated"}},{"kind":"Field","name":{"kind":"Name","value":"date_updated"}}]}},{"kind":"Field","name":{"kind":"Name","value":"wiederholung"}},{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"featured_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"bildergalerie"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<GetOneVeranstaltungQueryQuery, GetOneVeranstaltungQueryQueryVariables>;
 export const FeaturedEventQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"featuredEventQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"featured_event"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"event"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"datum"}},{"kind":"Field","name":{"kind":"Name","value":"mehr_info"}},{"kind":"Field","name":{"kind":"Name","value":"beschreibung"}},{"kind":"Field","name":{"kind":"Name","value":"short_description"}},{"kind":"Field","name":{"kind":"Name","value":"featured_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"titel"}}]}}]}}]}}]} as unknown as DocumentNode<FeaturedEventQueryQuery, FeaturedEventQueryQueryVariables>;
 export const ImpressionsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"impressionsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"impressions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"bildergalerie"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"directus_files_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}}]}}]}}]}}]}}]} as unknown as DocumentNode<ImpressionsQueryQuery, ImpressionsQueryQueryVariables>;
-export const GroupPagesQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"groupPagesQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group_page"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"gp_event"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"veranstaltung"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"datum"}},{"kind":"Field","name":{"kind":"Name","value":"featured_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"short_description"}},{"kind":"Field","name":{"kind":"Name","value":"recurring"}},{"kind":"Field","name":{"kind":"Name","value":"wiederholung"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"group_section"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"bilder"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"directus_files_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GroupPagesQueryQuery, GroupPagesQueryQueryVariables>;
+export const GroupPagesQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"groupPagesQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group_page"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"header_images"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"directus_files_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"gp_event"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"veranstaltung"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"datum"}},{"kind":"Field","name":{"kind":"Name","value":"featured_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"short_description"}},{"kind":"Field","name":{"kind":"Name","value":"recurring"}},{"kind":"Field","name":{"kind":"Name","value":"wiederholung"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"group_section"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"bilder"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"directus_files_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GroupPagesQueryQuery, GroupPagesQueryQueryVariables>;
 export const GetMemberPageQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getMemberPageQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"member_page"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"member_option_heading"}},{"kind":"Field","name":{"kind":"Name","value":"member_options"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"member_benefits"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}}]}},{"kind":"Field","name":{"kind":"Name","value":"benefits_heading"}}]}}]}}]} as unknown as DocumentNode<GetMemberPageQueryQuery, GetMemberPageQueryQueryVariables>;
+export const WanderungenQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"wanderungenQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"wanderung"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"strecke"}},{"kind":"Field","name":{"kind":"Name","value":"schwierigkeitsgrad"}},{"kind":"Field","name":{"kind":"Name","value":"natur"}},{"kind":"Field","name":{"kind":"Name","value":"dauer"}},{"kind":"Field","name":{"kind":"Name","value":"barrierefrei"}},{"kind":"Field","name":{"kind":"Name","value":"date_created"}},{"kind":"Field","name":{"kind":"Name","value":"date_updated"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"featured_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"wander_step"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"bilder"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"directus_files_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<WanderungenQueryQuery, WanderungenQueryQueryVariables>;

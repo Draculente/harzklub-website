@@ -119,6 +119,7 @@ export const footerQuery = graphql(/* GraphQL */ `
       footer_text
       footer_links {
         name
+        sorting
         link
       }
       footer_social_links {
@@ -228,6 +229,12 @@ export const groupPagesQuery = graphql(/* GraphQL */ `
       title
       description
       subtitle
+      header_images {
+        directus_files_id {
+          id
+          description
+        }
+      }
       gp_event {
         veranstaltung {
           titel
@@ -274,3 +281,38 @@ export const getMemberPageQuery = graphql(/* GraphQL */ `
     }
   }
 `);
+
+
+export const wanderungenQuery = graphql(/* GraphQL */ `
+  query wanderungenQuery {
+     wanderung{
+      titel
+      id
+      strecke
+      schwierigkeitsgrad
+      natur
+      dauer
+      barrierefrei
+      date_created
+      date_updated
+      description
+      link
+      featured_image {
+        id
+        description
+      }
+      wander_step {
+        id
+        description
+        bilder {
+          directus_files_id {
+            id
+            description
+            title
+            location
+            metadata
+          }
+        }
+      }
+     }}
+     `)

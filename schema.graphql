@@ -45,15 +45,15 @@ type Query {
   group_section_files(filter: group_section_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [group_section_files!]!
   group_section_files_by_id(id: ID!): group_section_files
   group_section_files_aggregated(groupBy: [String], filter: group_section_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [group_section_files_aggregated!]!
+  group_page(filter: group_page_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [group_page!]!
+  group_page_by_id(id: ID!): group_page
+  group_page_aggregated(groupBy: [String], filter: group_page_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [group_page_aggregated!]!
   event_changes(filter: event_changes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [event_changes!]!
   event_changes_by_id(id: ID!): event_changes
   event_changes_aggregated(groupBy: [String], filter: event_changes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [event_changes_aggregated!]!
   group_section(filter: group_section_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [group_section!]!
   group_section_by_id(id: ID!): group_section
   group_section_aggregated(groupBy: [String], filter: group_section_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [group_section_aggregated!]!
-  group_page(filter: group_page_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [group_page!]!
-  group_page_by_id(id: ID!): group_page
-  group_page_aggregated(groupBy: [String], filter: group_page_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [group_page_aggregated!]!
   wander_step(filter: wander_step_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [wander_step!]!
   wander_step_by_id(id: ID!): wander_step
   wander_step_aggregated(groupBy: [String], filter: wander_step_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [wander_step_aggregated!]!
@@ -70,6 +70,9 @@ type Query {
   gp_event(filter: gp_event_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [gp_event!]!
   gp_event_by_id(id: ID!): gp_event
   gp_event_aggregated(groupBy: [String], filter: gp_event_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [gp_event_aggregated!]!
+  group_page_files(filter: group_page_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [group_page_files!]!
+  group_page_files_by_id(id: ID!): group_page_files
+  group_page_files_aggregated(groupBy: [String], filter: group_page_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [group_page_files_aggregated!]!
 }
 
 type Mutation {
@@ -518,6 +521,8 @@ type group_page {
   slug: String
   group_section(filter: group_section_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [group_section]
   group_section_func: count_functions
+  header_images(filter: group_page_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [group_page_files]
+  header_images_func: count_functions
   gp_event(filter: gp_event_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [gp_event]
   gp_event_func: count_functions
 }
@@ -548,11 +553,42 @@ type group_page_aggregated_count {
   description: Int
   slug: Int
   group_section: Int
+  header_images: Int
   gp_event: Int
 }
 
 type group_page_aggregated_fields {
   id: Float
+}
+
+type group_page_files {
+  id: ID!
+  group_page_id(filter: group_page_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): group_page
+  directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+}
+
+type group_page_files_aggregated {
+  group: JSON
+  countAll: Int
+  count: group_page_files_aggregated_count
+  countDistinct: group_page_files_aggregated_count
+  avg: group_page_files_aggregated_fields
+  sum: group_page_files_aggregated_fields
+  avgDistinct: group_page_files_aggregated_fields
+  sumDistinct: group_page_files_aggregated_fields
+  min: group_page_files_aggregated_fields
+  max: group_page_files_aggregated_fields
+}
+
+type group_page_files_aggregated_count {
+  id: Int
+  group_page_id: Int
+  directus_files_id: Int
+}
+
+type group_page_files_aggregated_fields {
+  id: Float
+  group_page_id: Float
 }
 
 type group_section {
@@ -1450,6 +1486,14 @@ input gp_event_filter {
   _or: [gp_event_filter]
 }
 
+input group_page_files_filter {
+  id: number_filter_operators
+  group_page_id: group_page_filter
+  directus_files_id: directus_files_filter
+  _and: [group_page_files_filter]
+  _or: [group_page_files_filter]
+}
+
 input group_page_filter {
   id: number_filter_operators
   user_created: string_filter_operators
@@ -1464,6 +1508,8 @@ input group_page_filter {
   slug: string_filter_operators
   group_section: group_section_filter
   group_section_func: count_function_filter_operators
+  header_images: group_page_files_filter
+  header_images_func: count_function_filter_operators
   gp_event: gp_event_filter
   gp_event_func: count_function_filter_operators
   _and: [group_page_filter]

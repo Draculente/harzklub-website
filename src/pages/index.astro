@@ -375,6 +375,12 @@ const aufgaben = (await gqlClient.request(aufgabenQuery)).aufgaben
     </section>
 
     <section id="call-to-action" class="bg-primary relative pb-20">
+      <img
+        src="/images/filled-geiss-on-mountains.png"
+        alt="Der Hohegeisser Geiss steht stilisiert auf einem Berg."
+        class="absolute right-0 bottom-0"
+        loading="lazy"
+      />
       <div class="w-full h-3 bg-green-300 dark:bg-green-900"></div>
       <div class="w-full h-3 bg-green-400 dark:bg-green-700"></div>
       <div
@@ -400,17 +406,11 @@ const aufgaben = (await gqlClient.request(aufgabenQuery)).aufgaben
           />
           <a
             href={MITMACHEN}
-            class="btn btn-secondary rounded-md filter-none hover:scale-105 transition-all"
+            class="btn btn-secondary rounded-md filter-none hover:scale-105 transition-all z-10 relative"
             style="color: white; box-shadow: none;">Mehr erfahren &gt;</a
           >
         </div>
       </div>
-      <img
-        src="/images/filled-geiss-on-mountains.png"
-        alt="Der Hohegeisser Geiss steht stilisiert auf einem Berg."
-        class="absolute right-0 bottom-0"
-        loading="lazy"
-      />
     </section>
   </main>
 
