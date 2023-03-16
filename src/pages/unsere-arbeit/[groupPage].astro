@@ -1,0 +1,158 @@
+---
+import PageWrapper from "@components/PageWrapper.astro";
+import VeranstaltungsCard from "@components/VeranstaltungsCard.astro";
+import Layout from "@layouts/Layout.astro";
+import type { Group_Page } from "@lib/gql/graphql";
+import { groupPagesQuery } from "@lib/graphql/queries";
+import gqlClient from "@lib/utils/gql-client";
+import { getFileUrl } from "@lib/utils/helper";
+
+export async function getStaticPaths() {
+  return (await gqlClient.request(groupPagesQuery)).group_page.map((e) => {
+    return {
+      params: { groupPage: e.slug },
+      props: e,
+    };
+  });
+}
+
+const {
+  title,
+  description,
+  subtitle,
+  gp_event: events,
+  group_section,
+  header_images,
+} = Astro.props as Group_Page;
+
+const images = header_images?.map((e) => {
+  return {
+    desc: e?.directus_files_id?.description,
+    src: getFileUrl(e?.directus_files_id?.id),
+  };
+});
+
+if (images?.length != 2) {
+  throw new Error("Please provide two header-images per groupPage!");
+}
+
+const [header_image1, header_image2] = images;
+---
+
+<Layout description={description ?? undefined} title={title ?? undefined}>
+  <PageWrapper>
+    <section class="flex flex-row justify-start flex-wrap md:gap-11">
+      <div class="max-w-xl w-full flex flex-col items-start">
+        <h2 class="font-medium text-lg tracking-wide sm:text-base">
+          {subtitle}
+        </h2>
+        <h1
+          class="font-bold text-4xl leading-tight sm:text-4xl sm:font-semibold"
+        >
+          {title}
+        </h1>
+      </div>
+      <div class="flex flex-row justify-center grow max-w-full">
+        <div class="relative w-[500px] h-[60vw] max-h-[350px]">
+          <img
+            class="rounded-lg max-w-full w-[75%] shadow-lg absolute top-0 left-0"
+            src={header_image1.src}
+            alt={header_image1.desc}
+          />
+          <img
+            class="rounded-lg max-w-full w-[60%] shadow-lg absolute right-0 bottom-0"
+            src={header_image2.src}
+            alt={header_image2.desc}
+          />
+        </div>
+      </div>
+    </section>
+
+    {
+      events?.length && events?.length > 0 ? (
+        <section class="mt-24">
+          <h1 class="text-4xl font-semibold mb-11">
+            Unsere nächsten <span class="text-primary">Veranstaltungen</span>
+          </h1>
+          <div class="flex flex-row flex-wrap gap-4 w-full">
+            {events?.map((e) => {
+              return (
+                <div class="w-[400px] max-w-full">
+                  <VeranstaltungsCard
+                    date={e?.veranstaltung?.datum}
+                    titel={e?.veranstaltung?.titel ?? undefined}
+                    short_description={
+                      e?.veranstaltung?.beschreibung ?? undefined
+                    }
+                    slug={e?.veranstaltung?.slug ?? undefined}
+                    wiederholung={e?.veranstaltung?.wiederholung ?? undefined}
+                    recurring={e?.veranstaltung?.recurring ?? undefined}
+                    featured_image_url={getFileUrl(
+                      e?.veranstaltung?.featured_image?.id
+                    )}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      ) : (
+        <div />
+      )
+    }
+
+    <section class="py-24 flex flex-col gap-24">
+      {
+        group_section?.map((e) => {
+          return (
+            <div class="md:flex relative md:flex-wrap gap-10 md:h-fit">
+              <div class="w-[45%] md:w-full">
+                <h1 class="text-3xl font-semibold pb-10">
+                  <span class="text-primary">{e?.title?.split(" ")[0]}</span>
+                  {e?.title?.split(" ").slice(1).join(" ")}
+                </h1>
+                <div set:html={e?.description} />
+              </div>
+              <div class="max-h-full md:h-80 gap-4 sm:gap-2 grid grid-rows-5 grid-cols-12 image-container md:w-full w-[45%] absolute bottom-0 right-0 md:relative">
+                {e?.bilder?.map((b) => {
+                  return (
+                    <img
+                      src={getFileUrl(b?.directus_files_id?.id)}
+                      alt={b?.directus_files_id?.description}
+                      class="object-cover h-full w-full"
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })
+      }
+    </section>
+  </PageWrapper>
+</Layout>
+
+<style>
+  .image-container img {
+    display: none;
+  }
+
+  .image-container img:nth-child(1) {
+    @apply col-span-8;
+    @apply row-span-3;
+    @apply rounded-lg;
+    display: inline;
+  }
+  .image-container img:nth-child(2) {
+    @apply col-span-4;
+    @apply row-span-3;
+    @apply rounded-lg;
+    display: inline;
+  }
+  .image-container img:nth-child(3) {
+    @apply col-span-full;
+    @apply row-span-2;
+    @apply rounded-lg;
+    display: inline;
+  }
+</style>

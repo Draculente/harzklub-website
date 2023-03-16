@@ -1,6 +1,6 @@
 export const UNDER_CONSTRUCTION = "/im-aufbau";
 export const DEFAULT_AUFGABEN_SECTION_LINK = UNDER_CONSTRUCTION;
-export const MITMACHEN = UNDER_CONSTRUCTION;
+export const MITMACHEN = "/mach-mit";
 export const IMPRESSUM = "/impressum";
 export const DOWNLOADS = "/downloads";
 export const ORG_LOGO_LINK = "https://harzklub.de/";
@@ -10,13 +10,14 @@ export enum Seite {
   Startseite,
   Aktuelles,
   Heimatgruppe,
-  Jugendgruppe,
+  Jugendarbeit,
   Wanderungen,
   DerHarz,
   UeberUns,
   Error,
   Impressum,
   Impressionen,
+  Wanderwege
 }
 
 export default function l(seite: Seite): string {
@@ -28,6 +29,7 @@ export type SeitenInfo = {
   page: Seite;
   name: string;
   menu?: boolean;
+  submenu?: Array<SeitenInfo>;
 };
 
 export const pages: Array<SeitenInfo> = [
@@ -39,24 +41,24 @@ export const pages: Array<SeitenInfo> = [
     page: Seite.Heimatgruppe,
     href: UNDER_CONSTRUCTION,
     name: "Heimatgruppe",
+    menu: false,
+  },
+  {
+    page: Seite.Jugendarbeit,
+    href: "/unsere-arbeit/jugendarbeit",
+    name: "Jugendarbeit",
     menu: true,
   },
   {
-    page: Seite.Jugendgruppe,
-    href: UNDER_CONSTRUCTION,
-    name: "Jugendgruppe",
+    page: Seite.Wanderwege,
+    href: "/unsere-arbeit/wanderwege",
+    name: "Wanderwege",
     menu: true,
   },
   {
     page: Seite.Wanderungen,
-    href: UNDER_CONSTRUCTION,
+    href: "/wanderungen",
     name: "Wanderungen",
-    menu: true,
-  },
-  {
-    page: Seite.Impressionen,
-    href: "/impressionen",
-    name: "Impressionen",
     menu: true,
   },
   // { page: Seite.DerHarz, href: UNDER_CONSTRUCTION, "/de name: "Der Harz" },

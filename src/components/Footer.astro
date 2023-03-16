@@ -1,6 +1,6 @@
 ---
 import { footerQuery } from "@lib/graphql/queries";
-import { UNDER_CONSTRUCTION, DOWNLOADS } from "@lib/links";
+import { UNDER_CONSTRUCTION, DOWNLOADS, MITMACHEN } from "@lib/links";
 import gqlClient from "@lib/utils/gql-client";
 
 const { footer: footerData } = await gqlClient.request(footerQuery);
@@ -39,6 +39,7 @@ const { footer: footerData } = await gqlClient.request(footerQuery);
       {
         footerData?.footer_links
           ?.filter((e) => e?.link && e?.name)
+          .sort((a, b) => (a?.sorting ?? 0) - (b?.sorting ?? 0))
           .map((page) => (
             <a
               href={page?.link}
@@ -59,7 +60,7 @@ const { footer: footerData } = await gqlClient.request(footerQuery);
           alt="Drei Icons von Menschen, die neugierig über den Button schauen."
         />
         <a
-          href={UNDER_CONSTRUCTION}
+          href={MITMACHEN}
           class="btn btn-primary rounded-md w-full text-center hover:scale-105 transition-all"
           >Mitglied werden &gt;</a
         >

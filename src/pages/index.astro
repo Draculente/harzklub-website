@@ -253,7 +253,7 @@ const aufgaben = (await gqlClient.request(aufgabenQuery)).aufgaben
             loading="lazy"
           />
           <a
-            href="#"
+            href={frontpageData?.wandern_link}
             class="text-primary font-medium block text-center hover:underline"
             >Erfahre mehr über Wanderungen &gt;</a
           >
@@ -287,11 +287,19 @@ const aufgaben = (await gqlClient.request(aufgabenQuery)).aufgaben
             alt="6 Bilder, auf denen Menschen in Harzer-Trachten zu sehen sind."
             loading="lazy"
           />
-          <a
-            href="#"
-            class="text-primary font-medium block text-center hover:underline mt-7"
-            >Erfahre mehr über die Heimatgruppe &gt;</a
-          >
+          {
+            frontpageData?.heimat_link &&
+            frontpageData?.heimat_link.length > 0 ? (
+              <a
+                href={frontpageData?.heimat_link}
+                class="text-primary font-medium block text-center hover:underline mt-7"
+              >
+                Erfahre mehr über die Heimatgruppe &gt;
+              </a>
+            ) : (
+              <div />
+            )
+          }
         </div>
         <div
           class="w-1/5 rounded-md bg-info drop-shadow-lg p-8 mt-24 md:w-full md:mx-5"
@@ -358,7 +366,7 @@ const aufgaben = (await gqlClient.request(aufgabenQuery)).aufgaben
             loading="lazy"
           />
           <a
-            href="#"
+            href={frontpageData?.jugend_link}
             class="text-primary font-medium block text-center hover:underline -ml-32 md:ml-0"
             >Erfahre mehr über die Jugendarbeit &gt;</a
           >
@@ -367,6 +375,12 @@ const aufgaben = (await gqlClient.request(aufgabenQuery)).aufgaben
     </section>
 
     <section id="call-to-action" class="bg-primary relative pb-20">
+      <img
+        src="/images/filled-geiss-on-mountains.png"
+        alt="Der Hohegeisser Geiss steht stilisiert auf einem Berg."
+        class="absolute right-0 bottom-0"
+        loading="lazy"
+      />
       <div class="w-full h-3 bg-green-300 dark:bg-green-900"></div>
       <div class="w-full h-3 bg-green-400 dark:bg-green-700"></div>
       <div
@@ -392,17 +406,11 @@ const aufgaben = (await gqlClient.request(aufgabenQuery)).aufgaben
           />
           <a
             href={MITMACHEN}
-            class="btn btn-secondary rounded-md filter-none hover:scale-105 transition-all"
+            class="btn btn-secondary rounded-md filter-none hover:scale-105 transition-all z-10 relative"
             style="color: white; box-shadow: none;">Mehr erfahren &gt;</a
           >
         </div>
       </div>
-      <img
-        src="/images/filled-geiss-on-mountains.png"
-        alt="Der Hohegeisser Geiss steht stilisiert auf einem Berg."
-        class="absolute right-0 bottom-0"
-        loading="lazy"
-      />
     </section>
   </main>
 

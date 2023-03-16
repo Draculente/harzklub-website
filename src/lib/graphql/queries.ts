@@ -15,13 +15,16 @@ export const startseiteQuery = graphql(/* GraphQL */ `
       wandern_title
       wandern_text
       wandern_description
+      wandern_link
       tradition_description
       tradition_title
       tradition_text
+      heimat_link
       jugend_title
       jugend_subtitle
       jugend_description
       jugend_text
+      jugend_link
       mitgliedschaft_title
       mitgliedschaft_subtitle
       mitgliedschaft_text
@@ -116,6 +119,7 @@ export const footerQuery = graphql(/* GraphQL */ `
       footer_text
       footer_links {
         name
+        sorting
         link
       }
       footer_social_links {
@@ -217,3 +221,98 @@ export const impressionsQuery = graphql(/* GraphQL */ `
     }
   }
 `);
+
+export const groupPagesQuery = graphql(/* GraphQL */ `
+  query groupPagesQuery {
+    group_page {
+      slug
+      title
+      description
+      subtitle
+      header_images {
+        directus_files_id {
+          id
+          description
+        }
+      }
+      gp_event {
+        veranstaltung {
+          titel
+          datum
+          featured_image {
+            id
+          }
+          slug
+          short_description
+          recurring
+          wiederholung
+        }
+      }
+      group_section {
+        title
+        description
+        bilder {
+          directus_files_id {
+            id
+            description
+          }
+        }
+      }
+    }
+  }
+`);
+
+export const getMemberPageQuery = graphql(/* GraphQL */ `
+  query getMemberPageQuery {
+    member_page {
+      description
+      title
+      subtitle
+      member_option_heading
+      member_options {
+        name
+        price
+        description
+      }
+      member_benefits {
+        text
+      }
+      benefits_heading
+    }
+  }
+`);
+
+
+export const wanderungenQuery = graphql(/* GraphQL */ `
+  query wanderungenQuery {
+     wanderung{
+      titel
+      id
+      strecke
+      schwierigkeitsgrad
+      natur
+      dauer
+      barrierefrei
+      date_created
+      date_updated
+      description
+      link
+      featured_image {
+        id
+        description
+      }
+      wander_step {
+        id
+        description
+        bilder {
+          directus_files_id {
+            id
+            description
+            title
+            location
+            metadata
+          }
+        }
+      }
+     }}
+     `)

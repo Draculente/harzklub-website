@@ -2,12 +2,13 @@
   import type { Image } from "@lib/imageGallery";
   import { LottiePlayer } from "@lottiefiles/svelte-lottie-player";
   import { swipe } from "svelte-gestures";
-  import { fade, fly } from "svelte/transition";
+  import { fly } from "svelte/transition";
 
   export let images: Image[];
   export let showInfo = false;
   export let showTitle = true;
   export let iconBackground = false;
+  export let small = false;
 
   if (images.length === 0) {
     throw new Error("ImageGallery must have at least one image");
@@ -69,8 +70,8 @@
   }
 
   function showInfoF() {
-    info = true;
-    if (info) infoSeen = true;
+    info = !info;
+    infoSeen = true;
   }
   const touch = matchMedia("(hover: none), (pointer: coarse)").matches;
 </script>
@@ -95,7 +96,9 @@
   {#each images as image, i}
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <img
-      class="rounded-md cursor-pointer h-[200px] max-w-full md:w-full md:h-auto"
+      class="rounded-md cursor-pointer  {small
+        ? 'h-[100px] 3xs:w-full 3xs:h-auto'
+        : 'h-[200px] md:w-full md:h-auto'} max-w-full "
       on:click={() => {
         toggleModal();
         loading = true;
