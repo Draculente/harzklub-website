@@ -20,4 +20,15 @@ const { html } = Astro.props;
             margin-left: 50px;
             padding-left: 15px;
             border-left: 3px solid #ccc;
+        p
+            margin-top: 10px;
+            margin-bottom: 10px;
+
+        ul, li 
+            margin-left: 10px;
+
+        li::before
+            content: "-";
+            margin-right: 7px;
+            display: inline flow-root list-item;
 </style>
