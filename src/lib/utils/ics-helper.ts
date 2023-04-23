@@ -6,6 +6,7 @@ export function createEventAsync(e: ics.EventAttributes): Promise<string> {
   return new Promise((resolve, reject) => {
     ics.createEvent(e, (error, value) => {
       if (error) {
+        console.error(error);
         reject(error);
       }
       resolve(value);
@@ -17,6 +18,7 @@ export function createEventsAsync(e: ics.EventAttributes[]): Promise<string> {
   return new Promise((resolve, reject) => {
     ics.createEvents(e, (error, value) => {
       if (error) {
+        console.error(error);
         reject(error);
       }
       resolve(value);
@@ -38,7 +40,7 @@ export function icsAttributesFromVeranstaltung(
     start: convertTime(veranstaltung.datum),
     calName: "Harzklub Hohegeiß",
     created: convertTime(veranstaltung.date_created),
-    lastModified: convertTime(veranstaltung.date_updated),
+    // lastModified: convertTime(veranstaltung.date_updated),
     uid: `info+${veranstaltung.id}@harzklub-hohegeiss.de`,
     startOutputType: "utc",
     duration: { minutes: veranstaltung.duration ?? 30 },
