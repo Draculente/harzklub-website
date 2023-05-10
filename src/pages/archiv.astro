@@ -1,0 +1,31 @@
+---
+import gqlClient from "@lib/utils/gql-client";
+import { veranstaltungsQuery } from "@lib/graphql/queries";
+import { Seite } from "@lib/links";
+import VeranstaltungsList from "@components/VeranstaltungsList.astro";
+import SimplePageLayout from "@layouts/SimplePageLayout.astro";
+
+const { veranstaltung: veranstaltungen } = await gqlClient.request(
+  veranstaltungsQuery
+);
+
+const pastEvents = veranstaltungen
+  .filter((event) => !event.recurring && new Date(event.datum) < new Date())
+  .sort((a, b) => (new Date(b.datum) < new Date(a.datum) ? -1 : 1));
+
+const desc =
+  "Stöbere durch Bilder und Texte unsere vergangenen Veranstaltungen. Wer weiß, vielleicht findest du dich ja.";
+---
+
+<SimplePageLayout
+  title={"Archiv"}
+  description={desc}
+  page={Seite.Aktuelles}
+  subtitle={"Was bisher geschah..."}
+  text={desc}
+>
+  <h2 class="font-medium text-3xl mt-10">Veranstaltungen</h2>
+  <div class="next-events">
+    <VeranstaltungsList veranstaltungen={pastEvents} />
+  </div>
+</SimplePageLayout>
