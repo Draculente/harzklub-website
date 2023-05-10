@@ -64,6 +64,9 @@ type Query {
   member_benefits_by_id(id: ID!): member_benefits
   member_benefits_aggregated(groupBy: [String], filter: member_benefits_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [member_benefits_aggregated!]!
   member_page: member_page
+  faq(filter: faq_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [faq!]!
+  faq_by_id(id: ID!): faq
+  faq_aggregated(groupBy: [String], filter: faq_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [faq_aggregated!]!
   member_options(filter: member_options_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [member_options!]!
   member_options_by_id(id: ID!): member_options
   member_options_aggregated(groupBy: [String], filter: member_options_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [member_options_aggregated!]!
@@ -339,6 +342,48 @@ type event_changes_aggregated_count {
 type event_changes_aggregated_fields {
   id: Float
   event: Float
+}
+
+type faq {
+  id: ID!
+  user_created: String
+  date_created: Date
+  date_created_func: datetime_functions
+  user_updated: String
+  date_updated: Date
+  date_updated_func: datetime_functions
+  page(filter: member_page_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): member_page
+  question: String
+  answer: String
+}
+
+type faq_aggregated {
+  group: JSON
+  countAll: Int
+  count: faq_aggregated_count
+  countDistinct: faq_aggregated_count
+  avg: faq_aggregated_fields
+  sum: faq_aggregated_fields
+  avgDistinct: faq_aggregated_fields
+  sumDistinct: faq_aggregated_fields
+  min: faq_aggregated_fields
+  max: faq_aggregated_fields
+}
+
+type faq_aggregated_count {
+  id: Int
+  user_created: Int
+  date_created: Int
+  user_updated: Int
+  date_updated: Int
+  page: Int
+  question: Int
+  answer: Int
+}
+
+type faq_aggregated_fields {
+  id: Float
+  page: Float
 }
 
 type featured_event {
@@ -844,6 +889,8 @@ type member_page {
   member_benefits_func: count_functions
   member_options(filter: member_options_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [member_options]
   member_options_func: count_functions
+  faq(filter: faq_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [faq]
+  faq_func: count_functions
 }
 
 type meta {
@@ -1426,6 +1473,21 @@ input event_changes_filter {
   _or: [event_changes_filter]
 }
 
+input faq_filter {
+  id: number_filter_operators
+  user_created: string_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: string_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  page: member_page_filter
+  question: string_filter_operators
+  answer: string_filter_operators
+  _and: [faq_filter]
+  _or: [faq_filter]
+}
+
 input footer_filter {
   id: number_filter_operators
   date_updated: date_filter_operators
@@ -1611,6 +1673,8 @@ input member_page_filter {
   member_benefits_func: count_function_filter_operators
   member_options: member_options_filter
   member_options_func: count_function_filter_operators
+  faq: faq_filter
+  faq_func: count_function_filter_operators
   _and: [member_page_filter]
   _or: [member_page_filter]
 }

@@ -278,6 +278,10 @@ export const getMemberPageQuery = graphql(/* GraphQL */ `
         text
       }
       benefits_heading
+      faq {
+        question
+        answer
+      }
     }
   }
 `);
