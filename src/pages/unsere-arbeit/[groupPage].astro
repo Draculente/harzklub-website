@@ -32,6 +32,10 @@ const images = header_images?.map((e) => {
   };
 });
 
+const nextEvents = events?.filter(
+  (e) => new Date(e?.veranstaltung?.datum) > new Date(Date.now())
+);
+
 if (images?.length != 2) {
   throw new Error("Please provide two header-images per groupPage!");
 }
@@ -69,13 +73,13 @@ const [header_image1, header_image2] = images;
     </section>
 
     {
-      events?.length && events?.length > 0 ? (
+      nextEvents?.length && nextEvents?.length > 0 ? (
         <section class="mt-24">
           <h1 class="text-4xl font-semibold mb-11">
             Unsere nächsten <span class="text-primary">Veranstaltungen</span>
           </h1>
           <div class="flex flex-row flex-wrap gap-4 w-full">
-            {events?.map((e) => {
+            {nextEvents?.map((e) => {
               return (
                 <div class="w-[400px] max-w-full">
                   <VeranstaltungsCard
