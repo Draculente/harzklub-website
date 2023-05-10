@@ -70,22 +70,36 @@ const aufgaben = (await gqlClient.request(aufgabenQuery)).aufgaben
           class="col-span-2 md:col-span-3 md:row-start-2 md:w-full h-full grid grid-rows-4 gap-4 sm:flex sm:flex-col"
         >
           <div class="row-span-3">
-            <VeranstaltungsCard
-              short_description={featuredEvent?.short_description ?? undefined}
-              date={featuredEvent?.datum}
-              featured_image_url={getFileUrl(featuredEvent?.featured_image?.id)}
-              titel={featuredEvent?.titel ?? undefined}
-              slug={featuredEvent?.slug ?? undefined}
-            />
+            {
+              featuredEvent ? (
+                <VeranstaltungsCard
+                  short_description={
+                    featuredEvent?.short_description ?? undefined
+                  }
+                  date={featuredEvent?.datum}
+                  featured_image_url={getFileUrl(
+                    featuredEvent?.featured_image?.id
+                  )}
+                  titel={featuredEvent?.titel ?? undefined}
+                  slug={featuredEvent?.slug ?? undefined}
+                />
+              ) : (
+                <img
+                  src="/images/waldrand.jpg"
+                  alt="Ein Bild des Waldrands nahe Hohegeiß zur blauen Stunde"
+                  class="rounded-md w-full object-cover h-full max-h-60"
+                />
+              )
+            }
           </div>
           <a
             class="bg-info drop-shadow-md p-4 rounded-4xl w-full row-span-1 flex items-center sm:text-sm cursor-pointer hover:scale-105 transition-all"
-            href={UNDER_CONSTRUCTION}
+            href="/wanderungen"
           >
             <i
-              class="ri-flag-line bg-primary text-primary-content rounded-full px-2 py-1 mr-3 text-lg"
+              class="ri-map-2-line bg-primary text-primary-content rounded-full px-2 py-1 mr-3 text-lg"
             ></i>
-            Probleme auf einem Wanderweg melden
+            Deine Lieblingswanderung finden
           </a>
         </div>
         <div class="col-start-3 col-span-3 md:col-start-1 z-10">
