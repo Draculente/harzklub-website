@@ -74,6 +74,9 @@ export type Query = {
   event_changes: Array<Event_Changes>;
   event_changes_aggregated: Array<Event_Changes_Aggregated>;
   event_changes_by_id?: Maybe<Event_Changes>;
+  faq: Array<Faq>;
+  faq_aggregated: Array<Faq_Aggregated>;
+  faq_by_id?: Maybe<Faq>;
   featured_event?: Maybe<Featured_Event>;
   footer?: Maybe<Footer>;
   footer_link: Array<Footer_Link>;
@@ -237,6 +240,32 @@ export type QueryEvent_Changes_AggregatedArgs = {
 
 
 export type QueryEvent_Changes_By_IdArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryFaqArgs = {
+  filter?: InputMaybe<Faq_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryFaq_AggregatedArgs = {
+  filter?: InputMaybe<Faq_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryFaq_By_IdArgs = {
   id: Scalars['ID'];
 };
 
@@ -1121,6 +1150,77 @@ export type Event_Changes_Filter = {
   user_updated?: InputMaybe<String_Filter_Operators>;
 };
 
+export type Faq = {
+  __typename?: 'faq';
+  answer?: Maybe<Scalars['String']>;
+  date_created?: Maybe<Scalars['Date']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  id: Scalars['ID'];
+  page?: Maybe<Member_Page>;
+  question?: Maybe<Scalars['String']>;
+  user_created?: Maybe<Scalars['String']>;
+  user_updated?: Maybe<Scalars['String']>;
+};
+
+
+export type FaqPageArgs = {
+  filter?: InputMaybe<Member_Page_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type Faq_Aggregated = {
+  __typename?: 'faq_aggregated';
+  avg?: Maybe<Faq_Aggregated_Fields>;
+  avgDistinct?: Maybe<Faq_Aggregated_Fields>;
+  count?: Maybe<Faq_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']>;
+  countDistinct?: Maybe<Faq_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']>;
+  max?: Maybe<Faq_Aggregated_Fields>;
+  min?: Maybe<Faq_Aggregated_Fields>;
+  sum?: Maybe<Faq_Aggregated_Fields>;
+  sumDistinct?: Maybe<Faq_Aggregated_Fields>;
+};
+
+export type Faq_Aggregated_Count = {
+  __typename?: 'faq_aggregated_count';
+  answer?: Maybe<Scalars['Int']>;
+  date_created?: Maybe<Scalars['Int']>;
+  date_updated?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  page?: Maybe<Scalars['Int']>;
+  question?: Maybe<Scalars['Int']>;
+  user_created?: Maybe<Scalars['Int']>;
+  user_updated?: Maybe<Scalars['Int']>;
+};
+
+export type Faq_Aggregated_Fields = {
+  __typename?: 'faq_aggregated_fields';
+  id?: Maybe<Scalars['Float']>;
+  page?: Maybe<Scalars['Float']>;
+};
+
+export type Faq_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Faq_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Faq_Filter>>>;
+  answer?: InputMaybe<String_Filter_Operators>;
+  date_created?: InputMaybe<Date_Filter_Operators>;
+  date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  date_updated?: InputMaybe<Date_Filter_Operators>;
+  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  page?: InputMaybe<Member_Page_Filter>;
+  question?: InputMaybe<String_Filter_Operators>;
+  user_created?: InputMaybe<String_Filter_Operators>;
+  user_updated?: InputMaybe<String_Filter_Operators>;
+};
+
 export type Featured_Event = {
   __typename?: 'featured_event';
   date_updated?: Maybe<Scalars['Date']>;
@@ -1985,6 +2085,8 @@ export type Member_Page = {
   date_updated_func?: Maybe<Datetime_Functions>;
   /** Die Meta Description für Google und Co */
   description?: Maybe<Scalars['String']>;
+  faq?: Maybe<Array<Maybe<Faq>>>;
+  faq_func?: Maybe<Count_Functions>;
   id: Scalars['ID'];
   member_benefits?: Maybe<Array<Maybe<Member_Benefits>>>;
   member_benefits_func?: Maybe<Count_Functions>;
@@ -1995,6 +2097,16 @@ export type Member_Page = {
   title?: Maybe<Scalars['String']>;
   user_created?: Maybe<Scalars['String']>;
   user_updated?: Maybe<Scalars['String']>;
+};
+
+
+export type Member_PageFaqArgs = {
+  filter?: InputMaybe<Faq_Filter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
@@ -2026,6 +2138,8 @@ export type Member_Page_Filter = {
   date_updated?: InputMaybe<Date_Filter_Operators>;
   date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
   description?: InputMaybe<String_Filter_Operators>;
+  faq?: InputMaybe<Faq_Filter>;
+  faq_func?: InputMaybe<Count_Function_Filter_Operators>;
   id?: InputMaybe<Number_Filter_Operators>;
   member_benefits?: InputMaybe<Member_Benefits_Filter>;
   member_benefits_func?: InputMaybe<Count_Function_Filter_Operators>;
@@ -2886,7 +3000,7 @@ export type GroupPagesQueryQuery = { __typename?: 'Query', group_page: Array<{ _
 export type GetMemberPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetMemberPageQueryQuery = { __typename?: 'Query', member_page?: { __typename?: 'member_page', description?: string | null, title?: string | null, subtitle?: string | null, member_option_heading?: string | null, benefits_heading?: string | null, member_options?: Array<{ __typename?: 'member_options', name?: string | null, price?: number | null, description?: string | null } | null> | null, member_benefits?: Array<{ __typename?: 'member_benefits', text?: string | null } | null> | null } | null };
+export type GetMemberPageQueryQuery = { __typename?: 'Query', member_page?: { __typename?: 'member_page', description?: string | null, title?: string | null, subtitle?: string | null, member_option_heading?: string | null, benefits_heading?: string | null, member_options?: Array<{ __typename?: 'member_options', name?: string | null, price?: number | null, description?: string | null } | null> | null, member_benefits?: Array<{ __typename?: 'member_benefits', text?: string | null } | null> | null, faq?: Array<{ __typename?: 'faq', question?: string | null, answer?: string | null } | null> | null } | null };
 
 export type WanderungenQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2906,5 +3020,5 @@ export const GetOneVeranstaltungQueryDocument = {"kind":"Document","definitions"
 export const FeaturedEventQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"featuredEventQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"featured_event"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"event"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"datum"}},{"kind":"Field","name":{"kind":"Name","value":"mehr_info"}},{"kind":"Field","name":{"kind":"Name","value":"beschreibung"}},{"kind":"Field","name":{"kind":"Name","value":"short_description"}},{"kind":"Field","name":{"kind":"Name","value":"featured_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"titel"}}]}}]}}]}}]} as unknown as DocumentNode<FeaturedEventQueryQuery, FeaturedEventQueryQueryVariables>;
 export const ImpressionsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"impressionsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"impressions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"bildergalerie"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"directus_files_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}}]}}]}}]}}]}}]} as unknown as DocumentNode<ImpressionsQueryQuery, ImpressionsQueryQueryVariables>;
 export const GroupPagesQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"groupPagesQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group_page"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"header_images"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"directus_files_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"gp_event"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"veranstaltung"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"datum"}},{"kind":"Field","name":{"kind":"Name","value":"featured_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"short_description"}},{"kind":"Field","name":{"kind":"Name","value":"recurring"}},{"kind":"Field","name":{"kind":"Name","value":"wiederholung"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"group_section"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"bilder"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"directus_files_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GroupPagesQueryQuery, GroupPagesQueryQueryVariables>;
-export const GetMemberPageQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getMemberPageQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"member_page"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"member_option_heading"}},{"kind":"Field","name":{"kind":"Name","value":"member_options"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"member_benefits"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}}]}},{"kind":"Field","name":{"kind":"Name","value":"benefits_heading"}}]}}]}}]} as unknown as DocumentNode<GetMemberPageQueryQuery, GetMemberPageQueryQueryVariables>;
+export const GetMemberPageQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getMemberPageQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"member_page"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"member_option_heading"}},{"kind":"Field","name":{"kind":"Name","value":"member_options"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"member_benefits"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}}]}},{"kind":"Field","name":{"kind":"Name","value":"benefits_heading"}},{"kind":"Field","name":{"kind":"Name","value":"faq"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"question"}},{"kind":"Field","name":{"kind":"Name","value":"answer"}}]}}]}}]}}]} as unknown as DocumentNode<GetMemberPageQueryQuery, GetMemberPageQueryQueryVariables>;
 export const WanderungenQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"wanderungenQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"wanderung"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"strecke"}},{"kind":"Field","name":{"kind":"Name","value":"schwierigkeitsgrad"}},{"kind":"Field","name":{"kind":"Name","value":"natur"}},{"kind":"Field","name":{"kind":"Name","value":"dauer"}},{"kind":"Field","name":{"kind":"Name","value":"barrierefrei"}},{"kind":"Field","name":{"kind":"Name","value":"date_created"}},{"kind":"Field","name":{"kind":"Name","value":"date_updated"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"featured_image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"wander_step"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"bilder"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"directus_files_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<WanderungenQueryQuery, WanderungenQueryQueryVariables>;
