@@ -9,6 +9,7 @@ export const ERROR_PAGE = "/error";
 export enum Seite {
   Startseite,
   Aktuelles,
+  Archiv,
   Heimatgruppe,
   Jugendarbeit,
   Wanderungen,
@@ -37,6 +38,7 @@ export const pages: Array<SeitenInfo> = [
   { page: Seite.Error, href: ERROR_PAGE, name: "Error" },
   { page: Seite.Startseite, href: "/", name: "Startseite", menu: true },
   { page: Seite.Aktuelles, href: "/aktuelles", name: "Aktuelles", menu: true },
+  { page: Seite.Archiv, href: "/archiv", name: "Archiv", menu: true },
   {
     page: Seite.Heimatgruppe,
     href: UNDER_CONSTRUCTION,
@@ -53,7 +55,7 @@ export const pages: Array<SeitenInfo> = [
     page: Seite.Wanderwege,
     href: "/unsere-arbeit/wanderwege",
     name: "Wanderwege",
-    menu: true,
+    menu: false,
   },
   {
     page: Seite.Wanderungen,
