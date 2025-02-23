@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Image } from "@lib/imageGallery";
-  import { LottiePlayer } from "@lottiefiles/svelte-lottie-player";
+  // import { LottiePlayer } from "@lottiefiles/svelte-lottie-player";
   import { swipe } from "svelte-gestures";
   import { fly } from "svelte/transition";
 
@@ -96,9 +96,9 @@
   {#each images as image, i}
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <img
-      class="rounded-md cursor-pointer  {small
+      class="rounded-md cursor-pointer {small
         ? 'h-[100px] 3xs:w-full 3xs:h-auto'
-        : 'h-[200px] md:w-full md:h-auto'} max-w-full "
+        : 'h-[200px] md:w-full md:h-auto'} max-w-full"
       on:click={() => {
         toggleModal();
         loading = true;
@@ -165,7 +165,8 @@
           class="absolute top-0 left-0 w-full h-full flex justify-center items-center"
         >
           <div class="spinner">
-            <LottiePlayer
+            <span class="loader"></span>
+            <!-- <LottiePlayer
               src="/animation/Loading_Green.json"
               controls={false}
               controlsLayout={false}
@@ -174,7 +175,7 @@
               autoplay
               loop
               background="transparent"
-            />
+            /> -->
           </div>
         </div>
       {/if}
@@ -221,7 +222,7 @@
         <button
           class="{iconBackground
             ? 'bg-info'
-            : 'bg-transparent'} flex text-center justify-center items-center bg-opacity-50 m-2 px-2 py-1 rounded-full "
+            : 'bg-transparent'} flex text-center justify-center items-center bg-opacity-50 m-2 px-2 py-1 rounded-full"
           on:click|stopPropagation={nextImage("previous")}
           ><i class="ri-arrow-left-s-line text-3xl" />
         </button>
@@ -231,7 +232,7 @@
         <button
           class="{iconBackground
             ? 'bg-info'
-            : 'bg-transparent'} flex text-center justify-center items-center bg-opacity-50 m-2 px-2 py-1 rounded-full "
+            : 'bg-transparent'} flex text-center justify-center items-center bg-opacity-50 m-2 px-2 py-1 rounded-full"
           on:click|stopPropagation={nextImage("next")}
           ><i class="ri-arrow-right-s-line text-3xl" />
         </button>
@@ -273,3 +274,16 @@
     {/if}
   </div>
 {/if}
+
+<style>
+  .loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #fff;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+  }
+</style>
